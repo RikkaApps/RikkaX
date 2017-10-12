@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="target_app_not_found">Non ci sono applicazioni per gestire quest\'azione.</string>
+</resources>
