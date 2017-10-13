@@ -29,6 +29,18 @@ public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
         return mData;
     }
 
+    public void setData(T data) {
+        setData(data, null);
+    }
+
+    public void setData(T data, Object payload) {
+        mData = data;
+
+        int position = getAdapterPosition();
+        getAdapter().getItems().set(position, data);
+        getAdapter().notifyItemChanged(position, payload);
+    }
+
     public BaseRecyclerViewAdapter getAdapter() {
         return mAdapter;
     }
