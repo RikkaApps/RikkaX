@@ -22,6 +22,15 @@ public class ContextUtils {
         return new File(context.getCacheDir(), filename);
     }
 
+    public static File getExternalFile(Context context, String filename) {
+        File parent = context.getExternalFilesDir(null);
+        if (parent != null) {
+            return new File(parent, filename);
+        }
+
+        return new File(context.getFilesDir(), filename);
+    }
+
     @Nullable
     public static Activity getActivity(Context context) {
         if (context instanceof Activity) {
