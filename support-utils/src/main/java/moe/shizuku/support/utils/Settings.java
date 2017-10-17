@@ -19,7 +19,9 @@ public class Settings {
     }
 
     public static void init(Context context, String filename) {
-        sInstance = new Settings(context, filename);
+        if (sInstance == null) {
+            sInstance = new Settings(context, filename);
+        }
     }
 
     private static Settings instance() {
