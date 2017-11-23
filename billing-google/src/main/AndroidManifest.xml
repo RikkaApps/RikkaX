@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="moe.shizuku.support.billing.google" >
+
+    <uses-permission android:name="com.android.vending.BILLING"/>
+
+    <application tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
+        <activity
+            android:name="com.android.billingclient.api.ProxyBillingActivity"
+            android:theme="@style/BillingClient.Translucent"
+            android:exported="false"
+            tools:replace="android:theme" />
+
+    </application>
+</manifest>
