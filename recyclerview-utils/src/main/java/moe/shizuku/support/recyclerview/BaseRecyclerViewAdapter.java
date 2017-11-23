@@ -21,8 +21,12 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseV
         this(new ArrayList<>());
     }
 
+    public BaseRecyclerViewAdapter(CreatorPool creatorPool) {
+        this(new ArrayList<>(), creatorPool);
+    }
+
     public BaseRecyclerViewAdapter(List<?> items) {
-        this(items, new CreatorPool());
+        this(items, new ClassCreatorPool());
     }
 
     public BaseRecyclerViewAdapter(List<?> items, CreatorPool creatorPool) {
