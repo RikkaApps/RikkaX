@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string-array name="night_mode" tools:ignore="InconsistentArrays">
+        <item>@string/night_mode_off</item>
+        <item>@string/night_mode_on</item>
+        <item>@string/night_mode_auto</item>
+        <item>@string/night_mode_follow_system</item>
+    </string-array>
+
+    <integer-array name="night_mode_value" tools:ignore="InconsistentArrays">
+        <item>1</item>
+        <item>2</item>
+        <item>0</item>
+        <item>-1</item>
+    </integer-array>
+
+</resources>

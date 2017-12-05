@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="target_app_not_found">ليس لديك تطبيق ليقوم بهذا العمل.</string>
+    <string name="night_mode_off">إيقاف</string>
+    <string name="night_mode_on">تشغيل</string>
+    <string name="night_mode_auto">تلقائي</string>
+    <string name="night_mode_follow_system">أتبع النظام</string>
 </resources>

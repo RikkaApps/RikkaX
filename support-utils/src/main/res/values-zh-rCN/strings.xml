@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="night_mode_off">关闭</string>
+    <string name="night_mode_on">开启</string>
+    <string name="night_mode_auto">自动</string>
+    <string name="night_mode_follow_system">跟随系统</string>
+
 </resources>
