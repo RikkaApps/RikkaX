@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="target_app_not_found">沒找到可以使用的程式</string>
+    <string name="target_app_not_found">沒找到可以使用的程式。</string>
+    <string name="settings_night_mode">夜間模式</string>
+
+    <string name="night_mode_off">關閉</string>
+    <string name="night_mode_on">開啓</string>
+    <string name="night_mode_auto">自動</string>
+    <string name="night_mode_follow_system">跟隨系統</string>
 </resources>

@@ -50,19 +50,16 @@ public class LocaleDelegate {
      * Update locale of context's configuration, call in {@link Activity#attachBaseContext(Context)}.
      *
      * @param newBase newBase
-     * @return a new context instance with updated configuration
      */
-    public Context onAttachBaseContext(Context newBase) {
+    public void onAttachBaseContext(Context newBase) {
         if (Objects.equals(mLocale, sDefaultLocale)) {
-            return newBase;
+            return;
         }
 
         mLocale = sDefaultLocale;
 
         Configuration configuration = newBase.getResources().getConfiguration();
         configuration.setLocale(mLocale);
-
-        return newBase.createConfigurationContext(configuration);
     }
 
     /**

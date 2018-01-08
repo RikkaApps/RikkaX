@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="target_app_not_found">没找到可以使用的应用。</string>
+
+    <string name="settings_night_mode">夜间模式</string>
 
     <string name="night_mode_off">关闭</string>
     <string name="night_mode_on">开启</string>
