@@ -1,2 +1,2 @@
-include ':recyclerview-utils', ':support-utils'
+include ':recyclerview-utils', ':support-utils', ':helplib', ':design', ':billing-google', ':billing'
 

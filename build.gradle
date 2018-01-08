@@ -6,9 +6,9 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta7'
+        classpath 'com.android.tools.build:gradle:3.0.1'
 
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -21,6 +21,7 @@ allprojects {
         jcenter()
         mavenLocal()
         google()
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -29,7 +30,8 @@ task clean(type: Delete) {
 }
 
 ext {
-    supportLibraryVersion = '26.1.0'
-    targetSdkVersion = 26
-    buildToolsVersion = "26.0.2"
+    preferenceLibraryVersion = '2.2.2'
+    supportLibraryVersion = '27.0.2'
+    targetSdkVersion = 27
+    buildToolsVersion = "27.0.3"
 }
