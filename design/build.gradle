@@ -21,8 +21,8 @@ android {
 }
 
 ext {
-    libraryName = 'Billing-Google'
-    libraryDescription = 'Helper for google billing library.'
+    libraryName = 'Design'
+    libraryDescription = 'Material Desgin UI lib'
     libraryVersion = android.defaultConfig.versionName
     artifact = project.name
     bintrayName = project.name
@@ -30,7 +30,7 @@ ext {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.billingclient:billing:1.0'
+    implementation "com.android.support:support-annotations:$supportLibraryVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

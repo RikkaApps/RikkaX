@@ -21,8 +21,8 @@ android {
 }
 
 ext {
-    libraryName = 'Billing-Google'
-    libraryDescription = 'Helper for google billing library.'
+    libraryName = 'Billing'
+    libraryDescription = 'Rikka style payment UI.'
     libraryVersion = android.defaultConfig.versionName
     artifact = project.name
     bintrayName = project.name
@@ -31,6 +31,11 @@ ext {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.billingclient:billing:1.0'
+    implementation "com.android.support:support-annotations:$supportLibraryVersion"
+    implementation "com.android.support:support-fragment:$supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    implementation "moe.shizuku.support:recyclerview-utils:2.0.4"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

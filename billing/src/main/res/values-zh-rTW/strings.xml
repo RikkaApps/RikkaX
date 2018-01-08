@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="billing_success_new_device">已成功將該兌換碼綁定至這臺 %s。</string>
+    <string name="billing_success_change_device">已成功將該兌換碼從舊設備解除綁定，並綁定至這臺 %s。</string>
+    <string name="billing_failed_invalid">無效的兌換碼。</string>
+    <string name="billing_failed_connection_issue">網路錯誤。</string>
+    <string name="billing_method_summary">通過以下方式購買：</string>
+    <string name="billing_method_alipay">支付寶</string>
+    <string name="billing_redeem">兌換代碼</string>
+    <string name="billing_redeem_summary">兌換由開發者在其他渠道提供的代碼。</string>
+    <string name="billing_toast_google_play_unavailable">Google play 不可用。</string>
+    <string name="billing_redeem_dialog_hint">輸入代碼…</string>
+
+</resources>

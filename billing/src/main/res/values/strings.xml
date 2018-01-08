@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="billing_success_new_device">This redeem code has been bound to this %s successfully.</string>
+    <string name="billing_success_change_device">This redeem code has been bound to this %s and unbundled from old device successfully.</string>
+    <string name="billing_failed_invalid">Invalid redeem code.</string>
+    <string name="billing_failed_connection_issue">Network error.</string>
+    <string name="billing_method_summary">Pay via:</string>
+    <string name="billing_method_google_play" translatable="false">Google play</string>
+    <string name="billing_method_alipay">Alipay</string>
+    <string name="billing_redeem">Redeem code</string>
+    <string name="billing_redeem_summary">Redeem the code provided by the developer in other channels.</string>
+    <string name="billing_toast_google_play_unavailable">Google play is not available.</string>
+    <string name="billing_redeem_dialog_hint">Enter code…</string>
+
+</resources>
