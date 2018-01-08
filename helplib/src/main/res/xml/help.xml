@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="help"
+        android:title="@string/helplib_title_faq">
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="contact"
+        android:title="@string/helplib_title_contact">
+
+        <Preference
+            android:key="mail"
+            android:title="@string/helplib_action_mail"
+            android:icon="@drawable/helplib_feedback_mail_24dp">
+
+            <intent
+                android:action="android.intent.action.SENDTO"/>
+
+        </Preference>
+
+        <Preference
+            android:key="telegram"
+            android:title="@string/helplib_action_telegram_group"
+            android:icon="@drawable/helplib_feedback_telegram_24dp">
+
+            <intent
+                android:action="android.intent.action.VIEW"/>
+
+        </Preference>
+
+        <Preference
+            android:key="issue"
+            android:title="@string/helplib_action_issue"
+            android:icon="@drawable/helplib_feedback_issue_24dp">
+
+            <intent
+                android:action="android.intent.action.VIEW"/>
+
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="help_color_primary_dark">#607D8B</color>
+    <color name="help_color_primary_light">#607D8B</color>
+    <color name="help_color_primary_dark_dark">#455A64</color>
+    <color name="help_color_primary_dark_light">#455A64</color>
+    <color name="help_color_accent_dark">#80DEEA</color>
+    <color name="help_color_accent_light">#4285F4</color>
+</resources>

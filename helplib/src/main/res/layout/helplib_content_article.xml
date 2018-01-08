@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<moe.shizuku.support.design.AnimationFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground"
+    android:animateLayoutChanges="true"
+    android:clipToPadding="false"
+    android:elevation="8dp">
+
+    <include
+        layout="@layout/helplib_content_markdown"/>
+
+</moe.shizuku.support.design.AnimationFrameLayout>

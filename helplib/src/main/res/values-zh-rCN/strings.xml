@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="helplib_title">帮助和支持</string>
+    <string name="helplib_title_faq">常见问题</string>
+    <string name="helplib_title_contact">联系我们</string>
+    <string name="helplib_action_mail">发送邮件</string>
+    <string name="helplib_action_telegram_group">加入 Telegram 群组</string>
+    <string name="helplib_action_issue">回报问题</string>
+    <string name="helplib_action_about">关于</string>
+
+</resources>

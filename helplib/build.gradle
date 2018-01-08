@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.targetSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    libraryName = 'Helplib'
+    libraryDescription = 'Simple Google style help UI lib.'
+    libraryVersion = android.defaultConfig.versionName
+    artifact = project.name
+    bintrayName = project.name
+}
+
+dependencies {
+    implementation "com.android.support:support-fragment:$supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    implementation "moe.shizuku.preference:preference:$preferenceLibraryVersion"
+    implementation "moe.shizuku.preference:preference-dialog-android:$preferenceLibraryVersion"
+    implementation "moe.shizuku.preference:preference-simplemenu:$preferenceLibraryVersion"
+    implementation 'com.github.RikkaW:Markdown:1.0.6'
+    implementation "moe.shizuku.support:recyclerview-utils:2.0.3"
+    implementation "moe.shizuku.support:support-utils:2.0.2"
+    implementation "moe.shizuku.support:design:1.0.0"
+}
+
+if (rootProject.file('bintray.gradle').canRead()) {
+    apply from: project.rootProject.file('bintray.gradle')
+} else {
+    println("bintray.gradle not found, skiping.")
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="helplib_title"><![CDATA[Help & support]]></string>
+    <string name="helplib_title_faq">Frequently asked questions</string>
+    <string name="helplib_title_contact">Contact us</string>
+    <string name="helplib_action_mail">Send an email</string>
+    <string name="helplib_action_telegram_group">Join Telegram group</string>
+    <string name="helplib_action_issue">Report an issue</string>
+    <string name="helplib_action_about">About</string>
+
+</resources>
