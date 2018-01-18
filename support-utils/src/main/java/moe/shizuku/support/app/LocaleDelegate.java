@@ -15,6 +15,9 @@ public class LocaleDelegate {
     /** current locale **/
     private static Locale sDefaultLocale = Locale.getDefault();
 
+    /** system locale **/
+    private static Locale sSystemLocale = Locale.getDefault();
+
     /** locale of this instance **/
     private Locale mLocale = Locale.getDefault();
 
@@ -37,6 +40,24 @@ public class LocaleDelegate {
     }
 
     /**
+     * Get system locale stored in this class.
+     *
+     * @return system locale
+     */
+    public static Locale getSystemLocale() {
+        return sSystemLocale;
+    }
+
+    /**
+     * Set system locale.
+     *
+     * @param systemLocale new locale
+     */
+    public static void setSystemLocale(Locale systemLocale) {
+        sSystemLocale = systemLocale;
+    }
+
+    /**
      * Return if current locale is different from default.
      * <p>Call this in {@link Activity#onResume()} and if true you should recreate activity.
      *
@@ -47,18 +68,13 @@ public class LocaleDelegate {
     }
 
     /**
-     * Update locale of context's configuration, call in {@link Activity#attachBaseContext(Context)}.
+     * Update locale of given configuration, call in {@link Activity#attachBaseContext(Context)}.
      *
-     * @param newBase newBase
+     * @param configuration Configuration
      */
-    public void onAttachBaseContext(Context newBase) {
-        if (Objects.equals(mLocale, sDefaultLocale)) {
-            return;
-        }
-
+    public void updateConfiguration(Configuration configuration) {
         mLocale = sDefaultLocale;
 
-        Configuration configuration = newBase.getResources().getConfiguration();
         configuration.setLocale(mLocale);
     }
 

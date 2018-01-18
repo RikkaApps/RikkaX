@@ -20,9 +20,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import moe.shizuku.support.BuildConfig;
-import moe.shizuku.support.R;
 
-import static moe.shizuku.support.app.DayNightDelegate.NightMode.*;
+import static moe.shizuku.support.app.DayNightDelegate.NightMode.MODE_NIGHT_AUTO;
+import static moe.shizuku.support.app.DayNightDelegate.NightMode.MODE_NIGHT_FOLLOW_SYSTEM;
+import static moe.shizuku.support.app.DayNightDelegate.NightMode.MODE_NIGHT_NO;
+import static moe.shizuku.support.app.DayNightDelegate.NightMode.MODE_NIGHT_YES;
 
 /**
  * Created by rikka on 2017/9/19.
@@ -110,23 +112,27 @@ public class DayNightDelegate {
         }
     }
 
-    public boolean applyDayNight() {
-        boolean applied = false;
-
+    /**
+     * Update uiMode of given configuration, call in {@link Activity#attachBaseContext(Context)}.
+     *
+     * @param configuration Configuration
+     */
+    public void updateConfiguration(Configuration configuration) {
         final int nightMode = getNightMode();
         final int modeToApply = mapNightMode(nightMode);
-        if (modeToApply != MODE_NIGHT_FOLLOW_SYSTEM) {
-            applied = updateForNightMode(modeToApply);
+
+        if (modeToApply == MODE_NIGHT_FOLLOW_SYSTEM) {
+            return;
         }
 
-        if (nightMode == MODE_NIGHT_AUTO) {
-            // If we're already been started, we may need to setup auto mode again
-            ensureAutoNightModeManager();
-            mAutoNightModeManager.setup();
-        }
+        final int newNightMode = (modeToApply == MODE_NIGHT_YES)
+                ? Configuration.UI_MODE_NIGHT_YES
+                : Configuration.UI_MODE_NIGHT_NO;
+
+        configuration.uiMode = newNightMode
+                | (configuration.uiMode & ~Configuration.UI_MODE_NIGHT_MASK);
 
         mApplyDayNightCalled = true;
-        return applied;
     }
 
     public int getNightMode() {
@@ -153,6 +159,22 @@ public class DayNightDelegate {
                 Log.i(TAG, "setLocalNightMode() called with an unknown mode");
                 break;
         }
+    }
+
+    private void applyDayNight() {
+        final int nightMode = getNightMode();
+        final int modeToApply = mapNightMode(nightMode);
+        if (modeToApply != MODE_NIGHT_FOLLOW_SYSTEM) {
+            updateForNightMode(modeToApply);
+        }
+
+        if (nightMode == MODE_NIGHT_AUTO) {
+            // If we're already been started, we may need to setup auto mode again
+            ensureAutoNightModeManager();
+            mAutoNightModeManager.setup();
+        }
+
+        mApplyDayNightCalled = true;
     }
 
     private int mapNightMode(final int mode) {
@@ -189,7 +211,6 @@ public class DayNightDelegate {
                 // If we've already been created, we need to recreate the Activity for the
                 // mode to be applied
                 final Activity activity = (Activity) mContext;
-                activity.getWindow().setWindowAnimations(R.style.Animation_WindowEnterExitFade);
                 activity.recreate();
             } else {
                 if (BuildConfig.DEBUG) {
@@ -228,7 +249,7 @@ public class DayNightDelegate {
             final PackageManager pm = mContext.getPackageManager();
             try {
                 final ActivityInfo info = pm.getActivityInfo(
-                        new ComponentName(mContext, getClass()), 0);
+                        new ComponentName(mContext, mContext.getClass()), 0);
                 // We should return true (to recreate) if configChanges does not want to
                 // handle uiMode
                 return (info.configChanges & ActivityInfo.CONFIG_UI_MODE) == 0;
