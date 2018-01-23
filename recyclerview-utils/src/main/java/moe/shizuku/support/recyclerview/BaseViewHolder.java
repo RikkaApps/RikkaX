@@ -47,6 +47,7 @@ public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
     public final void bind(@NonNull List<Object> payloads, T data, BaseRecyclerViewAdapter adapter) {
         mAdapter = adapter;
+        mData = data;
 
         onBind(payloads);
     }

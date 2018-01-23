@@ -10,18 +10,30 @@ import java.util.List;
 public class IndexCreatorPool implements CreatorPool {
 
     private final List<BaseViewHolder.Creator> mCreators;
+    private final List<Integer> mPositionToIndex;
 
     public IndexCreatorPool() {
         mCreators = new ArrayList<>();
+        mPositionToIndex = new ArrayList<>();
     }
 
-    public List<BaseViewHolder.Creator> getCreators() {
-        return mCreators;
+    public void add(BaseViewHolder.Creator creator) {
+        int index = mCreators.indexOf(creator);
+        if (index != -1) {
+            mPositionToIndex.add(index);
+        } else {
+            mCreators.add(creator);
+            mPositionToIndex.add(mCreators.size() - 1);
+        }
+    }
+
+    public void clear() {
+        mPositionToIndex.clear();
     }
 
     @Override
     public int getCreatorIndex(BaseRecyclerViewAdapter adapter, int position) {
-        return position;
+        return mPositionToIndex.get(position);
     }
 
     @Override
