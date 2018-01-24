@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_billing_already_owned_title">You have already owned this item</string>
+    <string name="dialog_billing_already_owned_message">The biggest possibility is that you have signed in a different Google account that haven\'t purchased this item, it\'s a known issue of Google play.\nPlease try uninstall app, switch to the that have purchased in Google play, install app again.</string>
+
+</resources>

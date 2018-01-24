@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_billing_already_owned_title">您已经拥有这件物品</string>
+    <string name="dialog_billing_already_owned_message">最大的可能是您登录了另一个未购买这件物品的 Google 账号，这是 Google play 的一个已知问题。\n请尝试卸载应用，在 Google play 中切换到曾经购买的账号并重新安装。</string>
+
+</resources>
