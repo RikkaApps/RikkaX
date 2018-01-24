@@ -9,36 +9,36 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Rikka on 2017/2/16.
- */
 
-public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public abstract class BaseRecyclerViewAdapter<CP extends CreatorPool> extends RecyclerView.Adapter<BaseViewHolder> {
 
     private static final String TAG = "BaseRVAdapter";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private List mItems;
-    private CreatorPool mCreatorPool;
+    private CP mCreatorPool;
 
     public BaseRecyclerViewAdapter() {
         this(new ArrayList<>());
     }
 
-    public BaseRecyclerViewAdapter(CreatorPool creatorPool) {
+    public BaseRecyclerViewAdapter(CP creatorPool) {
         this(new ArrayList<>(), creatorPool);
     }
 
     public BaseRecyclerViewAdapter(List<?> items) {
-        this(items, new ClassCreatorPool());
+        mItems = items;
+        mCreatorPool = onCreateCreatorPool();
     }
 
-    public BaseRecyclerViewAdapter(List<?> items, CreatorPool creatorPool) {
+    public BaseRecyclerViewAdapter(List<?> items, CP creatorPool) {
         mItems = items;
         mCreatorPool = creatorPool;
     }
 
-    public CreatorPool getCreatorPool() {
+    public abstract CP onCreateCreatorPool();
+
+    public CP getCreatorPool() {
         return mCreatorPool;
     }
 
