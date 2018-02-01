@@ -8,9 +8,6 @@ import android.widget.Toast;
 
 import moe.shizuku.support.R;
 
-/**
- * Created by rikka on 2017/10/12.
- */
 
 public class IntentUtils {
 
@@ -18,45 +15,61 @@ public class IntentUtils {
         return intent.resolveActivity(context.getPackageManager()) != null;
     }
 
-    public static void startActivity(Context context, Intent intent) {
-        startActivity(context, intent, context.getString(R.string.target_app_not_found));
+    public static boolean startActivity(Context context, Intent intent) {
+        return startActivity(context, intent, context.getString(R.string.target_app_not_found));
     }
 
-    public static void startActivity(Context context, Intent intent, String notFoundMessage) {
+    public static boolean startActivity(Context context, Intent intent, String notFoundMessage) {
         if (isValid(context, intent)) {
             if (!(context instanceof Activity)) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             try {
                 context.startActivity(intent);
+                return true;
             } catch (Exception ignored) {
             }
         } else if (notFoundMessage != null) {
             Toast.makeText(context, notFoundMessage, Toast.LENGTH_LONG).show();
         }
+        return false;
     }
 
-    public static void startActivityForResult(Activity activity, Intent intent, int requestCode) {
-        startActivityForResult(activity, intent, requestCode, activity.getString(R.string.target_app_not_found));
+    public static boolean startActivityForResult(Activity activity, Intent intent, int requestCode) {
+        return startActivityForResult(activity, intent, requestCode, activity.getString(R.string.target_app_not_found));
     }
 
-    public static void startActivityForResult(Activity activity, Intent intent, int requestCode, String notFoundMessage) {
+    public static boolean startActivityForResult(Activity activity, Intent intent, int requestCode, String notFoundMessage) {
         if (isValid(activity, intent)) {
-            activity.startActivityForResult(intent, requestCode);
+            try {
+                activity.startActivityForResult(intent, requestCode);
+                return true;
+            } catch (Exception ignored) {
+            }
+            return true;
         } else if (notFoundMessage != null) {
             Toast.makeText(activity, notFoundMessage, Toast.LENGTH_LONG).show();
         }
+        return false;
     }
 
-    public static void startActivityForResult(Fragment fragment, Intent intent, int requestCode) {
-        startActivityForResult(fragment, intent, requestCode, fragment.getContext().getString(R.string.target_app_not_found));
+    public static boolean startActivityForResult(Fragment fragment, Intent intent, int requestCode) {
+        return startActivityForResult(fragment, intent, requestCode, fragment.getContext().getString(R.string.target_app_not_found));
     }
 
-    public static void startActivityForResult(Fragment fragment, Intent intent, int requestCode, String notFoundMessage) {
-        if (isValid(fragment.getContext(), intent)) {
-            fragment.startActivityForResult(intent, requestCode);
-        } else if (notFoundMessage != null) {
-            Toast.makeText(fragment.getContext(), notFoundMessage, Toast.LENGTH_LONG).show();
+    public static boolean startActivityForResult(Fragment fragment, Intent intent, int requestCode, String notFoundMessage) {
+        if (fragment.getActivity() == null) {
+            return false;
         }
+        if (isValid(fragment.getActivity(), intent)) {
+            try {
+                fragment.startActivityForResult(intent, requestCode);
+                return true;
+            } catch (Exception ignored) {
+            }
+        } else if (notFoundMessage != null) {
+            Toast.makeText(fragment.getActivity(), notFoundMessage, Toast.LENGTH_LONG).show();
+        }
+        return false;
     }
 }
