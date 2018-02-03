@@ -18,6 +18,7 @@
         android:scaleType="centerInside"
         android:src="@drawable/ic_logo_google_play_24dp"
         android:tint="?android:textColorTertiary"
+        android:tintMode="src_in"
         android:importantForAccessibility="no"/>
 
     <TextView

@@ -4,7 +4,7 @@ import moe.shizuku.support.recyclerview.BaseRecyclerViewAdapter;
 import moe.shizuku.support.recyclerview.ClassCreatorPool;
 
 
-public class PaymentAdapter extends BaseRecyclerViewAdapter {
+public class PaymentAdapter extends BaseRecyclerViewAdapter<ClassCreatorPool> {
 
     public PaymentAdapter() {
         super();
@@ -17,7 +17,7 @@ public class PaymentAdapter extends BaseRecyclerViewAdapter {
     }
 
     @Override
-    public ClassCreatorPool getCreatorPool() {
-        return (ClassCreatorPool) super.getCreatorPool();
+    public ClassCreatorPool onCreateCreatorPool() {
+        return new ClassCreatorPool();
     }
 }

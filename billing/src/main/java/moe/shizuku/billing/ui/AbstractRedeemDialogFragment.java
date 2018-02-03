@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import moe.shizuku.billing.R;
 
@@ -50,7 +53,7 @@ public abstract class AbstractRedeemDialogFragment extends DialogFragment implem
                 public void afterTextChanged(Editable s) {
                     if (getDialog() != null) {
                         ((AlertDialog) getDialog()).getButton(DialogInterface.BUTTON_POSITIVE)
-                                .setEnabled(onCheckInput(s.toString()));
+                                .setEnabled(onCheckCodeValidity(s.toString()));
                     }
                 }
             });
@@ -120,7 +123,50 @@ public abstract class AbstractRedeemDialogFragment extends DialogFragment implem
         }
     }
 
-    public abstract void onSubmit(String text, AlertDialog dialog);
+    /**
+     * Called when 'OK' is clicked, implement your redeem logic here.
+     *
+     * @param code Code in EditText
+     * @param dialog Dialog
+     */
+    public abstract void onSubmit(String code, AlertDialog dialog);
 
-    public abstract boolean onCheckInput(String text);
+    /**
+     * Check if the code is valid. If valid, the 'OK' button of the dialog will be enabled.
+     * <p>
+     * Make sure you only implemented local logic here.
+     *
+     * @param code Code in EditText
+     * @return is the code valid
+     */
+    public abstract boolean onCheckCodeValidity(String code);
+
+    /**
+     * Start Google play redeem activity.
+     *
+     * @param code Redeem code
+     * @param showFailedToast show 'Google play not available' if failed
+     * @return activity is successfully started
+     */
+    public boolean startRedeemGooglePlay(String code, boolean showFailedToast) {
+        if (getContext() == null) {
+            return false;
+        }
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/redeem?code=" + code));
+        if (intent.resolveActivity(getContext().getPackageManager()) == null) {
+            if (showFailedToast) {
+                Toast.makeText(getContext(), R.string.billing_toast_google_play_unavailable, Toast.LENGTH_SHORT).show();
+            }
+            return false;
+        }
+
+        try {
+            getContext().startActivity(intent);
+            return true;
+        } catch (Throwable tr) {
+            Toast.makeText(getContext(), R.string.billing_toast_google_play_unavailable, Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
 }
