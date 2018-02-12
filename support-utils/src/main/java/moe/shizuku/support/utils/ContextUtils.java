@@ -36,7 +36,7 @@ public class ContextUtils {
         if (context instanceof Activity) {
             return (Activity) context;
         } else if (context instanceof ContextWrapper) {
-            getActivity(((ContextWrapper) context).getBaseContext());
+            return getActivity(((ContextWrapper) context).getBaseContext());
         }
 
         return null;
