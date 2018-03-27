@@ -44,8 +44,15 @@ public class HtmlUtils {
             htmlDescription = Html.fromHtml(source, imageGetter, tagHandler);
         }
 
-        String descriptionWithOutExtraSpace = htmlDescription.toString().trim();
+        String htmlDescriptionString = htmlDescription.toString();
 
-        return (Spanned) htmlDescription.subSequence(0, descriptionWithOutExtraSpace.length());
+        int len = htmlDescriptionString.length();
+        int st = 0;
+        while ((st < len) && htmlDescriptionString.charAt(len - 1) == ' ') {
+            len--;
+        }
+        htmlDescriptionString = htmlDescriptionString.substring(0, len);
+
+        return (Spanned) htmlDescription.subSequence(0, htmlDescriptionString.length());
     }
 }
