@@ -7,7 +7,7 @@ android {
         minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.1.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -34,9 +34,9 @@ dependencies {
     implementation "moe.shizuku.preference:preference:$preferenceLibraryVersion"
     implementation "moe.shizuku.preference:preference-dialog-android:$preferenceLibraryVersion"
     implementation "moe.shizuku.preference:preference-simplemenu:$preferenceLibraryVersion"
-    implementation 'com.github.RikkaW:Markdown:1.0.6'
-    implementation "moe.shizuku.support:recyclerview-utils:2.0.3"
-    implementation "moe.shizuku.support:support-utils:2.0.2"
+    implementation 'ru.noties:markwon:1.0.3'
+    implementation "moe.shizuku.support:support-utils:2.2.4"
+    implementation "moe.shizuku.support:recyclerview-utils:2.1.1"
     implementation "moe.shizuku.support:design:1.0.0"
 }
 

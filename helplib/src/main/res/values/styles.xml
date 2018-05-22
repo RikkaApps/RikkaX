@@ -7,7 +7,7 @@
         <item name="android:colorPrimaryDark">@color/help_color_primary_dark_dark</item>
         <item name="android:colorAccent">@color/help_color_accent_dark</item>
         <item name="preferenceTheme">@style/HelpTheme.PreferenceThemeOverlay</item>
-        <item name="markdownStyle">@style/Markdown</item>
+        <!--<item name="markdownStyle">@style/Markdown</item>-->
     </style>
 
     <style name="HelpTheme.Light" parent="android:Theme.Material.Light">
@@ -15,7 +15,7 @@
         <item name="android:colorPrimaryDark">@color/help_color_primary_dark_light</item>
         <item name="android:colorAccent">@color/help_color_accent_light</item>
         <item name="preferenceTheme">@style/HelpTheme.PreferenceThemeOverlay</item>
-        <item name="markdownStyle">@style/Markdown.Light</item>
+        <!--<item name="markdownStyle">@style/Markdown.Light</item>-->
     </style>
 
     <style name="HelpTheme.Light.DarkActionBar" parent="android:Theme.Material.Light.DarkActionBar">
@@ -23,7 +23,7 @@
         <item name="android:colorPrimaryDark">@color/help_color_primary_dark_light</item>
         <item name="android:colorAccent">@color/help_color_accent_light</item>
         <item name="preferenceTheme">@style/HelpTheme.PreferenceThemeOverlay</item>
-        <item name="markdownStyle">@style/Markdown.Light</item>
+        <!--<item name="markdownStyle">@style/Markdown.Light</item>-->
     </style>
 
     <style name="HelpTheme.PreferenceThemeOverlay" parent="PreferenceThemeOverlay">
