@@ -65,6 +65,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import moe.shizuku.support.htmlcompat.R;
+
 /**
  * This class processes HTML strings into displayable styled text.
  * Not all HTML tags are supported.
@@ -168,6 +170,10 @@ public class HtmlCompat {
     @SuppressLint("StaticFieldLeak")
     private static Context sContext;
 
+    public static Context getContext() {
+        return sContext;
+    }
+
     public static void setContext(Context context) {
         sContext = context;
     }
@@ -177,10 +183,7 @@ public class HtmlCompat {
     /**
      * Returns displayable styled text from the provided HTML string with the legacy flags
      * {@link #FROM_HTML_MODE_LEGACY}.
-     *
-     * @deprecated use {@link #fromHtml(String, int)} instead.
      */
-    @Deprecated
     public static Spanned fromHtml(String source) {
         return fromHtml(source, FROM_HTML_MODE_LEGACY, null, null);
     }
@@ -1134,7 +1137,7 @@ class HtmlToSpannedConverter implements ContentHandler {
 
         if (d == null) {
             d = Resources.getSystem().
-                    getDrawable(com.android.internal.R.drawable.unknown_image);
+                    getDrawable(R.drawable.unknown_image);
             d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
         }
 
