@@ -5,10 +5,10 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName '2.2.3'
+        versionName '2.2.4'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
