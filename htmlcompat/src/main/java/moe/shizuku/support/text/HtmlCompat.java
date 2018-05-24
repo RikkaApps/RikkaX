@@ -239,17 +239,12 @@ public class HtmlCompat {
 
         Spanned spanned = converter.convert();
 
-        // remove extra space
-        String string = spanned.toString();
+        int i = spanned.length();
+        do {
+            i --;
+        } while (i >= 0 && Character.isWhitespace(spanned.charAt(i)));
 
-        int len = string.length();
-        int st = 0;
-        while ((st < len) && string.charAt(len - 1) == ' ') {
-            len--;
-        }
-        string = string.substring(0, len);
-
-        return (Spanned) spanned.subSequence(0, string.length());
+        return (Spanned) spanned.subSequence(0, i + 1);
     }
 
     /**

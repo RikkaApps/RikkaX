@@ -37,22 +37,18 @@ public class HtmlUtils {
     }
 
     public static Spanned fromHtml(String source, int flags, Html.ImageGetter imageGetter, Html.TagHandler tagHandler) {
-        Spanned htmlDescription;
+        Spanned spanned;
         if (Build.VERSION.SDK_INT >= 24) {
-            htmlDescription = Html.fromHtml(source, flags, imageGetter, tagHandler);
+            spanned = Html.fromHtml(source, flags, imageGetter, tagHandler);
         } else {
-            htmlDescription = Html.fromHtml(source, imageGetter, tagHandler);
+            spanned = Html.fromHtml(source, imageGetter, tagHandler);
         }
 
-        String htmlDescriptionString = htmlDescription.toString();
+        int i = spanned.length();
+        do {
+            i --;
+        } while (i >= 0 && Character.isWhitespace(spanned.charAt(i)));
 
-        int len = htmlDescriptionString.length();
-        int st = 0;
-        while ((st < len) && htmlDescriptionString.charAt(len - 1) == ' ') {
-            len--;
-        }
-        htmlDescriptionString = htmlDescriptionString.substring(0, len);
-
-        return (Spanned) htmlDescription.subSequence(0, htmlDescriptionString.length());
+        return (Spanned) spanned.subSequence(0, i + 1);
     }
 }
