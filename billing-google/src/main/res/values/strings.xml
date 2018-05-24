@@ -2,5 +2,7 @@
 <resources>
     <string name="dialog_billing_already_owned_title">You have already owned this item</string>
     <string name="dialog_billing_already_owned_message">The biggest possibility is that you have signed in a different Google account that haven\'t purchased this item, it\'s a known issue of Google play.\nPlease try uninstall app, switch to the that have purchased in Google play, install app again.</string>
+    <string name="dialog_billing_api_action_error_title">Error when interacting with Play Store</string>
+    <string name="dialog_billing_api_action_error_message">There may be a variety of reasons, but we know some of the possible reasons that usually limit the permissions of the Play Store. For example, the MIUI China version needs to ensure that the Play Store\'s "display interface in the background“ permission is granted. Please check if there is a similar situation.</string>
 
 </resources>
