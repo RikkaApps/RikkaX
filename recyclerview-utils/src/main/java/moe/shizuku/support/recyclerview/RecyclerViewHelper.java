@@ -1,5 +1,11 @@
 package moe.shizuku.support.recyclerview;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -52,5 +58,32 @@ public class RecyclerViewHelper {
 
     public static void fixOverScroll(RecyclerView recyclerView) {
         recyclerView.addOnLayoutChangeListener(new FixOverScrollListener());
+    }
+
+    public static void initFastScroller(RecyclerView recyclerView) {
+
+        Context context = recyclerView.getContext();
+        TypedArray a = context.getTheme().obtainStyledAttributes(new int[] {
+                android.R.attr.fastScrollThumbDrawable,
+                android.R.attr.fastScrollTrackDrawable,
+        });
+        StateListDrawable thumbDrawable = (StateListDrawable) a.getDrawable(0);
+        Drawable trackDrawable = a.getDrawable(1);
+        a.recycle();
+
+        initFastScroller(recyclerView, thumbDrawable, trackDrawable, thumbDrawable, trackDrawable);
+    }
+
+    @SuppressLint("PrivateResource")
+    public static void initFastScroller(RecyclerView recyclerView, StateListDrawable verticalThumbDrawable,
+                                        Drawable verticalTrackDrawable, StateListDrawable horizontalThumbDrawable,
+                                        Drawable horizontalTrackDrawable) {
+        Resources resources = recyclerView.getContext().getResources();
+        new FastScroller(recyclerView, verticalThumbDrawable, verticalTrackDrawable,
+                horizontalThumbDrawable, horizontalTrackDrawable,
+                resources.getDimensionPixelSize(R.dimen.fastscroll_default_thickness),
+                resources.getDimensionPixelSize(R.dimen.fastscroll_minimum_range),
+                resources.getDimensionPixelOffset(R.dimen.fastscroll_margin),
+                resources.getDimensionPixelSize(R.dimen.fastscroll_min_height));
     }
 }
