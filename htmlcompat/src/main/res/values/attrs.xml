@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HtmlCompatTextView">
+        <attr name="htmlText" format="reference"/>
+        <attr name="htmlFlags"/>
+        <attr name="htmlImageGetter" format="string"/>
+        <attr name="htmlTagHandler" format="string"/>
+    </declare-styleable>
+    <attr name="htmlFlags">
+        <flag name="legacy" value="0"/>
+        <flag name="separator_line_break_paragraph" value="1"/>
+        <flag name="separator_line_break_heading" value="2"/>
+        <flag name="separator_line_break_list_item" value="4"/>
+        <flag name="separator_line_break_list" value="8"/>
+        <flag name="separator_line_break_div" value="16"/>
+        <flag name="separator_line_break_blockquote" value="32"/>
+        <flag name="use_css_colors" value="256"/>
+    </attr>
+</resources>
