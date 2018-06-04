@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ResolverDrawerLayout">
+        <attr name="android:maxWidth" />
+        <attr name="maxCollapsedHeight" format="dimension" />
+        <attr name="maxCollapsedHeightSmall" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ResolverDrawerLayout_LayoutParams">
+        <attr name="layout_alwaysShow" format="boolean" />
+        <attr name="layout_ignoreOffset" format="boolean" />
+        <attr name="android:layout_gravity" />
+        <attr name="layout_hasNestedScrollIndicator" format="boolean" />
+    </declare-styleable>
+
+</resources>

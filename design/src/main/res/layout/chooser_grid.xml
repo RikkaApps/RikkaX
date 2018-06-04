@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<moe.shizuku.redirectstorage.widget.ResolverDrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:maxWidth="@dimen/resolver_max_width"
+    app:maxCollapsedHeight="288dp"
+    app:maxCollapsedHeightSmall="56dp"
+    android:id="@+id/contentPanel">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_alwaysShow="true"
+        android:elevation="8dp"
+        android:background="@android:color/white">
+
+        <TextView android:id="@android:id/title"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="14sp"
+            android:gravity="start|center_vertical"
+            android:paddingStart="?android:dialogPreferredPadding"
+            android:paddingEnd="?android:dialogPreferredPadding"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resolver_list"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="outsideOverlay"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:scrollIndicators="top"
+        android:clipToPadding="false"
+        android:paddingStart="?android:listPreferredItemPaddingStart"
+        android:paddingEnd="?android:listPreferredItemPaddingStart"/>
+
+    <TextView android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_alwaysShow="true"
+        android:background="@android:color/white"
+        android:text="@string/chooser_no_apps"
+        android:padding="32dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:elevation="8dp"/>
+
+</moe.shizuku.redirectstorage.widget.ResolverDrawerLayout>
