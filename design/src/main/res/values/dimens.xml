@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="list_item_padding">16dp</dimen>
     <dimen name="dir_elevation">8dp</dimen>
+
+    <dimen name="resolver_max_width">480dp</dimen>
+
 </resources>
