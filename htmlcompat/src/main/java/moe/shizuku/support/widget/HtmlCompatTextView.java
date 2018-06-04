@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.TextView;
@@ -128,6 +129,7 @@ public class HtmlCompatTextView extends TextView {
     public void setHtmlText(String html, int flags, Html.ImageGetter imageGetter, HtmlCompat.TagHandler tagHandler) {
         if (html != null) {
             setText(HtmlCompat.fromHtml(html, flags, imageGetter, tagHandler));
+            setMovementMethod(LinkMovementMethod.getInstance());
         } else {
             setText(null);
         }

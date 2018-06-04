@@ -33,7 +33,6 @@ import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.AlignmentSpan;
 import android.text.style.BackgroundColorSpan;
-import android.text.style.BulletSpan;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
@@ -47,6 +46,7 @@ import android.text.style.SuperscriptSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
+import android.util.TypedValue;
 
 import org.ccil.cowan.tagsoup.HTMLSchema;
 import org.ccil.cowan.tagsoup.Parser;
@@ -66,6 +66,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import moe.shizuku.support.htmlcompat.R;
+import moe.shizuku.support.text.style.BulletSpan;
 
 /**
  * This class processes HTML strings into displayable styled text.
@@ -239,12 +240,21 @@ public class HtmlCompat {
 
         Spanned spanned = converter.convert();
 
-        int i = spanned.length();
+        int i;
+        i = spanned.length();
         do {
             i --;
         } while (i >= 0 && Character.isWhitespace(spanned.charAt(i)));
 
-        return (Spanned) spanned.subSequence(0, i + 1);
+        spanned = (Spanned) spanned.subSequence(0, i + 1);
+
+        int length = spanned.length();
+        i = 0;
+        do {
+            i ++;
+        } while (i < length && Character.isWhitespace(spanned.charAt(i)));
+
+        return (Spanned) spanned.subSequence(i, spanned.length());
     }
 
     /**
@@ -999,16 +1009,66 @@ class HtmlToSpannedConverter implements ContentHandler {
         text.append('\n');
     }
 
+    private static int parseSize(String string) {
+        if (TextUtils.isEmpty(string)) {
+            return 0;
+        }
+
+        int length = string.length();
+
+        float value;
+        try {
+            if (string.endsWith("px") || string.endsWith("dp") || string.endsWith("sp")) {
+                value = Float.valueOf(string.substring(0, length - 2));
+            } else {
+                value = Float.valueOf(string);
+            }
+        } catch (NumberFormatException e) {
+            value = 0;
+        }
+
+        if (string.endsWith("px")) {
+            return (int) value;
+        } else if (string.endsWith("dp")) {
+            return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, HtmlCompat.getContext().getResources().getDisplayMetrics());
+        } else if (string.endsWith("sp")) {
+            return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, value, HtmlCompat.getContext().getResources().getDisplayMetrics());
+        } else {
+            return -1;
+        }
+    }
+
     private void startLi(Editable text, Attributes attributes) {
+        String _gapWidth = attributes.getValue("", "gap");
+        String _color = attributes.getValue("", "color");
+
+        int gapWidth = BulletSpan.STANDARD_GAP_WIDTH;
+        boolean wantColor = !TextUtils.isEmpty(_color);
+        int color = 0;
+        if (!TextUtils.isEmpty(_gapWidth)) {
+            gapWidth = parseSize(_gapWidth);
+        }
+
         startBlockElement(text, attributes, getMarginListItem());
-        start(text, new Bullet());
+        start(text, new Bullet(gapWidth, wantColor, color));
         startCssStyle(text, attributes);
     }
 
     private static void endLi(Editable text) {
+        Bullet bullet = getLast(text, Bullet.class);
+        if (bullet == null) {
+            return;
+        }
+        BulletSpan span;
+        if (bullet.mWantColor) {
+            span = new BulletSpan(bullet.mGapWidth, bullet.mColor);
+        } else {
+            span = new BulletSpan(bullet.mGapWidth);
+        }
+
         endCssStyle(text);
         endBlockElement(text);
-        end(text, Bullet.class, new BulletSpan());
+        end(text, Bullet.class, span);
     }
 
     private void startBlockquote(Editable text, Attributes attributes) {
@@ -1279,7 +1339,18 @@ class HtmlToSpannedConverter implements ContentHandler {
     private static class Blockquote { }
     private static class Super { }
     private static class Sub { }
-    private static class Bullet { }
+
+    private static class Bullet {
+        public int mGapWidth;
+        public boolean mWantColor;
+        public int mColor;
+
+        public Bullet(int gapWidth, boolean wantColor, int color) {
+            mGapWidth = gapWidth;
+            mWantColor = wantColor;
+            mColor = color;
+        }
+    }
 
     private static class Font {
         public String mFace;
