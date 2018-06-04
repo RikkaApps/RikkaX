@@ -15,5 +15,6 @@
         <flag name="separator_line_break_div" value="16"/>
         <flag name="separator_line_break_blockquote" value="32"/>
         <flag name="use_css_colors" value="256"/>
+        <flag name="trim_whitespace" value="512"/>
     </attr>
 </resources>

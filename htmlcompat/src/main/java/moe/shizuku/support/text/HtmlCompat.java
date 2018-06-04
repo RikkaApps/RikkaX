@@ -143,6 +143,11 @@ public class HtmlCompat {
     public static final int FROM_HTML_OPTION_USE_CSS_COLORS = 0x00000100;
 
     /**
+     * Flag indicating that whitespace at the begin and the end will be trimmed.
+     */
+    public static final int FROM_HTML_OPTION_TRIM_WHITESPACE = 0x00000200;
+
+    /**
      * Flags for {@link #fromHtml(String, int, Html.ImageGetter, TagHandler)}: Separate block-level
      * elements with blank lines (two newline characters) in between. This is the legacy behavior
      * prior to N.
@@ -240,21 +245,25 @@ public class HtmlCompat {
 
         Spanned spanned = converter.convert();
 
-        int i;
-        i = spanned.length();
-        do {
-            i --;
-        } while (i >= 0 && Character.isWhitespace(spanned.charAt(i)));
+        if ((flags & FROM_HTML_OPTION_TRIM_WHITESPACE) > 0) {
+            int i;
+            i = spanned.length();
+            do {
+                i--;
+            } while (i >= 0 && Character.isWhitespace(spanned.charAt(i)));
 
-        spanned = (Spanned) spanned.subSequence(0, i + 1);
+            spanned = (Spanned) spanned.subSequence(0, i + 1);
 
-        int length = spanned.length();
-        i = 0;
-        do {
-            i ++;
-        } while (i < length && Character.isWhitespace(spanned.charAt(i)));
+            int length = spanned.length();
+            i = 0;
+            while (i < length && Character.isWhitespace(spanned.charAt(i))) {
+                i++;
+            }
 
-        return (Spanned) spanned.subSequence(i, spanned.length());
+            return (Spanned) spanned.subSequence(i, spanned.length());
+        } else {
+            return spanned;
+        }
     }
 
     /**
