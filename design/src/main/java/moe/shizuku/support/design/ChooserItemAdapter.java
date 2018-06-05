@@ -17,7 +17,7 @@ import moe.shizuku.support.recyclerview.BaseViewHolder;
 import moe.shizuku.support.recyclerview.ClassCreatorPool;
 import moe.shizuku.support.utils.IntentUtils;
 
-public class BaseChooserItemAdapter extends BaseRecyclerViewAdapter<ClassCreatorPool> {
+public class ChooserItemAdapter extends BaseRecyclerViewAdapter<ClassCreatorPool> {
 
     private final BaseViewHolder.Creator<ResolveInfo> CREATOR = new BaseViewHolder.Creator<ResolveInfo>() {
         @Override
@@ -26,9 +26,9 @@ public class BaseChooserItemAdapter extends BaseRecyclerViewAdapter<ClassCreator
         }
     };
 
-    private BaseChooserFragment mParentFragment;
+    private ChooserFragment mParentFragment;
 
-    public BaseChooserItemAdapter(List<ResolveInfo> resolveInfo, BaseChooserFragment parentFragment) {
+    public ChooserItemAdapter(List<ResolveInfo> resolveInfo, ChooserFragment parentFragment) {
         super(resolveInfo);
 
         mParentFragment = parentFragment;
@@ -55,7 +55,7 @@ public class BaseChooserItemAdapter extends BaseRecyclerViewAdapter<ClassCreator
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mParentFragment.getSourceIntent());
+                    Intent intent = new Intent(mParentFragment.getTargetIntent());
                     intent.setComponent(new ComponentName(
                             getData().activityInfo.packageName,
                             getData().activityInfo.name));

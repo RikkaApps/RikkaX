@@ -35,8 +35,8 @@ dependencies {
     implementation "moe.shizuku.preference:preference-dialog-android:$preferenceLibraryVersion"
     implementation "moe.shizuku.preference:preference-simplemenu:$preferenceLibraryVersion"
     implementation 'ru.noties:markwon:1.0.3'
-    implementation "moe.shizuku.support:support-utils:2.2.4"
-    implementation "moe.shizuku.support:recyclerview-utils:2.1.1"
+    implementation "moe.shizuku.support:support-utils:2.3.1"
+    implementation "moe.shizuku.support:recyclerview-utils:2.1.2"
     implementation "moe.shizuku.support:design:1.0.0"
 }
 
