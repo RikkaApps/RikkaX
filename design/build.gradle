@@ -7,10 +7,10 @@ android {
         minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.1.3"
+        versionName "1.1.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        consumerProguardFiles 'proguard-rules.pro'
     }
     buildTypes {
         release {
