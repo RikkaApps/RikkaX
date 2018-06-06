@@ -20,13 +20,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Path.Direction;
-import android.os.Parcel;
 import android.text.Layout;
-import android.text.ParcelableSpan;
 import android.text.Spanned;
-import android.text.style.LeadingMarginSpan;
 
-public class BulletSpan implements LeadingMarginSpan, ParcelableSpan {
+public class BulletSpan extends android.text.style.BulletSpan {
 
     public static final int STANDARD_GAP_WIDTH = 2;
     public static final int STANDARD_BULLET_RADIUS = 5;
@@ -39,6 +36,8 @@ public class BulletSpan implements LeadingMarginSpan, ParcelableSpan {
     private Path mBulletPath = null;
 
     public BulletSpan() {
+        super();
+
         mGapWidth = STANDARD_GAP_WIDTH;
         mBulletRadius = STANDARD_BULLET_RADIUS;
         mWantColor = false;
@@ -46,6 +45,8 @@ public class BulletSpan implements LeadingMarginSpan, ParcelableSpan {
     }
 
     public BulletSpan(int gapWidth) {
+        super(gapWidth);
+
         mGapWidth = gapWidth;
         mBulletRadius = STANDARD_BULLET_RADIUS;
         mWantColor = false;
@@ -53,6 +54,8 @@ public class BulletSpan implements LeadingMarginSpan, ParcelableSpan {
     }
 
     public BulletSpan(int gapWidth, int bulletRadius) {
+        super(gapWidth);
+
         mGapWidth = gapWidth;
         mBulletRadius = bulletRadius;
         mWantColor = false;
@@ -60,46 +63,20 @@ public class BulletSpan implements LeadingMarginSpan, ParcelableSpan {
     }
 
     public BulletSpan(int gapWidth, int bulletRadius, int color) {
+        super(gapWidth, color);
+
         mGapWidth = gapWidth;
         mBulletRadius = bulletRadius;
         mWantColor = true;
         mColor = color;
     }
 
-    public BulletSpan(Parcel src) {
-        mGapWidth = src.readInt();
-        mWantColor = src.readInt() != 0;
-        mColor = src.readInt();
-        mBulletRadius = src.readInt();
-    }
-
-    public int getSpanTypeId() {
-        return getSpanTypeIdInternal();
-    }
-
-    public int getSpanTypeIdInternal() {
-        return 8/*TextUtils.BULLET_SPAN*/;
-    }
-
-    public int describeContents() {
-        return 0;
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        writeToParcelInternal(dest, flags);
-    }
-
-    public void writeToParcelInternal(Parcel dest, int flags) {
-        dest.writeInt(mGapWidth);
-        dest.writeInt(mWantColor ? 1 : 0);
-        dest.writeInt(mColor);
-        dest.writeInt(mBulletRadius);
-    }
-
+    @Override
     public int getLeadingMargin(boolean first) {
         return 2 * mBulletRadius + 2 * mGapWidth;
     }
 
+    @Override
     public void drawLeadingMargin(Canvas c, Paint p, int x, int dir,
                                   int top, int baseline, int bottom,
                                   CharSequence text, int start, int end,
