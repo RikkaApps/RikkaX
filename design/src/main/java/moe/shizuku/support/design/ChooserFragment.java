@@ -186,6 +186,8 @@ public class ChooserFragment extends Fragment {
                     }
                 });
 
+        view.findViewById(android.R.id.empty).setVisibility(mResolves.isEmpty() ? View.VISIBLE : View.GONE);
+
         RecyclerView recyclerView = view.findViewById(R.id.resolver_list);
         // TODO Adaptive grid layout
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 4));
