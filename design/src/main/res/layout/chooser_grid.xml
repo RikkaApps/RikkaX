@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         app:layout_alwaysShow="true"
         android:elevation="8dp"
-        android:background="@android:color/white">
+        android:background="?android:colorBackground">
 
         <TextView android:id="@android:id/title"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:id="@+id/resolver_list"
         android:scrollbars="vertical"
         android:scrollbarStyle="outsideOverlay"
-        android:background="@android:color/white"
+        android:background="?android:colorBackground"
         android:elevation="8dp"
         android:scrollIndicators="top"
         android:clipToPadding="false"
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_alwaysShow="true"
-        android:background="@android:color/white"
+        android:background="?android:colorBackground"
         android:text="@string/chooser_no_apps"
         android:padding="32dp"
         android:gravity="center"

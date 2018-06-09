@@ -26,37 +26,41 @@ public class ChooserFragment extends Fragment {
     public static final String ARG_RESOLVE_INTENT = ChooserFragment.class.getName() + ".arg.RESOLVE_INTENT";
     public static final String ARG_RESOLVE_INFO_LIST = ChooserFragment.class.getName() + ".arg.RESOLVE_INFO_LIST";
     public static final String ARG_EXCLUDE_COMPONENT_LIST = ChooserFragment.class.getName() + ".arg.EXCLUDE_COMPONENT_LIST";
+    public static final String ARG_EXTRA_RESOLVE_INFO_LIST = ChooserFragment.class.getName() + ".arg.EXTRA_RESOLVE_INFO_LIST";
+    public static final String ARG_EXTRA_INTENT_LIST = ChooserFragment.class.getName() + ".arg.EXTRA_INTENT_LIST";
+    public static final String ARG_EXTRA_FROM_START = ChooserFragment.class.getName() + ".arg.EXTRA_FROM_START";
+    public static final String ARG_EXTRA_FROM_START_NEW_LINE = ChooserFragment.class.getName() + ".arg.EXTRA_FROM_START_NEW_LINE";
 
     @NonNull
     public static Intent newIntent(@NonNull ComponentName componentName, @NonNull String title,
-                                 @NonNull Intent targetIntent) {
+                                   @NonNull Intent targetIntent) {
         return newIntent(componentName, title, targetIntent, null, null, null);
     }
 
     @NonNull
     public static Intent newIntent(@NonNull ComponentName componentName, @NonNull String title,
-                                 @NonNull Intent targetIntent, @Nullable Intent resolveIntent) {
+                                   @NonNull Intent targetIntent, @Nullable Intent resolveIntent) {
         return newIntent(componentName, title, targetIntent, resolveIntent, null, null);
     }
 
     @NonNull
     public static Intent newIntent(@NonNull ComponentName componentName, @NonNull String title,
-                                 @NonNull Intent targetIntent, @Nullable Intent resolveIntent,
-                                 @Nullable List<ComponentName> excludeComponents) {
+                                   @NonNull Intent targetIntent, @Nullable Intent resolveIntent,
+                                   @Nullable List<ComponentName> excludeComponents) {
         return newIntent(componentName, title, targetIntent, resolveIntent, excludeComponents, null);
     }
 
     @NonNull
     public static Intent newIntent(@NonNull ComponentName componentName, @NonNull String title,
-                                 @NonNull Intent targetIntent, @Nullable List<ResolveInfo> resolves) {
+                                   @NonNull Intent targetIntent, @Nullable List<ResolveInfo> resolves) {
         return newIntent(componentName, title, targetIntent, null, null, resolves);
     }
 
     @NonNull
     private static Intent newIntent(@NonNull ComponentName componentName, @NonNull String title,
-                                  @NonNull Intent targetIntent, @Nullable Intent resolveIntent,
-                                  @Nullable List<ComponentName> excludeComponents,
-                                  @Nullable List<ResolveInfo> resolves) {
+                                    @NonNull Intent targetIntent, @Nullable Intent resolveIntent,
+                                    @Nullable List<ComponentName> excludeComponents,
+                                    @Nullable List<ResolveInfo> resolves) {
         Bundle arguments = new Bundle();
         arguments.putString(ChooserFragment.ARG_TITLE, title);
         arguments.putParcelable(ChooserFragment.ARG_TARGET_INTENT, targetIntent);
@@ -135,6 +139,9 @@ public class ChooserFragment extends Fragment {
     private Intent mTargetIntent;
     private List<ResolveInfo> mResolves;
 
+    private List<Intent> mExtraTargetIntent;
+    private List<ResolveInfo> mExtraResolves;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +169,23 @@ public class ChooserFragment extends Fragment {
                 }
             }
             getArguments().putParcelableArrayList(ARG_RESOLVE_INFO_LIST, new ArrayList<>(mResolves));
+        }
+
+        if (getArguments().containsKey(ARG_EXTRA_INTENT_LIST) && getArguments().containsKey(ARG_EXTRA_RESOLVE_INFO_LIST)) {
+            mExtraTargetIntent = getArguments().getParcelableArrayList(ARG_EXTRA_INTENT_LIST);
+            mExtraResolves = getArguments().getParcelableArrayList(ARG_EXTRA_RESOLVE_INFO_LIST);
+            if (getArguments().getBoolean(ARG_EXTRA_FROM_START, true)) {
+                mResolves.addAll(0, mExtraResolves);
+
+                if (getArguments().getBoolean(ARG_EXTRA_FROM_START_NEW_LINE, true)) {
+                    int count = 4 - (mExtraResolves.size() % 4);
+                    for (int i = 0; i < count; i++) {
+                        mResolves.add(mExtraResolves.size(), null);
+                    }
+                }
+            } else {
+                mResolves.addAll(mExtraResolves);
+            }
         }
     }
 
@@ -195,7 +219,11 @@ public class ChooserFragment extends Fragment {
     }
 
     @NonNull
-    public Intent getTargetIntent() {
+    public Intent getTargetIntent(ResolveInfo resolveInfo) {
+        if (mExtraResolves.contains(resolveInfo)) {
+            int index = mExtraResolves.indexOf(resolveInfo);
+            return mExtraTargetIntent.get(index);
+        }
         return mTargetIntent;
     }
 }

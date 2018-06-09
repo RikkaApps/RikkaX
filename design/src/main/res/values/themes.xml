@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Theme used for the intent picker activity. -->
+    <style name="Theme.Design.Resolver.DayNight" parent="Theme.Design.Resolver.Light"/>
+
+    <style name="Theme.Design.Resolver" parent="android:Theme.DeviceDefault">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorControlActivated">?android:colorControlHighlight</item>
+        <item name="android:colorBackground">#424242</item>
+    </style>
+
     <style name="Theme.Design.Resolver.Light" parent="android:Theme.DeviceDefault.Light">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
@@ -9,6 +22,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:colorControlActivated">?android:colorControlHighlight</item>
+        <item name="android:colorBackground">@android:color/white</item>
     </style>
 
 </resources>

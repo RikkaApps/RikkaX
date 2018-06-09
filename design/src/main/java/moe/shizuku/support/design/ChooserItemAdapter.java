@@ -15,9 +15,10 @@ import java.util.List;
 import moe.shizuku.support.recyclerview.BaseRecyclerViewAdapter;
 import moe.shizuku.support.recyclerview.BaseViewHolder;
 import moe.shizuku.support.recyclerview.ClassCreatorPool;
+import moe.shizuku.support.recyclerview.CreatorPool;
 import moe.shizuku.support.utils.IntentUtils;
 
-public class ChooserItemAdapter extends BaseRecyclerViewAdapter<ClassCreatorPool> {
+public class ChooserItemAdapter extends BaseRecyclerViewAdapter<CreatorPool> {
 
     private final BaseViewHolder.Creator<ResolveInfo> CREATOR = new BaseViewHolder.Creator<ResolveInfo>() {
         @Override
@@ -32,13 +33,22 @@ public class ChooserItemAdapter extends BaseRecyclerViewAdapter<ClassCreatorPool
         super(resolveInfo);
 
         mParentFragment = parentFragment;
-
-        getCreatorPool().putRule(ResolveInfo.class, CREATOR);
     }
 
     @Override
-    public ClassCreatorPool onCreateCreatorPool() {
-        return new ClassCreatorPool();
+    public CreatorPool onCreateCreatorPool() {
+        return new CreatorPool() {
+
+            @Override
+            public int getCreatorIndex(BaseRecyclerViewAdapter adapter, int position) {
+                return 0;
+            }
+
+            @Override
+            public BaseViewHolder.Creator getCreator(int index) {
+                return CREATOR;
+            }
+        };
     }
 
     private class ChooserItemViewHolder extends BaseViewHolder<ResolveInfo> {
@@ -55,7 +65,7 @@ public class ChooserItemAdapter extends BaseRecyclerViewAdapter<ClassCreatorPool
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mParentFragment.getTargetIntent());
+                    Intent intent = new Intent(mParentFragment.getTargetIntent(getData()));
                     intent.setComponent(new ComponentName(
                             getData().activityInfo.packageName,
                             getData().activityInfo.name));
