@@ -51,7 +51,7 @@ public class ChooserItemAdapter extends BaseRecyclerViewAdapter<CreatorPool> {
         };
     }
 
-    private class ChooserItemViewHolder extends BaseViewHolder<ResolveInfo> {
+    private class ChooserItemViewHolder extends BaseViewHolder<ResolveInfo> implements View.OnClickListener {
 
         private ImageView icon;
         private TextView title;
@@ -61,19 +61,17 @@ public class ChooserItemAdapter extends BaseRecyclerViewAdapter<CreatorPool> {
 
             icon = itemView.findViewById(android.R.id.icon);
             title = itemView.findViewById(android.R.id.text1);
+        }
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mParentFragment.getTargetIntent(getData()));
-                    intent.setComponent(new ComponentName(
-                            getData().activityInfo.packageName,
-                            getData().activityInfo.name));
-                    IntentUtils.startActivity(v.getContext(), intent);
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mParentFragment.getTargetIntent(getData()));
+            intent.setComponent(new ComponentName(
+                    getData().activityInfo.packageName,
+                    getData().activityInfo.name));
+            IntentUtils.startActivity(v.getContext(), intent);
 
-                    mParentFragment.requireActivity().finish();
-                }
-            });
+            mParentFragment.requireActivity().finish();
         }
 
         @Override
@@ -83,8 +81,11 @@ public class ChooserItemAdapter extends BaseRecyclerViewAdapter<CreatorPool> {
             if (getData() == null) {
                 icon.setImageDrawable(null);
                 title.setText(null);
+                itemView.setOnClickListener(null);
                 return;
             }
+
+            itemView.setOnClickListener(this);
 
             PackageManager pm = itemView.getContext().getPackageManager();
 
