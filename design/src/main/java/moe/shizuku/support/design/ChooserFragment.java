@@ -220,7 +220,7 @@ public class ChooserFragment extends Fragment {
 
     @NonNull
     public Intent getTargetIntent(ResolveInfo resolveInfo) {
-        if (mExtraResolves.contains(resolveInfo)) {
+        if (mExtraResolves != null && mExtraResolves.contains(resolveInfo)) {
             int index = mExtraResolves.indexOf(resolveInfo);
             return mExtraTargetIntent.get(index);
         }
