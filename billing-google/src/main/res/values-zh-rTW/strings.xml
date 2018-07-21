@@ -4,4 +4,6 @@
     <string name="dialog_billing_already_owned_message">最大的可能是您登入了另一個未購買這件物品的 Google 賬號，這是 Google play 的一個已知問題。\n請嘗試解除安裝應用，在 Google play 中切換到曾經購買的賬號並重新安裝。</string>
     <string name="dialog_billing_api_action_error_title">與 Play Store 互動期間出現錯誤</string>
     <string name="dialog_billing_api_action_error_message">原因可能多種多樣，但我們知道一些可能的原因，通常都是限制了 Play Store 的權限。如 MIUI 中國大陸版需要保證沒有關閉 Play Store 的「在後臺顯示界面」權限。請檢查時候否有類似情況。</string>
+    <string name="dialog_billing_unavailable_title">結算 API 不可用</string>
+    <string name="dialog_billing_unavailable_message">請確認您已經安裝 Play Store 且沒有禁用。\n您可能需要檢查是否有應用與 Play Store 的連接（通過綁定服務）是否被阻斷（如中國大陸地區設備常見的限制後臺功能）。\n此外您可能還需要檢查是否有應用僞裝成 Play Store 的情況。</string>
 </resources>

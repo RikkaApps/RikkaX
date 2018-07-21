@@ -19,6 +19,7 @@ public class HtmlCompatTextView extends TextView {
     private static final String TAG = "HtmlCompatTextView";
 
     private int mFlags;
+    private boolean mLinksClickable;
     private Html.ImageGetter mImageGetter;
     private HtmlCompat.TagHandler mTagHandler;
 
@@ -44,6 +45,7 @@ public class HtmlCompatTextView extends TextView {
         int flags = a.getInteger(R.styleable.HtmlCompatTextView_htmlFlags, HtmlCompat.FROM_HTML_MODE_LEGACY);
         String imageGetterClass = a.getString(R.styleable.HtmlCompatTextView_htmlImageGetter);
         String tagHandlerClass = a.getString(R.styleable.HtmlCompatTextView_htmlTagHandler);
+        mLinksClickable = a.getBoolean(R.styleable.HtmlCompatTextView_android_linksClickable, false);
 
         a.recycle();
 
@@ -129,7 +131,9 @@ public class HtmlCompatTextView extends TextView {
     public void setHtmlText(String html, int flags, Html.ImageGetter imageGetter, HtmlCompat.TagHandler tagHandler) {
         if (html != null) {
             setText(HtmlCompat.fromHtml(html, flags, imageGetter, tagHandler));
-            setMovementMethod(LinkMovementMethod.getInstance());
+            if (mLinksClickable && html.contains("<a href")) {
+                setMovementMethod(LinkMovementMethod.getInstance());
+            }
         } else {
             setText(null);
         }

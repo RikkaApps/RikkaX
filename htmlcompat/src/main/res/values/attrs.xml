@@ -5,6 +5,7 @@
         <attr name="htmlFlags"/>
         <attr name="htmlImageGetter" format="string"/>
         <attr name="htmlTagHandler" format="string"/>
+        <attr name="android:linksClickable"/>
     </declare-styleable>
     <attr name="htmlFlags">
         <flag name="legacy" value="0"/>

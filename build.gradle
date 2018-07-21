@@ -32,6 +32,6 @@ task clean(type: Delete) {
 ext {
     preferenceLibraryVersion = '2.2.3'
     supportLibraryVersion = '27.1.1'
-    targetSdkVersion = 27
-    buildToolsVersion = "27.0.3"
+    targetSdkVersion = 28
+    buildToolsVersion = "28.0.0"
 }

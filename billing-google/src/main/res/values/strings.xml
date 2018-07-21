@@ -4,5 +4,6 @@
     <string name="dialog_billing_already_owned_message">The biggest possibility is that you have signed in a different Google account that haven\'t purchased this item, it\'s a known issue of Google play.\nPlease try uninstall app, switch to the that have purchased in Google play, install app again.</string>
     <string name="dialog_billing_api_action_error_title">Error when interacting with Play Store</string>
     <string name="dialog_billing_api_action_error_message">There may be a variety of reasons, but we know some of the possible reasons that usually limit the permissions of the Play Store. For example, the MIUI China version needs to ensure that the Play Store\'s "display interface in the background“ permission is granted. Please check if there is a similar situation.</string>
-
+    <string name="dialog_billing_unavailable_title">Billing API unavailable</string>
+    <string name="dialog_billing_unavailable_message">Please make sure you have Play Store installed and it is not disabled.\nYou may also need to check if the connection (via bind service) between app and Play Store is blocked (such background limit feature commonly seen in mainland China devices).\nIn addition, you may need to check if there is an app pretending to be the Play Store.</string>
 </resources>
