@@ -134,6 +134,8 @@ public class FastScroller extends ItemDecoration implements OnItemTouchListener 
         }
     };
 
+    private Callback mCallback = null;
+
     public FastScroller(RecyclerView recyclerView, StateListDrawable verticalThumbDrawable,
                         Drawable verticalTrackDrawable, StateListDrawable horizontalThumbDrawable,
                         Drawable horizontalTrackDrawable, int defaultWidth, int scrollbarMinimumRange,
@@ -187,6 +189,10 @@ public class FastScroller extends ItemDecoration implements OnItemTouchListener 
         cancelHide();
     }
 
+    public void setCallback(Callback callback) {
+        mCallback = callback;
+    }
+
     private void requestRedraw() {
         mRecyclerView.invalidate();
     }
@@ -209,7 +215,18 @@ public class FastScroller extends ItemDecoration implements OnItemTouchListener 
         } else if (state == STATE_VISIBLE) {
             resetHideDelay(HIDE_DELAY_AFTER_VISIBLE_MS);
         }
+
         mState = state;
+
+        if (mCallback != null) {
+            if (state == STATE_DRAGGING) {
+                mCallback.onDragging();
+            } else if (state == STATE_HIDDEN) {
+                mCallback.onHidden();
+            } else if (state == STATE_VISIBLE) {
+                mCallback.onVisible();
+            }
+        }
     }
 
     private boolean isLayoutRTL() {
@@ -587,5 +604,15 @@ public class FastScroller extends ItemDecoration implements OnItemTouchListener 
             mVerticalTrackDrawable.setAlpha(alpha);
             requestRedraw();
         }
+    }
+
+    public interface Callback {
+
+        void onDragging();
+
+        void onHidden();
+
+        void onVisible();
+
     }
 }
