@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -60,8 +61,8 @@ public class RecyclerViewHelper {
         recyclerView.addOnLayoutChangeListener(new FixOverScrollListener());
     }
 
-    public static void initFastScroller(RecyclerView recyclerView) {
-
+    @NonNull
+    public static FastScroller initFastScroller(RecyclerView recyclerView) {
         Context context = recyclerView.getContext();
         TypedArray a = context.getTheme().obtainStyledAttributes(new int[] {
                 android.R.attr.fastScrollThumbDrawable,
@@ -71,15 +72,16 @@ public class RecyclerViewHelper {
         Drawable trackDrawable = a.getDrawable(1);
         a.recycle();
 
-        initFastScroller(recyclerView, thumbDrawable, trackDrawable, thumbDrawable, trackDrawable);
+        return initFastScroller(recyclerView, thumbDrawable, trackDrawable, thumbDrawable, trackDrawable);
     }
 
     @SuppressLint("PrivateResource")
-    public static void initFastScroller(RecyclerView recyclerView, StateListDrawable verticalThumbDrawable,
+    @NonNull
+    public static FastScroller initFastScroller(RecyclerView recyclerView, StateListDrawable verticalThumbDrawable,
                                         Drawable verticalTrackDrawable, StateListDrawable horizontalThumbDrawable,
                                         Drawable horizontalTrackDrawable) {
         Resources resources = recyclerView.getContext().getResources();
-        new FastScroller(recyclerView, verticalThumbDrawable, verticalTrackDrawable,
+        return new FastScroller(recyclerView, verticalThumbDrawable, verticalTrackDrawable,
                 horizontalThumbDrawable, horizontalTrackDrawable,
                 resources.getDimensionPixelSize(R.dimen.fastscroll_default_thickness),
                 resources.getDimensionPixelSize(R.dimen.fastscroll_minimum_range),
