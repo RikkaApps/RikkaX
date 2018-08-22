@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="switchbar_background_light">#80868b</color>
+    <color name="switchbar_background_dark">#adb0b3</color>
+</resources>

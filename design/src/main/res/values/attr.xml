@@ -14,4 +14,14 @@
         <attr name="layout_hasNestedScrollIndicator" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="SwitchBar">
+        <attr name="switchOnText" format="string"/>
+        <attr name="switchOffText" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="Design">
+        <attr name="switchBarBackgroundNormal" format="color" />
+        <attr name="switchBarBackgroundDisabled" format="color" />
+    </declare-styleable>
+
 </resources>

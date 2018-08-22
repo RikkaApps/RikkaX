@@ -25,4 +25,22 @@
         <item name="android:colorBackground">@android:color/white</item>
     </style>
 
+
+    <style name="Theme.Design.Widget.SwitchBar.Switch" parent="android:Widget">
+        <item name="android:colorAccent">?android:textColorPrimaryInverse</item>
+    </style>
+
+    <style name="Theme.Design.Widget.SwitchBar" parent="android:Widget">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">?android:actionBarSize</item>
+        <item name="android:background">@drawable/switchbar_background</item>
+        <item name="android:foreground">?android:selectableItemBackground</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
 </resources>
