@@ -1,6 +1,7 @@
 package moe.shizuku.support.design;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -43,18 +44,20 @@ public class SwitchBar extends LinearLayout implements Checkable {
     }
 
     public SwitchBar(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, R.attr.switchBarStyle);
     }
 
     public SwitchBar(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, R.style.Theme_Design_Widget_SwitchBar);
+        this(context, attrs, defStyleAttr, 0);
     }
 
     public SwitchBar(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
+        ColorStateList textColor = null;
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SwitchBar, defStyleAttr, defStyleRes);
+            textColor = a.getColorStateList(R.styleable.SwitchBar_android_textColor);
             mSwitchOnText = a.getString(R.styleable.SwitchBar_switchOnText);
             mSwitchOffText = a.getString(R.styleable.SwitchBar_switchOffText);
             a.recycle();
@@ -63,6 +66,9 @@ public class SwitchBar extends LinearLayout implements Checkable {
         LayoutInflater.from(context).inflate(R.layout.switchbar_widget_layout, this, true);
         mStatusText = findViewById(android.R.id.text1);
         mSwitch = findViewById(android.R.id.toggle);
+
+        if (textColor != null)
+            mStatusText.setTextColor(textColor);
 
         setOnClickListener(v -> toggle());
 

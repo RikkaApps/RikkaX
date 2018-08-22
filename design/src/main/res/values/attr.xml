@@ -15,11 +15,13 @@
     </declare-styleable>
 
     <declare-styleable name="SwitchBar">
+        <attr name="android:textColor"/>
         <attr name="switchOnText" format="string"/>
         <attr name="switchOffText" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="Design">
+        <attr name="switchBarStyle" format="reference" />
         <attr name="switchBarBackgroundNormal" format="color" />
         <attr name="switchBarBackgroundDisabled" format="color" />
     </declare-styleable>
