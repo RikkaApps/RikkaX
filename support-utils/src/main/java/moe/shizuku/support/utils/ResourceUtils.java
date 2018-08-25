@@ -1,59 +1,61 @@
 package moe.shizuku.support.utils;
 
-
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
+import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
-import android.util.TypedValue;
 import android.view.View;
 
-
 public class ResourceUtils {
+
+    private static String packageName;
+
+    public static void setPackageName(String packageName) {
+        ResourceUtils.packageName = packageName;
+    }
 
     /**
      * Check if the current language is RTL
      *
-     * @param context Context
+     * @param configuration Configuration
      * @return Result
      */
-    public static boolean isRtl(Context context) {
-        return context.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+    public static boolean isRtl(Configuration configuration) {
+        return configuration.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
     }
 
     /**
-     * Check if the current ui mode is nighjt mode
+     * Check if the current ui mode is night mode
      *
-     * @param context Context
+     * @param configuration Configuration
      * @return Result
      */
-    public static boolean isNightMode(Context context) {
-        return (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) > 0;
+    public static boolean isNightMode(Configuration configuration) {
+        return (configuration.uiMode & Configuration.UI_MODE_NIGHT_YES) > 0;
     }
 
-    private static TypedValue getTypedValue(Resources.Theme theme, int attrId) {
-        TypedValue typedValue = new TypedValue();
-        theme.resolveAttribute(attrId, typedValue, true);
-        return typedValue;
-    }
-
-    public static @ColorInt int resolveColor(Context context, @AttrRes int attrId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return context.getTheme().getResources().getColor(getTypedValue(context.getTheme(), attrId).resourceId, context.getTheme());
-        } else {
-            return ContextCompat.getColor(context, getTypedValue(context.getTheme(), attrId).resourceId);
+    public static String resolveString(Resources resources, String identifier, String defaultResult) {
+        assert packageName != null;
+        int id = resources.getIdentifier(identifier, "string", packageName);
+        if (id > 0) {
+            return resources.getString(id);
         }
+        return defaultResult;
     }
 
-    public static ColorStateList resolveColorStateList(Context context, @AttrRes int attrId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return context.getTheme().getResources().getColorStateList(getTypedValue(context.getTheme(), attrId).resourceId, context.getTheme());
-        } else {
-            return ContextCompat.getColorStateList(context, getTypedValue(context.getTheme(), attrId).resourceId);
-        }
+    public static @ColorInt int resolveColor(Resources.Theme theme, @AttrRes int attrId) {
+        TypedArray a = theme.obtainStyledAttributes(new int[]{attrId});
+        int res = a.getColor(0, 0);
+        a.recycle();
+        return res;
+    }
+
+    public static ColorStateList resolveColorStateList(Resources.Theme theme, @AttrRes int attrId) {
+        TypedArray a = theme.obtainStyledAttributes(new int[]{attrId});
+        ColorStateList res = a.getColorStateList(0);
+        a.recycle();
+        return res;
     }
 }
