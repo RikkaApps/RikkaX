@@ -41,7 +41,7 @@ public class ResourceUtils {
         return typedValue;
     }
 
-    public static @ColorInt int resloveColor(Context context, @AttrRes int attrId) {
+    public static @ColorInt int resolveColor(Context context, @AttrRes int attrId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getTheme().getResources().getColor(getTypedValue(context.getTheme(), attrId).resourceId, context.getTheme());
         } else {
@@ -49,7 +49,7 @@ public class ResourceUtils {
         }
     }
 
-    public static ColorStateList resloveColorStateList(Context context, @AttrRes int attrId) {
+    public static ColorStateList resolveColorStateList(Context context, @AttrRes int attrId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return context.getTheme().getResources().getColorStateList(getTypedValue(context.getTheme(), attrId).resourceId, context.getTheme());
         } else {
