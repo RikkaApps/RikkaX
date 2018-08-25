@@ -4,10 +4,10 @@ android {
     compileSdkVersion rootProject.ext.targetSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.2.1"
+        versionName "2.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard-rules.pro'

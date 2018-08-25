@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_light">@color/material_grey_50</color>
+    <color name="primary_light">@color/material_grey_100</color>
+    <color name="primary_dark_light">@color/material_grey_600</color>
+    <color name="navigation_bar_light">@color/background_light</color>
+    <color name="primary_dark_light_light_status_bar">@color/material_grey_300</color>
+
+    <color name="background_dark">@color/material_grey_850</color>
+    <color name="primary_dark">@color/material_grey_900</color>
+    <color name="primary_dark_dark">#101010</color>
+    <color name="navigation_bar_dark">@color/background_dark</color>
+
+    <color name="cardview_light_background">#ffffff</color>
+    <color name="cardview_dark_background">@color/material_grey_800</color>
+
+    <color name="switchbar_background_light">#80868b</color>
+    <color name="switchbar_background_dark">#424242</color>
+</resources>

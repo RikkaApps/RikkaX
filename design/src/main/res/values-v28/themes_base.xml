@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Light.V28" parent="Base.Light.V27">
+        <item name="android:dialogCornerRadius">8dp</item>
+        <item name="android:buttonCornerRadius">4dp</item>
+    </style>
+
+    <style name="Base.V28" parent="Base.V27">
+        <item name="android:dialogCornerRadius">8dp</item>
+        <item name="android:buttonCornerRadius">4dp</item>
+    </style>
+
+    <style name="Theme.Design.Light" parent="Base.Light.V28"/>
+    <style name="Theme.Design" parent="Base.V28"/>
+</resources>

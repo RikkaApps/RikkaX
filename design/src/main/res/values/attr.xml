@@ -15,12 +15,22 @@
     </declare-styleable>
 
     <declare-styleable name="SwitchBar">
-        <attr name="android:textColor"/>
-        <attr name="switchOnText" format="string"/>
-        <attr name="switchOffText" format="string"/>
+        <attr name="android:textColor" />
+        <attr name="switchOnText" format="string" />
+        <attr name="switchOffText" format="string" />
     </declare-styleable>
 
     <declare-styleable name="Design">
+        <!-- Alert color, such as error or dangerous action. -->
+        <attr name="colorAlert" format="color"/>
+        <!-- Safe color, such as a safe state. -->
+        <attr name="colorSafe" format="color"/>
+        <!-- Warning color, such as a warning text. -->
+        <attr name="colorWarning" format="color"/>
+        <!-- Color for cards. -->
+        <attr name="cardBackground" format="reference"/>
+
+        <!-- Style for SwitchBar -->
         <attr name="switchBarStyle" format="reference" />
         <attr name="switchBarBackgroundNormal" format="color" />
         <attr name="switchBarBackgroundDisabled" format="color" />
