@@ -82,10 +82,13 @@ public class ChooserItemAdapter extends BaseRecyclerViewAdapter<CreatorPool> {
                 icon.setImageDrawable(null);
                 title.setText(null);
                 itemView.setOnClickListener(null);
+                itemView.setClickable(false);
+                itemView.setFocusable(false);
                 return;
             }
 
             itemView.setOnClickListener(this);
+            itemView.setFocusable(true);
 
             PackageManager pm = itemView.getContext().getPackageManager();
 

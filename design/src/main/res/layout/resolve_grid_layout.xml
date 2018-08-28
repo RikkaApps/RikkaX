@@ -26,7 +26,6 @@
     android:gravity="center"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    android:focusable="true"
     android:background="?android:selectableItemBackgroundBorderless">
 
     <FrameLayout android:layout_width="wrap_content"
@@ -39,8 +38,7 @@
             android:layout_marginRight="3dp"
             android:layout_marginBottom="3dp"
             android:scaleType="fitCenter"
-            android:importantForAccessibility="no"
-            tools:src="@drawable/abc_ic_menu_share_mtrl_alpha"/>
+            android:importantForAccessibility="no"/>
 
         <!--<View
             android:layout_width="32dp"
