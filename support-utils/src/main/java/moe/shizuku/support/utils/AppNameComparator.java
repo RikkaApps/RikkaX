@@ -46,7 +46,7 @@ public class AppNameComparator<T> implements Comparator<T> {
         } else {
             int aUserId = mInfoProvider.getUserId(a);
             int bUserId = mInfoProvider.getUserId(b);
-            return bUserId - aUserId;
+            return Integer.compare(aUserId, bUserId);
         }
     }
 }
