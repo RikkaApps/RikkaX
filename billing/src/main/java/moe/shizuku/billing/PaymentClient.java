@@ -16,6 +16,7 @@ import java.lang.annotation.Retention;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,7 +134,7 @@ public class PaymentClient {
             postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
         }
 
-        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+        byte[] postDataBytes = postData.toString().getBytes(StandardCharsets.UTF_8);
 
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
         conn.setReadTimeout(10000);

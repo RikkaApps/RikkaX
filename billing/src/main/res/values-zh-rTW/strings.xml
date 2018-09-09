@@ -8,7 +8,10 @@
     <string name="billing_method_alipay">支付寶</string>
     <string name="billing_redeem">兌換代碼</string>
     <string name="billing_redeem_summary">兌換由開發者在其他渠道提供的代碼。</string>
-    <string name="billing_toast_google_play_unavailable">Google play 不可用。</string>
+    <string name="billing_google_play_unavailable">Google Play 不可用。</string>
     <string name="billing_redeem_dialog_hint">輸入代碼…</string>
+    <string name="billing_have_problem">購買時遇到問題？對付款/退款政策有疑問？</string>
+    <string name="billing_view_help">檢視幫助</string>
+    <string name="billing_apply_google_redeem_code">可申請獲得 Google Play 兌換碼</string>
 
 </resources>

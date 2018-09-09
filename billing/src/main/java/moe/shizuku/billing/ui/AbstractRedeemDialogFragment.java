@@ -156,7 +156,7 @@ public abstract class AbstractRedeemDialogFragment extends DialogFragment implem
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/redeem?code=" + code));
         if (intent.resolveActivity(getContext().getPackageManager()) == null) {
             if (showFailedToast) {
-                Toast.makeText(getContext(), R.string.billing_toast_google_play_unavailable, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.billing_google_play_unavailable, Toast.LENGTH_SHORT).show();
             }
             return false;
         }
@@ -165,7 +165,7 @@ public abstract class AbstractRedeemDialogFragment extends DialogFragment implem
             getContext().startActivity(intent);
             return true;
         } catch (Throwable tr) {
-            Toast.makeText(getContext(), R.string.billing_toast_google_play_unavailable, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.billing_google_play_unavailable, Toast.LENGTH_SHORT).show();
         }
         return false;
     }
