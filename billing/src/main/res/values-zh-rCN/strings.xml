@@ -4,7 +4,7 @@
     <string name="billing_success_change_device">已成功将该兑换码从旧设备解除绑定，并绑定至这台 %s。</string>
     <string name="billing_failed_invalid">无效的兑换码。</string>
     <string name="billing_failed_connection_issue">网络错误。</string>
-    <string name="billing_method_summary">通过以下方式购买：</string>
+    <string name="billing_method_summary">购买/恢复购买：</string>
     <string name="billing_method_alipay">支付宝</string>
     <string name="billing_redeem">兑换代码</string>
     <string name="billing_redeem_summary">兑换由开发者在其他渠道提供的代码。</string>

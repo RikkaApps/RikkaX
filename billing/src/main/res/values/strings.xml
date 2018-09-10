@@ -4,7 +4,7 @@
     <string name="billing_success_change_device">This redeem code has been bound to this %s and unbundled from old device successfully.</string>
     <string name="billing_failed_invalid">Invalid redeem code.</string>
     <string name="billing_failed_connection_issue">Network error.</string>
-    <string name="billing_method_summary">Pay via:</string>
+    <string name="billing_method_summary">Pay/Restore purchase:</string>
     <string name="billing_method_google_play" translatable="false">Google Play</string>
     <string name="billing_method_alipay">Alipay</string>
     <string name="billing_redeem">Redeem code</string>
