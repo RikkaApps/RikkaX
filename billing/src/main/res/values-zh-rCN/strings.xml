@@ -12,6 +12,6 @@
     <string name="billing_redeem_dialog_hint">输入代码…</string>
     <string name="billing_have_problem">购买时遇到问题？对付款/退款政策有疑问？</string>
     <string name="billing_view_help">查看帮助</string>
-    <string name="billing_apply_google_redeem_code">可申请获得 Google {lay 兑换码</string>
+    <string name="billing_apply_google_redeem_code">可申请获得 Google Play 兑换码</string>
 
 </resources>
