@@ -1263,8 +1263,11 @@ class HtmlToSpannedConverter implements ContentHandler {
                 return i;
             }
         }
-        // FIXME
-        return 0/*Color.getHtmlColor(color)*/;
+        try {
+            return Color.parseColor(color); /*Color.getHtmlColor(color)*/
+        } catch (IllegalArgumentException ignored) {
+            return 0;
+        }
     }
 
     public void setDocumentLocator(Locator locator) {
