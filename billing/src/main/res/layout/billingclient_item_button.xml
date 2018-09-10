@@ -9,7 +9,8 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingTop="16dp"
-    android:paddingBottom="16dp">
+    android:paddingBottom="16dp"
+    android:gravity="center_vertical">
 
     <ImageView
         android:id="@android:id/icon"
@@ -29,7 +30,6 @@
         android:layout_marginStart="24dp"
         android:textSize="16sp"
         android:minHeight="24dp"
-        android:gravity="center_vertical"
         tools:text="@string/billing_method_google_play"/>
 
     <TextView
