@@ -203,12 +203,7 @@ public class ChooserFragment extends Fragment {
         view.<TextView>findViewById(android.R.id.title).setText(mTitle);
 
         view.<ResolverDrawerLayout>findViewById(R.id.contentPanel).setOnDismissedListener(
-                new ResolverDrawerLayout.OnDismissedListener() {
-                    @Override
-                    public void onDismissed() {
-                        requireActivity().finish();
-                    }
-                });
+                () -> requireActivity().finish());
 
         view.findViewById(android.R.id.empty).setVisibility(mResolves.isEmpty() ? View.VISIBLE : View.GONE);
 

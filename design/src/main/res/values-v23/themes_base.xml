@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Design.Light.LightStatusBar" parent="Theme.Design.Light">
+        <item name="android:colorPrimaryDark">@color/primary_dark_light_light_status_bar</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>
