@@ -84,18 +84,24 @@ public class SwitchBar extends LinearLayout implements Checkable {
 
     @Override
     public void setChecked(boolean checked) {
-        if (isChecked != checked) {
-            if (isBroadcasting) {
-                return;
-            }
+        setChecked(checked, true);
+    }
 
-            isBroadcasting = true;
-            if (mOnCheckedChangeListener != null) {
-                if (!mOnCheckedChangeListener.onCheckedChanged(this, checked)) {
+    public void setChecked(boolean checked, boolean notify) {
+        if (isChecked != checked) {
+            if (notify) {
+                if (isBroadcasting) {
                     return;
                 }
+
+                isBroadcasting = true;
+                if (mOnCheckedChangeListener != null) {
+                    if (!mOnCheckedChangeListener.onCheckedChanged(this, checked)) {
+                        return;
+                    }
+                }
+                isBroadcasting = false;
             }
-            isBroadcasting = false;
 
             isChecked = checked;
             updateViewStates();
