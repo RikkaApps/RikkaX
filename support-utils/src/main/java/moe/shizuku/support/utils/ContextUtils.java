@@ -3,9 +3,10 @@ package moe.shizuku.support.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.support.annotation.Nullable;
 
 import java.io.File;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by rikka on 2017/9/9.

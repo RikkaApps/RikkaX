@@ -1,8 +1,8 @@
 package moe.shizuku.billing.ui;
 
-
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
+
+import androidx.annotation.DrawableRes;
 
 public class PaymentFeatureInfo {
 

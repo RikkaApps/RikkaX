@@ -1,6 +1,5 @@
 package moe.shizuku.support.design;
 
-
 import android.view.View;
 
 public class AnimationViewDelegate {

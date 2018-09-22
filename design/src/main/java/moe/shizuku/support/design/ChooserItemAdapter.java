@@ -4,9 +4,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,18 +12,12 @@ import java.util.List;
 
 import moe.shizuku.support.recyclerview.BaseRecyclerViewAdapter;
 import moe.shizuku.support.recyclerview.BaseViewHolder;
-import moe.shizuku.support.recyclerview.ClassCreatorPool;
 import moe.shizuku.support.recyclerview.CreatorPool;
 import moe.shizuku.support.utils.IntentUtils;
 
 public class ChooserItemAdapter extends BaseRecyclerViewAdapter<CreatorPool> {
 
-    private final BaseViewHolder.Creator<ResolveInfo> CREATOR = new BaseViewHolder.Creator<ResolveInfo>() {
-        @Override
-        public BaseViewHolder<ResolveInfo> createViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            return new ChooserItemViewHolder(inflater.inflate(R.layout.resolve_grid_layout, parent, false));
-        }
-    };
+    private final BaseViewHolder.Creator<ResolveInfo> CREATOR = (inflater, parent) -> new ChooserItemViewHolder(inflater.inflate(R.layout.resolve_grid_layout, parent, false));
 
     private ChooserFragment mParentFragment;
 

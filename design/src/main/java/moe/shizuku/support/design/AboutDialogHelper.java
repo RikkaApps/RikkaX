@@ -1,6 +1,5 @@
 package moe.shizuku.support.design;
 
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;

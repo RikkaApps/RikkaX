@@ -21,13 +21,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.content.PermissionChecker;
 import android.text.format.DateUtils;
 import android.util.Log;
 
 import java.util.Calendar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.PermissionChecker;
 
 /**
  * Class which managing whether we are in the night or not.

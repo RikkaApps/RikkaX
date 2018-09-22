@@ -2,13 +2,11 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.targetSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName '2.3.6'
+        versionName '3.0.0'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -27,8 +25,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
-    implementation "com.android.support:support-annotations:$supportLibraryVersion"
-    compileOnly "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "androidx.annotation:annotation:$androidXLibraryVersion"
+    compileOnly "androidx.appcompat:appcompat:$androidXLibraryVersion"
 }
 
 ext {

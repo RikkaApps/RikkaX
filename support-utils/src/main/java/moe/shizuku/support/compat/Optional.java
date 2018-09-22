@@ -1,11 +1,12 @@
 package moe.shizuku.support.compat;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Created by Fung Gwo on 2018/2/25.
@@ -36,6 +37,7 @@ public class Optional<T> {
     }
 
     public static <T> Optional<T> empty() {
+        //noinspection unchecked
         return (Optional<T>) EMPTY;
     }
 

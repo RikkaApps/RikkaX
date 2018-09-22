@@ -3,13 +3,13 @@ package moe.shizuku.support.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import moe.shizuku.support.htmlcompat.R;
 import moe.shizuku.support.text.HtmlCompat;
 

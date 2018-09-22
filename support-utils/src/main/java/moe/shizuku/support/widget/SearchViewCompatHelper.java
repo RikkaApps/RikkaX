@@ -1,9 +1,10 @@
 package moe.shizuku.support.widget;
 
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.widget.SearchView;
 
 /**
  * Created by Rikka on 2017/2/17.

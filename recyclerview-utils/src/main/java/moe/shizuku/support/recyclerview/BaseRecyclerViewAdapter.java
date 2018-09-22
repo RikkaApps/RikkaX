@@ -1,6 +1,5 @@
 package moe.shizuku.support.recyclerview;
 
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class BaseRecyclerViewAdapter<CP extends CreatorPool> extends RecyclerView.Adapter<BaseViewHolder> {
 
@@ -78,8 +79,9 @@ public abstract class BaseRecyclerViewAdapter<CP extends CreatorPool> extends Re
         return LayoutInflater.from(parent.getContext());
     }
 
+    @NonNull
     @Override
-    public final BaseViewHolder onCreateViewHolder(ViewGroup parent, int creatorIndex) {
+    public final BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int creatorIndex) {
         LayoutInflater inflater = onGetLayoutInflater(parent);
         BaseViewHolder.Creator creator = mCreatorPool.getCreator(creatorIndex);
         if (DEBUG) {
@@ -90,7 +92,7 @@ public abstract class BaseRecyclerViewAdapter<CP extends CreatorPool> extends Re
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position, @NonNull List<Object> payloads) {
         if (DEBUG) {
             Log.d(TAG,
                     "bind: position=" + position
@@ -107,12 +109,12 @@ public abstract class BaseRecyclerViewAdapter<CP extends CreatorPool> extends Re
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onBindViewHolder(final BaseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final BaseViewHolder holder, int position) {
         holder.bind(getItemAt(position), this);
     }
 
     @Override
-    public void onViewRecycled(BaseViewHolder holder) {
+    public void onViewRecycled(@NonNull BaseViewHolder holder) {
         super.onViewRecycled(holder);
 
         holder.recycle();

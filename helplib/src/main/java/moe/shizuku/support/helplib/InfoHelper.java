@@ -3,10 +3,6 @@ package moe.shizuku.support.helplib;
 import android.content.Context;
 import android.os.Build;
 
-/**
- * Created by rikka on 2017/9/15.
- */
-
 public class InfoHelper {
 
     private static String ANDROID = Build.VERSION.RELEASE;

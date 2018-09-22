@@ -10,10 +10,7 @@ import moe.shizuku.support.recyclerview.BaseRecyclerViewAdapter;
 
 /**
  * 用来处理需要根据条件过滤数据及搜索的帮助类。
- *
- * Created by Rikka on 2017/2/21.
  */
-
 public class FilterHelper<T> {
 
     private BaseRecyclerViewAdapter mAdapter;

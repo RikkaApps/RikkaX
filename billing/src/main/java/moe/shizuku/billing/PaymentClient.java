@@ -1,11 +1,7 @@
 package moe.shizuku.billing;
 
-
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.IntDef;
-import android.support.annotation.StringDef;
-import android.support.annotation.WorkerThread;
 import android.util.JsonReader;
 
 import java.io.ByteArrayOutputStream;
@@ -19,6 +15,10 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.StringDef;
+import androidx.annotation.WorkerThread;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 

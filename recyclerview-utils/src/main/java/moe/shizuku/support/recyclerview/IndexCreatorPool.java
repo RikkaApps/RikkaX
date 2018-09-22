@@ -3,10 +3,6 @@ package moe.shizuku.support.recyclerview;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by rikka on 2017/11/19.
- */
-
 public class IndexCreatorPool implements CreatorPool {
 
     private final List<BaseViewHolder.Creator> mCreators;

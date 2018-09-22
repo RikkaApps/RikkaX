@@ -1,6 +1,7 @@
 package moe.shizuku.support.compat;
 
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by Fung Gwo on 2018/2/22.

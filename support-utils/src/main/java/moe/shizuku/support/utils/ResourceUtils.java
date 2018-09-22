@@ -4,9 +4,10 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.support.annotation.AttrRes;
-import android.support.annotation.ColorInt;
 import android.view.View;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
 
 public class ResourceUtils {
 

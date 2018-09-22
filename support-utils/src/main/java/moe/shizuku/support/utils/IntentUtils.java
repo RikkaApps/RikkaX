@@ -3,9 +3,9 @@ package moe.shizuku.support.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
 import moe.shizuku.support.R;
 
 
@@ -54,7 +54,7 @@ public class IntentUtils {
     }
 
     public static boolean startActivityForResult(Fragment fragment, Intent intent, int requestCode) {
-        return startActivityForResult(fragment, intent, requestCode, fragment.getContext().getString(R.string.target_app_not_found));
+        return startActivityForResult(fragment, intent, requestCode, fragment.requireContext().getString(R.string.target_app_not_found));
     }
 
     public static boolean startActivityForResult(Fragment fragment, Intent intent, int requestCode, String notFoundMessage) {

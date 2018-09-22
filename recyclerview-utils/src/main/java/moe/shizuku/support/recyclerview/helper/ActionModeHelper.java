@@ -1,18 +1,14 @@
 package moe.shizuku.support.recyclerview.helper;
 
-import android.support.v7.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
 import moe.shizuku.support.recyclerview.BaseRecyclerViewAdapter;
 
 /**
  * 用来处理选择状态的帮助类。
- *
- * Created by Rikka on 2017/2/21.
  */
-
 public class ActionModeHelper<T> {
 
     private BaseRecyclerViewAdapter mAdapter;

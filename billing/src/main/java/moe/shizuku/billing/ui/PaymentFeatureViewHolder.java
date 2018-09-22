@@ -10,7 +10,6 @@ import android.widget.TextView;
 import moe.shizuku.billing.R;
 import moe.shizuku.support.recyclerview.BaseViewHolder;
 
-
 public class PaymentFeatureViewHolder extends BaseViewHolder<PaymentFeatureInfo> {
 
     public static final Creator<PaymentFeatureInfo> CREATOR = new Creator<PaymentFeatureInfo>() {
