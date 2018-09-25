@@ -3,6 +3,7 @@ package moe.shizuku.support.compat;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,11 @@ import androidx.annotation.Nullable;
  */
 
 public class Optional<T> {
+
+    @NonNull
+    public static <T> List<T> safeList(@Nullable List<T> nullableList) {
+        return Optional.of(nullableList).orElse(Collections.<T>emptyList());
+    }
 
     private final @Nullable T value;
 
@@ -45,6 +51,14 @@ public class Optional<T> {
         return value == null ? defaultValue : value;
     }
 
+    public @NonNull T orElse(@NonNull Callable<T> callable) {
+        try {
+            return value == null ? Objects.requireNonNull(callable.call()) : value;
+        } catch (Exception e) {
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+
     public @Nullable T get() {
         return value;
     }
@@ -53,10 +67,6 @@ public class Optional<T> {
         if (value != null) {
             consumer.accept(value);
         }
-    }
-
-    public static @NonNull <T> List<T> safeList(@Nullable List<T> nullableList) {
-        return Optional.of(nullableList).orElse(Collections.<T>emptyList());
     }
 
 }

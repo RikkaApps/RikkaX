@@ -19,6 +19,7 @@ public class IdBasedRecyclerViewAdapter extends BaseRecyclerViewAdapter<IndexCre
         super(data);
     }
 
+    @NonNull
     public List<Long> getIds() {
         return mIds;
     }
@@ -54,7 +55,7 @@ public class IdBasedRecyclerViewAdapter extends BaseRecyclerViewAdapter<IndexCre
         }
     }
 
-    public void notifyItemChangeById(long targetId, Object payload) {
+    public void notifyItemChangeById(long targetId, @Nullable Object payload) {
         for (int index = 0; index < getItemCount(); index++) {
             if (getIds().get(index) == targetId) {
                 notifyItemChanged(index, payload);
@@ -62,7 +63,7 @@ public class IdBasedRecyclerViewAdapter extends BaseRecyclerViewAdapter<IndexCre
         }
     }
 
-    public void setFirstItemById(long targetId, Object object) {
+    public void setFirstItemById(long targetId, @Nullable Object object) {
         for (int index = 0; index < getItemCount(); index++) {
             if (getIds().get(index) == targetId) {
                 getItems().set(index, object);
