@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="billing_success_new_device">This redeem code has been bound to this %s successfully.</string>
-    <string name="billing_success_change_device">This redeem code has been bound to this %s and unbundled from old device successfully.</string>
-    <string name="billing_failed_invalid">Invalid redeem code.</string>
-    <string name="billing_failed_connection_issue">Network error.</string>
     <string name="billing_method_summary">Pay/Restore purchase:</string>
     <string name="billing_method_google_play" translatable="false">Google Play</string>
     <string name="billing_method_alipay">Alipay</string>
@@ -14,5 +10,12 @@
     <string name="billing_have_problem">Have problems when purchase? Have questions about payment/refund policy?</string>
     <string name="billing_view_help">View document</string>
     <string name="billing_apply_google_redeem_code">Can apply for a Google Play redeem code</string>
+
+    <string name="billing_success_new_device">This redeem code has been bound to this %s successfully.</string>
+    <string name="billing_success_change_device">This redeem code has been bound to this %s and unbundled from old device successfully.</string>
+    <string name="billing_failed_invalid">Invalid redeem code.</string>
+    <string name="billing_failed_connection_issue">Network error.</string>
+    <string name="billing_failed_unknown_error">Unknown error.</string>
+    <string name="billing_failed_bad_price">The value of the redeem code is insufficient.</string>
 
 </resources>
