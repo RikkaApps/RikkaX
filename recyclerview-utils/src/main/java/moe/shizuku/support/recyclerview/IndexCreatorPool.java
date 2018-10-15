@@ -14,14 +14,25 @@ public class IndexCreatorPool implements CreatorPool {
     }
 
     public void add(BaseViewHolder.Creator creator) {
-        int index = mCreators.indexOf(creator);
-        if (index != -1) {
-            mPositionToIndex.add(index);
+        int indexOfCreator = mCreators.indexOf(creator);
+        if (indexOfCreator != -1) {
+            mPositionToIndex.add(indexOfCreator);
         } else {
             mCreators.add(creator);
             mPositionToIndex.add(mCreators.size() - 1);
         }
     }
+
+    public void add(int index, BaseViewHolder.Creator creator) {
+        int indexOfCreator = mCreators.indexOf(creator);
+        if (indexOfCreator != -1) {
+            mPositionToIndex.add(index, indexOfCreator);
+        } else {
+            mCreators.add(creator);
+            mPositionToIndex.add(index, mCreators.size() - 1);
+        }
+    }
+
 
     public void clear() {
         mPositionToIndex.clear();
