@@ -12,7 +12,7 @@
 
     <string name="billing_success_new_device">已成功將該兌換碼綁定至這臺 %s。</string>
     <string name="billing_success_change_device">已成功將該兌換碼從舊設備解除綁定，並綁定至這臺 %s。</string>
-    <string name="billing_failed_invalid">無效的兌換碼。</string>
+    <string name="billing_failed_invalid">無效的兌換碼或兌換碼尚未可用。</string>
     <string name="billing_failed_connection_issue">網路錯誤。</string>
     <string name="billing_failed_unknown_error">未知錯誤。</string>
     <string name="billing_failed_bad_price">該兌換碼的價值不足。</string>
