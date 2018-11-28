@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="billing_success_new_device">已成功將該兌換碼綁定至這臺 %s。</string>
-    <string name="billing_success_change_device">已成功將該兌換碼從舊設備解除綁定，並綁定至這臺 %s。</string>
-    <string name="billing_failed_invalid">無效的兌換碼。</string>
-    <string name="billing_failed_connection_issue">網路錯誤。</string>
     <string name="billing_method_summary">購買/恢復購買：</string>
     <string name="billing_method_alipay">支付寶</string>
     <string name="billing_redeem">兌換代碼</string>
@@ -13,5 +9,12 @@
     <string name="billing_have_problem">購買時遇到問題？對付款/退款政策有疑問？</string>
     <string name="billing_view_help">檢視幫助</string>
     <string name="billing_apply_google_redeem_code">可申請獲得 Google Play 兌換碼</string>
+
+    <string name="billing_success_new_device">已成功將該兌換碼綁定至這臺 %s。</string>
+    <string name="billing_success_change_device">已成功將該兌換碼從舊設備解除綁定，並綁定至這臺 %s。</string>
+    <string name="billing_failed_invalid">無效的兌換碼或兌換碼尚未可用。</string>
+    <string name="billing_failed_connection_issue">網路錯誤。</string>
+    <string name="billing_failed_unknown_error">未知錯誤。</string>
+    <string name="billing_failed_bad_price">該兌換碼的價值不足。</string>
 
 </resources>

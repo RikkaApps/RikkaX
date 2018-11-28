@@ -35,13 +35,28 @@ public class IdBasedRecyclerViewAdapter extends BaseRecyclerViewAdapter<IndexCre
         getIds().clear();
     }
 
-    public void addItem(@NonNull BaseViewHolder.Creator creator, @Nullable Object object, long id) {
+    public <T> void addItem(int index, @NonNull BaseViewHolder.Creator<T> creator, @Nullable T object, long id) {
+        getCreatorPool().add(index, creator);
+        getItems().add(index, object);
+        getIds().add(index, id);
+    }
+
+    public <T> void addItem(@NonNull BaseViewHolder.Creator<T> creator, @Nullable T object, long id) {
         getCreatorPool().add(creator);
         getItems().add(object);
         getIds().add(id);
     }
 
-    public void addItems(@NonNull BaseViewHolder.Creator creator, @NonNull List<Object> list, @NonNull List<Long> ids) {
+    public <T> void addItems(int index, @NonNull BaseViewHolder.Creator<T> creator, @NonNull List<T> list, @NonNull List<Long> ids) {
+        for (int i = 0; i < list.size(); i++) {
+            getCreatorPool().add(index, creator);
+        }
+
+        getItems().addAll(index, list);
+        getIds().addAll(index, ids);
+    }
+
+    public <T> void addItems(@NonNull BaseViewHolder.Creator<T> creator, @NonNull List<T> list, @NonNull List<Long> ids) {
         for (int index = 0; index < list.size(); index++) {
             addItem(creator, list.get(index), ids.get(index));
         }
