@@ -1,5 +1,6 @@
 package moe.shizuku.support.recyclerview;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,11 @@ public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
     public BaseViewHolder(View itemView) {
         super(itemView);
+    }
+
+    @NonNull
+    public final Context getContext() {
+        return itemView.getContext();
     }
 
     public T getData() {

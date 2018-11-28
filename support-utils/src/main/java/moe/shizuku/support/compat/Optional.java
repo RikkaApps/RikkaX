@@ -69,4 +69,26 @@ public class Optional<T> {
         }
     }
 
+    public boolean isPresent() {
+        return value != null;
+    }
+
+    @NonNull
+    public Optional<T> filter(@NonNull Predicate<? super T> predicate) {
+        if (value == null || !predicate.apply(value)) {
+            return Optional.empty();
+        } else {
+            return this;
+        }
+    }
+
+    @NonNull
+    public <R> Optional<R> map(@NonNull Function<? super T, R> mapper) {
+        if (value == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(mapper.apply(value));
+        }
+    }
+
 }

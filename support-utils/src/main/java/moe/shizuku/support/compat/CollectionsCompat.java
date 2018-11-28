@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public final class CollectionsCompat {
 
@@ -66,6 +67,29 @@ public final class CollectionsCompat {
             }
         }
         return true;
+    }
+
+    /**
+     * Clone ArrayList safely
+     *
+     * It is usually used like:
+     * "bundle.putExtra("my_list", CollectionsCompat.cloneArrayList(list).get());"
+     *
+     * Returning Optional<> makes this api flexible, you can use it like:
+     * "CollectionsCompat.cloneArrayList(list).orElse(new ArrayList<>());"
+     *
+     * @param collection Original data
+     * @param <E> Element type
+     * @return Optional of ArrayList clone
+     */
+    @NonNull
+    public static <E> Optional<ArrayList<E>> cloneArrayList(@Nullable Collection<E> collection) {
+        return Optional.of(collection).map(new Function<Collection<E>, ArrayList<E>>() {
+            @Override
+            public ArrayList<E> apply(Collection<E> input) {
+                return new ArrayList<>(input);
+            }
+        });
     }
 
 }
