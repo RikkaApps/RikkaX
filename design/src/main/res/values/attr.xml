@@ -27,6 +27,8 @@
         <attr name="colorSafe" format="color"/>
         <!-- Warning color, such as a warning text. -->
         <attr name="colorWarning" format="color"/>
+        <!-- Inactive color. -->
+        <attr name="colorInactive" format="color"/>
         <!-- Color for cards. -->
         <attr name="cardBackground" format="reference"/>
 

@@ -10,6 +10,7 @@
         <item name="colorAlert">@color/material_red_A200</item>
         <item name="colorSafe">@color/material_green_600</item>
         <item name="colorWarning">@color/material_orange_700</item>
+        <item name="colorInactive">@color/material_grey_600</item>
         <item name="switchBarStyle">@style/Theme.Design.Widget.SwitchBar.Light</item>
         <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
@@ -24,6 +25,7 @@
         <item name="colorAlert">@color/material_red_A100</item>
         <item name="colorSafe">@color/material_green_A100</item>
         <item name="colorWarning">@color/material_orange_A100</item>
+        <item name="colorInactive">@color/material_grey_500</item>
         <item name="switchBarStyle">@style/Theme.Design.Widget.SwitchBar</item>
         <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
