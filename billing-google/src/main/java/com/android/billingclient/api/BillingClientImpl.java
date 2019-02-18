@@ -1045,16 +1045,19 @@ class BillingClientImpl extends BillingClient {
 
                 @Override
                 public Object invoke(Object proxy, final Method method, final Object[] args) throws Throwable {
-                    //BillingHelper.logInfo(TAG, method.getName());
-
                     Callable<Object> task = new Callable<Object>() {
-                        public Object call() {
+                        public Object call() throws Exception {
                             try {
                                 return method.invoke(billingService, args);
-                            } catch (IllegalAccessException | InvocationTargetException e) {
+                            } catch (InvocationTargetException e) {
+                                Throwable target = e.getTargetException();
+                                if (target instanceof Exception)
+                                    throw (Exception) target;
+                                else
+                                    target.printStackTrace();
+                            } catch (IllegalAccessException e) {
                                 e.printStackTrace();
                             }
-                            // should never be called
                             return null;
                         }
                     };
