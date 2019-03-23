@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_billing_already_owned_title">You have already owned this item</string>
-    <string name="dialog_billing_already_owned_message">The biggest possibility is that you have signed in a different Google account that haven\'t purchased this item, it\'s a known issue of Google Play.\nPlease try uninstall app, switch to the that have purchased in Google Play, install app again.\nIf the issue still occurs, try clearing data of Google Play.</string>
+    <string name="dialog_billing_already_owned_message">This is because Play Store does not provide the correct purchase information, causing the app to mistakenly believe that it has not been purchased. Usually clearing the Play Store data and force stop the app will work.\nAlso, if you\'re signed in to multiple Google accounts, try reinstalling with the account you purchased.</string>
     <string name="dialog_billing_api_action_error_title">Error when interacting with Play Store</string>
     <string name="dialog_billing_api_action_error_message">There may be a variety of reasons, but we know some of the possible reasons that usually limit the permissions of the Play Store. For example, the MIUI China version needs to ensure that the Play Store\'s "display interface in the background“ permission is granted. Please check if there is a similar situation.</string>
     <string name="dialog_billing_unavailable_title">Billing API unavailable</string>
-    <string name="dialog_billing_unavailable_message">Please make sure you have Play Store installed and it is not disabled.\nYou may also need to check if the connection (via bind service) between app and Play Store is blocked (such background limit feature commonly seen in mainland China devices).\nIn addition, you may need to check if there is an app pretending to be the Play Store (such as \"Lucky Patcher\").</string>
+    <string name="dialog_billing_unavailable_message">There are several possibilities: \n1. Play Store is not installed correctly.\n2. The account area does not support purchase (such as the mainland China region).\n3. The connection between the app and the Play Store is blocked (such as the background limit feature).\n4. Use cheating apps like "Lucky Patcher".</string>
 </resources>

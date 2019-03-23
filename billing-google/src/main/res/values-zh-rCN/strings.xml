@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_billing_already_owned_title">您已经拥有这件物品</string>
-    <string name="dialog_billing_already_owned_message">最大的可能是您登录了另一个未购买这件物品的 Google 账号，这是 Google Play 的一个已知问题。\n请尝试卸载应用，在 Google Play 中切换到曾经购买的账号并重新安装。\n如果问题仍然出现，尝试清除 Google Play 数据。</string>
+    <string name="dialog_billing_already_owned_message">这是因为 Play Store 没有提供正确的购买信息，造成应用错误地认为还未购买。通常清除 Play Store 数据并强行停止应用即可恢复。\n此外，如果你登录了多个 Google 账号，请尝试使用购买时的账号重新安装。</string>
     <string name="dialog_billing_api_action_error_title">与 Play Store 交互期间出现错误</string>
     <string name="dialog_billing_api_action_error_message">原因可能多种多样，但我们知道一些可能的原因，通常都是限制了 Play Store 的权限。如 MIUI 中国大陆版需要保证没有关闭 Play Store 的“在后台显示界面”权限。请检查时候否有类似情况。</string>
     <string name="dialog_billing_unavailable_title">结算 API 不可用</string>
-    <string name="dialog_billing_unavailable_message">请确认您已经安装 Play Store 且没有禁用。\n您可能需要检查是否有应用与 Play Store 的连接（通过绑定服务）是否被阻断（如中国大陆地区设备常见的限制后台功能）。\n此外您可能还需要检查是否有应用伪装成 Play Store 的情况（如“幸运破解器”）。</string>
+    <string name="dialog_billing_unavailable_message">有以下几种可能：\n1. Play Store 没有正确安装。\n2. 账号所在区域不支持购买（如中国大陆区域）。\n3. 应用与 Play Store 的连接被阻断（如限制后台功能）。\n4. 使用“幸运破解器”等欺骗应用。</string>
 </resources>
