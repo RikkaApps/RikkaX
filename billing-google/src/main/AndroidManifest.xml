@@ -9,8 +9,8 @@
         <activity
             android:name="com.android.billingclient.api.ProxyBillingActivity"
             android:theme="@style/BillingClient.Translucent"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:exported="false" />
+            android:exported="false"
+            tools:replace="android:theme" />
 
     </application>
 </manifest>
