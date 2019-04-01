@@ -13,10 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:tint="?android:colorControlNormal"
     android:shape="rectangle">
-    <solid android:color="#39ffffff" />
-    <size android:width="8dp" />
+    <solid android:color="#00ffffff" />
 </shape>
