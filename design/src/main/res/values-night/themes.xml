@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.Design.Resolver.DayNight" parent="Theme.Design.Resolver"/>
+
+    <style name="Widget.Design.Button.Outline.DayNight" parent="Widget.Design.Button.Outline"/>
+
 </resources>
