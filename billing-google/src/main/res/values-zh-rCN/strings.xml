@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_billing_already_owned_title">您已经拥有这件物品</string>
-    <string name="dialog_billing_already_owned_message">这是因为 Play Store 没有提供正确的购买信息，造成应用错误地认为还未购买。通常清除 Play Store 数据并强行停止应用即可恢复。\n此外，如果你登录了多个 Google 账号，请尝试使用购买时的账号重新安装。</string>
+    <string name="dialog_billing_already_owned_message">这是因为 Play Store 没有提供正确的购买信息（缺少关键凭据）。此问题出现时其他涉及购买的应用应该也会出现异常。\n这个问题无法由我们解决，请尝试：\n1. 清除 Play Store 数据并强行停止应用。\n2. 如果登录多个 Google 账号，尝试使用购买时的账号重新安装。\n3. 检查网络情况（特别是当你身处中国大陆）。</string>
     <string name="dialog_billing_api_action_error_title">与 Play Store 交互期间出现错误</string>
     <string name="dialog_billing_api_action_error_message">原因可能多种多样，但我们知道一些可能的原因，通常都是限制了 Play Store 的权限。如 MIUI 中国大陆版需要保证没有关闭 Play Store 的“在后台显示界面”权限。请检查时候否有类似情况。</string>
     <string name="dialog_billing_unavailable_title">结算 API 不可用</string>
