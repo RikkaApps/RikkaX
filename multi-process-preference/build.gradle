@@ -6,10 +6,11 @@ android {
         minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0.0-alpha3"
+        versionName "1.0.0-alpha5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard-rules.pro'
+        aidlPackageWhiteList 'moe/shizuku/multiprocesspreference/IMultiProcessPreferenceChangeListener.aidl'
     }
     buildTypes {
         release {

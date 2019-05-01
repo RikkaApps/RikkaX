@@ -2,7 +2,6 @@ package moe.shizuku.preference;
 
 import android.annotation.SuppressLint;
 import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,6 +9,8 @@ import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.RemoteCallbackList;
+import android.os.RemoteException;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,8 +21,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import moe.shizuku.multiprocesspreference.IMultiProcessPreferenceChangeListener;
+
 public abstract class PreferenceProvider extends ContentProvider implements SharedPreferences.OnSharedPreferenceChangeListener {
 
+    public static final String EXTRA_DATA = "data";
     public static final String EXTRA_RESULT = "result";
 
     public static final String METHOD_GET_ALL = "getAll";
@@ -32,6 +36,8 @@ public abstract class PreferenceProvider extends ContentProvider implements Shar
     public static final String METHOD_GET_FLOAT = "getFloat";
     public static final String METHOD_GET_BOOLEAN = "getBoolean";
     public static final String METHOD_CONTAINS = "contains";
+    public static final String METHOD_REGISTER_LISTENER = "registerListener";
+    public static final String METHOD_UNREGISTER_LISTENER = "unregisterListener";
 
     public static final String METHOD_EDITOR_COMMIT = "editor_commit";
     public static final String METHOD_EDITOR_APPLY = "editor_apply";
@@ -40,9 +46,9 @@ public abstract class PreferenceProvider extends ContentProvider implements Shar
     public static final String EXTRA_EDITOR_KEYS = "editor_keys";
     public static final String EXTRA_EDITOR_VALUES = "editor_values";
 
-    private SharedPreferences mSharedPreferences;
+    private final RemoteCallbackList<IMultiProcessPreferenceChangeListener> mListeners = new RemoteCallbackList<>();
 
-    private ContentResolver mContentResolver;
+    private SharedPreferences mSharedPreferences;
     private Uri mUri;
 
     @Override
@@ -52,7 +58,6 @@ public abstract class PreferenceProvider extends ContentProvider implements Shar
         mSharedPreferences = onCreatePreference(context);
         mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
-        mContentResolver = context.getContentResolver();
         mUri = new Uri.Builder().scheme("content").authority(info.authority).build();
     }
 
@@ -138,9 +143,45 @@ public abstract class PreferenceProvider extends ContentProvider implements Shar
         }
     }
 
+    private Bundle registerOnSharedPreferenceChangeListener(IMultiProcessPreferenceChangeListener listener) {
+        if (listener == null)
+            return null;
+
+        synchronized (this) {
+            mListeners.register(listener);
+        }
+        return null;
+    }
+
+    private Bundle unregisterOnSharedPreferenceChangeListener(IMultiProcessPreferenceChangeListener listener) {
+        if (listener == null)
+            return null;
+
+        synchronized (this) {
+            mListeners.unregister(listener);
+        }
+        return null;
+    }
+
+    private void dispatchPreferenceChanged(IMultiProcessPreferenceChangeListener listener, String key) {
+        if (listener == null)
+            return;
+
+        try {
+            listener.onPreferenceChanged(key);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        mContentResolver.notifyChange(mUri.buildUpon().appendPath(key).build(), null);
+        int i = mListeners.beginBroadcast();
+        while (i > 0) {
+            i--;
+            dispatchPreferenceChanged(mListeners.getBroadcastItem(i), key);
+        }
+        mListeners.finishBroadcast();
     }
 
     @SuppressLint("ApplySharedPref")
@@ -228,6 +269,13 @@ public abstract class PreferenceProvider extends ContentProvider implements Shar
             case METHOD_CONTAINS:
                 Objects.requireNonNull(arg);
                 return contains(arg);
+
+            case METHOD_REGISTER_LISTENER:
+                Objects.requireNonNull(extras);
+                return registerOnSharedPreferenceChangeListener(IMultiProcessPreferenceChangeListener.Stub.asInterface(extras.getBinder(EXTRA_DATA)));
+            case METHOD_UNREGISTER_LISTENER:
+                Objects.requireNonNull(extras);
+                return unregisterOnSharedPreferenceChangeListener(IMultiProcessPreferenceChangeListener.Stub.asInterface(extras.getBinder(EXTRA_DATA)));
 
             case METHOD_EDITOR_COMMIT:
                 Objects.requireNonNull(extras);

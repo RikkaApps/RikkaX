@@ -3,12 +3,11 @@ package moe.shizuku.preference;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
+import android.os.Message;
 
 import androidx.annotation.Nullable;
 
@@ -19,6 +18,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import moe.shizuku.multiprocesspreference.IMultiProcessPreferenceChangeListener;
+
+import static moe.shizuku.preference.PreferenceProvider.EXTRA_DATA;
 import static moe.shizuku.preference.PreferenceProvider.EXTRA_EDITOR_ACTIONS;
 import static moe.shizuku.preference.PreferenceProvider.EXTRA_EDITOR_KEYS;
 import static moe.shizuku.preference.PreferenceProvider.EXTRA_EDITOR_VALUES;
@@ -32,36 +34,38 @@ import static moe.shizuku.preference.PreferenceProvider.METHOD_GET_FLOAT;
 import static moe.shizuku.preference.PreferenceProvider.METHOD_GET_INT;
 import static moe.shizuku.preference.PreferenceProvider.METHOD_GET_LONG;
 import static moe.shizuku.preference.PreferenceProvider.METHOD_GET_STRING;
+import static moe.shizuku.preference.PreferenceProvider.METHOD_GET_STRING_SET;
+import static moe.shizuku.preference.PreferenceProvider.METHOD_REGISTER_LISTENER;
+import static moe.shizuku.preference.PreferenceProvider.METHOD_UNREGISTER_LISTENER;
 
-public class MultiProcessPreference implements SharedPreferences {
+public class MultiProcessPreference implements SharedPreferences, Handler.Callback {
 
     private static final Object CONTENT = new Object();
+    private static final int MSG_PREFERENCE_CHANGED = 100;
 
     private final Object mLock = new Object();
 
     private final WeakHashMap<OnSharedPreferenceChangeListener, Object> mListeners =
             new WeakHashMap<>();
 
-    private final ContentObserver mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+    private final IMultiProcessPreferenceChangeListener mListener = new IMultiProcessPreferenceChangeListener.Stub() {
 
         @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            String key = uri.getPath();
-            if (!TextUtils.isEmpty(key)) {
-                key = key.substring(1);
-                for (OnSharedPreferenceChangeListener listener : mListeners.keySet()) {
-                    if (listener != null)
-                        listener.onSharedPreferenceChanged(MultiProcessPreference.this, key);
-                }
-            }
+        public void onPreferenceChanged(String key) {
+            Message msg = Message.obtain();
+            msg.what = MSG_PREFERENCE_CHANGED;
+            msg.obj = key;
+            mHandler.sendMessage(msg);
         }
     };
 
     private final ContentResolver mContentResolver;
+    private final Handler mHandler;
     private final Uri mUri;
 
     public MultiProcessPreference(Context context, String authority) {
         mContentResolver = context.getContentResolver();
+        mHandler = new Handler(Looper.getMainLooper(), this);
         mUri = new Uri.Builder().scheme("content").authority(authority).build();
     }
 
@@ -91,7 +95,7 @@ public class MultiProcessPreference implements SharedPreferences {
     @Override
     public Set<String> getStringSet(String key, @Nullable Set<String> defValues) {
         Objects.requireNonNull(key);
-        Bundle reply = mContentResolver.call(mUri, METHOD_GET_STRING, key, null);
+        Bundle reply = mContentResolver.call(mUri, METHOD_GET_STRING_SET, key, null);
         if (reply == null)
             return defValues;
 
@@ -159,7 +163,9 @@ public class MultiProcessPreference implements SharedPreferences {
     public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
         synchronized (mLock) {
             if (mListeners.isEmpty()) {
-                mContentResolver.registerContentObserver(mUri, true, mContentObserver);
+                Bundle extras = new Bundle();
+                extras.putBinder(EXTRA_DATA, mListener.asBinder());
+                mContentResolver.call(mUri, METHOD_REGISTER_LISTENER, null, extras);
             }
 
             mListeners.put(listener, CONTENT);
@@ -172,9 +178,24 @@ public class MultiProcessPreference implements SharedPreferences {
             mListeners.remove(listener);
 
             if (mListeners.isEmpty()) {
-                mContentResolver.unregisterContentObserver(mContentObserver);
+                Bundle extras = new Bundle();
+                extras.putBinder(EXTRA_DATA, mListener.asBinder());
+                mContentResolver.call(mUri, METHOD_UNREGISTER_LISTENER, null, extras);
             }
         }
+    }
+
+    @Override
+    public boolean handleMessage(Message msg) {
+        if (msg.what == MSG_PREFERENCE_CHANGED && msg.obj instanceof String) {
+            String key = (String) msg.obj;
+            for (OnSharedPreferenceChangeListener listener : mListeners.keySet()) {
+                if (listener != null)
+                    listener.onSharedPreferenceChanged(MultiProcessPreference.this, key);
+            }
+            return true;
+        }
+        return false;
     }
 
     public class Editor implements SharedPreferences.Editor {
