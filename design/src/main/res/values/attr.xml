@@ -38,4 +38,8 @@
         <attr name="switchBarBackgroundDisabled" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="RaisedView">
+        <attr name="state_raised" format="boolean" />
+    </declare-styleable>
+
 </resources>
