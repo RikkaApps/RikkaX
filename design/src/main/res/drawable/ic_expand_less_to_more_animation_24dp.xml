@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:tools="http://schemas.android.com/tools"
+                 android:drawable="@drawable/ic_expand_less_24dp"
+                 tools:ignore="NewApi">
+    <target
+        android:name="v"
+        android:animation="@animator/ic_expand_to_more_animation"/>
+
+</animated-vector>
