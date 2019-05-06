@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/BillingClient.Card">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:style="@style/BillingClient.Card"
+    style="?billingClientCardStyle">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@android:id/content"
@@ -11,4 +13,4 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-</androidx.cardview.widget.CardView>
+</FrameLayout>

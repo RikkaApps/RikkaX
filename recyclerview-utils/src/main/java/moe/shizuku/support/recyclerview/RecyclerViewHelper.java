@@ -44,11 +44,7 @@ public class RecyclerViewHelper {
                 firstPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
                 lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
 
-                if (firstPosition == 0 && lastPosition == itemCount -1) {
-                    return false;
-                } else {
-                    return true;
-                }
+                return firstPosition != 0 || lastPosition != itemCount - 1;
             }
             return true;
         }
@@ -61,7 +57,7 @@ public class RecyclerViewHelper {
     @NonNull
     public static FastScroller initFastScroller(RecyclerView recyclerView) {
         Context context = recyclerView.getContext();
-        TypedArray a = context.getTheme().obtainStyledAttributes(new int[] {
+        TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{
                 android.R.attr.fastScrollThumbDrawable,
                 android.R.attr.fastScrollTrackDrawable,
         });
@@ -75,8 +71,8 @@ public class RecyclerViewHelper {
     @SuppressLint("PrivateResource")
     @NonNull
     public static FastScroller initFastScroller(RecyclerView recyclerView, StateListDrawable verticalThumbDrawable,
-                                        Drawable verticalTrackDrawable, StateListDrawable horizontalThumbDrawable,
-                                        Drawable horizontalTrackDrawable) {
+                                                Drawable verticalTrackDrawable, StateListDrawable horizontalThumbDrawable,
+                                                Drawable horizontalTrackDrawable) {
         Resources resources = recyclerView.getContext().getResources();
         return new FastScroller(recyclerView, verticalThumbDrawable, verticalTrackDrawable,
                 horizontalThumbDrawable, horizontalTrackDrawable,

@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
+    android:background="@drawable/billingclient_btn_background"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingTop="16dp"
@@ -17,7 +17,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_logo_google_play_24dp"
+        tools:src="@drawable/ic_billingclient_google_play_24dp"
         android:tint="?android:textColorTertiary"
         android:tintMode="src_in"
         android:importantForAccessibility="no"/>

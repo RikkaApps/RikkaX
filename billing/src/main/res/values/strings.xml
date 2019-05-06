@@ -11,8 +11,8 @@
     <string name="billing_view_help">View document</string>
     <string name="billing_apply_google_redeem_code">Can apply for a Google Play redeem code</string>
 
-    <string name="billing_success_new_device">This redeem code has been bound to this %s successfully.</string>
-    <string name="billing_success_change_device">This redeem code has been bound to this %s and unbundled from old device successfully.</string>
+    <string name="billing_success_new_device">The redeem code now in effect on this %s.</string>
+    <string name="billing_success_change_device">The redeem code has expired on other devices and is in effect on %s.</string>
     <string name="billing_failed_invalid">Invalid redeem code or the code is not available yet.</string>
     <string name="billing_failed_connection_issue">Network error.</string>
     <string name="billing_failed_unknown_error">Unknown error.</string>

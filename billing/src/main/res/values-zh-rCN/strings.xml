@@ -10,8 +10,8 @@
     <string name="billing_view_help">查看帮助</string>
     <string name="billing_apply_google_redeem_code">可申请获得 Google Play 兑换码</string>
 
-    <string name="billing_success_new_device">已成功将该兑换码绑定至这台 %s。</string>
-    <string name="billing_success_change_device">已成功将该兑换码从旧设备解除绑定，并绑定至这台 %s。</string>
+    <string name="billing_success_new_device">兑换码现在在这台 %s 上生效。</string>
+    <string name="billing_success_change_device">兑换码已在其他设备失效并在 %s 上生效。</string>
     <string name="billing_failed_invalid">无效的兑换码或兑换码尚未可用。</string>
     <string name="billing_failed_connection_issue">网络错误。</string>
     <string name="billing_failed_unknown_error">未知错误。</string>
