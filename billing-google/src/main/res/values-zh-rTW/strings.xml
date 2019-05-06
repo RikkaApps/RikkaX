@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_billing_already_owned_title">您已經擁有這件物品</string>
-    <string name="dialog_billing_already_owned_message">這是因為 Play Store 沒有提供正確的購買資訊（缺少關鍵憑據）。此問題出現時其他涉及購買的應用程式應該也會出現異常。\n這個問題無法由我們解決，請嘗試：\n1. 清除 Play Store 資料並強行停止應用程式。\n2. 如果登入多個 Google 賬號，嘗試使用購買時的賬號重新安裝。\n3. 檢查網路情況（特別是當你身處中國大陸）。\n4. 搜尋這是否是特定版本的 Play Store 的 bug。</string>
-    <string name="dialog_billing_api_action_error_title">與 Play Store 互動期間出現錯誤</string>
+    <string name="dialog_billing_already_owned_message">這是因為 Play Store 沒有提供正確的購買資訊（缺少關鍵憑據）。此問題出現時其他涉及購買的應用程式應該也會出現異常。\n這個問題不是我們的錯，並且無法由我們解決。\n\n以下方法可能會解決問題：\n1. 清除 Play Store 資料。\n2. 如果登入多個 Google 賬號，使用購買時的賬號重新安裝。\n3. 檢查網路情況（特別是當你身處中國大陸）。\n4. 在系統設定中刪除你的 Google 帳戶，然後重新新增。\n5. 搜尋這是否是特定版本的 Play Store 的 bug。\n\n進行任何嘗試後，記得強行停止相關應用程式（甚至重新啟動裝置）。</string>    <string name="dialog_billing_api_action_error_title">與 Play Store 互動期間出現錯誤</string>
     <string name="dialog_billing_api_action_error_message">原因可能多種多樣，但我們知道一些可能的原因，通常都是限制了 Play Store 的權限。如 MIUI 中國大陸版需要保證沒有關閉 Play Store 的「在後臺顯示界面」權限。請檢查時候否有類似情況。</string>
     <string name="dialog_billing_unavailable_title">結算 API 不可用</string>
     <string name="dialog_billing_unavailable_message">有以下幾種可能：\n1. Play Store 沒有正確安裝。\n2. 賬號所在區域不支持購買（如中國大陸區域）。\n3. 應用程式與 Play Store 的連接被阻斷（如中國大陸地區設備常見的限制後臺功能）。\n4. 使用“幸運破解器”等欺騙應用。</string>
