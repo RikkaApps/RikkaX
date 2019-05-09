@@ -205,7 +205,7 @@ public class MultiProcessPreference implements SharedPreferences, Handler.Callba
         private ArrayList<String> mKeys;
         private ArrayList<Object> mValues;
 
-        Editor() {
+        public Editor() {
             mData = new Bundle();
             mActions = new ArrayList<>();
             mKeys = new ArrayList<>();
