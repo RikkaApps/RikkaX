@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_billing_already_owned_title">You have already owned this item</string>
-    <string name="dialog_billing_already_owned_message">Please try: \n1. Clear the data of Play Store.\n2. If you have logged in to multiple Google accounts, reinstall with the account you purchased.\n3. Remove your Google account in system settings and add again.\nAfter any attempt, remember to force stop related apps (even reboot the device).\n\n* This issue is caused by Google Play\’s inability to provide proof of purchase. This \"owned\" status does not include the proof of purchase which can be verified, so we cannot conclude that you have purchased, or the purchase will be easily to fake.\n* If you can\'t solve it all the time, please send email with the order number to get the single device redeem code to solve the problem temporarily.</string>
+    <string name="dialog_billing_already_owned_message"><![CDATA[
+    Please try:
+    <br>1. Remove \"old\" devices from <a href="https://myaccount.google.com/device-activity">Recently used devices</a> (if this device is recognized as a \"new\" device)
+    <br>2. Clear the data of Play Store
+    <br>3. Make sure app is installed from Google Play <b>with the account you purchased</b>
+    <br>4. Remove your Google account in system settings and add again
+    <br><b>After any attempt, remember to force stop related apps (even reboot the device)</b>
+    <br><br>* This issue is caused by Google Play\’s inability to provide proof of purchase. This \"owned\" status does not include the proof of purchase which can be verified, so we cannot conclude that you have purchased, or the purchase will be easily to fake.
+    <br>* If you can\'t solve the problem, please send email with the order number to get the single device redeem code to solve the problem temporarily.]]></string>
     <string name="dialog_billing_api_action_error_title">Error when interacting with Play Store</string>
-    <string name="dialog_billing_api_action_error_message">There may be a variety of reasons, but we know some of the possible reasons that usually limit the permissions of the Play Store. For example, the MIUI China version needs to ensure that the Play Store\'s "display interface in the background“ permission is granted. Please check if there is a similar situation.</string>
+    <string name="dialog_billing_api_action_error_message"><![CDATA[There may be a variety of reasons, but we know some of the possible reasons that usually limit the permissions of the Play Store. For example, the MIUI China version needs to ensure that the Play Store\'s \"Display interface in the background\" permission is granted. Please check if there is a similar situation.]]></string>
     <string name="dialog_billing_unavailable_title">Billing API unavailable</string>
-    <string name="dialog_billing_unavailable_message">There are several possibilities: \n1. Play Store is not installed correctly.\n2. The account area does not support purchase (such as the mainland China region).\n3. The connection between the app and the Play Store is blocked (such as the background limit feature).\n4. Use cheating apps like "Lucky Patcher".</string>
+    <string name="dialog_billing_unavailable_message"><![CDATA[
+    There are several possibilities:
+    <br>1. Play Store is not installed correctly
+    <br>2. The account area does not support purchase (such as the mainland China region)
+    <br>3. The connection between the app and the Play Store is blocked (such as the background limit feature)
+    <br>4. Using cheating apps like \"Lucky Patcher\"]]></string>
 </resources>

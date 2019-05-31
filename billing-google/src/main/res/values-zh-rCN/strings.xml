@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="dialog_billing_already_owned_title">您已经拥有这件物品</string>
-    <string name="dialog_billing_already_owned_message">请尝试：\n1. 清除 Play Store 数据。\n2. 如果登录多个 Google 账号，使用购买时的账号重新安装。\n3. 在系统设置中删除 Google 帐户并重新添加。\n进行任何尝试后，记得强行停止相关应用（甚至重新启动设备）。\n\n* 此问题是由于 Google Play 不能提供购买凭据引起。此“已拥有”状态不包括可供验证的购买凭据，我们无法断定您已购买，否则购买将可以轻易伪造。\n* 如果你始终无法解决，请携带订单号发送邮件获取单设备兑换码来临时解决问题。</string>
+    <string name="dialog_billing_already_owned_title">您已经拥有这件物品</string>.
+    <string name="dialog_billing_already_owned_message"><![CDATA[
+    请尝试：
+    <br>1. 在<a href="https://myaccount.google.com/device-activity">最近使用的设备</a>移除“旧”设备（如果此设备被认为是“新”设备）
+    <br>2. 清除 Play Store 数据
+    <br>3. 确保应用是从 Google Play 且<b>使用购买时的账号</b>安装
+    <br>4. 在系统设置中删除 Google 帐户并重新添加
+    <br><b>进行任何尝试后，记得强行停止相关应用（甚至重新启动设备）。</b>
+    <br><br>* 此问题是由于 Google Play 不能提供购买凭据引起。此“已拥有”状态不包括可供验证的购买凭据，我们无法断定您已购买，否则购买将可以轻易伪造。
+    <br>* 如果你无法解决问题，请携带订单号发送邮件获取单设备兑换码来临时解决问题。]]></string>
     <string name="dialog_billing_api_action_error_title">与 Play Store 交互期间出现错误</string>
-    <string name="dialog_billing_api_action_error_message">原因可能多种多样，但我们知道一些可能的原因，通常都是限制了 Play Store 的权限。如 MIUI 中国大陆版需要保证没有关闭 Play Store 的“在后台显示界面”权限。请检查时候否有类似情况。</string>
+    <string name="dialog_billing_api_action_error_message"><![CDATA[原因可能多种多样，但我们知道一些可能的原因，通常都是限制了 Play Store 的权限。如 MIUI 中国大陆版需要保证没有关闭 Play Store 的“在后台显示界面”权限。请检查时候否有类似情况。]]></string>
     <string name="dialog_billing_unavailable_title">结算 API 不可用</string>
-    <string name="dialog_billing_unavailable_message">有以下几种可能：\n1. Play Store 没有正确安装。\n2. 账号所在区域不支持购买（如中国大陆区域）。\n3. 应用与 Play Store 的连接被阻断（如限制后台功能）。\n4. 使用“幸运破解器”等欺骗应用。</string>
+    <string name="dialog_billing_unavailable_message"><![CDATA[
+    有以下几种可能：
+    <br>1. Play Store 没有正确安装
+    <br>2. 账号所在区域不支持购买（如中国大陆区域）
+    <br>3. 应用与 Play Store 的连接被阻断（如限制后台功能）
+    <br>4. 使用“幸运破解器”等欺骗应用]]></string>
 </resources>
