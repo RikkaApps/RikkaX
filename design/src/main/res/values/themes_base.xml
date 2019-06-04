@@ -17,6 +17,7 @@
         <item name="switchBarStyle">@style/Widget.Design.SwitchBar.Light</item>
         <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
+        <item name="outlineButtonStyle">@style/Widget.Design.Button.Outline.Light</item>
     </style>
 
     <style name="Base" parent="android:Theme.Material">
@@ -35,6 +36,7 @@
         <item name="switchBarStyle">@style/Widget.Design.SwitchBar</item>
         <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
+        <item name="outlineButtonStyle">@style/Widget.Design.Button.Outline</item>
     </style>
 
     <!-- Theme for users -->
@@ -51,10 +53,5 @@
     </style>
 
     <style name="Theme.Design.Light.LightStatusBar" parent="Theme.Design.Light"/>
-
-    <style name="Widget.Design.Toolbar" parent="android:Widget.Material.Toolbar">
-        <item name="android:titleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Title</item>
-        <item name="android:subtitleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle</item>
-    </style>
 
 </resources>
