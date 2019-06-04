@@ -27,7 +27,7 @@ public class RaisedToolbar extends Toolbar implements RaisedView {
     }
 
     public RaisedToolbar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr);
+        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override

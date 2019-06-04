@@ -7,6 +7,7 @@
         <item name="android:colorBackground">@color/background_light</item>
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
 
         <item name="cardBackground">@color/cardview_light_background</item>
         <item name="colorAlert">@color/material_red_A200</item>
@@ -24,6 +25,7 @@
         <item name="android:colorBackground">@color/background_dark</item>
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
 
         <item name="cardBackground">@color/cardview_dark_background</item>
         <item name="colorAlert">@color/material_red_A100</item>
@@ -49,5 +51,10 @@
     </style>
 
     <style name="Theme.Design.Light.LightStatusBar" parent="Theme.Design.Light"/>
+
+    <style name="Widget.Design.Toolbar" parent="android:Widget.Material.Toolbar">
+        <item name="android:titleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Title</item>
+        <item name="android:subtitleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle</item>
+    </style>
 
 </resources>
