@@ -19,4 +19,5 @@
     <br>2. The account area does not support purchase (such as the mainland China region)
     <br>3. The connection between the app and the Play Store is blocked (such as the background limit feature)
     <br>4. Using cheating apps like \"Lucky Patcher\"]]></string>
+    <string name="dialog_billing_debug_message" translatable="false"><![CDATA[Debug message: %s]]></string>
 </resources>
