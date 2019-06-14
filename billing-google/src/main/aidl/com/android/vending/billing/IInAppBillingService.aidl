@@ -53,7 +53,7 @@ interface IInAppBillingService {
      *        and "subs" for subscriptions)
      * @return RESULT_OK(0) on success and appropriate response code on failures.
      */
-    int isBillingSupported(int apiVersion, String packageName, String type) = 1;
+    int isBillingSupported(int apiVersion, String packageName, String type) = 0;
 
     /**
      * Provides details of a list of SKUs
@@ -78,7 +78,7 @@ interface IInAppBillingService {
      *                           "title : "Example Title",
      *                           "description" : "This is an example description" }'
      */
-    Bundle getSkuDetails(int apiVersion, String packageName, String type, in Bundle skusBundle) = 2;
+    Bundle getSkuDetails(int apiVersion, String packageName, String type, in Bundle skusBundle) = 1;
 
     /**
      * Returns a pending intent to launch the purchase flow for an in-app item by providing a SKU,
@@ -110,7 +110,7 @@ interface IInAppBillingService {
      *                                  was signed with the private key of the developer
      */
     Bundle getBuyIntent(int apiVersion, String packageName, String sku, String type,
-        String developerPayload) = 3;
+        String developerPayload) = 2;
 
     /**
      * Returns the current SKUs owned by the user of the type and package name specified along with
@@ -136,7 +136,7 @@ interface IInAppBillingService {
      *                                      next set of in-app purchases. Only set if the
      *                                      user has more owned skus than the current list.
      */
-    Bundle getPurchases(int apiVersion, String packageName, String type, String continuationToken) = 4;
+    Bundle getPurchases(int apiVersion, String packageName, String type, String continuationToken) = 3;
 
     /**
      * Consume the last purchase of the given SKU. This will result in this item being removed
@@ -147,12 +147,12 @@ interface IInAppBillingService {
      *        to be consumed
      * @return RESULT_OK(0) if consumption succeeded, appropriate response codes on failures.
      */
-    int consumePurchase(int apiVersion, String packageName, String purchaseToken) = 5;
+    int consumePurchase(int apiVersion, String packageName, String purchaseToken) = 4;
 
     /**
      * This API is currently under development.
      */
-    int stub(int apiVersion, String packageName, String type) = 6;
+    int stub(int apiVersion, String packageName, String type) = 5;
 
     /**
      * Returns a pending intent to launch the purchase flow for upgrading or downgrading a
@@ -186,7 +186,7 @@ interface IInAppBillingService {
      *                                  was signed with the private key of the developer
      */
     Bundle getBuyIntentToReplaceSkus(int apiVersion, String packageName,
-        in List<String> oldSkus, String newSku, String type, String developerPayload) = 7;
+        in List<String> oldSkus, String newSku, String type, String developerPayload) = 6;
 
     /**
      * Returns a pending intent to launch the purchase flow for an in-app item. This method is
@@ -234,7 +234,7 @@ interface IInAppBillingService {
      *                          later to use this flag.
      */
     Bundle getBuyIntentExtraParams(int apiVersion, String packageName, String sku,
-        String type, String developerPayload, in Bundle extraParams) = 8;
+        String type, String developerPayload, in Bundle extraParams) = 7;
 
     /**
      * Returns the most recent purchase made by the user for each SKU, even if that purchase is
@@ -262,7 +262,7 @@ interface IInAppBillingService {
      *                                      user has more owned skus than the current list.
      */
     Bundle getPurchaseHistory(int apiVersion, String packageName, String type,
-        String continuationToken, in Bundle extraParams) = 9;
+        String continuationToken, in Bundle extraParams) = 8;
 
     /**
     * This method is a variant of {@link #isBillingSupported}} that takes an additional
@@ -277,21 +277,21 @@ interface IInAppBillingService {
     * @return RESULT_OK(0) on success and appropriate response code on failures.
     */
     int isBillingSupportedExtraParams(int apiVersion, String packageName, String type,
-        in Bundle extraParams) = 10;
+        in Bundle extraParams) = 9;
 
     Bundle getPurchasesExtraParams(int apiVersion, String packageName, String type,
-        String continuationToken, in Bundle extraParams) = 11;
+        String continuationToken, in Bundle extraParams) = 10;
 
     Bundle consumePurchaseExtraParams(int apiVersion, String packageName, String purchaseToken,
-        in Bundle extraParams) = 12;
+        in Bundle extraParams) = 11;
 
     Bundle getSubscriptionManagementIntent(int apiVersion, String packageName, String sku,
-        String type, in Bundle extraParams) = 801;
+        String type, in Bundle extraParams) = 800;
 
     Bundle getSkuDetailsExtraParams(int apiVersion, String packageName, String type,
-        in Bundle skusBundle, in Bundle extraParams) = 901;
+        in Bundle skusBundle, in Bundle extraParams) = 900;
 
     Bundle acknowledgePurchaseExtraParams(int apiVersion, String packageName, String purchaseToken,
-        in Bundle extraParam) = 902;
+        in Bundle extraParam) = 901;
 
 }
