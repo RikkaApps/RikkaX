@@ -9,8 +9,7 @@
         <activity
             android:name="com.android.billingclient.api.ProxyBillingActivity"
             android:theme="@style/BillingClient.Translucent"
-            android:exported="false"
-            tools:replace="android:theme" />
+            android:exported="false" />
 
     </application>
 </manifest>
