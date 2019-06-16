@@ -199,7 +199,7 @@ class BillingClientImpl extends BillingClient {
         underAgeOfConsent,
         enablePendingPurchases,
         listener,
-        "2.0.1");
+        "1.2.1");
   }
 
   // Used by C++.
