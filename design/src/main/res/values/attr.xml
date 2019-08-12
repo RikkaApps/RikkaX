@@ -38,6 +38,9 @@
         <attr name="switchBarBackgroundDisabled" format="color" />
 
         <attr name="outlineButtonStyle" format="reference" />
+        <attr name="outlineButtonBackground" format="reference" />
+        <attr name="outlineButtonForeground" format="reference" />
+
     </declare-styleable>
 
     <declare-styleable name="RaisedView">

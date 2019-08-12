@@ -50,8 +50,8 @@
 
     <style name="Widget.Design.Button.Outline" parent="android:Widget.Material.Button.Borderless">
         <item name="android:stateListAnimator">@animator/material_button_outline_state_list_animator</item>
-        <item name="android:background">@drawable/material_button_outline_background_dark</item>
-        <item name="android:foreground">@drawable/material_button_outline_foreground</item>
+        <item name="android:background">?outlineButtonBackground</item>
+        <item name="android:foreground">?outlineButtonForeground</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingStart">16dp</item>
@@ -62,8 +62,8 @@
 
     <style name="Widget.Design.Button.Outline.Light" parent="android:Widget.Material.Button.Borderless">
         <item name="android:stateListAnimator">@animator/material_button_outline_state_list_animator</item>
-        <item name="android:background">@drawable/material_button_outline_background</item>
-        <item name="android:foreground">@drawable/material_button_outline_foreground</item>
+        <item name="android:background">?outlineButtonBackground</item>
+        <item name="android:foreground">?outlineButtonForeground</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingStart">16dp</item>
@@ -73,6 +73,11 @@
     <style name="Widget.Design.Toolbar" parent="android:Widget.Material.Toolbar">
         <item name="android:titleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Title</item>
         <item name="android:subtitleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle</item>
+    </style>
+
+    <style name="Widget.Design.ActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
+        <item name="android:contentInsetStart">@dimen/design_toolbar_content_padding_start</item>
+        <item name="android:paddingEnd">@dimen/design_toolbar_padding_end</item>
     </style>
 
 </resources>

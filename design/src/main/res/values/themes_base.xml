@@ -8,6 +8,7 @@
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
         <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
+        <item name="android:actionBarStyle">@style/Widget.Design.ActionBar</item>
 
         <item name="cardBackground">@color/cardview_light_background</item>
         <item name="colorAlert">@color/material_red_A200</item>
@@ -18,6 +19,8 @@
         <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
         <item name="outlineButtonStyle">@style/Widget.Design.Button.Outline.Light</item>
+        <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
+        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
     </style>
 
     <style name="Base" parent="android:Theme.Material">
@@ -27,6 +30,7 @@
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
         <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
+        <item name="android:actionBarStyle">@style/Widget.Design.ActionBar</item>
 
         <item name="cardBackground">@color/cardview_dark_background</item>
         <item name="colorAlert">@color/material_red_A100</item>
@@ -37,6 +41,8 @@
         <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
         <item name="outlineButtonStyle">@style/Widget.Design.Button.Outline</item>
+        <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
+        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
     </style>
 
     <!-- Theme for users -->
