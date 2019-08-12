@@ -6,15 +6,14 @@
     <string name="billing_redeem_summary">兌換由開發者在其他渠道提供的代碼。</string>
     <string name="billing_google_play_unavailable">Google Play 不可用。</string>
     <string name="billing_redeem_dialog_hint">輸入代碼…</string>
-    <string name="billing_have_problem">購買時遇到問題？對付款/退款政策有疑問？</string>
+    <string name="billing_have_problem">購買或恢復時遇到問題？</string>
     <string name="billing_view_help">檢視幫助</string>
-    <string name="billing_apply_google_redeem_code">可申請獲得 Google Play 兌換碼</string>
 
     <string name="billing_success_new_device">兌換碼現在在這臺 %s 上生效。</string>
     <string name="billing_success_change_device">兌換碼已在其他裝置失效並在 %s 上生效。</string>
-    <string name="billing_failed_invalid">無效的兌換碼或兌換碼尚未可用。</string>
+    <string name="billing_failed_invalid">無效的兌換碼。\n如果確認你的操作無誤請聯絡開發者。</string>
     <string name="billing_failed_connection_issue">網路錯誤。</string>
     <string name="billing_failed_unknown_error">未知錯誤。</string>
-    <string name="billing_failed_bad_price">該兌換碼的價值不足。</string>
+    <string name="billing_failed_bad_price">該兌換碼用於其他產品。</string>
 
 </resources>
