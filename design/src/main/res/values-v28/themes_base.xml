@@ -10,6 +10,19 @@
         <item name="android:buttonCornerRadius">4dp</item>
     </style>
 
+    <style name="Base.Light.Dialog.V28" parent="Base.Light.Dialog">
+        <item name="android:dialogCornerRadius">8dp</item>
+        <item name="android:buttonCornerRadius">4dp</item>
+    </style>
+
+    <style name="Base.Dialog.V28" parent="Base.Dialog">
+        <item name="android:dialogCornerRadius">8dp</item>
+        <item name="android:buttonCornerRadius">4dp</item>
+    </style>
+
     <style name="Theme.Design.Light" parent="Base.Light.V28"/>
     <style name="Theme.Design" parent="Base.V28"/>
+
+    <style name="Theme.Design.Light.Dialog" parent="Base.Light.Dialog.V28"/>
+    <style name="Theme.Design.Dialog" parent="Base.Dialog.V28"/>
 </resources>

@@ -45,9 +45,50 @@
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
     </style>
 
+    <style name="Base.Light.Dialog" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
+        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
+        <item name="android:actionBarStyle">@style/Widget.Design.ActionBar</item>
+
+        <item name="cardBackground">@color/cardview_light_background</item>
+        <item name="colorAlert">@color/material_red_A200</item>
+        <item name="colorSafe">@color/material_green_600</item>
+        <item name="colorWarning">@color/material_orange_700</item>
+        <item name="colorInactive">@color/material_grey_600</item>
+        <item name="switchBarStyle">@style/Widget.Design.SwitchBar.Light</item>
+        <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
+        <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
+        <item name="outlineButtonStyle">@style/Widget.Design.Button.Outline.Light</item>
+        <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
+        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+    </style>
+
+    <style name="Base.Dialog" parent="android:Theme.Material.Dialog">
+        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
+        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
+        <item name="android:actionBarStyle">@style/Widget.Design.ActionBar</item>
+
+        <item name="cardBackground">@color/cardview_dark_background</item>
+        <item name="colorAlert">@color/material_red_A100</item>
+        <item name="colorSafe">@color/material_green_A100</item>
+        <item name="colorWarning">@color/material_orange_A100</item>
+        <item name="colorInactive">@color/material_grey_500</item>
+        <item name="switchBarStyle">@style/Widget.Design.SwitchBar</item>
+        <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
+        <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
+        <item name="outlineButtonStyle">@style/Widget.Design.Button.Outline</item>
+        <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
+        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+    </style>
+
     <!-- Theme for users -->
     <style name="Theme.Design.Light" parent="Base.Light"/>
+    <style name="Theme.Design.Light.Dialog" parent="Base.Light.Dialog"/>
+
     <style name="Theme.Design" parent="Base"/>
+    <style name="Theme.Design.Dialog" parent="Base.Dialog"/>
 
     <!-- Light theme variants -->
     <style name="Theme.Design.Light.DarkActionBar" parent="Theme.Design.Light">
