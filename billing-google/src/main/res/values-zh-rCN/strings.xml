@@ -16,7 +16,10 @@
     <string name="dialog_billing_unavailable_message"><![CDATA[
     有以下几种可能：
     <br>1. Play Store 没有正确安装
-    <br>2. 账号所在区域不支持购买（如中国大陆区域）
-    <br>3. 应用与 Play Store 的连接被阻断（如限制后台功能）
-    <br>4. 使用“幸运破解器”等欺骗应用]]></string>
+    <br>2. 此应用不是从 Play Store 安装
+    <br>3. 账号所在区域不支持购买（如中国大陆区域）
+    <br>4. 应用与 Play Store 的连接被阻断（如限制后台功能）
+    <br>5. 使用“幸运破解器”等欺骗应用]]></string>
+    <string name="dialog_billing_unknown_message"><![CDATA[我们无法提供帮助，但一般情况下，您应确保从 Play Store 安装该应用，并检查 Play Store 是否运作良好。]]></string>
+
 </resources>

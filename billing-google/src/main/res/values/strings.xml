@@ -16,8 +16,10 @@
     <string name="dialog_billing_unavailable_message"><![CDATA[
     There are several possibilities:
     <br>1. Play Store is not installed correctly
-    <br>2. The account area does not support purchase (such as the mainland China region)
-    <br>3. The connection between the app and the Play Store is blocked (such as the background limit feature)
-    <br>4. Using cheating apps like \"Lucky Patcher\"]]></string>
+    <br>2. This app is not installed from Play Store
+    <br>3. The account area does not support purchase (such as the mainland China region)
+    <br>4. The connection between the app and the Play Store is blocked (such as the background limit feature)
+    <br>5. Using cheating apps like \"Lucky Patcher\"]]></string>
     <string name="dialog_billing_debug_message" translatable="false"><![CDATA[Debug message: %s]]></string>
+    <string name="dialog_billing_unknown_message"><![CDATA[We can\'t provide help, but in general, you should make sure the app is installed from Play Store and check if Play Store works well.]]></string>
 </resources>
