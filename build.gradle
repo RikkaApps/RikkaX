@@ -30,7 +30,6 @@ task clean(type: Delete) {
 }
 
 ext {
-    preferenceLibraryVersion = '3.0.0'
     androidXLibraryVersion = '1.0.0'
     targetSdkVersion = 28
 }

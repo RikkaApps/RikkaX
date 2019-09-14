@@ -6,7 +6,7 @@ android {
         minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "3.0.0"
+        versionName "4.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -28,15 +28,15 @@ ext {
 }
 
 dependencies {
-    implementation "androidx.fragment:fragment:$androidXLibraryVersion"
+    def preferenceLibraryVersion = '4.0.0'
+    implementation "androidx.fragment:fragment:1.1.0"
     implementation "androidx.recyclerview:recyclerview:$androidXLibraryVersion"
-    implementation "moe.shizuku.preference:preference:$preferenceLibraryVersion"
-    implementation "moe.shizuku.preference:preference-dialog-android:$preferenceLibraryVersion"
-    implementation "moe.shizuku.preference:preference-simplemenu:$preferenceLibraryVersion"
+    implementation "moe.shizuku.preference:preference-android:$preferenceLibraryVersion"
+    implementation "moe.shizuku.preference:preference-simplemenu-android:$preferenceLibraryVersion"
     implementation 'ru.noties.markwon:core:3.0.1'
     implementation "moe.shizuku.support:support-utils:3.0.6"
     implementation "moe.shizuku.support:recyclerview-utils:3.0.4"
-    implementation "moe.shizuku.support:design:3.1.7"
+    implementation "moe.shizuku.support:design:3.1.8"
 }
 
 if (rootProject.file('bintray.gradle').canRead()) {

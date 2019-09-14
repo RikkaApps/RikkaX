@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/billingclient_btn_background"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp"
     android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:gravity="center_vertical">
+    android:paddingEnd="16dp"
+    android:paddingBottom="16dp">
 
     <ImageView
         android:id="@android:id/icon"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:duplicateParentState="true"
+        android:importantForAccessibility="no"
         android:scaleType="centerInside"
-        tools:src="@drawable/ic_billingclient_google_play_24dp"
         android:tint="?android:textColorTertiary"
         android:tintMode="src_in"
-        android:importantForAccessibility="no"/>
+        tools:src="@drawable/ic_billingclient_google_play_24dp" />
 
     <TextView
         android:id="@android:id/title"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:textSize="16sp"
+        android:layout_weight="1"
+        android:duplicateParentState="true"
         android:minHeight="24dp"
-        tools:text="@string/billing_method_google_play"/>
+        android:textSize="16sp"
+        tools:text="@string/billing_method_google_play" />
 
     <TextView
         android:id="@android:id/summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:duplicateParentState="true"
         android:textSize="16sp"
-        tools:text="￥130"/>
+        tools:text="￥130" />
 
 </LinearLayout>
