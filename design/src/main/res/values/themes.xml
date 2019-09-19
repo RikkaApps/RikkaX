@@ -80,4 +80,11 @@
         <item name="android:paddingEnd">@dimen/design_toolbar_padding_end</item>
     </style>
 
+    <style name="Widget.Design.BorderScrollView" parent="android:Widget">
+        <item name="borderTopDrawable">?android:dividerVertical</item>
+        <item name="borderBottomDrawable">?android:dividerVertical</item>
+        <item name="borderTopStyle">whenContentScrolled</item>
+        <item name="borderBottomStyle">whenContentScrolled</item>
+    </style>
+
 </resources>

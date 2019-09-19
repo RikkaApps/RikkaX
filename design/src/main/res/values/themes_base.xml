@@ -9,6 +9,9 @@
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
         <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
         <item name="android:actionBarStyle">@style/Widget.Design.ActionBar</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:dividerVertical">?android:listDivider</item>
+        <item name="android:dividerHorizontal">?android:listDivider</item>
 
         <item name="cardBackground">@color/cardview_light_background</item>
         <item name="colorAlert">@color/material_red_A200</item>
@@ -31,6 +34,9 @@
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
         <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
         <item name="android:actionBarStyle">@style/Widget.Design.ActionBar</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:dividerVertical">?android:listDivider</item>
+        <item name="android:dividerHorizontal">?android:listDivider</item>
 
         <item name="cardBackground">@color/cardview_dark_background</item>
         <item name="colorAlert">@color/material_red_A100</item>
@@ -50,6 +56,9 @@
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
         <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
         <item name="android:actionBarStyle">@style/Widget.Design.ActionBar</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:dividerVertical">?android:listDivider</item>
+        <item name="android:dividerHorizontal">?android:listDivider</item>
 
         <item name="cardBackground">@color/cardview_light_background</item>
         <item name="colorAlert">@color/material_red_A200</item>
@@ -69,6 +78,7 @@
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
         <item name="android:toolbarStyle">@style/Widget.Design.Toolbar</item>
         <item name="android:actionBarStyle">@style/Widget.Design.ActionBar</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
 
         <item name="cardBackground">@color/cardview_dark_background</item>
         <item name="colorAlert">@color/material_red_A100</item>

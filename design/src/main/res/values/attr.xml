@@ -22,15 +22,15 @@
 
     <declare-styleable name="Design">
         <!-- Alert color, such as error or dangerous action. -->
-        <attr name="colorAlert" format="color"/>
+        <attr name="colorAlert" format="color" />
         <!-- Safe color, such as a safe state. -->
-        <attr name="colorSafe" format="color"/>
+        <attr name="colorSafe" format="color" />
         <!-- Warning color, such as a warning text. -->
-        <attr name="colorWarning" format="color"/>
+        <attr name="colorWarning" format="color" />
         <!-- Inactive color. -->
-        <attr name="colorInactive" format="color"/>
+        <attr name="colorInactive" format="color" />
         <!-- Color for cards. -->
-        <attr name="cardBackground" format="reference"/>
+        <attr name="cardBackground" format="reference" />
 
         <!-- Style for SwitchBar -->
         <attr name="switchBarStyle" format="reference" />
@@ -41,10 +41,28 @@
         <attr name="outlineButtonBackground" format="reference" />
         <attr name="outlineButtonForeground" format="reference" />
 
+        <attr name="borderScrollViewStyle" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="RaisedView">
         <attr name="state_raised" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BorderScrollView">
+        <attr name="borderTopDrawable" format="reference" />
+        <attr name="borderBottomDrawable" format="reference" />
+        <attr name="borderTopStyle" format="enum">
+            <enum name="never" value="0"/>
+            <enum name="whenTop" value="1"/>
+            <enum name="whenContentScrolled" value="2"/>
+            <enum name="always" value="3"/>
+        </attr>
+        <attr name="borderBottomStyle" format="enum">
+            <enum name="never" value="0"/>
+            <enum name="whenBottom" value="1"/>
+            <enum name="whenContentScrolled" value="2"/>
+            <enum name="always" value="3"/>
+        </attr>
     </declare-styleable>
 
 </resources>
