@@ -61,10 +61,15 @@ public class FitsSystemWindowsFrameLayout extends FrameLayout {
         // If our insets have changed, keep them and trigger a layout...
         if (!Objects.equals(mLastInsets, newInsets)) {
             mLastInsets = newInsets;
+            setPadding(getPaddingLeft() + insets.getSystemWindowInsetLeft(),
+                    getPaddingTop(),
+                    getPaddingRight() + insets.getSystemWindowInsetRight(),
+                    getPaddingBottom());
+
             requestLayout();
         }
 
-        return insets;
+        return insets.replaceSystemWindowInsets(0, insets.getSystemWindowInsetTop(), 0, insets.getSystemWindowInsetBottom());
     }
 
     @Override

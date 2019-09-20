@@ -3,32 +3,30 @@ package moe.shizuku.support.design.widget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 
 import java.util.Objects;
 
 import moe.shizuku.support.design.R;
 
-public class BorderScrollView extends FitsSystemWindowsNestedScrollView implements BorderView {
+public class BorderRecyclerView extends FitsSystemWindowsRecyclerView implements BorderView {
 
     private BorderViewDelegate mBorderViewDelegate;
 
-    public BorderScrollView(@NonNull Context context) {
+    public BorderRecyclerView(@NonNull Context context) {
         this(context, null);
     }
 
-    public BorderScrollView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public BorderRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, R.attr.borderViewStyle);
     }
 
-    public BorderScrollView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    public BorderRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
 
-        mBorderViewDelegate = new BorderViewDelegate(this, context, attrs, defStyleAttr);
+        mBorderViewDelegate = new BorderViewDelegate(this, context, attrs, defStyle);
     }
 
     @Override
@@ -36,29 +34,16 @@ public class BorderScrollView extends FitsSystemWindowsNestedScrollView implemen
         return mBorderViewDelegate;
     }
 
-    private int getScrollRange() {
-        int scrollRange = 0;
-        if (getChildCount() > 0) {
-            View child = getChildAt(0);
-            NestedScrollView.LayoutParams lp = (LayoutParams) child.getLayoutParams();
-            int childSize = child.getHeight() + lp.topMargin + lp.bottomMargin;
-            int parentSpace = getHeight() - getPaddingTop() - getPaddingBottom();
-            scrollRange = Math.max(0, childSize - parentSpace);
-        }
-        return scrollRange;
-    }
-
     @Override
     public void updateBorderStatus() {
-        final int offset = getScrollY();
-        final int range = getScrollRange();
+        int offset = computeVerticalScrollOffset();
+        int range = computeVerticalScrollRange() - computeVerticalScrollExtent();
         final boolean isShowingTopBorder, isShowingBottomBorder;
         final boolean isTop, isBottom;
         if (range != 0) {
             isTop = offset == 0;
             isBottom = offset == range;
         } else {
-            //isTop = isBottom = false;
             return;
         }
         isShowingTopBorder = getBorderTopStyle() == BorderStyle.ALWAYS
@@ -77,16 +62,7 @@ public class BorderScrollView extends FitsSystemWindowsNestedScrollView implemen
     }
 
     @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        super.onScrollChanged(l, t, oldl, oldt);
-
-        updateBorderStatus();
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-
+    public void onScrolled(int dx, int dy) {
         updateBorderStatus();
     }
 

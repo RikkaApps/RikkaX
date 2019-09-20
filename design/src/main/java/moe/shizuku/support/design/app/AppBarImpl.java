@@ -10,6 +10,7 @@ import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 
+import moe.shizuku.support.design.RaisedView;
 import moe.shizuku.support.design.widget.AppBarLayout;
 import moe.shizuku.support.utils.ResourceUtils;
 
@@ -268,6 +269,21 @@ public class AppBarImpl extends AppBar {
     @Override
     public float getElevation() {
         return mAppBarLayout.getElevation();
+    }
+
+    @Override
+    public boolean isRaised() {
+        if (mAppBarLayout instanceof RaisedView) {
+            return ((RaisedView) mAppBarLayout).isRaised();
+        }
+        return false;
+    }
+
+    @Override
+    public void setRaised(boolean raised) {
+        if (mAppBarLayout instanceof RaisedView) {
+            ((RaisedView) mAppBarLayout).setRaised(raised);
+        }
     }
 
     private void updateHomeAccessibility() {

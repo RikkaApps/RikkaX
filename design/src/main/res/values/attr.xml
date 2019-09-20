@@ -41,14 +41,14 @@
         <attr name="outlineButtonBackground" format="reference" />
         <attr name="outlineButtonForeground" format="reference" />
 
-        <attr name="borderScrollViewStyle" format="reference" />
+        <attr name="borderViewStyle" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="RaisedView">
         <attr name="state_raised" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="BorderScrollView">
+    <declare-styleable name="BorderView">
         <attr name="borderTopDrawable" format="reference" />
         <attr name="borderBottomDrawable" format="reference" />
         <attr name="borderTopStyle" format="enum">

@@ -9,6 +9,7 @@ import java.util.Objects;
 
 class FitsSystemWindowsChildDelegate {
 
+    private int mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom;
     private View mView;
 
     @Nullable
@@ -17,6 +18,11 @@ class FitsSystemWindowsChildDelegate {
     FitsSystemWindowsChildDelegate(View view) {
         mView = view;
         mView.setOnApplyWindowInsetsListener((v, insets) -> onWindowInsetChanged(insets));
+
+        mPaddingLeft = view.getPaddingLeft();
+        mPaddingTop = view.getPaddingTop();
+        mPaddingRight = view.getPaddingRight();
+        mPaddingBottom = view.getPaddingBottom();
     }
 
     private WindowInsets onWindowInsetChanged(final WindowInsets insets) {
@@ -30,10 +36,10 @@ class FitsSystemWindowsChildDelegate {
         // If our insets have changed, keep them and trigger a layout...
         if (!Objects.equals(mLastInsets, newInsets)) {
             mLastInsets = newInsets;
-            mView.setPadding(mView.getPaddingLeft() + getInsetLeft(),
-                    mView.getPaddingTop() + getInsetTop(),
-                    mView.getPaddingRight() + getInsetRight(),
-                    mView.getPaddingBottom() + getInsetBottom());
+            mView.setPadding(mPaddingLeft + getInsetLeft(),
+                    mPaddingTop + getInsetTop(),
+                    mPaddingRight + getInsetRight(),
+                    mPaddingBottom + getInsetBottom());
             return insets.consumeSystemWindowInsets();
         }
 

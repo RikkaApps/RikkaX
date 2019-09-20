@@ -510,4 +510,8 @@ public abstract class AppBar {
      * @return Elevation value in pixels
      */
     public abstract float getElevation();
+
+    public abstract boolean isRaised();
+
+    public abstract void setRaised(boolean raised);
 }
