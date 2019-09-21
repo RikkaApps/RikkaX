@@ -107,7 +107,10 @@ public class AppBarLayout extends LinearLayout {
             // If we need to offset the first child, we need to offset all of them to make space
             final int topInset = getTopInset();
             for (int z = getChildCount() - 1; z >= 0; z--) {
-                ViewCompat.offsetTopAndBottom(getChildAt(z), topInset);
+                View view = getChildAt(z);
+                // On pre-29, mTop is set by unknown
+                view.setTop(0);
+                ViewCompat.offsetTopAndBottom(view, topInset);
             }
         }
     }

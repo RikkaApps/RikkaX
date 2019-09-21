@@ -40,7 +40,7 @@ class FitsSystemWindowsChildDelegate {
                     mPaddingTop + getInsetTop(),
                     mPaddingRight + getInsetRight(),
                     mPaddingBottom + getInsetBottom());
-            return insets.consumeSystemWindowInsets();
+            return insets;
         }
 
         return insets;

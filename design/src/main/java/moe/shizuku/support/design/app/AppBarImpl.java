@@ -3,6 +3,7 @@ package moe.shizuku.support.design.app;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.View;

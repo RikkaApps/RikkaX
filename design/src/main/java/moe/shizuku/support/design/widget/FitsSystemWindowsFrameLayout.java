@@ -14,6 +14,8 @@ import java.util.Objects;
 
 public class FitsSystemWindowsFrameLayout extends FrameLayout {
 
+    private int mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom;
+
     @Nullable
     private WindowInsets mLastInsets;
 
@@ -31,6 +33,12 @@ public class FitsSystemWindowsFrameLayout extends FrameLayout {
 
     public FitsSystemWindowsFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+
+        mPaddingLeft = getPaddingLeft();
+        mPaddingTop = getPaddingTop();
+        mPaddingRight = getPaddingRight();
+        mPaddingBottom = getPaddingBottom();
+
         setupForInsets();
     }
 
@@ -61,10 +69,10 @@ public class FitsSystemWindowsFrameLayout extends FrameLayout {
         // If our insets have changed, keep them and trigger a layout...
         if (!Objects.equals(mLastInsets, newInsets)) {
             mLastInsets = newInsets;
-            setPadding(getPaddingLeft() + insets.getSystemWindowInsetLeft(),
-                    getPaddingTop(),
-                    getPaddingRight() + insets.getSystemWindowInsetRight(),
-                    getPaddingBottom());
+            setPadding(mPaddingLeft + insets.getSystemWindowInsetLeft(),
+                    mPaddingTop,
+                    mPaddingRight + insets.getSystemWindowInsetRight(),
+                    mPaddingBottom);
 
             requestLayout();
         }
