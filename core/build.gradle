@@ -37,11 +37,11 @@ dependencies {
 }
 
 project.ext {
-    mavProjectName = 'Rikka Core'
-    mavPublishToInternalRepo = true
+    mavProjectName = 'rikka.core:core'
+    mavLibraryDescription = 'Basic classes.'
 }
 
 group = 'rikka.core'
 version = android.defaultConfig.versionName
 
-apply from: rootProject.file('gradle-mavenizer.gradle')
+apply from: rootProject.file('publish.gradle')

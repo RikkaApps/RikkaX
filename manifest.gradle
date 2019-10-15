@@ -1,5 +1,5 @@
 ext {
-    mavRepoInternalUrl = "${System.getProperty('user.home')}/.m2/repository"
+    bintray_plugin_version = '1.8.4'
 
     gradle_plugin_version = '3.6.0-beta01'
     kotlin_version = '1.3.50'

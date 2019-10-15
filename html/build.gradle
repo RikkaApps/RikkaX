@@ -20,7 +20,6 @@ android {
 }
 
 dependencies {
-    //noinspection GradleDependency
     implementation "org.ccil.cowan.tagsoup:tagsoup:1.2"
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
 
@@ -30,8 +29,8 @@ dependencies {
 }
 
 project.ext {
-    mavProjectName = 'HtmlCompat'
-    mavPublishToInternalRepo = true
+    mavProjectName = 'rikka.html:html'
+    mavLibraryDescription = 'Copy of android.text.Html class.'
 }
 
 group = 'rikka.html'

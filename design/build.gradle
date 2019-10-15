@@ -42,11 +42,11 @@ dependencies {
 }
 
 project.ext {
-    mavProjectName = 'Rikka Design'
-    mavPublishToInternalRepo = true
+    mavProjectName = 'rikka.design:design'
+    mavLibraryDescription = 'Minimal Material Design components.'
 }
 
 group = 'rikka.design'
 version = android.defaultConfig.versionName
 
-apply from: rootProject.file('gradle-mavenizer.gradle')
+apply from: rootProject.file('publish.gradle')

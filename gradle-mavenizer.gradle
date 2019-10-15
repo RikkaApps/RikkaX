@@ -54,9 +54,3 @@ project.afterEvaluate {
     }
 }
 
-allprojects {
-    tasks.withType(Javadoc) {
-        options.addStringOption('Xdoclint:none', '-quiet')
-    }
-}
-
