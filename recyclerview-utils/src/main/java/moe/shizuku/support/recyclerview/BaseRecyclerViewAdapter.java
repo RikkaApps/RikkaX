@@ -18,6 +18,15 @@ public abstract class BaseRecyclerViewAdapter<CP extends CreatorPool> extends Re
 
     private List mItems;
     private CP mCreatorPool;
+    private Object mListener;
+
+    public Object getListener() {
+        return mListener;
+    }
+
+    public void setListener(Object listener) {
+        mListener = listener;
+    }
 
     public BaseRecyclerViewAdapter() {
         this(new ArrayList<>());

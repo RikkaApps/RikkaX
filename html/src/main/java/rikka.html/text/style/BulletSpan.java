@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package moe.shizuku.support.text.style;
+package rikka.html.text.style;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

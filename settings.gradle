@@ -1,1 +1,1 @@
-include ':core', ':design', ':recyclerview-utils', ':support-utils', ':helplib', ':billing-google', ':billing', ':htmlcompat', ':multi-process-preference'
+include ':core', ':design', ':html', ':recyclerview-utils', ':support-utils', ':helplib', ':billing-google', ':billing', ':multi-process-preference'

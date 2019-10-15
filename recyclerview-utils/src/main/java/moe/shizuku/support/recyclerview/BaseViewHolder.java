@@ -10,14 +10,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * Created by Rikka on 2017/2/16.
- */
-
 public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
     public interface Creator<T> {
-        BaseViewHolder<T> createViewHolder(LayoutInflater inflater, ViewGroup parent);
+        BaseViewHolder createViewHolder(LayoutInflater inflater, ViewGroup parent);
     }
 
     private T mData;

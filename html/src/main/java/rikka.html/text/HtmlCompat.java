@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package moe.shizuku.support.text;
+package rikka.html.text;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -65,8 +65,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import moe.shizuku.support.htmlcompat.R;
-import moe.shizuku.support.text.style.BulletSpan;
+import rikka.html.R;
+import rikka.html.text.style.BulletSpan;
 
 /**
  * This class processes HTML strings into displayable styled text.
@@ -184,7 +184,8 @@ public class HtmlCompat {
         sContext = context;
     }
 
-    private HtmlCompat() { }
+    private HtmlCompat() {
+    }
 
     /**
      * Returns displayable styled text from the provided HTML string with the legacy flags
@@ -279,9 +280,9 @@ public class HtmlCompat {
      * made to add HTML tags corresponding to spans. Also note that HTML metacharacters
      * (such as "&lt;" and "&amp;") within the input text are escaped.
      *
-     * @param text input text to convert
+     * @param text   input text to convert
      * @param option one of {@link #TO_HTML_PARAGRAPH_LINES_CONSECUTIVE} or
-     *     {@link #TO_HTML_PARAGRAPH_LINES_INDIVIDUAL}
+     *               {@link #TO_HTML_PARAGRAPH_LINES_INDIVIDUAL}
      * @return string containing input converted to HTML
      */
     public static String toHtml(Spanned text, int option) {
@@ -318,7 +319,7 @@ public class HtmlCompat {
             String elements = " ";
             boolean needDiv = false;
 
-            for(int j = 0; j < style.length; j++) {
+            for (int j = 0; j < style.length; j++) {
                 if (style[j] instanceof AlignmentSpan) {
                     Layout.Alignment align =
                             ((AlignmentSpan) style[j]).getAlignment();
@@ -756,8 +757,8 @@ class HtmlToSpannedConverter implements ContentHandler {
         return sTextDecorationPattern;
     }
 
-    public HtmlToSpannedConverter( String source, Html.ImageGetter imageGetter,
-                                   HtmlCompat.TagHandler tagHandler, Parser parser, int flags) {
+    public HtmlToSpannedConverter(String source, Html.ImageGetter imageGetter,
+                                  HtmlCompat.TagHandler tagHandler, Parser parser, int flags) {
         mSource = source;
         mSpannableStringBuilder = new SpannableStringBuilder();
         mImageGetter = imageGetter;
@@ -1341,16 +1342,35 @@ class HtmlToSpannedConverter implements ContentHandler {
     public void skippedEntity(String name) throws SAXException {
     }
 
-    private static class Bold { }
-    private static class Italic { }
-    private static class Underline { }
-    private static class Strikethrough { }
-    private static class Big { }
-    private static class Small { }
-    private static class Monospace { }
-    private static class Blockquote { }
-    private static class Super { }
-    private static class Sub { }
+    private static class Bold {
+    }
+
+    private static class Italic {
+    }
+
+    private static class Underline {
+    }
+
+    private static class Strikethrough {
+    }
+
+    private static class Big {
+    }
+
+    private static class Small {
+    }
+
+    private static class Monospace {
+    }
+
+    private static class Blockquote {
+    }
+
+    private static class Super {
+    }
+
+    private static class Sub {
+    }
 
     private static class Bullet {
         public int mGapWidth;

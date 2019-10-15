@@ -1,4 +1,4 @@
-package moe.shizuku.support.widget;
+package rikka.html.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,8 +10,9 @@ import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import moe.shizuku.support.htmlcompat.R;
-import moe.shizuku.support.text.HtmlCompat;
+
+import rikka.html.R;
+import rikka.html.text.HtmlCompat;
 
 @SuppressLint("AppCompatCustomView")
 public class HtmlCompatTextView extends TextView {
