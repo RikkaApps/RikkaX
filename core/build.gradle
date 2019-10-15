@@ -44,10 +44,4 @@ project.ext {
 group = 'rikka.core'
 version = android.defaultConfig.versionName
 
-apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${mavPluginVersion}/gradle-mavenizer.gradle"
-
-allprojects {
-    tasks.withType(Javadoc) {
-        options.addStringOption('Xdoclint:none', '-quiet')
-    }
-}
+apply from: rootProject.file('gradle-mavenizer.gradle')

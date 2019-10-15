@@ -1,5 +1,4 @@
 ext {
-    mavPluginVersion = '1.0.4'
     mavRepoInternalUrl = "${System.getProperty('user.home')}/.m2/repository"
 
     gradle_plugin_version = '3.6.0-beta01'
