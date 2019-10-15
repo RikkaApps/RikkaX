@@ -7,7 +7,7 @@ android {
         minSdkVersion 21
         targetSdkVersion target_sdk
         versionCode 1
-        versionName rikka_design_version
+        versionName rikka_core_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -30,23 +30,18 @@ dependencies {
     implementation "androidx.core:core:$androidx_core_version"
     implementation "androidx.core:core-ktx:$androidx_core_version"
     implementation "androidx.fragment:fragment:$androidx_fragment_version"
-    implementation "androidx.interpolator:interpolator:$androidx_interpolator_version"
-    implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
-    implementation "rikka.core:core:$rikka_core_version"
-    implementation "moe.shizuku.support:recyclerview-utils:3.0.4"
-    implementation "moe.shizuku.support:support-utils:3.0.6"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
 project.ext {
-    mavProjectName = 'Rikka Design'
+    mavProjectName = 'Rikka Core'
     mavPublishToInternalRepo = true
 }
 
-group = 'rikka.design'
+group = 'rikka.core'
 version = android.defaultConfig.versionName
 
 apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${mavPluginVersion}/gradle-mavenizer.gradle"

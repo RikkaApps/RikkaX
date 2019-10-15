@@ -1,56 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<moe.shizuku.support.design.ResolverDrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<rikka.design.widget.FitsSystemWindowsResolverDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contentPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:maxWidth="@dimen/resolver_max_width"
-    app:maxCollapsedHeight="288dp"
-    app:maxCollapsedHeightSmall="56dp"
-    android:id="@+id/contentPanel">
+    app:maxCollapsedHeight="336dp"
+    app:maxCollapsedHeightSmall="56dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_alwaysShow="true"
+        android:background="@drawable/bottomsheet_background"
         android:elevation="8dp"
-        android:background="?android:colorBackground">
+        app:layout_alwaysShow="true">
 
-        <TextView android:id="@android:id/title"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@android:id/title"
             android:layout_width="wrap_content"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif-medium"
             android:gravity="start|center_vertical"
             android:paddingStart="16dp"
+            android:paddingTop="16dp"
             android:paddingEnd="16dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"/>
+            android:paddingBottom="16dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resolver_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/resolver_list"
-        android:scrollbars="vertical"
+        android:background="?android:colorBackground"
+        android:clipToPadding="false"
+        android:elevation="8dp"
+        android:paddingStart="?android:listPreferredItemPaddingStart"
+        android:paddingEnd="?android:listPreferredItemPaddingStart"
+        android:scrollIndicators="top"
         android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="?android:colorBackground"
         android:elevation="8dp"
-        android:scrollIndicators="top"
-        android:clipToPadding="false"
-        android:paddingStart="?android:listPreferredItemPaddingStart"
-        android:paddingEnd="?android:listPreferredItemPaddingStart"/>
-
-    <TextView android:id="@android:id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_alwaysShow="true"
-        android:background="?android:colorBackground"
-        android:text="@string/chooser_no_apps"
-        android:padding="32dp"
         android:gravity="center"
+        android:padding="32dp"
+        android:text="@string/chooser_no_apps"
         android:visibility="gone"
-        android:elevation="8dp"/>
+        app:layout_alwaysShow="true"
+        tools:visibility="visible" />
 
-</moe.shizuku.support.design.ResolverDrawerLayout>
+    <View
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?android:colorBackground"
+        android:elevation="8dp" />
+
+</rikka.design.widget.FitsSystemWindowsResolverDrawerLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="follow_system">Follow system</string>
+
+    <string name="dark_theme">Dark theme</string>
+
+    <string name="dark_theme_follow_system" translatable="false">@string/follow_system</string>
+    <string name="dark_theme_off">Always off</string>
+    <string name="dark_theme_on">Always on</string>
+    <string name="dark_theme_auto_time">On at night</string>
+    <string name="dark_theme_auto_battery">On when \"Battery saver\" is enabled</string>
+
+</resources>

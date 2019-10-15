@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="follow_system">跟随系统</string>
+
+    <string name="dark_theme">深色主题</string>
+
+    <string name="dark_theme_off">总是关闭</string>
+    <string name="dark_theme_on">总是开启</string>
+    <string name="dark_theme_auto_time">夜晚时开启</string>
+    <string name="dark_theme_auto_battery">“省电模式”启用时开启</string>
+</resources>

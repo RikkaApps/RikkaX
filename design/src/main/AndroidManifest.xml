@@ -1,2 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="moe.shizuku.support.design" />
+    package="rikka.design">
+
+    <application>
+        <activity
+            android:name=".app.ChooserActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:theme="@style/Theme.Design.Resolver.DayNight" />
+    </application>
+</manifest>
