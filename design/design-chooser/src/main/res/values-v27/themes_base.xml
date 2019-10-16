@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.Light.Resolver.V27" parent="Base.Light.Resolver">
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarDividerColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Base.Resolver.V27" parent="Base.Resolver">
+        <item name="android:navigationBarDividerColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.Design.Light.Resolver" parent="Base.Light.Resolver.V27"/>
+    <style name="Theme.Design.Resolver" parent="Base.Resolver.V27"/>
+
+</resources>

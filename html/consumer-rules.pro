@@ -1,1 +1,1 @@
--keep class moe.shizuku.support.text.style.** { *; }
+-keep class rikka.html.text.style.** { *; }

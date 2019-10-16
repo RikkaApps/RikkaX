@@ -3,7 +3,7 @@ package ${PACKAGE_NAME};
 import android.content.Context;
 import android.view.View;
 
-import moe.shizuku.support.recyclerview.BaseViewHolder;
+import rikka.recyclerview.BaseViewHolder;
 
 #parse("File Header.java")
 public class ${NAME} extends BaseViewHolder<${TYPE}> {

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="follow_system">أتبع النظام</string>
+
+    <string name="target_app_not_found">ليس لديك تطبيق ليقوم بهذا العمل.</string>
+
+</resources>

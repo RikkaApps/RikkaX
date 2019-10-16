@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion target_sdk
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion target_sdk
+        versionCode 1
+        versionName rikka_design_version
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.core:core:$androidx_core_version"
+    implementation "androidx.core:core-ktx:$androidx_core_version"
+    implementation "androidx.fragment:fragment:$androidx_fragment_version"
+    implementation "androidx.interpolator:interpolator:$androidx_interpolator_version"
+    implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
+    implementation "rikka.core:core:$rikka_core_version"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+project.ext {
+    mavProjectName = 'rikka.design:design'
+    mavLibraryDescription = 'Minimal Material Design components.'
+}
+
+group = 'rikka.design'
+version = android.defaultConfig.versionName
+
+apply from: rootProject.file('publish.gradle')

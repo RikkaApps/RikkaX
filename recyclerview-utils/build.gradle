@@ -1,20 +1,20 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.targetSdkVersion
+    compileSdkVersion target_sdk
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        targetSdkVersion target_sdk
         versionCode 1
-        versionName '3.1.0'
+        versionName rikka_recyclerview_utils_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        consumerProguardFiles 'consumer-rules.pro'
     }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -24,7 +24,7 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation "androidx.recyclerview:recyclerview:$androidXLibraryVersion"
+    implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     testImplementation 'junit:junit:4.12'
 }
 
@@ -36,8 +36,12 @@ ext {
     bintrayName = project.name
 }
 
-if (rootProject.file('bintray.gradle').canRead()) {
-    apply from: project.rootProject.file('bintray.gradle')
-} else {
-    println("bintray.gradle not found, skiping.")
+project.ext {
+    mavProjectName = 'rikka.recyclerview:recyclerview-utils'
+    mavLibraryDescription = 'Helper classes for RecyclerView.'
 }
+
+group = 'rikka.recyclerview'
+version = android.defaultConfig.versionName
+
+apply from: rootProject.file('publish.gradle')

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ResolverDrawerLayout">
+        <attr name="android:maxWidth" />
+        <attr name="maxCollapsedHeight" format="dimension" />
+        <attr name="maxCollapsedHeightSmall" format="dimension" />
+        <!-- Whether the Drawer should be positioned at the top rather than at the bottom. -->
+        <attr name="showAtTop" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ResolverDrawerLayout_Layout">
+        <attr name="layout_alwaysShow" format="boolean" />
+        <attr name="layout_ignoreOffset" format="boolean" />
+        <attr name="android:layout_gravity" />
+        <attr name="layout_hasNestedScrollIndicator" format="boolean" />
+        <attr name="layout_maxHeight" format="dimension" />
+    </declare-styleable>
+
+</resources>

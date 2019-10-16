@@ -36,4 +36,4 @@ project.ext {
 group = 'rikka.html'
 version = android.defaultConfig.versionName
 
-apply from: rootProject.file('gradle-mavenizer.gradle')
+apply from: rootProject.file('publish.gradle')

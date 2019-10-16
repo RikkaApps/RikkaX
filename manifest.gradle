@@ -13,7 +13,11 @@ ext {
     androidx_recyclerview_version = "1.1.0-beta05"
     androidx_interpolator_version = "1.0.0"
 
-    rikka_core_version = "1.0.0-alpha01"
-    rikka_design_version = "1.0.0-alpha01"
-    rikka_html_version = "1.0.0-alpha01"
+    rikka_core_version = "1.0.0"
+    rikka_design_version = "1.1.0"
+    rikka_design_chooser_version = "1.0.0"
+    rikka_design_helplib_version = "1.0.0"
+    rikka_html_version = "1.0.0"
+    rikka_preference_multiprocess_version = "1.0.0"
+    rikka_recyclerview_utils_version = "1.0.0"
 }
