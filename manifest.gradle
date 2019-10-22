@@ -14,7 +14,7 @@ ext {
     androidx_interpolator_version = "1.0.0"
 
     rikka_core_version = "1.0.0"
-    rikka_design_version = "1.1.1"
+    rikka_design_version = "1.1.2"
     rikka_design_chooser_version = "1.0.0"
     rikka_design_helplib_version = "1.0.0"
     rikka_html_version = "1.0.0"
