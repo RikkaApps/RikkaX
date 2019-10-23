@@ -94,6 +94,16 @@ public class DayNightDelegate {
      */
     public static final int MODE_NIGHT_UNSPECIFIED = -100;
 
+    private static Context sApplicationContext;
+
+    public static Context getApplicationContext() {
+        return sApplicationContext;
+    }
+
+    public static void setApplicationContext(Context applicationContext) {
+        sApplicationContext = applicationContext;
+    }
+
     @NightMode
     private static int sDefaultNightMode = MODE_NIGHT_UNSPECIFIED;
 
@@ -194,6 +204,7 @@ public class DayNightDelegate {
                 setLocalNightMode(saved);
             }
         }
+        ensureAutoManagers();
     }
 
     public void onSaveInstanceState(Bundle outState) {
@@ -254,8 +265,6 @@ public class DayNightDelegate {
         configuration.uiMode = newNightMode
                 | (configuration.uiMode & ~Configuration.UI_MODE_NIGHT_MASK);
 
-        ensureAutoManagers();
-
         mContext = activity;
 
         mApplyDayNightCalled = true;
@@ -276,7 +285,7 @@ public class DayNightDelegate {
     public void applyDayNight() {
         final int nightMode = calculateNightMode();
         final int modeToApply = mapNightMode(nightMode);
-        updateForNightMode(modeToApply);
+        updateForNightMode(mContext, modeToApply);
 
         mApplyDayNightCalled = true;
     }
@@ -320,8 +329,13 @@ public class DayNightDelegate {
             case MODE_NIGHT_FOLLOW_SYSTEM:
                 // If we're following the system, we just use the system default from the
                 // application context
-                return mContext.getApplicationContext()
-                        .getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                if (getApplicationContext() != null) {
+                    return getApplicationContext()
+                            .getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                } else {
+                    Log.d(TAG, "mapNightModeToFlag() | ApplicationContext not set");
+                    return Configuration.UI_MODE_NIGHT_NO;
+                }
         }
     }
 
@@ -329,8 +343,8 @@ public class DayNightDelegate {
      * Updates the {@link Resources} configuration {@code uiMode} with the
      * chosen {@code UI_MODE_NIGHT} value.
      */
-    private boolean updateForNightMode(@ApplyableNightMode final int mode) {
-        final Resources res = mContext.getResources();
+    private boolean updateForNightMode(Context context, @ApplyableNightMode final int mode) {
+        final Resources res = context.getResources();
         final Configuration conf = res.getConfiguration();
         final int currentNightMode = conf.uiMode & Configuration.UI_MODE_NIGHT_MASK;
 
@@ -343,8 +357,10 @@ public class DayNightDelegate {
                 }
                 // If we've already been created, we need to recreate the Activity for the
                 // mode to be applied
-                final Activity activity = (Activity) mContext;
-                activity.recreate();
+                if (context instanceof Activity) {
+                    final Activity activity = (Activity) context;
+                    activity.recreate();
+                }
             } else {
                 if (DEBUG) {
                     Log.d(TAG, "applyNightMode() | Night mode changed, updating configuration");
