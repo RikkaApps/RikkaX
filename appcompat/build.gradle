@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion target_sdk
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion target_sdk
+        versionCode 1
+        versionName rikka_appcompat_version
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_7
+        targetCompatibility = JavaVersion.VERSION_1_7
+    }
+    defaultConfig {
+        // This disables the builds tools automatic vector -> PNG generation
+        generatedDensities = []
+    }
+    sourceSets {
+        main.res.srcDirs += 'src/main/res-public'
+    }
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
+        noCompress 'ttf'
+    }
+    testOptions {
+        animationsDisabled = true
+    }
+}
+
+dependencies {
+    api("androidx.annotation:annotation:1.1.0")
+
+    api("androidx.core:core:1.1.0")
+    implementation("androidx.collection:collection:1.0.0")
+    api("androidx.cursoradapter:cursoradapter:1.0.0")
+    api("androidx.fragment:fragment:1.1.0")
+    api("androidx.appcompat:appcompat-resources:1.2.0-alpha01")
+    api("androidx.drawerlayout:drawerlayout:1.0.0")
+}
+
+project.ext {
+    mavProjectName = 'rikka.appcompat:appcompat'
+    mavLibraryDescription = 'Modified appcompt.'
+}
+
+group = 'rikka.appcompat'
+version = android.defaultConfig.versionName
+
+apply from: rootProject.file('publish.gradle')
