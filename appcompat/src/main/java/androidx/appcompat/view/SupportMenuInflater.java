@@ -414,11 +414,27 @@ public class SupportMenuInflater extends MenuInflater {
             itemChecked = a.getBoolean(R.styleable.MenuItem_android_checked, defaultItemChecked);
             itemVisible = a.getBoolean(R.styleable.MenuItem_android_visible, groupVisible);
             itemEnabled = a.getBoolean(R.styleable.MenuItem_android_enabled, groupEnabled);
-            itemShowAsAction = a.getInt(R.styleable.MenuItem_showAsAction, -1);
+            if (a.hasValue(R.styleable.MenuItem_android_showAsAction)) {
+                itemShowAsAction = a.getInt(R.styleable.MenuItem_android_showAsAction, -1);
+            } else {
+                itemShowAsAction = a.getInt(R.styleable.MenuItem_showAsAction, -1);
+            }
             itemListenerMethodName = a.getString(R.styleable.MenuItem_android_onClick);
-            itemActionViewLayout = a.getResourceId(R.styleable.MenuItem_actionLayout, 0);
-            itemActionViewClassName = a.getString(R.styleable.MenuItem_actionViewClass);
-            itemActionProviderClassName = a.getString(R.styleable.MenuItem_actionProviderClass);
+            if (a.hasValue(R.styleable.MenuItem_android_actionLayout)) {
+                itemActionViewLayout = a.getResourceId(R.styleable.MenuItem_android_actionLayout, 0);
+            } else {
+                itemActionViewLayout = a.getResourceId(R.styleable.MenuItem_actionLayout, 0);
+            }
+            if (a.hasValue(R.styleable.MenuItem_android_actionViewClass)) {
+                itemActionViewClassName = a.getString(R.styleable.MenuItem_android_actionViewClass);
+            } else {
+                itemActionViewClassName = a.getString(R.styleable.MenuItem_actionViewClass);
+            }
+            if (a.hasValue(R.styleable.MenuItem_android_actionProviderClass)) {
+                itemActionProviderClassName = a.getString(R.styleable.MenuItem_android_actionProviderClass);
+            } else {
+                itemActionProviderClassName = a.getString(R.styleable.MenuItem_actionProviderClass);
+            }
 
             final boolean hasActionProvider = itemActionProviderClassName != null;
             if (hasActionProvider && itemActionViewLayout == 0 && itemActionViewClassName == null) {
@@ -433,7 +449,11 @@ public class SupportMenuInflater extends MenuInflater {
                 itemActionProvider = null;
             }
 
-            itemContentDescription = a.getText(R.styleable.MenuItem_contentDescription);
+            if (a.hasValue(R.styleable.MenuItem_android_contentDescription)) {
+                itemContentDescription = a.getText(R.styleable.MenuItem_android_contentDescription);
+            } else {
+                itemContentDescription = a.getText(R.styleable.MenuItem_contentDescription);
+            }
             itemTooltipText = a.getText(R.styleable.MenuItem_tooltipText);
             if (a.hasValue(R.styleable.MenuItem_iconTintMode)) {
                 itemIconTintMode = DrawableUtils.parseTintMode(a.getInt(

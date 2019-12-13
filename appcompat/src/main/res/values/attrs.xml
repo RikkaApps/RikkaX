@@ -716,6 +716,7 @@
         <attr name="android:onClick" />
 
         <!-- How this item should display in the Action Bar, if present. -->
+        <attr name="android:showAsAction" />
         <attr name="showAsAction">
             <!-- Never show this item in an action bar, show it in the overflow menu instead.
                  Mutually exclusive with "ifRoom" and "always". -->
@@ -741,20 +742,24 @@
         <!-- An optional layout to be used as an action view.
              See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. -->
+        <attr name="android:actionLayout" />
         <attr name="actionLayout" format="reference" />
 
         <!-- The name of an optional View class to instantiate and use as an
              action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. -->
+        <attr name="android:actionViewClass" />
         <attr name="actionViewClass" format="string" />
 
         <!-- The name of an optional ActionProvider class to instantiate an action view
              and perform operations such as default action for that menu item.
              See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
              for more info. -->
+        <attr name="android:actionProviderClass" />
         <attr name="actionProviderClass" format="string" />
 
         <!-- The content description associated with the item. -->
+        <attr name="android:contentDescription" />
         <attr name="contentDescription" format="string"/>
 
         <!-- The tooltip text associated with the item. -->
