@@ -2,6 +2,6 @@
 <resources>
     <dimen name="design_activity_horizontal_margin">80dp</dimen>
 
-    <dimen name="design_toolbar_content_padding_start">104dp</dimen>
-    <dimen name="design_toolbar_content_padding_start_with_navigation">104dp</dimen>
+    <dimen name="rd_toolbar_content_padding_start">104dp</dimen>
+    <dimen name="rd_toolbar_content_padding_start_with_navigation">104dp</dimen>
 </resources>

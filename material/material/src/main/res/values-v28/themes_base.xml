@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Base.V28.Light" parent="Base.V27.Light">
-        <item name="android:dialogCornerRadius">8dp</item>
-        <item name="android:buttonCornerRadius">4dp</item>
+        <item name="android:dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
+        <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
 
     <style name="Base.V28" parent="Base.V27">
-        <item name="android:dialogCornerRadius">8dp</item>
-        <item name="android:buttonCornerRadius">4dp</item>
+        <item name="android:dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
+        <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
 
     <style name="Base.V28.Light.Dialog" parent="Base.Light.Dialog">
-        <item name="android:dialogCornerRadius">8dp</item>
-        <item name="android:buttonCornerRadius">4dp</item>
+        <item name="android:dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
+        <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
 
     <style name="Base.V28.Dialog" parent="Base.Dialog">
-        <item name="android:dialogCornerRadius">8dp</item>
-        <item name="android:buttonCornerRadius">4dp</item>
+        <item name="android:dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
+        <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
 
     <style name="Theme.Material.Light" parent="Base.V28.Light"/>

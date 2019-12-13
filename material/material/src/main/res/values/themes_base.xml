@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base themes -->
-    <style name="Base.Light" parent="Theme.AppCompat.Light">
-        <item name="android:colorPrimary">@color/primary_light</item>
-        <item name="android:colorPrimaryDark">@color/primary_dark_light</item>
+    <style name="Base.Light" parent="Theme.MaterialComponents.Light">
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
+        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:dividerVertical">?android:listDivider</item>
+        <item name="android:dividerHorizontal">?android:listDivider</item>
         <item name="android:colorBackground">@color/background_light</item>
-        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
-        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
-        <item name="android:listDivider">@drawable/list_divider</item>
-        <item name="android:dividerVertical">?android:listDivider</item>
-        <item name="android:dividerHorizontal">?android:listDivider</item>
 
+        <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
-        <item name="dialogCornerRadius">8dp</item>
-        <item name="toolbarStyle">@style/Widget.Material.Toolbar</item>
-        <item name="actionBarStyle">@style/Widget.Material.ActionBar</item>
 
         <item name="cardBackground">@color/cardview_light_background</item>
         <item name="colorAlert">@color/material_red_A200</item>
@@ -27,22 +24,20 @@
         <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline.Light</item>
         <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+        <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
     </style>
 
-    <style name="Base" parent="Theme.AppCompat">
-        <item name="android:colorPrimary">@color/primary_dark</item>
-        <item name="android:colorPrimaryDark">@color/primary_dark_dark</item>
+    <style name="Base" parent="Theme.MaterialComponents">
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
+        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:dividerVertical">?android:listDivider</item>
+        <item name="android:dividerHorizontal">?android:listDivider</item>
         <item name="android:colorBackground">@color/background_dark</item>
-        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
-        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
-        <item name="android:listDivider">@drawable/list_divider</item>
-        <item name="android:dividerVertical">?android:listDivider</item>
-        <item name="android:dividerHorizontal">?android:listDivider</item>
 
+        <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
-        <item name="dialogCornerRadius">8dp</item>
-        <item name="toolbarStyle">@style/Widget.Material.Toolbar</item>
-        <item name="actionBarStyle">@style/Widget.Material.ActionBar</item>
 
         <item name="cardBackground">@color/cardview_dark_background</item>
         <item name="colorAlert">@color/material_red_A100</item>
@@ -55,19 +50,18 @@
         <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline</item>
         <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+        <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
     </style>
 
-    <style name="Base.Light.Dialog" parent="Theme.AppCompat.Light.Dialog">
+    <style name="Base.Light.Dialog" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
         <item name="android:listDivider">@drawable/list_divider</item>
         <item name="android:dividerVertical">?android:listDivider</item>
         <item name="android:dividerHorizontal">?android:listDivider</item>
 
+        <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
-        <item name="dialogCornerRadius">8dp</item>
-        <item name="toolbarStyle">@style/Widget.Material.Toolbar</item>
-        <item name="actionBarStyle">@style/Widget.Material.ActionBar</item>
 
         <item name="cardBackground">@color/cardview_light_background</item>
         <item name="colorAlert">@color/material_red_A200</item>
@@ -80,19 +74,18 @@
         <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline.Light</item>
         <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+        <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
     </style>
 
-    <style name="Base.Dialog" parent="Theme.AppCompat.Dialog">
+    <style name="Base.Dialog" parent="Theme.MaterialComponents.Dialog">
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
         <item name="android:listDivider">@drawable/list_divider</item>
         <item name="android:dividerVertical">?android:listDivider</item>
         <item name="android:dividerHorizontal">?android:listDivider</item>
 
+        <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
-        <item name="dialogCornerRadius">8dp</item>
-        <item name="toolbarStyle">@style/Widget.Material.Toolbar</item>
-        <item name="actionBarStyle">@style/Widget.Material.ActionBar</item>
 
         <item name="cardBackground">@color/cardview_dark_background</item>
         <item name="colorAlert">@color/material_red_A100</item>
@@ -105,6 +98,7 @@
         <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline</item>
         <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+        <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
     </style>
 
     <!-- Theme for users -->
@@ -120,7 +114,7 @@
     <style name="Theme.Material.Light.DarkActionBar" parent="Theme.Material.Light">
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="actionBarWidgetTheme">@null</item>
-        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
 
         <!-- Panel attributes -->
         <item name="listChoiceBackgroundIndicator" tools:ignore="PrivateResource">@drawable/abc_list_selector_holo_dark</item>
@@ -130,4 +124,15 @@
     </style>
 
     <style name="Theme.Material.Light.LightStatusBar" parent="Theme.Material.Light" />
+
+    <!-- Components -->
+    <style name="Widget.Material.ActionBar.Solid" parent="Widget.MaterialComponents.ActionBar.Solid">
+        <item name="contentInsetStart">@dimen/rd_toolbar_content_padding_start</item>
+        <item name="contentInsetStartWithNavigation">@dimen/rd_toolbar_content_padding_start_with_navigation</item>
+    </style>
+
+    <style name="Widget.Material.ActionBar.Surface" parent="Widget.MaterialComponents.ActionBar.Surface">
+        <item name="contentInsetStart">@dimen/rd_toolbar_content_padding_start</item>
+        <item name="contentInsetStartWithNavigation">@dimen/rd_toolbar_content_padding_start_with_navigation</item>
+    </style>
 </resources>

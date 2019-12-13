@@ -6,7 +6,7 @@
     <color name="navigation_bar_light">@color/background_light</color>
     <color name="primary_dark_light_light_status_bar">@color/material_grey_300</color>
 
-    <color name="background_dark">@color/material_grey_850</color>
+    <color name="background_dark">#ff212121</color>
     <color name="primary_dark">@color/material_grey_900</color>
     <color name="primary_dark_dark">#101010</color>
     <color name="navigation_bar_dark">@color/background_dark</color>

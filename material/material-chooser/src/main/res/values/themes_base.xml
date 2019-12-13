@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.Light.Resolver">
+    <style name="Base.Light.Resolver" parent="Theme.Material.Light">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:backgroundDimEnabled">true</item>
@@ -12,11 +13,14 @@
         <item name="android:colorControlActivated">?android:colorControlHighlight</item>
         <item name="android:colorBackground">@android:color/white</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
-    <style name="Base.Resolver">
+    <style name="Base.Resolver" parent="Theme.Material">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:backgroundDimEnabled">true</item>
@@ -25,6 +29,8 @@
         <item name="android:colorControlActivated">?android:colorControlHighlight</item>
         <item name="android:colorBackground">#3c4043</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <!-- Theme for users -->

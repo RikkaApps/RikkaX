@@ -31,6 +31,10 @@
         <attr name="borderViewStyle" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="MaterialComponentsExpand">
+        <attr name="materialButtonHorizontalMarginAmend" format="dimension" />
+    </declare-styleable>
+
     <declare-styleable name="RaisedView">
         <attr name="state_raised" format="boolean" />
     </declare-styleable>

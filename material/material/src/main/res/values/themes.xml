@@ -45,16 +45,6 @@
         <item name="android:paddingEnd">16dp</item>
     </style>
 
-    <style name="Widget.Material.Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="titleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Title</item>
-        <item name="subtitleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle</item>
-    </style>
-
-    <style name="Widget.Material.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
-        <item name="contentInsetStart">@dimen/design_toolbar_content_padding_start</item>
-        <item name="contentInsetStartWithNavigation">@dimen/design_toolbar_content_padding_start_with_navigation</item>
-    </style>
-
     <style name="Widget.Material.BorderView" parent="android:Widget">
         <item name="borderTopDrawable">?android:dividerVertical</item>
         <item name="borderBottomDrawable">?android:dividerVertical</item>

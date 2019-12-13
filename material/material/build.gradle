@@ -24,6 +24,10 @@ android {
     }
 }
 
+configurations.all {
+    exclude group: 'androidx.appcompat', module: 'appcompat'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -31,7 +35,9 @@ dependencies {
     implementation "androidx.interpolator:interpolator:$androidx_interpolator_version"
     api "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     api "androidx.swiperefreshlayout:swiperefreshlayout:$androidx_swiperefreshlayout_version"
-    implementation "rikka.appcompat:appcompat:$rikka_appcompat_version"
+    api 'com.google.android.material:material:1.2.0-alpha02'
+
+    api "rikka.appcompat:appcompat:$rikka_appcompat_version"
     implementation "rikka.core:core:$rikka_core_version"
 
     testImplementation 'junit:junit:4.12'
