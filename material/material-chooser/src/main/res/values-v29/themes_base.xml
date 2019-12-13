@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.V29.Light.Resolver" parent="Base.V27.Light.Resolver">
+        <item name="android:enforceNavigationBarContrast">true</item>
+    </style>
+
+    <style name="Base.V29.Resolver" parent="Base.V27.Resolver">
+        <item name="android:enforceNavigationBarContrast">true</item>
+    </style>
+
+    <style name="Theme.Material.Light.Resolver" parent="Base.V29.Light.Resolver"/>
+    <style name="Theme.Material.Resolver" parent="Base.V29.Resolver"/>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PreferenceThemeOverlay.Help" parent="PreferenceThemeOverlay">
+        <item name="preferenceCategoryStyle">@style/Preference.Help.Category</item>
+        <item name="preferenceStyle">@style/Preference.Help</item>
+    </style>
+
+    <style name="Preference.Help.Category" parent="Preference.Category.Material">
+        <item name="android:layout">@layout/helplib_header</item>
+    </style>
+
+    <style name="Preference.Help" parent="Preference.Material">
+        <item name="android:layout">@layout/helplib_item</item>
+    </style>
+
+    <style name="Widget.Material.Help.Header" parent="">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:paddingStart">?android:listPreferredItemPaddingStart</item>
+        <item name="android:paddingEnd">?android:listPreferredItemPaddingEnd</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+</resources>

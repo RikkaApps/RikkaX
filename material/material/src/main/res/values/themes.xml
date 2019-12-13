@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Material.Widget.SwitchBar.Switch" parent="android:Widget">
+        <item name="android:colorAccent">?android:textColorPrimaryInverse</item>
+    </style>
+
+    <style name="Widget.Material.SwitchBar.Light" parent="Widget.Material.SwitchBar">
+        <item name="android:textColor">@color/switchbar_text_light</item>
+    </style>
+
+    <style name="Widget.Material.SwitchBar" parent="android:Widget">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">?android:actionBarSize</item>
+        <item name="android:background">@drawable/switchbar_background</item>
+        <item name="android:foreground">?android:selectableItemBackground</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:textColor">@color/switchbar_text_dark</item>
+    </style>
+
+    <style name="Widget.Material.Button.Outline" parent="android:Widget.Material.Button.Borderless">
+        <item name="android:stateListAnimator">@animator/material_button_outline_state_list_animator</item>
+        <item name="android:background">?outlineButtonBackground</item>
+        <item name="android:foreground">?outlineButtonForeground</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:textColor">?android:colorAccent</item>
+    </style>
+
+    <style name="Widget.Material.Button.Outline.Light" parent="android:Widget.Material.Button.Borderless">
+        <item name="android:stateListAnimator">@animator/material_button_outline_state_list_animator</item>
+        <item name="android:background">?outlineButtonBackground</item>
+        <item name="android:foreground">?outlineButtonForeground</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="Widget.Material.Toolbar" parent="android:Widget.Material.Toolbar">
+        <item name="android:titleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Title</item>
+        <item name="android:subtitleTextAppearance">@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle</item>
+    </style>
+
+    <style name="Widget.Material.ActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
+        <item name="android:contentInsetStart">@dimen/design_toolbar_content_padding_start</item>
+        <item name="android:paddingEnd">@dimen/design_toolbar_padding_end</item>
+    </style>
+
+    <style name="Widget.Material.BorderView" parent="android:Widget">
+        <item name="borderTopDrawable">?android:dividerVertical</item>
+        <item name="borderBottomDrawable">?android:dividerVertical</item>
+        <item name="borderTopStyle">whenContentScrolled</item>
+        <item name="borderBottomStyle">whenContentScrolled</item>
+    </style>
+
+    <style name="ThemeOverlay" />
+
+</resources>

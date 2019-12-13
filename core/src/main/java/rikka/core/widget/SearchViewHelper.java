@@ -3,6 +3,7 @@ package rikka.core.widget;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class SearchViewHelper {
 
@@ -55,27 +56,53 @@ public class SearchViewHelper {
             }
         });
 
-        android.widget.SearchView searchView = (android.widget.SearchView) item.getActionView();
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+        View actionView = item.getActionView();
+        if (actionView instanceof android.widget.SearchView) {
+            android.widget.SearchView searchView = (android.widget.SearchView) actionView;
+            searchView.setMaxWidth(Integer.MAX_VALUE);
+            searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    o.onSearchTextChange(newText);
+
+                    mKeyword = newText;
+                    return false;
+                }
+            });
+
+            if (mIsSearching) {
+                String keyword = mKeyword;
+                item.expandActionView();
+                searchView.setQuery(keyword, false);
             }
+        } else if (actionView instanceof androidx.appcompat.widget.SearchView) {
+            androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) actionView;
+            searchView.setMaxWidth(Integer.MAX_VALUE);
+            searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                o.onSearchTextChange(newText);
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    o.onSearchTextChange(newText);
 
-                mKeyword = newText;
-                return false;
+                    mKeyword = newText;
+                    return false;
+                }
+            });
+
+            if (mIsSearching) {
+                String keyword = mKeyword;
+                item.expandActionView();
+                searchView.setQuery(keyword, false);
             }
-        });
-
-        if (mIsSearching) {
-            String keyword = mKeyword;
-            item.expandActionView();
-            searchView.setQuery(keyword, false);
         }
     }
 

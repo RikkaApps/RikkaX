@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="rikka.material.chooser">
+
+    <application>
+        <activity
+            android:name=".ChooserActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:theme="@style/Theme.Material.Resolver.DayNight" />
+    </application>
+</manifest>

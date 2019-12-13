@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base themes -->
+    <style name="Base.Light" parent="Theme.AppCompat.Light">
+        <item name="android:colorPrimary">@color/primary_light</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark_light</item>
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
+        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:toolbarStyle">@style/Widget.Material.Toolbar</item>
+        <item name="android:actionBarStyle">@style/Widget.Material.ActionBar</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:dividerVertical">?android:listDivider</item>
+        <item name="android:dividerHorizontal">?android:listDivider</item>
+
+        <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
+        <item name="dialogCornerRadius">8dp</item>
+
+        <item name="cardBackground">@color/cardview_light_background</item>
+        <item name="colorAlert">@color/material_red_A200</item>
+        <item name="colorSafe">@color/material_green_600</item>
+        <item name="colorWarning">@color/material_orange_700</item>
+        <item name="colorInactive" tools:ignore="PrivateResource">@color/material_grey_600</item>
+        <item name="switchBarStyle">@style/Widget.Material.SwitchBar.Light</item>
+        <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
+        <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
+        <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline.Light</item>
+        <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
+        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+    </style>
+
+    <style name="Base" parent="Theme.AppCompat">
+        <item name="android:colorPrimary">@color/primary_dark</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark_dark</item>
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
+        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:toolbarStyle">@style/Widget.Material.Toolbar</item>
+        <item name="android:actionBarStyle">@style/Widget.Material.ActionBar</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:dividerVertical">?android:listDivider</item>
+        <item name="android:dividerHorizontal">?android:listDivider</item>
+
+        <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
+        <item name="dialogCornerRadius">8dp</item>
+
+        <item name="cardBackground">@color/cardview_dark_background</item>
+        <item name="colorAlert">@color/material_red_A100</item>
+        <item name="colorSafe">@color/material_green_A100</item>
+        <item name="colorWarning">@color/material_orange_A100</item>
+        <item name="colorInactive">@color/material_grey_500</item>
+        <item name="switchBarStyle">@style/Widget.Material.SwitchBar</item>
+        <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
+        <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
+        <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline</item>
+        <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
+        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+    </style>
+
+    <style name="Base.Light.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
+        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:toolbarStyle">@style/Widget.Material.Toolbar</item>
+        <item name="android:actionBarStyle">@style/Widget.Material.ActionBar</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:dividerVertical">?android:listDivider</item>
+        <item name="android:dividerHorizontal">?android:listDivider</item>
+
+        <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
+        <item name="dialogCornerRadius">8dp</item>
+
+        <item name="cardBackground">@color/cardview_light_background</item>
+        <item name="colorAlert">@color/material_red_A200</item>
+        <item name="colorSafe">@color/material_green_600</item>
+        <item name="colorWarning">@color/material_orange_700</item>
+        <item name="colorInactive" tools:ignore="PrivateResource">@color/material_grey_600</item>
+        <item name="switchBarStyle">@style/Widget.Material.SwitchBar.Light</item>
+        <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
+        <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
+        <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline.Light</item>
+        <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
+        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+    </style>
+
+    <style name="Base.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
+        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
+        <item name="android:toolbarStyle">@style/Widget.Material.Toolbar</item>
+        <item name="android:actionBarStyle">@style/Widget.Material.ActionBar</item>
+        <item name="android:listDivider">@drawable/list_divider</item>
+        <item name="android:dividerVertical">?android:listDivider</item>
+        <item name="android:dividerHorizontal">?android:listDivider</item>
+
+        <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
+        <item name="dialogCornerRadius">8dp</item>
+
+        <item name="cardBackground">@color/cardview_dark_background</item>
+        <item name="colorAlert">@color/material_red_A100</item>
+        <item name="colorSafe">@color/material_green_A100</item>
+        <item name="colorWarning">@color/material_orange_A100</item>
+        <item name="colorInactive">@color/material_grey_500</item>
+        <item name="switchBarStyle">@style/Widget.Material.SwitchBar</item>
+        <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
+        <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
+        <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline</item>
+        <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
+        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
+    </style>
+
+    <!-- Theme for users -->
+    <style name="Theme.Material.Light" parent="Base.Light" />
+
+    <style name="Theme.Material.Light.Dialog" parent="Base.Light.Dialog" />
+
+    <style name="Theme.Material" parent="Base" />
+
+    <style name="Theme.Material.Dialog" parent="Base.Dialog" />
+
+    <!-- Light theme variants -->
+    <style name="Theme.Material.Light.DarkActionBar" parent="Theme.Material.Light">
+        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="actionBarWidgetTheme">@null</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+
+        <!-- Panel attributes -->
+        <item name="listChoiceBackgroundIndicator" tools:ignore="PrivateResource">@drawable/abc_list_selector_holo_dark</item>
+
+        <item name="colorPrimaryDark" tools:ignore="PrivateResource">@color/primary_dark_material_dark</item>
+        <item name="colorPrimary" tools:ignore="PrivateResource">@color/primary_material_dark</item>
+    </style>
+
+    <style name="Theme.Material.Light.LightStatusBar" parent="Theme.Material.Light" />
+</resources>
