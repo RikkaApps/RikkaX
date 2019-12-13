@@ -355,9 +355,10 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
         mBaseContextAttached = true;
 
-        if (Build.VERSION.SDK_INT >= 17) {
+        int nightMode = calculateNightMode();
+        if (Build.VERSION.SDK_INT >= 17 && nightMode != MODE_NIGHT_UNSPECIFIED) {
             @ApplyableNightMode final int modeToApply = mapNightMode(baseContext,
-                    calculateNightMode());
+                    nightMode);
             final Configuration config = createOverrideConfigurationForDayNight(
                     baseContext, modeToApply, configOverlay);
 
@@ -2206,6 +2207,9 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         }
 
         @NightMode final int nightMode = calculateNightMode();
+        if (nightMode == MODE_NIGHT_UNSPECIFIED) {
+            return false;
+        }
         @ApplyableNightMode final int modeToApply = mapNightMode(mContext, nightMode);
         final boolean applied = updateForNightMode(modeToApply, allowRecreation);
 
