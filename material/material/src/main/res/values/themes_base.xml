@@ -10,6 +10,7 @@
         <item name="android:dividerHorizontal">?android:listDivider</item>
         <item name="android:colorBackground">@color/background_light</item>
 
+        <item name="actionBarStyle">@style/Widget.Material.ActionBar.Solid</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
 
@@ -36,6 +37,7 @@
         <item name="android:dividerHorizontal">?android:listDivider</item>
         <item name="android:colorBackground">@color/background_dark</item>
 
+        <item name="actionBarStyle">@style/Widget.Material.ActionBar.Surface</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
 
@@ -60,6 +62,7 @@
         <item name="android:dividerVertical">?android:listDivider</item>
         <item name="android:dividerHorizontal">?android:listDivider</item>
 
+        <item name="actionBarStyle">@style/Widget.Material.ActionBar.Solid</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
 
@@ -84,6 +87,7 @@
         <item name="android:dividerVertical">?android:listDivider</item>
         <item name="android:dividerHorizontal">?android:listDivider</item>
 
+        <item name="actionBarStyle">@style/Widget.Material.ActionBar.Surface</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
 
