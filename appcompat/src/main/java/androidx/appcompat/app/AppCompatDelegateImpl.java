@@ -452,11 +452,6 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
     @Override
     public void setSupportActionBar(Toolbar toolbar) {
-        if (!(mHost instanceof Activity)) {
-            // Only Activities support custom Action Bars
-            return;
-        }
-
         final ActionBar ab = getSupportActionBar();
         if (ab instanceof WindowDecorActionBar) {
             throw new IllegalStateException("This Activity already has an action bar supplied " +
