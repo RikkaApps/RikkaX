@@ -2,5 +2,6 @@
 <resources>
     <style name="Theme.Material.Light.LightStatusBar" parent="Theme.Material.Light">
         <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimaryVariant">@color/primary_dark_light_light_status_bar</item>
     </style>
 </resources>
