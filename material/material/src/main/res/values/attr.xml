@@ -21,6 +21,7 @@
 
         <!-- Style for SwitchBar -->
         <attr name="switchBarStyle" format="reference" />
+        <attr name="switchBarTheme" format="reference" />
         <attr name="switchBarBackgroundNormal" format="color" />
         <attr name="switchBarBackgroundDisabled" format="color" />
 

@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="android.widget.LinearLayout">
 
     <TextView
         android:id="@android:id/text1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_marginStart="@dimen/switchbar_text_padding"
-        android:textColor="?android:textColorPrimaryInverse"
-        android:textAppearance="?android:textAppearanceMediumInverse"
+        android:layout_weight="1"
+        android:duplicateParentState="true"
+        android:ellipsize="end"
         android:fontFamily="sans-serif-medium"
         android:maxLines="2"
-        android:ellipsize="end"
-        android:duplicateParentState="true"
-        android:textAlignment="viewStart"/>
+        android:textAlignment="viewStart"
+        android:textAppearance="?android:textAppearanceMediumInverse"
+        android:textColor="?android:textColorPrimaryInverse" />
 
     <Switch
         android:id="@android:id/toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:clickable="false"
-        android:focusable="false"
         android:background="@null"
+        android:clickable="false"
         android:duplicateParentState="true"
-        android:theme="@style/Theme.Material.Widget.SwitchBar.Switch"/>
+        android:focusable="false"
+        android:theme="?switchBarTheme"/>
 
 </merge>

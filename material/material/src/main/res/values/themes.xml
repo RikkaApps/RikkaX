@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Material.Widget.SwitchBar.Switch" parent="android:Widget">
-        <item name="android:colorAccent">?android:textColorPrimaryInverse</item>
+    <style name="ThemeOverlay.Material.SwitchBar" parent="android:Widget">
+        <item name="colorControlActivated">?android:textColorPrimaryInverse</item>
     </style>
 
     <style name="Widget.Material.SwitchBar.Light" parent="Widget.Material.SwitchBar">
@@ -10,6 +10,7 @@
     </style>
 
     <style name="Widget.Material.SwitchBar" parent="android:Widget">
+        <item name="android:theme">?switchBarTheme</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:minHeight">?android:actionBarSize</item>
