@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import java.util.Objects;
 
-class FitsSystemWindowsChildDelegate {
+public class FitsSystemWindowsChildDelegate {
 
     private int mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom;
     private View mView;
@@ -15,7 +15,7 @@ class FitsSystemWindowsChildDelegate {
     @Nullable
     private WindowInsets mLastInsets;
 
-    FitsSystemWindowsChildDelegate(View view) {
+    public FitsSystemWindowsChildDelegate(View view) {
         mView = view;
         mView.setOnApplyWindowInsetsListener((v, insets) -> onWindowInsetChanged(insets));
 
