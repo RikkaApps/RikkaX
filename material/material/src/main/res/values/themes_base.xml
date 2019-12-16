@@ -15,6 +15,8 @@
         <item name="actionBarStyle">@style/Widget.Material.ActionBar.Solid</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
+        <item name="dialogTheme">@style/ThemeOverlay.Material.Dialog</item>
+        <item name="alertDialogTheme">@style/ThemeOverlay.Material.Dialog.Alert</item>
 
         <item name="cardBackground">@color/cardview_light_background</item>
         <item name="colorAlert">@color/material_red_A200</item>
@@ -45,6 +47,8 @@
         <item name="actionBarStyle">@style/Widget.Material.ActionBar.Surface</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
+        <item name="dialogTheme">@style/ThemeOverlay.Material.Dialog</item>
+        <item name="alertDialogTheme">@style/ThemeOverlay.Material.Dialog.Alert</item>
 
         <item name="cardBackground">@color/cardview_dark_background</item>
         <item name="colorAlert">@color/material_red_A100</item>
@@ -73,6 +77,8 @@
         <item name="actionBarStyle">@style/Widget.Material.ActionBar.Solid</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
+        <item name="dialogTheme">@style/ThemeOverlay.Material.Dialog</item>
+        <item name="alertDialogTheme">@style/ThemeOverlay.Material.Dialog.Alert</item>
 
         <item name="cardBackground">@color/cardview_light_background</item>
         <item name="colorAlert">@color/material_red_A200</item>
@@ -101,6 +107,8 @@
         <item name="actionBarStyle">@style/Widget.Material.ActionBar.Surface</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
+        <item name="dialogTheme">@style/ThemeOverlay.Material.Dialog</item>
+        <item name="alertDialogTheme">@style/ThemeOverlay.Material.Dialog.Alert</item>
 
         <item name="cardBackground">@color/cardview_dark_background</item>
         <item name="colorAlert">@color/material_red_A100</item>
@@ -141,14 +149,4 @@
 
     <style name="Theme.Material.Light.LightStatusBar" parent="Theme.Material.Light" />
 
-    <!-- Components -->
-    <style name="Widget.Material.ActionBar.Solid" parent="Widget.MaterialComponents.ActionBar.Solid">
-        <item name="contentInsetStart">@dimen/rd_toolbar_content_padding_start</item>
-        <item name="contentInsetStartWithNavigation">@dimen/rd_toolbar_content_padding_start_with_navigation</item>
-    </style>
-
-    <style name="Widget.Material.ActionBar.Surface" parent="Widget.MaterialComponents.ActionBar.Surface">
-        <item name="contentInsetStart">@dimen/rd_toolbar_content_padding_start</item>
-        <item name="contentInsetStartWithNavigation">@dimen/rd_toolbar_content_padding_start_with_navigation</item>
-    </style>
 </resources>

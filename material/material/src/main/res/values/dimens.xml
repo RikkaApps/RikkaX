@@ -22,4 +22,11 @@
 
     <dimen name="rd_material_button_horizontal_margin_amend">-8dp</dimen>
 
+    <dimen name="rd_material_dialog_default_elevation">24dp</dimen>
+    <item type="dimen" format="float" name="rd_material_dialog_default_dim_amount">0.54</item>
+    <integer name="rd_material_dialog_enter_alpha_anim_duration">150</integer>
+    <integer name="rd_material_dialog_enter_scale_anim_duration">225</integer>
+    <integer name="rd_material_dialog_exit_alpha_anim_duration">150</integer>
+    <integer name="rd_material_dialog_exit_scale_anim_duration">150</integer>
+
 </resources>
