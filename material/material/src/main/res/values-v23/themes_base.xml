@@ -4,4 +4,33 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="colorPrimaryVariant">@color/primary_dark_light_light_status_bar</item>
     </style>
+
+    <style name="Base.V23.Light" parent="Base.Light">
+        <item name="android:dialogTheme">@style/ThemeOverlay.Platform.Dialog</item>
+        <item name="android:alertDialogTheme">@style/ThemeOverlay.Platform.Dialog.Alert</item>
+    </style>
+
+    <style name="Base.V23" parent="Base">
+        <item name="android:dialogTheme">@style/ThemeOverlay.Platform.Dialog</item>
+        <item name="android:alertDialogTheme">@style/ThemeOverlay.Platform.Dialog.Alert</item>
+    </style>
+
+    <style name="Base.V23.Light.Dialog" parent="Base.Light.Dialog">
+        <item name="android:dialogTheme">@style/ThemeOverlay.Platform.Dialog</item>
+        <item name="android:alertDialogTheme">@style/ThemeOverlay.Platform.Dialog.Alert</item>
+    </style>
+
+    <style name="Base.V23.Dialog" parent="Base.Dialog">
+        <item name="android:dialogTheme">@style/ThemeOverlay.Platform.Dialog</item>
+        <item name="android:alertDialogTheme">@style/ThemeOverlay.Platform.Dialog.Alert</item>
+    </style>
+
+    <style name="Theme.Material.Light" parent="Base.V23.Light" />
+
+    <style name="Theme.Material" parent="Base.V23" />
+
+    <style name="Theme.Material.Light.Dialog" parent="Base.V23.Light.Dialog" />
+
+    <style name="Theme.Material.Dialog" parent="Base.V23.Dialog" />
+
 </resources>

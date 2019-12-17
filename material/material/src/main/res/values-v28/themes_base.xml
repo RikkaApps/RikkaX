@@ -10,12 +10,12 @@
         <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
 
-    <style name="Base.V28.Light.Dialog" parent="Base.Light.Dialog">
+    <style name="Base.V28.Light.Dialog" parent="Base.V23.Light.Dialog">
         <item name="android:dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
 
-    <style name="Base.V28.Dialog" parent="Base.Dialog">
+    <style name="Base.V28.Dialog" parent="Base.V23.Dialog">
         <item name="android:dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
