@@ -17,6 +17,44 @@
         <item name="android:windowAnimationStyle">@style/Animation.Material.Dialog</item>
         <item name="android:windowElevation">@dimen/rd_material_dialog_default_elevation</item>
         <item name="android:backgroundDimAmount">@dimen/rd_material_dialog_default_dim_amount</item>
+
+        <item name="alertDialogStyle">@style/AlertDialog.Material</item>
+        <item name="android:checkedTextViewStyle">@style/Widget.MaterialComponents.CheckedTextView</item>
+        <item name="buttonBarButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush</item>
+
+        <item name="materialAlertDialogBodyTextStyle">@style/AlertDialog.Material.Body.Text</item>
+        <item name="materialAlertDialogTitlePanelStyle">@style/MaterialAlertDialog.MaterialComponents.Title.Panel</item>
+        <item name="materialAlertDialogTitleIconStyle">@style/MaterialAlertDialog.MaterialComponents.Title.Icon</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/AlertDialog.Material.Title.Text</item>
+    </style>
+
+    <style name="AlertDialog.Material" parent="AlertDialog.AppCompat">
+        <item name="android:layout">@layout/rd_alert_dialog</item>
+        <item name="listItemLayout">@layout/mtrl_alert_select_dialog_item</item>
+        <item name="multiChoiceItemLayout">@layout/mtrl_alert_select_dialog_multichoice</item>
+        <item name="singleChoiceItemLayout">@layout/mtrl_alert_select_dialog_singlechoice</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceMediumComponent</item>
+    </style>
+
+    <style name="AlertDialog.Material.Body.Text" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textAppearance">?textAppearanceBody2</item>
+        <item name="android:textColor">@color/material_on_surface_emphasis_medium</item>
+    </style>
+
+    <style name="AlertDialog.Material.Title.Text" parent="RtlOverlay.DialogWindowTitle.AppCompat">
+        <item name="android:textAppearance">?textAppearanceSubtitle1</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/material_on_surface_emphasis_high_type</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:layout_gravity">start|center_vertical</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
     </style>
 
 </resources>
