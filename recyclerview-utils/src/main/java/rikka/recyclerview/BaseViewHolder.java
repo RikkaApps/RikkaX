@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
@@ -80,10 +80,10 @@ public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
     }
 
     public final void recycle() {
+        onRecycle();
+
         mData = null;
         mAdapter = null;
-
-        onRecycle();
     }
 
     public void onRecycle() {
