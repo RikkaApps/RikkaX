@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion target_sdk
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion target_sdk
+        versionCode 1
+        versionName rikka_annotations_version
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+ext {
+    libraryName = 'Annotation'
+    libraryDescription = 'Annotations'
+    libraryVersion = android.defaultConfig.versionName
+    artifact = project.name
+    bintrayName = project.name
+}
+
+project.ext {
+    mavProjectName = 'rikka.annotation:annotation'
+    mavLibraryDescription = 'Annotations'
+}
+
+group = 'rikka.annotation'
+version = android.defaultConfig.versionName
+
+apply from: rootProject.file('publish.gradle')
