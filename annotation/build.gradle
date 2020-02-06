@@ -6,7 +6,7 @@ android {
         minSdkVersion 14
         targetSdkVersion target_sdk
         versionCode 1
-        versionName rikka_annotations_version
+        versionName rikka_annotation_version
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildTypes {
