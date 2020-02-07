@@ -21,14 +21,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-ext {
-    libraryName = 'Annotation'
-    libraryDescription = 'Annotations'
-    libraryVersion = android.defaultConfig.versionName
-    artifact = project.name
-    bintrayName = project.name
-}
-
 project.ext {
     mavProjectName = 'rikka.annotation:annotation'
     mavLibraryDescription = 'Annotations'

@@ -11,7 +11,7 @@
 
     <dimen name="app_bar_elevation">4dp</dimen>
 
-    <dimen name="design_activity_horizontal_margin">0dp</dimen>
+    <dimen name="rd_activity_horizontal_margin">0dp</dimen>
 
     <dimen name="rd_toolbar_content_padding_start">16dp</dimen>
     <dimen name="rd_toolbar_content_padding_start_with_navigation">72dp</dimen>

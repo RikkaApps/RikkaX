@@ -30,6 +30,12 @@
         <attr name="outlineButtonForeground" format="reference" />
 
         <attr name="borderViewStyle" format="reference" />
+
+        <attr name="appBarStyle" format="reference" />
+
+        <attr name="toolbarColor" format="color|reference" />
+
+        <attr name="notificationColor" format="color|reference" />
     </declare-styleable>
 
     <declare-styleable name="MaterialComponentsExpand">
