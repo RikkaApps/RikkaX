@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import rikka.material.R;
 
-public class BorderScrollView extends FitsSystemWindowsNestedScrollView implements BorderView {
+public class BorderScrollView extends NestedScrollView implements BorderView {
 
     private BorderViewDelegate mBorderViewDelegate;
 

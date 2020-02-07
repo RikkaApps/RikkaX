@@ -45,6 +45,7 @@ public class AppBarLayout extends LinearLayout implements RaisedView {
         setOrientation(VERTICAL);
 
         setOnApplyWindowInsetsListener((v, insets) -> onWindowInsetChanged(insets));
+        requestApplyInsets();
     }
 
     WindowInsets onWindowInsetChanged(final WindowInsets insets) {

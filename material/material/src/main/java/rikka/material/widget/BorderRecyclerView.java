@@ -6,12 +6,13 @@ import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
 import rikka.material.R;
 
-public class BorderRecyclerView extends FitsSystemWindowsRecyclerView implements BorderView {
+public class BorderRecyclerView extends RecyclerView implements BorderView {
 
     private BorderViewDelegate mBorderViewDelegate;
 

@@ -63,4 +63,28 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="WindowInsetsHelper">
+        <attr name="systemUiVisibility" format="flags">
+            <flag name="LAYOUT_STABLE" value="256" />
+            <flag name="LAYOUT_FULLSCREEN" value="1024" />
+            <flag name="LAYOUT_HIDE_NAVIGATION" value="512" />
+        </attr>
+        <attr name="systemWindowsInsetsStart" format="flags">
+            <flag name="padding" value="1" />
+            <flag name="consume" value="2" />
+        </attr>
+        <attr name="systemWindowsInsetsTop" format="flags">
+            <flag name="padding" value="1" />
+            <flag name="consume" value="2" />
+        </attr>
+        <attr name="systemWindowsInsetsEnd" format="flags">
+            <flag name="padding" value="1" />
+            <flag name="consume" value="2" />
+        </attr>
+        <attr name="systemWindowsInsetsBottom" format="flags">
+            <flag name="padding" value="1" />
+            <flag name="consume" value="2" />
+        </attr>
+    </declare-styleable>
+
 </resources>

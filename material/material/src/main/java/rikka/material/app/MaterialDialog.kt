@@ -3,8 +3,8 @@ package rikka.material.app
 import android.app.ActionBar
 import android.content.Context
 import android.content.DialogInterface
+import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.Window
 import androidx.appcompat.app.AppCompatDialog
@@ -20,6 +20,20 @@ open class MaterialDialog : AppCompatDialog, AppBarOwner, TranslucentSystemBars 
     constructor(context: Context) : super(context)
     constructor(context: Context, themeResId: Int) : super(context, themeResId)
     constructor(context: Context, cancelable: Boolean, cancelListener: DialogInterface.OnCancelListener?) : super(context, cancelable, cancelListener)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (parent is TranslucentSystemBars) {
+            if ((parent as TranslucentSystemBars).shouldApplyTranslucentSystemBars()) {
+                (parent as TranslucentSystemBars).onApplyTranslucentSystemBars()
+            }
+        } else {
+            if (shouldApplyTranslucentSystemBars()) {
+                onApplyTranslucentSystemBars()
+            }
+        }
+    }
 
     override fun getAppBar(): AppBar? {
         return appBar
@@ -86,17 +100,5 @@ open class MaterialDialog : AppCompatDialog, AppBarOwner, TranslucentSystemBars 
             return
         }
         super.onOptionsMenuClosed(menu)
-    }
-
-    override fun onAttachedToWindow() {
-        if (parent is TranslucentSystemBars) {
-            if ((parent as TranslucentSystemBars).shouldApplyTranslucentSystemBars()) {
-                (parent as TranslucentSystemBars).onApplyTranslucentSystemBars()
-            }
-        } else {
-            if (shouldApplyTranslucentSystemBars()) {
-                onApplyTranslucentSystemBars()
-            }
-        }
     }
 }
