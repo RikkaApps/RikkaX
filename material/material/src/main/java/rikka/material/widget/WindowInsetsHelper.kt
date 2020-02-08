@@ -10,10 +10,6 @@ import rikka.material.R
 
 open class WindowInsetsHelper private constructor(
         private val view: View,
-        private var initialPaddingLeft: Int = view.paddingLeft,
-        private var initialPaddingTop: Int = view.paddingTop,
-        private var initialPaddingRight: Int = view.paddingRight,
-        private var initialPaddingBottom: Int = view.paddingBottom,
         private val paddingSystemWindowsInsetsStart: Boolean,
         private val paddingSystemWindowsInsetsTop: Boolean,
         private val paddingSystemWindowsInsetsEnd: Boolean,
@@ -22,6 +18,18 @@ open class WindowInsetsHelper private constructor(
         private val consumeSystemWindowsInsetsTop: Boolean,
         private val consumeSystemWindowsInsetsEnd: Boolean,
         private val consumeSystemWindowsInsetsBottom: Boolean) : OnApplyWindowInsetsListener {
+
+    var initialPaddingLeft: Int = view.paddingLeft
+        private set
+
+    var initialPaddingTop: Int = view.paddingTop
+        private set
+
+    var initialPaddingRight: Int = view.paddingRight
+        private set
+
+    var initialPaddingBottom: Int = view.paddingBottom
+        private set
 
     private var lastInsets: WindowInsetsCompat? = null
 
@@ -82,7 +90,7 @@ open class WindowInsetsHelper private constructor(
     companion object {
 
         @JvmStatic
-        fun attach(view: View, attrs: AttributeSet): WindowInsetsHelper? {
+        fun attach(view: View, attrs: AttributeSet) {
             val a = view.context.obtainStyledAttributes(attrs, R.styleable.WindowInsetsHelper, 0, 0)
             val systemUiVisibility = a.getInt(R.styleable.WindowInsetsHelper_systemUiVisibility, Int.MIN_VALUE)
             val systemWindowsInsetsStart = a.getInt(R.styleable.WindowInsetsHelper_systemWindowsInsetsStart, 0)
@@ -91,7 +99,7 @@ open class WindowInsetsHelper private constructor(
             val systemWindowsInsetsBottom = a.getInt(R.styleable.WindowInsetsHelper_systemWindowsInsetsBottom, 0)
             a.recycle()
 
-            return attach(view, systemUiVisibility,
+            attach(view, systemUiVisibility,
                     systemWindowsInsetsStart,
                     systemWindowsInsetsTop,
                     systemWindowsInsetsEnd,
@@ -103,26 +111,17 @@ open class WindowInsetsHelper private constructor(
                    systemWindowsInsetsStart: Int,
                    systemWindowsInsetsTop: Int,
                    systemWindowsInsetsEnd: Int,
-                   systemWindowsInsetsBottom: Int): WindowInsetsHelper? {
+                   systemWindowsInsetsBottom: Int) {
 
             if (systemUiVisibility > 0) {
                 view.systemUiVisibility = (view.systemUiVisibility or systemUiVisibility)
             }
 
             if (systemWindowsInsetsStart + systemWindowsInsetsTop + systemWindowsInsetsEnd + systemWindowsInsetsBottom == 0) {
-                return null
+                return
             }
 
-            val initialPaddingLeft: Int = view.paddingLeft
-            val initialPaddingTop: Int = view.paddingTop
-            val initialPaddingRight: Int = view.paddingRight
-            val initialPaddingBottom: Int = view.paddingBottom
-
             val listener = WindowInsetsHelper(view,
-                    initialPaddingLeft,
-                    initialPaddingTop,
-                    initialPaddingRight,
-                    initialPaddingBottom,
                     systemWindowsInsetsStart and 1 == 1,
                     systemWindowsInsetsTop and 1 == 1,
                     systemWindowsInsetsEnd and 1 == 1,
@@ -132,8 +131,33 @@ open class WindowInsetsHelper private constructor(
                     systemWindowsInsetsEnd and 2 == 2,
                     systemWindowsInsetsBottom and 2 == 2)
             ViewCompat.setOnApplyWindowInsetsListener(view, listener)
-            return listener
+            view.setTag(R.id.tag_rikka_material_WindowInsetsHelper, listener)
         }
-
     }
+}
+
+val View.windowInsetsHelper: WindowInsetsHelper?
+    get() {
+        val value = getTag(R.id.tag_rikka_material_WindowInsetsHelper)
+        return if (value is WindowInsetsHelper) value else null
+    }
+
+val View.initialPaddingLeft: Int
+    get() = windowInsetsHelper?.initialPaddingLeft ?: 0
+
+val View.initialPaddingTop: Int
+    get() = windowInsetsHelper?.initialPaddingTop ?: 0
+
+val View.initialPaddingRight: Int
+    get() = windowInsetsHelper?.initialPaddingRight ?: 0
+
+val View.initialPaddingBottom: Int
+    get() = windowInsetsHelper?.initialPaddingBottom ?: 0
+
+fun View.setInitialPadding(left: Int, top: Int, right: Int, bottom: Int) {
+    windowInsetsHelper?.setInitialPadding(left, top, right, bottom)
+}
+
+fun View.setInitialPaddingRelative(start: Int, top: Int, end: Int, bottom: Int) {
+    windowInsetsHelper?.setInitialPaddingRelative(start, top, end, bottom)
 }
