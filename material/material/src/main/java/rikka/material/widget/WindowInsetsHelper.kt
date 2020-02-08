@@ -1,6 +1,9 @@
 package rikka.material.widget
 
+import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.util.AttributeSet
+import android.view.Gravity.*
 import android.view.View
 import androidx.core.graphics.Insets
 import androidx.core.view.OnApplyWindowInsetsListener
@@ -8,28 +11,38 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import rikka.material.R
 
+private typealias ApplyInsetsCallback<T> = (insets: Insets, left: Boolean, top: Boolean, right: Boolean, bottom: Boolean) -> T
+
+private class ApplyPadding(private val padding: Rect) : ApplyInsetsCallback<Unit> {
+
+    override fun invoke(insets: Insets, left: Boolean, top: Boolean, right: Boolean, bottom: Boolean) {
+        padding.left += if (left) insets.left else 0
+        padding.top += if (top) insets.top else 0
+        padding.right += if (right) insets.right else 0
+        padding.bottom += if (bottom) insets.bottom else 0
+    }
+}
+
+private class ConsumeInsets : ApplyInsetsCallback<Insets> {
+
+    override fun invoke(insets: Insets, left: Boolean, top: Boolean, right: Boolean, bottom: Boolean): Insets {
+        val insetsLeft = if (left) 0 else insets.left
+        val insetsTop = if (top) 0 else insets.top
+        val insetsRight = if (right) 0 else insets.right
+        val insetsBottom = if (bottom) 0 else insets.bottom
+        return Insets.of(insetsLeft, insetsTop, insetsRight, insetsBottom)
+    }
+}
+
 open class WindowInsetsHelper private constructor(
         private val view: View,
-        private val paddingSystemWindowsInsetsStart: Boolean,
-        private val paddingSystemWindowsInsetsTop: Boolean,
-        private val paddingSystemWindowsInsetsEnd: Boolean,
-        private val paddingSystemWindowsInsetsBottom: Boolean,
-        private val consumeSystemWindowsInsetsStart: Boolean,
-        private val consumeSystemWindowsInsetsTop: Boolean,
-        private val consumeSystemWindowsInsetsEnd: Boolean,
-        private val consumeSystemWindowsInsetsBottom: Boolean) : OnApplyWindowInsetsListener {
+        private val fitSystemWindows: Int,
+        private val consumeSystemWindows: Int) : OnApplyWindowInsetsListener {
 
-    var initialPaddingLeft: Int = view.paddingLeft
-        private set
-
-    var initialPaddingTop: Int = view.paddingTop
-        private set
-
-    var initialPaddingRight: Int = view.paddingRight
-        private set
-
-    var initialPaddingBottom: Int = view.paddingBottom
-        private set
+    internal var initialPaddingLeft: Int = view.paddingLeft
+    internal var initialPaddingTop: Int = view.paddingTop
+    internal var initialPaddingRight: Int = view.paddingRight
+    internal var initialPaddingBottom: Int = view.paddingBottom
 
     private var lastInsets: WindowInsetsCompat? = null
 
@@ -51,29 +64,38 @@ open class WindowInsetsHelper private constructor(
         }
     }
 
-    private fun applyWindowInsets(insets: WindowInsetsCompat): WindowInsetsCompat {
+    @SuppressLint("RtlHardcoded")
+    private fun <T> applyInsets(insets: Insets, fit: Int, callback: ApplyInsetsCallback<T>): T {
+        val relativeMode = fit and RELATIVE_LAYOUT_DIRECTION == RELATIVE_LAYOUT_DIRECTION
+
         val isRTL = view.layoutDirection == View.LAYOUT_DIRECTION_RTL
 
-        val paddingSystemWindowsInsetsLeft = (!isRTL && paddingSystemWindowsInsetsStart) || (isRTL && paddingSystemWindowsInsetsEnd)
-        val paddingSystemWindowsInsetsRight = (!isRTL && paddingSystemWindowsInsetsEnd) || (isRTL && paddingSystemWindowsInsetsStart)
+        val left: Boolean
+        val top = fit and TOP == TOP
+        val right: Boolean
+        val bottom = fit and BOTTOM == BOTTOM
 
-        val paddingLeft = initialPaddingLeft + if (paddingSystemWindowsInsetsLeft) insets.systemWindowInsetLeft else 0
-        val paddingTop = initialPaddingTop + if (paddingSystemWindowsInsetsTop) insets.systemWindowInsetTop else 0
-        val paddingRight = initialPaddingRight + if (paddingSystemWindowsInsetsRight) insets.systemWindowInsetRight else 0
-        val paddingBottom = initialPaddingBottom + if (paddingSystemWindowsInsetsBottom) insets.systemWindowInsetBottom else 0
+        if (relativeMode) {
+            val start = fit and START == START
+            val end = fit and END == END
+            left = (!isRTL && start) || (isRTL && end)
+            right = (!isRTL && end) || (isRTL && start)
+        } else {
+            left = fit and LEFT == LEFT
+            right = fit and RIGHT == RIGHT
+        }
 
-        val consumeSystemWindowsInsetsLeft = (!isRTL && consumeSystemWindowsInsetsStart) || (isRTL && consumeSystemWindowsInsetsEnd)
-        val consumeSystemWindowsInsetsRight = (!isRTL && consumeSystemWindowsInsetsEnd) || (isRTL && consumeSystemWindowsInsetsStart)
+        return callback.invoke(insets, left, top, right, bottom)
+    }
 
-        val systemInsetsLeft = if (consumeSystemWindowsInsetsLeft) 0 else insets.systemWindowInsetLeft
-        val systemInsetsTop = if (consumeSystemWindowsInsetsTop) 0 else insets.systemWindowInsetTop
-        val systemInsetsRight = if (consumeSystemWindowsInsetsRight) 0 else insets.systemWindowInsetRight
-        val systemInsetsBottom = if (consumeSystemWindowsInsetsBottom) 0 else insets.systemWindowInsetBottom
+    private fun applyWindowInsets(windowInsets: WindowInsetsCompat): WindowInsetsCompat {
+        val padding = Rect(initialPaddingLeft, initialPaddingTop, initialPaddingRight, initialPaddingBottom)
+        applyInsets(windowInsets.systemWindowInsets, fitSystemWindows, ApplyPadding(padding))
 
-        view.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
+        view.setPadding(padding.left, padding.top, padding.right, padding.bottom)
 
-        return WindowInsetsCompat.Builder(insets)
-                .setSystemWindowInsets(Insets.of(systemInsetsLeft, systemInsetsTop, systemInsetsRight, systemInsetsBottom))
+        return WindowInsetsCompat.Builder(windowInsets)
+                .setSystemWindowInsets(applyInsets(windowInsets.systemWindowInsets, consumeSystemWindows, ConsumeInsets()))
                 .build()
     }
 
@@ -92,44 +114,28 @@ open class WindowInsetsHelper private constructor(
         @JvmStatic
         fun attach(view: View, attrs: AttributeSet) {
             val a = view.context.obtainStyledAttributes(attrs, R.styleable.WindowInsetsHelper, 0, 0)
-            val systemUiVisibility = a.getInt(R.styleable.WindowInsetsHelper_systemUiVisibility, Int.MIN_VALUE)
-            val systemWindowsInsetsStart = a.getInt(R.styleable.WindowInsetsHelper_systemWindowsInsetsStart, 0)
-            val systemWindowsInsetsTop = a.getInt(R.styleable.WindowInsetsHelper_systemWindowsInsetsTop, 0)
-            val systemWindowsInsetsEnd = a.getInt(R.styleable.WindowInsetsHelper_systemWindowsInsetsEnd, 0)
-            val systemWindowsInsetsBottom = a.getInt(R.styleable.WindowInsetsHelper_systemWindowsInsetsBottom, 0)
+            val edgeToEdge = a.getBoolean(R.styleable.WindowInsetsHelper_edgeToEdge, false)
+            val fitSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_fitSystemWindowsInsets, 0)
+            val consumeSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_consumeSystemWindowsInsets, 0)
             a.recycle()
 
-            attach(view, systemUiVisibility,
-                    systemWindowsInsetsStart,
-                    systemWindowsInsetsTop,
-                    systemWindowsInsetsEnd,
-                    systemWindowsInsetsBottom)
+            attach(view, edgeToEdge, fitSystemWindowsInsets, consumeSystemWindowsInsets)
         }
 
         @JvmStatic
-        fun attach(view: View, systemUiVisibility: Int,
-                   systemWindowsInsetsStart: Int,
-                   systemWindowsInsetsTop: Int,
-                   systemWindowsInsetsEnd: Int,
-                   systemWindowsInsetsBottom: Int) {
-
-            if (systemUiVisibility > 0) {
-                view.systemUiVisibility = (view.systemUiVisibility or systemUiVisibility)
+        fun attach(view: View, layoutBelowSystemUi: Boolean, fitSystemWindowsInsets: Int, consumeSystemWindowsInsets: Int) {
+            if (layoutBelowSystemUi) {
+                view.systemUiVisibility = (view.systemUiVisibility
+                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
             }
 
-            if (systemWindowsInsetsStart + systemWindowsInsetsTop + systemWindowsInsetsEnd + systemWindowsInsetsBottom == 0) {
+            if (fitSystemWindowsInsets == 0) {
                 return
             }
 
-            val listener = WindowInsetsHelper(view,
-                    systemWindowsInsetsStart and 1 == 1,
-                    systemWindowsInsetsTop and 1 == 1,
-                    systemWindowsInsetsEnd and 1 == 1,
-                    systemWindowsInsetsBottom and 1 == 1,
-                    systemWindowsInsetsStart and 2 == 2,
-                    systemWindowsInsetsTop and 2 == 2,
-                    systemWindowsInsetsEnd and 2 == 2,
-                    systemWindowsInsetsBottom and 2 == 2)
+            val listener = WindowInsetsHelper(view, fitSystemWindowsInsets, consumeSystemWindowsInsets)
             ViewCompat.setOnApplyWindowInsetsListener(view, listener)
             view.setTag(R.id.tag_rikka_material_WindowInsetsHelper, listener)
         }
@@ -153,6 +159,12 @@ val View.initialPaddingRight: Int
 
 val View.initialPaddingBottom: Int
     get() = windowInsetsHelper?.initialPaddingBottom ?: 0
+
+val View.initialPaddingStart: Int
+    get() = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) initialPaddingRight else initialPaddingLeft
+
+val View.initialPaddingEnd: Int
+    get() = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) initialPaddingLeft else initialPaddingRight
 
 fun View.setInitialPadding(left: Int, top: Int, right: Int, bottom: Int) {
     windowInsetsHelper?.setInitialPadding(left, top, right, bottom)
