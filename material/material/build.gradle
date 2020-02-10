@@ -34,6 +34,7 @@ dependencies {
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
     implementation "androidx.interpolator:interpolator:$androidx_interpolator_version"
     implementation "androidx.core:core:$androidx_core_version"
+    implementation "androidx.core:core-ktx:$androidx_core_version"
     api "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     api "androidx.swiperefreshlayout:swiperefreshlayout:$androidx_swiperefreshlayout_version"
     api 'com.google.android.material:material:1.2.0-alpha04'
