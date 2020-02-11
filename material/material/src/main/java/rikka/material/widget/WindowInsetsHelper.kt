@@ -117,16 +117,6 @@ open class WindowInsetsHelper private constructor(
     }
 
     private fun applyWindowInsets(windowInsets: WindowInsetsCompat): WindowInsetsCompat {
-        if (!initialMargin) {
-            initialMarginLeft = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.leftMargin ?: 0
-            initialMarginTop = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.topMargin ?: 0
-            initialMarginRight = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.rightMargin ?: 0
-            initialMarginBottom = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.bottomMargin ?: 0
-            initialMarginStart = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.marginStart ?: 0
-            initialMarginEnd = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.marginEnd ?: 0
-            initialMargin = true
-        }
-
         if (fitSystemWindows != 0) {
             val padding = Rect(initialPaddingLeft, initialPaddingTop, initialPaddingRight, initialPaddingBottom)
             applyInsets(windowInsets.systemWindowInsets, fitSystemWindows, ApplyInsets(padding))
@@ -134,6 +124,16 @@ open class WindowInsetsHelper private constructor(
         }
 
         if (layout_fitSystemWindowsInsets != 0) {
+            if (!initialMargin) {
+                initialMarginLeft = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.leftMargin ?: 0
+                initialMarginTop = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.topMargin ?: 0
+                initialMarginRight = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.rightMargin ?: 0
+                initialMarginBottom = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.bottomMargin ?: 0
+                initialMarginStart = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.marginStart ?: 0
+                initialMarginEnd = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.marginEnd ?: 0
+                initialMargin = true
+            }
+
             val margin = if ((layout_fitSystemWindowsInsets and RELATIVE_LAYOUT_DIRECTION) == RELATIVE_LAYOUT_DIRECTION)
                 Rect(initialMarginLeft, initialMarginTop, initialMarginRight, initialMarginBottom)
             else
@@ -198,7 +198,7 @@ open class WindowInsetsHelper private constructor(
                         or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
             }
 
-            if (fitSystemWindowsInsets == 0 && layout_fitSystemWindowsInsets == 0) {
+            if (fitSystemWindowsInsets == 0 && layout_fitSystemWindowsInsets == 0 && consumeSystemWindowsInsets == 0) {
                 return
             }
 
