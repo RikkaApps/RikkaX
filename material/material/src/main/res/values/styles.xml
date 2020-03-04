@@ -59,6 +59,10 @@
         <item name="contentInsetStartWithNavigation">@dimen/rd_toolbar_content_padding_start_with_navigation</item>
     </style>
 
+    <style name="Widget.Material.ExtendedFloatingActionButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton"/>
+
+    <style name="Widget.Material.ExtendedFloatingActionButton.Icon" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"/>
+
     <style name="Animation.Material.Dialog" parent="Animation.AppCompat.Dialog">
         <item name="android:windowEnterAnimation">@anim/rd_dialog_enter</item>
         <item name="android:windowExitAnimation">@anim/rd_dialog_exit</item>

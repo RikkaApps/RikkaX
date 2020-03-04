@@ -31,6 +31,8 @@
         <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
         <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
+
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
     </style>
 
     <style name="Base" parent="Theme.MaterialComponents">
@@ -63,6 +65,8 @@
         <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
         <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
+
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
     </style>
 
     <style name="Base.Light.Dialog" parent="Theme.MaterialComponents.Light.Dialog">
@@ -93,6 +97,8 @@
         <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
         <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
+
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
     </style>
 
     <style name="Base.Dialog" parent="Theme.MaterialComponents.Dialog">
@@ -123,6 +129,8 @@
         <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
         <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
+
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
     </style>
 
     <!-- Theme for users -->

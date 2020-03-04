@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="Widget.Material.ExtendedFloatingActionButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="android:outlineSpotShadowColor">?colorSecondary</item>
+    </style>
+
+    <style name="Widget.Material.ExtendedFloatingActionButton.Icon" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
+        <item name="android:outlineSpotShadowColor">?colorSecondary</item>
+    </style>
+</resources>
