@@ -3,13 +3,11 @@
 
     <style name="Base.V27.Light" parent="Base.V23.Light">
         <item name="android:navigationBarColor">?android:colorBackground</item>
-        <item name="android:navigationBarDividerColor">#1f000000</item>
         <item name="android:windowLightNavigationBar">true</item>
     </style>
 
     <style name="Base.V27" parent="Base.V23">
         <item name="android:navigationBarColor">?android:colorBackground</item>
-        <item name="android:navigationBarDividerColor">#1fffffff</item>
         <item name="android:windowLightNavigationBar">false</item>
     </style>
 

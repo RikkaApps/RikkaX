@@ -31,6 +31,7 @@
         <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
         <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
+        <item name="navigationBarDividerColor">@color/navigation_bar_divider_light</item>
 
         <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
     </style>
@@ -65,6 +66,7 @@
         <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
         <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
+        <item name="navigationBarDividerColor">@color/navigation_bar_divider_dark</item>
 
         <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
     </style>
@@ -97,6 +99,7 @@
         <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
         <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
+        <item name="navigationBarDividerColor">@color/navigation_bar_divider_light</item>
 
         <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
     </style>
@@ -129,6 +132,7 @@
         <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
         <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
+        <item name="navigationBarDividerColor">@color/navigation_bar_divider_dark</item>
 
         <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
     </style>

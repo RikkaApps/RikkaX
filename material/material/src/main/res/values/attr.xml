@@ -36,6 +36,8 @@
         <attr name="toolbarColor" format="color|reference" />
 
         <attr name="notificationColor" format="color|reference" />
+
+        <attr name="navigationBarDividerColor" format="color|reference"/>
     </declare-styleable>
 
     <declare-styleable name="MaterialComponentsExpand">
