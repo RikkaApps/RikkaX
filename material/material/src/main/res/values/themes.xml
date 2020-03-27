@@ -42,6 +42,7 @@
     <style name="AlertDialog.Material.Body.Text" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textAppearance">?textAppearanceBody2</item>
         <item name="android:textColor">@color/material_on_surface_emphasis_medium</item>
+        <item name="android:lineSpacingExtra">@dimen/rd_material_dialog_line_spacing_extra</item>
     </style>
 
     <style name="AlertDialog.Material.Title.Text" parent="RtlOverlay.DialogWindowTitle.AppCompat">

@@ -31,4 +31,7 @@
 
     <dimen name="rd_material_dialog_title_divider_material">16sp</dimen>
     <dimen name="rd_material_dialog_padding_top_material">24dp</dimen>
+
+    <dimen name="rd_material_dialog_line_spacing_extra">2sp</dimen>
+
 </resources>
