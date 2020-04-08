@@ -155,7 +155,7 @@ public class ChooserFragment extends ThemedAppCompatDialogFragment {
             throw new IllegalArgumentException("Arguments cannot be null or empty.");
         }
 
-        mAppIconLoader = new AppIconLoader(requireContext().getResources().getDimensionPixelSize(R.dimen.rd_chooser_icon_size), requireContext());
+        mAppIconLoader = new AppIconLoader(requireContext().getResources().getDimensionPixelSize(R.dimen.rd_chooser_icon_size), true, requireContext());
 
         mTitle = getArguments().getString(ARG_TITLE);
         mTargetIntent = getArguments().getParcelable(ARG_TARGET_INTENT);

@@ -37,7 +37,7 @@ dependencies {
     implementation "rikka.core:core:$rikka_core_version"
     implementation "rikka.material:material:$rikka_material_version"
     implementation "rikka.recyclerview:recyclerview-utils:$rikka_recyclerview_utils_version"
-    implementation 'me.zhanghai.android.appiconloader:appiconloader:1.1.1'
+    implementation 'me.zhanghai.android.appiconloader:appiconloader:1.2.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
