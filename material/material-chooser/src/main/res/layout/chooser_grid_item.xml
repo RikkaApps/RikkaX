@@ -32,8 +32,8 @@
         android:layout_height="wrap_content">
 
         <ImageView android:id="@android:id/icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/rd_chooser_icon_size"
+            android:layout_height="@dimen/rd_chooser_icon_size"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:layout_marginBottom="3dp"

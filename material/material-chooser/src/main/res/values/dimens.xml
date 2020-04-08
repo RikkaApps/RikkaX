@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <dimen name="rd_chooser_icon_size">48dp</dimen>
 </resources>
