@@ -24,7 +24,9 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
+    implementation 'me.zhanghai.android.fastscroll:library:1.1.2'
     testImplementation 'junit:junit:4.12'
 }
 
