@@ -43,7 +43,7 @@ private class VerticalPaddingDecoration constructor(context: Context, paddingTop
     }
 }
 
-fun RecyclerView.setEdgeEffect(overScrollIfContentScrolls: Boolean = true, alwaysClipToPadding: Boolean = true) {
+fun RecyclerView.fixEdgeEffect(overScrollIfContentScrolls: Boolean = true, alwaysClipToPadding: Boolean = true) {
     if (overScrollIfContentScrolls) {
         val listener = OverScrollIfContentScrollsListener()
         addOnLayoutChangeListener(listener)

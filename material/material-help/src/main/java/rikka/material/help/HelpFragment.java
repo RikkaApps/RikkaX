@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import moe.shizuku.preference.Preference;
 import moe.shizuku.preference.PreferenceFragment;
 import moe.shizuku.preference.PreferenceGroup;
-import rikka.recyclerview.RecyclerViewHelper;
+import rikka.recyclerview.RecyclerViewKt;
 
 public class HelpFragment extends PreferenceFragment {
 
@@ -34,7 +34,7 @@ public class HelpFragment extends PreferenceFragment {
     public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         RecyclerView recyclerView = super.onCreateRecyclerView(inflater, parent, savedInstanceState);
         recyclerView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        RecyclerViewHelper.fixOverScroll(recyclerView);
+        RecyclerViewKt.fixEdgeEffect(recyclerView, true, true);
         return recyclerView;
     }
 
