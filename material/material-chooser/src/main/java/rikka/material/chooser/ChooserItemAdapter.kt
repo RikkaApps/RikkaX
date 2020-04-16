@@ -72,7 +72,7 @@ internal class ChooserItemAdapter(resolveInfo: List<ResolveInfo?>, private val p
                 var label: CharSequence? = null
                 try {
                     withContext(Dispatchers.IO) {
-                        drawable = parentFragment.appIconLoader.loadIcon(data!!.activityInfo.applicationInfo, false)
+                        drawable = ChooserIconLoader.get(context).loadIcon(data!!.activityInfo.applicationInfo, false)
                         label = data!!.loadLabel(pm)
                     }
                 } catch (e: Throwable) {

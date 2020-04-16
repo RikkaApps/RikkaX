@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.zhanghai.android.appiconloader.AppIconLoader;
 import rikka.material.internal.ThemedAppCompatDialogFragment;
 
 public class ChooserFragment extends ThemedAppCompatDialogFragment {
@@ -138,8 +137,6 @@ public class ChooserFragment extends ThemedAppCompatDialogFragment {
         return chooserFragment;
     }
 
-    private AppIconLoader mAppIconLoader;
-
     private String mTitle;
     private Intent mTargetIntent;
     private List<ResolveInfo> mResolves;
@@ -154,8 +151,6 @@ public class ChooserFragment extends ThemedAppCompatDialogFragment {
         if (getArguments() == null) {
             throw new IllegalArgumentException("Arguments cannot be null or empty.");
         }
-
-        mAppIconLoader = new AppIconLoader(requireContext().getResources().getDimensionPixelSize(R.dimen.rd_chooser_icon_size), true, requireContext());
 
         mTitle = getArguments().getString(ARG_TITLE);
         mTargetIntent = getArguments().getParcelable(ARG_TARGET_INTENT);
@@ -233,9 +228,5 @@ public class ChooserFragment extends ThemedAppCompatDialogFragment {
             return mExtraTargetIntent.get(index);
         }
         return mTargetIntent;
-    }
-
-    protected AppIconLoader getAppIconLoader() {
-        return mAppIconLoader;
     }
 }
