@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package rikka.recyclerview
 
 import android.content.Context
@@ -52,7 +54,6 @@ fun RecyclerView.setEdgeEffect(overScrollIfContentScrolls: Boolean = true, alway
             removeOnLayoutChangeListener(listener)
             setTag(R.id.tag_rikka_recyclerView_OverScrollIfContentScrollsListener, null)
         }
-
     }
 
     edgeEffectFactory = if (alwaysClipToPadding && !clipToPadding) {
