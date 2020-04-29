@@ -34,7 +34,7 @@ dependencies {
 }
 
 project.ext {
-    mavProjectName = 'rikka.preference:preference-multiprocess'
+    mavProjectName = 'rikka.preference:multiprocesspreference'
     mavLibraryDescription = 'Multi-process preference with ContentProvider.'
 }
 
