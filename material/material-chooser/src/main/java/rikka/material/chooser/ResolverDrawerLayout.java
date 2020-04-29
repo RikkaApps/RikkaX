@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+
 package rikka.material.chooser;
 
 import android.content.Context;
@@ -131,7 +132,7 @@ public class ResolverDrawerLayout extends ViewGroup {
 
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ResolverDrawerLayout,
                 defStyleAttr, 0);
-        mMaxWidth = a.getDimensionPixelSize(R.styleable.ResolverDrawerLayout_android_maxWidth, -1);
+        mMaxWidth = a.getDimensionPixelSize(R.styleable.ResolverDrawerLayout_maxWidth, -1);
         mMaxCollapsedHeight = a.getDimensionPixelSize(
                 R.styleable.ResolverDrawerLayout_maxCollapsedHeight, 0);
         mMaxCollapsedHeightSmall = a.getDimensionPixelSize(
@@ -426,7 +427,7 @@ public class ResolverDrawerLayout extends ViewGroup {
                             smoothScrollTo(yvel < 0 ? 0 : mCollapsibleHeight, yvel);
                         }
                     }
-                }else {
+                } else {
                     smoothScrollTo(
                             mCollapseOffset < mCollapsibleHeight / 2 ? 0 : mCollapsibleHeight, 0);
                 }
@@ -784,6 +785,41 @@ public class ResolverDrawerLayout extends ViewGroup {
         return android.widget.ScrollView.class.getName();
     }
 
+    /*@Override
+    public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfoInternal(info);
+
+        if (isEnabled()) {
+            if (mCollapseOffset != 0) {
+                info.addAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD);
+                info.setScrollable(true);
+            }
+        }
+
+        // This view should never get accessibility focus, but it's interactive
+        // via nested scrolling, so we can't hide it completely.
+        info.removeAction(AccessibilityAction.ACTION_ACCESSIBILITY_FOCUS);
+    }
+
+    @Override
+    public boolean performAccessibilityActionInternal(int action, Bundle arguments) {
+        if (action == AccessibilityAction.ACTION_ACCESSIBILITY_FOCUS.getId()) {
+            // This view should never get accessibility focus.
+            return false;
+        }
+
+        if (super.performAccessibilityActionInternal(action, arguments)) {
+            return true;
+        }
+
+        if (action == AccessibilityNodeInfo.ACTION_SCROLL_FORWARD && mCollapseOffset != 0) {
+            smoothScrollTo(0, 0);
+            return true;
+        }
+
+        return false;
+    }*/
+
     @Override
     public void onDrawForeground(Canvas canvas) {
         if (mScrollIndicatorDrawable != null) {
@@ -1055,6 +1091,7 @@ public class ResolverDrawerLayout extends ViewGroup {
     public interface OnCollapsedChangedListener {
         /**
          * Callback when the sheet is either fully expanded or collapsed.
+         *
          * @param isCollapsed true when collapsed, false when expanded.
          */
         void onCollapsedChanged(boolean isCollapsed);

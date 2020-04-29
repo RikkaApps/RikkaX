@@ -1,7 +1,11 @@
 package rikka.material.chooser
 
+import android.content.res.Resources
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import rikka.core.res.resolveColor
 import rikka.material.app.MaterialActivity
 
 open class ChooserActivity : MaterialActivity() {
@@ -26,4 +30,21 @@ open class ChooserActivity : MaterialActivity() {
                 .replace(android.R.id.content, fragment)
                 .commit()
     }
+
+    /*override fun shouldApplyTranslucentSystemBars(): Boolean {
+        return true
+    }
+
+    override fun onApplyTranslucentSystemBars() {
+        super.onApplyTranslucentSystemBars()
+
+        val window = window
+        window?.statusBarColor = Color.TRANSPARENT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            window.navigationBarColor = Color.TRANSPARENT
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                window.isNavigationBarContrastEnforced = true
+            }
+        }
+    }*/
 }

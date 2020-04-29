@@ -13,7 +13,7 @@ internal object ChooserIconLoader {
         synchronized(this) {
             if (appIconLoader == null) {
                 val shrinkNonAdaptiveIcons = Build.VERSION.SDK_INT >= 26 && context.applicationInfo.loadIcon(context.packageManager) is AdaptiveIconDrawable
-                appIconLoader = AppIconLoader(context.resources.getDimensionPixelSize(R.dimen.rd_chooser_icon_size), shrinkNonAdaptiveIcons, context)
+                appIconLoader = AppIconLoader(context.resources.getDimensionPixelSize(R.dimen.chooser_icon_size), shrinkNonAdaptiveIcons, context)
             }
             return appIconLoader!!
         }

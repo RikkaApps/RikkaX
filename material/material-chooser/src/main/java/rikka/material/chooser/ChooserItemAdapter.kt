@@ -10,8 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import rikka.recyclerview.BaseViewHolder
 import rikka.recyclerview.IdBasedRecyclerViewAdapter
@@ -64,9 +62,6 @@ internal class ChooserItemAdapter(resolveInfo: List<ResolveInfo?>, private val p
             itemView.setOnClickListener(this)
             itemView.isFocusable = true
             val pm = itemView.context.packageManager
-            GlobalScope.launch(Dispatchers.IO) {
-
-            }
             parentFragment.lifecycleScope.launchWhenCreated {
                 var drawable: Bitmap? = null
                 var label: CharSequence? = null

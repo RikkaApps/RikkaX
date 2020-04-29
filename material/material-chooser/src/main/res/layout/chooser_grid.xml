@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rikka.material.chooser.FitsSystemWindowsResolverDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<rikka.material.chooser.ResolverDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contentPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:maxWidth="@dimen/resolver_max_width"
+    app:edgeToEdge="true"
     app:maxCollapsedHeight="336dp"
-    app:maxCollapsedHeightSmall="56dp">
+    app:maxCollapsedHeightSmall="56dp"
+    app:maxWidth="@dimen/resolver_max_width">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,55 +17,66 @@
         android:elevation="8dp"
         app:layout_alwaysShow="true">
 
+        <ImageView
+            android:id="@+id/drag"
+            android:layout_width="24dp"
+            android:layout_height="4dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/chooser_edge_margin_thin"
+            android:layout_marginBottom="@dimen/chooser_edge_margin_thin"
+            android:importantForAccessibility="no"
+            android:src="@drawable/chooser_drag_handle"
+            android:tint="@color/chooser_lighter_gray"
+            android:tintMode="src_in" />
+
         <TextView
             android:id="@android:id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/drag"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="start|center_vertical"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="16dp"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textSize="16sp" />
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="@dimen/chooser_view_spacing"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/resolver_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:colorBackground"
-        android:clipToPadding="false"
-        android:elevation="8dp"
-        android:paddingStart="?android:listPreferredItemPaddingStart"
-        android:paddingEnd="?android:listPreferredItemPaddingStart"
-        android:scrollIndicators="top"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical" />
-
-    <TextView
-        android:id="@android:id/empty"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:colorBackground"
         android:elevation="8dp"
-        android:gravity="center"
-        android:padding="32dp"
-        android:text="@string/chooser_no_apps"
-        android:visibility="gone"
-        app:layout_alwaysShow="true"
-        tools:visibility="visible" />
+        android:orientation="vertical"
+        app:fitSystemWindowsInsets="bottom">
 
-    <View
-        android:id="@+id/space"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="?android:colorBackground"
-        android:elevation="8dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resolver_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="?android:listPreferredItemPaddingStart"
+            android:paddingEnd="?android:listPreferredItemPaddingStart"
+            android:scrollIndicators="top"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical" />
 
-</rikka.material.chooser.FitsSystemWindowsResolverDrawerLayout>
+        <TextView
+            android:id="@android:id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="32dp"
+            android:text="@string/chooser_no_apps"
+            android:visibility="gone"
+            app:layout_alwaysShow="true"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</rikka.material.chooser.ResolverDrawerLayout>
