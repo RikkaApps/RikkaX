@@ -2367,6 +2367,10 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         }
 
         @NightMode final int nightMode = calculateNightMode();
+        if (nightMode == MODE_NIGHT_UNSPECIFIED) {
+            return false;
+        }
+
         @ApplyableNightMode final int modeToApply = mapNightMode(mContext, nightMode);
         final boolean applied = updateForNightMode(modeToApply, allowRecreation);
 
