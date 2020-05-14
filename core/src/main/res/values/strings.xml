@@ -7,9 +7,7 @@
     <string name="dark_theme_follow_system" translatable="false">@string/follow_system</string>
     <string name="dark_theme_off">Always off</string>
     <string name="dark_theme_on">Always on</string>
-    <string name="dark_theme_auto_time">On at night</string>
-    <string name="dark_theme_auto_battery">On when \"Battery saver\" is enabled</string>
-
-    <string name="target_app_not_found">Don\'t have apps to handle this action.</string>
+    <string name="dark_theme_auto_time">At night</string>
+    <string name="dark_theme_auto_battery">When \"Battery saver\" is enabled</string>
 
 </resources>

@@ -91,7 +91,7 @@ import java.util.Iterator;
  * retained until the Activity is destroyed.</p>
  */
 public abstract class AppCompatDelegate {
-
+    static final boolean DEBUG = false;
     static final String TAG = "AppCompatDelegate";
 
     /**
@@ -548,7 +548,7 @@ public abstract class AppCompatDelegate {
      * the delegates to avoid unnecessary recreations when possible.</p>
      *
      * <p>If this method is called after any host components with attached
-     * {@link AppCompatDelegate}s have been 'started', a {@code uiMode} configuration change
+     * {@link AppCompatDelegate}s have been 'created', a {@code uiMode} configuration change
      * will occur in each. This may result in those components being recreated, depending
      * on their manifest configuration.</p>
      *
@@ -559,6 +559,10 @@ public abstract class AppCompatDelegate {
      */
     @SuppressWarnings("deprecation")
     public static void setDefaultNightMode(@NightMode int mode) {
+        if (DEBUG) {
+            Log.d(TAG, String.format("setDefaultNightMode. New:%d, Current:%d",
+                    mode, sDefaultNightMode));
+        }
         switch (mode) {
             case MODE_NIGHT_NO:
             case MODE_NIGHT_YES:
@@ -633,7 +637,7 @@ public abstract class AppCompatDelegate {
         return VectorEnabledTintResources.isCompatVectorFromResourcesEnabled();
     }
 
-    static void markStarted(@NonNull AppCompatDelegate delegate) {
+    static void addActiveDelegate(@NonNull AppCompatDelegate delegate) {
         synchronized (sActiveDelegatesLock) {
             // Remove any existing records pointing to the delegate.
             // There should not be any, but we'll make sure
@@ -643,7 +647,7 @@ public abstract class AppCompatDelegate {
         }
     }
 
-    static void markStopped(@NonNull AppCompatDelegate delegate) {
+    static void removeActiveDelegate(@NonNull AppCompatDelegate delegate) {
         synchronized (sActiveDelegatesLock) {
             // Remove any WeakRef records pointing to the delegate in the set
             removeDelegateFromActives(delegate);
@@ -669,6 +673,9 @@ public abstract class AppCompatDelegate {
             for (WeakReference<AppCompatDelegate> activeDelegate : sActiveDelegates) {
                 final AppCompatDelegate delegate = activeDelegate.get();
                 if (delegate != null) {
+                    if (DEBUG) {
+                        Log.d(TAG, "applyDayNightToActiveDelegates. Applying to " + delegate);
+                    }
                     delegate.applyDayNight();
                 }
             }
