@@ -15,10 +15,6 @@ public class IntentUtils {
         return intent.resolveActivity(context.getPackageManager()) != null;
     }
 
-    public static boolean startActivity(Context context, Intent intent) {
-        return startActivity(context, intent, context.getString(R.string.target_app_not_found));
-    }
-
     public static boolean startActivity(Context context, Intent intent, String notFoundMessage) {
         if (isValid(context, intent)) {
             if (!(context instanceof Activity)) {
@@ -35,10 +31,6 @@ public class IntentUtils {
         return false;
     }
 
-    public static boolean startActivityForResult(Activity activity, Intent intent, int requestCode) {
-        return startActivityForResult(activity, intent, requestCode, activity.getString(R.string.target_app_not_found));
-    }
-
     public static boolean startActivityForResult(Activity activity, Intent intent, int requestCode, String notFoundMessage) {
         if (isValid(activity, intent)) {
             try {
@@ -51,10 +43,6 @@ public class IntentUtils {
             Toast.makeText(activity, notFoundMessage, Toast.LENGTH_LONG).show();
         }
         return false;
-    }
-
-    public static boolean startActivityForResult(Fragment fragment, Intent intent, int requestCode) {
-        return startActivityForResult(fragment, intent, requestCode, fragment.requireContext().getString(R.string.target_app_not_found));
     }
 
     public static boolean startActivityForResult(Fragment fragment, Intent intent, int requestCode, String notFoundMessage) {

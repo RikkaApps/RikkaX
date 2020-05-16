@@ -81,7 +81,9 @@ public class FileUtils {
     public static long copy(@NonNull InputStream in, @NonNull OutputStream out,
                             @Nullable CancellationSignal signal, @Nullable Executor executor,
                             @Nullable ProgressListener listener) throws IOException {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+                && in instanceof FileInputStream
+                && out instanceof FileOutputStream) {
             return android.os.FileUtils.copy(((FileInputStream) in).getFD(), ((FileOutputStream) out).getFD(),
                     signal, executor, listener != null ? (android.os.FileUtils.ProgressListener) listener::onProgress : null);
         } else {
