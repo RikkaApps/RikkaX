@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<!-- Copyright (C) 2008 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,7 +14,16 @@
      limitations under the License.
 -->
 
-<!-- This is a dummy drawable so that we can refer to the drawable ID -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@android:color/white"/>
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingMode="stack">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="?android:colorBackground" />
+        </shape>
+    </item>
+    <item>
+        <nine-patch
+            android:src="@drawable/abc_cab_background_top_mtrl_alpha"
+            android:tint="?attr/colorControlActivated" />
+    </item>
+</layer-list>

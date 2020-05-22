@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/abc_ic_commit_search_api_mtrl_alpha"
+    android:tint="?attr/colorControlNormal" />

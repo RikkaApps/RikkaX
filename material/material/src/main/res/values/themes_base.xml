@@ -152,9 +152,6 @@
         <item name="actionBarWidgetTheme">@null</item>
         <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
 
-        <!-- Panel attributes -->
-        <item name="listChoiceBackgroundIndicator" tools:ignore="PrivateResource">@drawable/abc_list_selector_holo_dark</item>
-
         <item name="colorPrimaryDark" tools:ignore="PrivateResource">@color/primary_dark_material_dark</item>
         <item name="colorPrimary" tools:ignore="PrivateResource">@color/primary_material_dark</item>
     </style>
