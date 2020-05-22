@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package rikka.material.widget
 
 import android.annotation.SuppressLint
