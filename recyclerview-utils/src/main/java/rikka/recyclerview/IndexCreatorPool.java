@@ -33,13 +33,10 @@ public class IndexCreatorPool implements CreatorPool {
     }
 
     public void remove(int itemPosition) {
-        int indexOfCreator = mPositionToIndex.get(itemPosition);
-        mCreators.remove(indexOfCreator);
         mPositionToIndex.remove(itemPosition);
     }
 
     public void clear() {
-        mCreators.clear();
         mPositionToIndex.clear();
     }
 
