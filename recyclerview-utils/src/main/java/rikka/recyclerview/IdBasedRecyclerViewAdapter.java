@@ -35,7 +35,7 @@ public class IdBasedRecyclerViewAdapter extends BaseRecyclerViewAdapter<IndexCre
         getIds().clear();
     }
 
-    public <T> void addItem(int index, @NonNull BaseViewHolder.Creator<T> creator, @Nullable T object, long id) {
+    public <T> void addItemAt(int index, @NonNull BaseViewHolder.Creator<T> creator, @Nullable T object, long id) {
         getCreatorPool().add(index, creator);
         getItems().add(index, object);
         getIds().add(index, id);
@@ -47,7 +47,7 @@ public class IdBasedRecyclerViewAdapter extends BaseRecyclerViewAdapter<IndexCre
         getIds().add(id);
     }
 
-    public <T> void addItems(int index, @NonNull BaseViewHolder.Creator<T> creator, @NonNull List<T> list, @NonNull List<Long> ids) {
+    public <T> void addItemsAt(int index, @NonNull BaseViewHolder.Creator<T> creator, @NonNull List<T> list, @NonNull List<Long> ids) {
         for (int i = 0; i < list.size(); i++) {
             getCreatorPool().add(index, creator);
         }
@@ -60,6 +60,12 @@ public class IdBasedRecyclerViewAdapter extends BaseRecyclerViewAdapter<IndexCre
         for (int index = 0; index < list.size(); index++) {
             addItem(creator, list.get(index), ids.get(index));
         }
+    }
+
+    public void removeItemAt(int index) {
+        getCreatorPool().remove(index);
+        getItems().remove(index);
+        getIds().remove(index);
     }
 
     public void notifyItemChangeById(long targetId) {

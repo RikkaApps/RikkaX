@@ -3,6 +3,7 @@ package rikka.recyclerview;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public class IndexCreatorPool implements CreatorPool {
 
     private final List<BaseViewHolder.Creator> mCreators;
@@ -15,26 +16,30 @@ public class IndexCreatorPool implements CreatorPool {
 
     public void add(BaseViewHolder.Creator creator) {
         int indexOfCreator = mCreators.indexOf(creator);
-        if (indexOfCreator != -1) {
-            mPositionToIndex.add(indexOfCreator);
-        } else {
+        if (indexOfCreator == -1) {
             mCreators.add(creator);
-            mPositionToIndex.add(mCreators.size() - 1);
+            indexOfCreator = mCreators.size() - 1;
         }
+        mPositionToIndex.add(indexOfCreator);
     }
 
-    public void add(int index, BaseViewHolder.Creator creator) {
+    public void add(int itemPosition, BaseViewHolder.Creator creator) {
         int indexOfCreator = mCreators.indexOf(creator);
-        if (indexOfCreator != -1) {
-            mPositionToIndex.add(index, indexOfCreator);
-        } else {
+        if (indexOfCreator == -1) {
             mCreators.add(creator);
-            mPositionToIndex.add(index, mCreators.size() - 1);
+            indexOfCreator = mCreators.size() - 1;
         }
+        mPositionToIndex.add(itemPosition, indexOfCreator);
     }
 
+    public void remove(int itemPosition) {
+        int indexOfCreator = mPositionToIndex.get(itemPosition);
+        mCreators.remove(indexOfCreator);
+        mPositionToIndex.remove(itemPosition);
+    }
 
     public void clear() {
+        mCreators.clear();
         mPositionToIndex.clear();
     }
 
