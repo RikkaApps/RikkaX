@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="helplib_action_about">Sobre</string>
+    <string name="helplib_action_issue">Relatar um problema</string>
+    <string name="helplib_action_telegram_group">Entrar no grupo do Telegram</string>
+    <string name="helplib_action_mail">Enviar e-mail</string>
+    <string name="helplib_title_contact">Entre em contato</string>
+    <string name="helplib_title_faq">Questões frequentes</string>
+    <string name="helplib_title">Ajuda e suporte</string>
+</resources>
