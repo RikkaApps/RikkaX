@@ -12,26 +12,28 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
+    buildFeatures {
+        buildConfig = false
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
-    implementation "org.ccil.cowan.tagsoup:tagsoup:1.2"
-    implementation "androidx.annotation:annotation:$androidx_annotation_version"
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    api "rikka.html:html:$rikka_html_version"
 }
 
 project.ext {
-    mavProjectName = 'rikka.html:html'
-    mavLibraryDescription = 'Copy of android.text.Html class.'
+    mavProjectName = 'rikka.html:html-ktx'
+    mavLibraryDescription = 'Copy of android.text.Html class (including kotlin extensions).'
 }
 
 group = 'rikka.html'

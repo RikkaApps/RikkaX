@@ -1,0 +1,1 @@
+-keep class rikka.html.text.style.** { *; }
