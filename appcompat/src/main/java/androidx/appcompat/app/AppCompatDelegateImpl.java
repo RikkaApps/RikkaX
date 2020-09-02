@@ -929,7 +929,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
                             + " }");
         }
 
-        if (Build.VERSION.SDK_INT >= 21) {
+        /*if (Build.VERSION.SDK_INT >= 21) {
             // If we're running on L or above, we can rely on ViewCompat's
             // setOnApplyWindowInsetsListener
             ViewCompat.setOnApplyWindowInsetsListener(subDecor, new OnApplyWindowInsetsListener() {
@@ -960,7 +960,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
                             insets.top = updateStatusGuard(null, insets);
                         }
                     });
-        }
+        }*/
 
         if (mDecorContentParent == null) {
             mTitleView = (TextView) subDecor.findViewById(R.id.title);
