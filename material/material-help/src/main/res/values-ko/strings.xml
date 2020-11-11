@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="helplib_action_about">정보</string>
+    <string name="helplib_action_issue">이슈 보고</string>
+    <string name="helplib_action_telegram_group">텔레그램 그룹 가입</string>
+    <string name="helplib_action_mail">이메일 보내기</string>
+    <string name="helplib_title_contact">연락처</string>
+    <string name="helplib_title_faq">자주 묻는 질문</string>
+    <string name="helplib_title">도움말 및 지원</string>
+</resources>
