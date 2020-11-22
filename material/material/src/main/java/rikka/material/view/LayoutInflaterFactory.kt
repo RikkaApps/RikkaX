@@ -1,22 +1,34 @@
-package rikka.material.app
+package rikka.material.view
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.InflateException
+import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.collection.SimpleArrayMap
-import rikka.material.widget.WindowInsetsHelper
 import java.lang.reflect.Constructor
 
-open class MaterialViewInflaterImpl {
+open class LayoutInflaterFactory(private val delegate: AppCompatDelegate) : LayoutInflater.Factory2 {
 
-    open fun onViewCreated(view: View?, parent: View?, name: String, context: Context, attrs: AttributeSet) {
-        if (view == null) {
-            return
-        }
-
-        WindowInsetsHelper.attach(view, attrs)
+    final override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        return onCreateView(null, name, context, attrs)
     }
+
+    override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
+        val view = delegate.createView(parent, name, context, attrs)
+                ?: LayoutInflaterFactoryDefaultImpl.createViewFromTag(context, name, attrs)
+        if (view != null) {
+            onViewCreated(view, parent, name, context, attrs)
+        }
+        return view
+    }
+
+    open fun onViewCreated(view: View, parent: View?, name: String, context: Context, attrs: AttributeSet) {
+    }
+}
+
+private object LayoutInflaterFactoryDefaultImpl {
 
     private val constructorSignature = arrayOf(
             Context::class.java, AttributeSet::class.java)
@@ -29,7 +41,7 @@ open class MaterialViewInflaterImpl {
 
     private val constructorMap = SimpleArrayMap<String, Constructor<out View?>>()
 
-    open fun createViewFromTag(context: Context, name: String, attrs: AttributeSet): View? {
+    fun createViewFromTag(context: Context, name: String, attrs: AttributeSet): View? {
         var name = name
         if (name == "view") {
             name = attrs.getAttributeValue(null, "class")

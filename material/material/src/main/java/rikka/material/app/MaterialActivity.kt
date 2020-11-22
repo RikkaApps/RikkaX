@@ -5,7 +5,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.annotation.CallSuper
-import androidx.appcompat.app.MaterialViewInflater
 import androidx.appcompat.widget.Toolbar
 import rikka.core.res.resolveColor
 import rikka.material.R
@@ -17,7 +16,7 @@ open class MaterialActivity : ThemedAppCompatActivity(), AppBarOwner, Translucen
     private var appBar: AppBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installViewFactory(LayoutInflater.from(this))
+        onInstallViewFactory(LayoutInflater.from(this))
         super.onCreate(savedInstanceState)
 
         if (shouldApplyTranslucentSystemBars()) {
@@ -25,8 +24,8 @@ open class MaterialActivity : ThemedAppCompatActivity(), AppBarOwner, Translucen
         }
     }
 
-    open fun installViewFactory(layoutInflater: LayoutInflater) {
-        layoutInflater.factory2 = MaterialViewInflater(this)
+    open fun onInstallViewFactory(layoutInflater: LayoutInflater) {
+        layoutInflater.factory2 = MaterialViewInflater(delegate)
     }
 
     override fun getAppBar(): AppBar? {
