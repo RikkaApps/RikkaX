@@ -24,7 +24,5 @@ object BuildUtils {
 
     inline val atLeast29 get() = Build.VERSION.SDK_INT >= 29
 
-    inline val atLeast30
-        get() = Build.VERSION.SDK_INT >= 30
-                || Build.VERSION.SDK_INT == 29 && Build.VERSION.PREVIEW_SDK_INT > 0
+    inline val atLeast30 get() = Build.VERSION.SDK_INT >= 30
 }

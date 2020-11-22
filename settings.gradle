@@ -1,6 +1,6 @@
 include ':annotation'
 include ':appcompat'
-include ':core'
+include ':core:core', ':core:core-ktx'
 include ':material:material'
 include ':material:material-chooser', ':material:material-help'
 include ':html:html', ':html:html-ktx'

@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion target_sdk
@@ -8,8 +7,6 @@ android {
         targetSdkVersion target_sdk
         versionCode 1
         versionName rikka_core_version
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildTypes {
@@ -26,14 +23,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compileOnly "androidx.appcompat:appcompat:$androidx_appcompat_version"
-    implementation "androidx.core:core-ktx:$androidx_core_version"
+    implementation "androidx.core:core:$androidx_core_version"
     implementation "androidx.fragment:fragment:$androidx_fragment_version"
-
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
 project.ext {
