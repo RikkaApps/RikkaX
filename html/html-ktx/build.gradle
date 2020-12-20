@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    api "rikka.html:html:$rikka_html_version"
+    api(project(':html:html'))
 }
 
 project.ext {

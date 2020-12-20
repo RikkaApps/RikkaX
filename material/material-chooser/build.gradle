@@ -33,11 +33,12 @@ dependencies {
     implementation "androidx.fragment:fragment:$androidx_fragment_version"
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha01"
-    implementation "rikka.appcompat:appcompat:$rikka_appcompat_version"
-    implementation "rikka.core:core:$rikka_core_version"
-    implementation "rikka.material:material:$rikka_material_version"
-    implementation "rikka.recyclerview:recyclerview-utils:$rikka_recyclerview_utils_version"
     implementation 'me.zhanghai.android.appiconloader:appiconloader:1.2.0'
+
+    implementation(project(":appcompat"))
+    implementation(project(":core:core"))
+    implementation(project(":material:material"))
+    implementation(project(":recyclerview-utils"))
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

@@ -25,7 +25,8 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     implementation "moe.shizuku.preference:preference-android:$preferenceLibraryVersion"
     implementation "moe.shizuku.preference:preference-simplemenu-android:$preferenceLibraryVersion"
-    implementation "rikka.recyclerview:recyclerview-utils:$rikka_recyclerview_utils_version"
+
+    implementation(project(":recyclerview-utils"))
 }
 
 project.ext {
