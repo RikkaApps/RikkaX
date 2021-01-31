@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
-import rikka.material.view.LayoutInflaterFactory
+import rikka.layoutinflater.view.LayoutInflaterFactory
 import rikka.material.widget.WindowInsetsHelper
 
 open class MaterialViewInflater(delegate: AppCompatDelegate) : LayoutInflaterFactory(delegate) {

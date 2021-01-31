@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion target_sdk
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion target_sdk
+        versionCode 1
+        versionName rikka_layout_inflater_version
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.annotation:annotation:$androidx_annotation_version"
+    compileOnly "androidx.appcompat:appcompat:$androidx_appcompat_version"
+}
+
+project.ext {
+    mavProjectName = 'rikka.layoutinflater:layoutinflater'
+    mavLibraryDescription = 'Implementation of LayoutInflater.Factory2, makes accessing view attributes during the view inflating process possible.'
+}
+
+group = 'rikka.layoutinflater'
+version = android.defaultConfig.versionName
+
+apply from: rootProject.file('publish.gradle')

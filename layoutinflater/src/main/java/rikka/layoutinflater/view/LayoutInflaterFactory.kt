@@ -1,4 +1,4 @@
-package rikka.material.view
+package rikka.layoutinflater.view
 
 import android.content.Context
 import android.util.AttributeSet
@@ -42,21 +42,21 @@ private object LayoutInflaterFactoryDefaultImpl {
     private val constructorMap = SimpleArrayMap<String, Constructor<out View?>>()
 
     fun createViewFromTag(context: Context, name: String, attrs: AttributeSet): View? {
-        var name = name
-        if (name == "view") {
-            name = attrs.getAttributeValue(null, "class")
+        var tag = name
+        if (tag == "view") {
+            tag = attrs.getAttributeValue(null, "class")
         }
         return try {
-            if (-1 == name.indexOf('.')) {
+            if (-1 == tag.indexOf('.')) {
                 for (prefix in classPrefixList) {
-                    val view: View? = createViewByPrefix(context, name, attrs, prefix)
+                    val view: View? = createViewByPrefix(context, tag, attrs, prefix)
                     if (view != null) {
                         return view
                     }
                 }
                 null
             } else {
-                createViewByPrefix(context, name, attrs, null)
+                createViewByPrefix(context, tag, attrs, null)
             }
         } catch (e: Exception) {
             null
@@ -75,7 +75,7 @@ private object LayoutInflaterFactoryDefaultImpl {
                 constructor = clazz.getConstructor(*constructorSignature)
                 constructorMap.put(name, constructor)
             }
-            constructor.isAccessible = true
+            constructor!!.isAccessible = true
             constructor.newInstance(context, attrs)
         } catch (e: Exception) {
             null
