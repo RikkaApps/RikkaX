@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package rikka.material.widget
+package rikka.insets
 
 import android.annotation.SuppressLint
 import android.graphics.Rect
@@ -12,7 +12,6 @@ import androidx.core.graphics.Insets
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import rikka.material.R
 
 private typealias ApplyInsetsCallback<T> = (insets: Insets, left: Boolean, top: Boolean, right: Boolean, bottom: Boolean) -> T
 

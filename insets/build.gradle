@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion target_sdk
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion target_sdk
+        versionCode 1
+        versionName rikka_insets_version
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.annotation:annotation:$androidx_annotation_version"
+    implementation "androidx.core:core-ktx:$androidx_core_version"
+}
+
+project.ext {
+    mavProjectName = 'rikka.insets:insets'
+    mavLibraryDescription = 'Handle all "window insets" problems without writing Java codes.'
+}
+
+group = 'rikka.insets'
+version = android.defaultConfig.versionName
+
+apply from: rootProject.file('publish.gradle')
