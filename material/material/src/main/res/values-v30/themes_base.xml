@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.V30.Light" parent="Base.V28.Light">
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+    </style>
+
+    <style name="Base.V30" parent="Base.V28">
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+    </style>
+
+    <style name="Theme.Material.Light" parent="Base.V30.Light"/>
+    <style name="Theme.Material" parent="Base.V30"/>
+</resources>
