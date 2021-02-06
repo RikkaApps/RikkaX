@@ -1,4 +1,4 @@
-package rikka.material.widget;
+package rikka.widget.borderview;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,25 +8,22 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.ObjectsCompat;
 import androidx.core.widget.NestedScrollView;
 
-import java.util.Objects;
+public class BorderNestedScrollView extends NestedScrollView implements BorderView {
 
-import rikka.material.R;
+    private final BorderViewDelegate mBorderViewDelegate;
 
-public class BorderScrollView extends NestedScrollView implements BorderView {
-
-    private BorderViewDelegate mBorderViewDelegate;
-
-    public BorderScrollView(@NonNull Context context) {
+    public BorderNestedScrollView(@NonNull Context context) {
         this(context, null);
     }
 
-    public BorderScrollView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public BorderNestedScrollView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, R.attr.borderViewStyle);
     }
 
-    public BorderScrollView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public BorderNestedScrollView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         mBorderViewDelegate = new BorderViewDelegate(this, context, attrs, defStyleAttr);
@@ -41,7 +38,7 @@ public class BorderScrollView extends NestedScrollView implements BorderView {
         int scrollRange = 0;
         if (getChildCount() > 0) {
             View child = getChildAt(0);
-            NestedScrollView.LayoutParams lp = (FrameLayout.LayoutParams) child.getLayoutParams();
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) child.getLayoutParams();
             int childSize = child.getHeight() + lp.topMargin + lp.bottomMargin;
             int parentSpace = getHeight() - getPaddingTop() - getPaddingBottom();
             scrollRange = Math.max(0, childSize - parentSpace);
@@ -62,14 +59,14 @@ public class BorderScrollView extends NestedScrollView implements BorderView {
             //isTop = isBottom = false;
             return;
         }
-        isShowingTopBorder = getBorderTopStyle() == BorderStyle.ALWAYS
-                || (getBorderTopStyle() == BorderStyle.TOP_OR_BOTTOM && isTop)
-                || (getBorderTopStyle() == BorderStyle.SCROLLED && !isTop);
-        isShowingBottomBorder = getBorderBottomStyle() == BorderStyle.ALWAYS
-                || (getBorderBottomStyle() == BorderStyle.TOP_OR_BOTTOM && isBottom)
-                || (getBorderBottomStyle() == BorderStyle.SCROLLED && !isBottom);
+        isShowingTopBorder = getBorderTopVisibility() == BorderVisibility.ALWAYS
+                || (getBorderTopVisibility() == BorderVisibility.TOP_OR_BOTTOM && isTop)
+                || (getBorderTopVisibility() == BorderVisibility.SCROLLED && !isTop);
+        isShowingBottomBorder = getBorderBottomVisibility() == BorderVisibility.ALWAYS
+                || (getBorderBottomVisibility() == BorderVisibility.TOP_OR_BOTTOM && isBottom)
+                || (getBorderBottomVisibility() == BorderVisibility.SCROLLED && !isBottom);
 
-        if (!Objects.equals(getBorderViewDelegate().isShowingTopBorder(), isShowingTopBorder) || !Objects.equals(getBorderViewDelegate().isShowingBottomBorder(), isShowingBottomBorder)) {
+        if (!ObjectsCompat.equals(getBorderViewDelegate().isShowingTopBorder(), isShowingTopBorder) || !ObjectsCompat.equals(getBorderViewDelegate().isShowingBottomBorder(), isShowingBottomBorder)) {
             onBorderVisibilityChanged(isShowingTopBorder,
                     getBorderViewDelegate().isShowingTopBorder(),
                     isShowingBottomBorder,

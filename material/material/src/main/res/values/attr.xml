@@ -48,21 +48,4 @@
         <attr name="state_raised" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="BorderView">
-        <attr name="borderTopDrawable" format="reference" />
-        <attr name="borderBottomDrawable" format="reference" />
-        <attr name="borderTopStyle" format="enum">
-            <enum name="never" value="0" />
-            <enum name="whenTop" value="1" />
-            <enum name="whenContentScrolled" value="2" />
-            <enum name="always" value="3" />
-        </attr>
-        <attr name="borderBottomStyle" format="enum">
-            <enum name="never" value="0" />
-            <enum name="whenBottom" value="1" />
-            <enum name="whenContentScrolled" value="2" />
-            <enum name="always" value="3" />
-        </attr>
-    </declare-styleable>
-
 </resources>

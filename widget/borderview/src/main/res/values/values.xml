@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.BorderView" parent="android:Widget">
+        <item name="borderTopDrawable">?android:dividerVertical</item>
+        <item name="borderTopStyle">outside</item>
+        <item name="borderTopVisibility">whenContentScrolled</item>
+        <item name="borderBottomDrawable">?android:dividerVertical</item>
+        <item name="borderBottomStyle">outside</item>
+        <item name="borderBottomVisibility">whenContentScrolled</item>
+    </style>
+</resources>

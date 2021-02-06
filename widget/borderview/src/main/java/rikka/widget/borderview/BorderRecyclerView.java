@@ -1,4 +1,4 @@
-package rikka.material.widget;
+package rikka.widget.borderview;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,15 +6,12 @@ import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.ObjectsCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.Objects;
-
-import rikka.material.R;
 
 public class BorderRecyclerView extends RecyclerView implements BorderView {
 
-    private BorderViewDelegate mBorderViewDelegate;
+    private final BorderViewDelegate mBorderViewDelegate;
 
     public BorderRecyclerView(@NonNull Context context) {
         this(context, null);
@@ -47,14 +44,14 @@ public class BorderRecyclerView extends RecyclerView implements BorderView {
         } else {
             return;
         }
-        isShowingTopBorder = getBorderTopStyle() == BorderStyle.ALWAYS
-                || (getBorderTopStyle() == BorderStyle.TOP_OR_BOTTOM && isTop)
-                || (getBorderTopStyle() == BorderStyle.SCROLLED && !isTop);
-        isShowingBottomBorder = getBorderBottomStyle() == BorderStyle.ALWAYS
-                || (getBorderBottomStyle() == BorderStyle.TOP_OR_BOTTOM && isBottom)
-                || (getBorderBottomStyle() == BorderStyle.SCROLLED && !isBottom);
+        isShowingTopBorder = getBorderTopVisibility() == BorderVisibility.ALWAYS
+                || (getBorderTopVisibility() == BorderVisibility.TOP_OR_BOTTOM && isTop)
+                || (getBorderTopVisibility() == BorderVisibility.SCROLLED && !isTop);
+        isShowingBottomBorder = getBorderBottomVisibility() == BorderVisibility.ALWAYS
+                || (getBorderBottomVisibility() == BorderVisibility.TOP_OR_BOTTOM && isBottom)
+                || (getBorderBottomVisibility() == BorderVisibility.SCROLLED && !isBottom);
 
-        if (!Objects.equals(getBorderViewDelegate().isShowingTopBorder(), isShowingTopBorder) || !Objects.equals(getBorderViewDelegate().isShowingBottomBorder(), isShowingBottomBorder)) {
+        if (!ObjectsCompat.equals(getBorderViewDelegate().isShowingTopBorder(), isShowingTopBorder) || !ObjectsCompat.equals(getBorderViewDelegate().isShowingBottomBorder(), isShowingBottomBorder)) {
             onBorderVisibilityChanged(isShowingTopBorder,
                     getBorderViewDelegate().isShowingTopBorder(),
                     isShowingBottomBorder,

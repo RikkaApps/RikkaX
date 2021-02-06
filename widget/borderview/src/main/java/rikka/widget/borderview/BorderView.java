@@ -1,12 +1,16 @@
-package rikka.material.widget;
+package rikka.widget.borderview;
 
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
 public interface BorderView {
 
-    enum BorderStyle {
+    enum BorderVisibility {
         NEVER, TOP_OR_BOTTOM, SCROLLED, ALWAYS
+    }
+    
+    enum BorderStyle {
+        INSIDE, OUTSIDE
     }
 
     interface OnBorderVisibilityChangedListener {
@@ -27,6 +31,22 @@ public interface BorderView {
 
     default void setBorderVisibilityChangedListener(OnBorderVisibilityChangedListener listener) {
         getBorderViewDelegate().setBorderVisibilityChangedListener(listener);
+    }
+
+    default BorderVisibility getBorderTopVisibility() {
+        return getBorderViewDelegate().getBorderTopVisibility();
+    }
+
+    default void setBorderTopVisibility(BorderVisibility style) {
+        getBorderViewDelegate().setBorderTopVisibility(style);
+    }
+
+    default BorderVisibility getBorderBottomVisibility() {
+        return getBorderViewDelegate().getBorderBottomVisibility();
+    }
+
+    default void setBorderBottomVisibility(BorderVisibility style) {
+        getBorderViewDelegate().setBorderBottomVisibility(style);
     }
 
     default BorderStyle getBorderTopStyle() {

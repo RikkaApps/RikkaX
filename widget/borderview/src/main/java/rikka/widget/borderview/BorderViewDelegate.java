@@ -1,4 +1,4 @@
-package rikka.material.widget;
+package rikka.widget.borderview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,17 +9,16 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import rikka.material.R;
-
 public class BorderViewDelegate {
 
     private BorderView.OnBorderVisibilityChangedListener mBorderVisibilityChangedListener;
 
-    private View mView;
-    private BorderView mBorderView;
+    private final View mView;
+    private final BorderView mBorderView;
 
     private boolean isShowingTopBorder, isShowingBottomBorder;
 
+    private BorderView.BorderVisibility borderTopVisibility, borderBottomVisibility;
     private BorderView.BorderStyle borderTopStyle, borderBottomStyle;
     private Drawable borderTopDrawable, borderBottomDrawable;
 
@@ -27,43 +26,61 @@ public class BorderViewDelegate {
         mView = view;
         mBorderView = (BorderView) view;
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BorderView, defStyleAttr, R.style.Widget_Material_BorderView);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BorderView, defStyleAttr, R.style.Widget_BorderView);
         borderTopDrawable = a.getDrawable(R.styleable.BorderView_borderTopDrawable);
         borderBottomDrawable = a.getDrawable(R.styleable.BorderView_borderBottomDrawable);
-        switch (a.getInt(R.styleable.BorderView_borderTopStyle, 0)) {
+        switch (a.getInt(R.styleable.BorderView_borderTopVisibility, 0)) {
             case 0:
-                borderTopStyle = BorderView.BorderStyle.NEVER;
+                borderTopVisibility = BorderView.BorderVisibility.NEVER;
                 break;
             case 1:
-                borderTopStyle = BorderView.BorderStyle.TOP_OR_BOTTOM;
+                borderTopVisibility = BorderView.BorderVisibility.TOP_OR_BOTTOM;
                 break;
             case 3:
-                borderTopStyle = BorderView.BorderStyle.ALWAYS;
+                borderTopVisibility = BorderView.BorderVisibility.ALWAYS;
                 break;
             case 2:
             default:
-                borderTopStyle = BorderView.BorderStyle.SCROLLED;
+                borderTopVisibility = BorderView.BorderVisibility.SCROLLED;
+                break;
+        }
+        switch (a.getInt(R.styleable.BorderView_borderBottomVisibility, 0)) {
+            case 0:
+                borderBottomVisibility = BorderView.BorderVisibility.NEVER;
+                break;
+            case 1:
+                borderBottomVisibility = BorderView.BorderVisibility.TOP_OR_BOTTOM;
+                break;
+            case 3:
+                borderBottomVisibility = BorderView.BorderVisibility.ALWAYS;
+                break;
+            case 2:
+            default:
+                borderBottomVisibility = BorderView.BorderVisibility.SCROLLED;
+                break;
+        }
+        switch (a.getInt(R.styleable.BorderView_borderTopStyle, 0)) {
+            case 0:
+                borderTopStyle = BorderView.BorderStyle.INSIDE;
+                break;
+            case 1:
+            default:
+                borderTopStyle = BorderView.BorderStyle.OUTSIDE;
                 break;
         }
         switch (a.getInt(R.styleable.BorderView_borderBottomStyle, 0)) {
             case 0:
-                borderBottomStyle = BorderView.BorderStyle.NEVER;
+                borderBottomStyle = BorderView.BorderStyle.INSIDE;
                 break;
             case 1:
-                borderBottomStyle = BorderView.BorderStyle.TOP_OR_BOTTOM;
-                break;
-            case 3:
-                borderBottomStyle = BorderView.BorderStyle.ALWAYS;
-                break;
-            case 2:
             default:
-                borderBottomStyle = BorderView.BorderStyle.SCROLLED;
+                borderBottomStyle = BorderView.BorderStyle.OUTSIDE;
                 break;
         }
         a.recycle();
 
-        isShowingTopBorder = borderTopStyle == BorderView.BorderStyle.TOP_OR_BOTTOM || borderTopStyle == BorderView.BorderStyle.ALWAYS;
-        isShowingBottomBorder = borderBottomStyle == BorderView.BorderStyle.ALWAYS;
+        isShowingTopBorder = borderTopVisibility == BorderView.BorderVisibility.TOP_OR_BOTTOM || borderTopVisibility == BorderView.BorderVisibility.ALWAYS;
+        isShowingBottomBorder = borderBottomVisibility == BorderView.BorderVisibility.ALWAYS;
     }
 
     public BorderView.OnBorderVisibilityChangedListener getBorderVisibilityChangedListener() {
@@ -74,24 +91,24 @@ public class BorderViewDelegate {
         mBorderVisibilityChangedListener = borderVisibilityChangedListener;
     }
 
-    public BorderView.BorderStyle getBorderTopStyle() {
-        return borderTopStyle;
+    public BorderView.BorderVisibility getBorderTopVisibility() {
+        return borderTopVisibility;
     }
 
-    public void setBorderTopStyle(BorderView.BorderStyle style) {
-        if (style != this.borderTopStyle) {
-            this.borderTopStyle = style;
+    public void setBorderTopVisibility(BorderView.BorderVisibility style) {
+        if (style != this.borderTopVisibility) {
+            this.borderTopVisibility = style;
             mBorderView.updateBorderStatus();
         }
     }
 
-    public BorderView.BorderStyle getBorderBottomStyle() {
-        return borderBottomStyle;
+    public BorderView.BorderVisibility getBorderBottomVisibility() {
+        return borderBottomVisibility;
     }
 
-    public void setBorderBottomStyle(BorderView.BorderStyle stle) {
-        if (stle != this.borderBottomStyle) {
-            this.borderBottomStyle = stle;
+    public void setBorderBottomVisibility(BorderView.BorderVisibility stle) {
+        if (stle != this.borderBottomVisibility) {
+            this.borderBottomVisibility = stle;
             mBorderView.updateBorderStatus();
         }
     }
@@ -114,6 +131,28 @@ public class BorderViewDelegate {
     public void setBorderBottomDrawable(Drawable borderBottomDrawable) {
         if (borderBottomDrawable != this.borderBottomDrawable) {
             this.borderBottomDrawable = borderBottomDrawable;
+            mView.postInvalidate();
+        }
+    }
+
+    public BorderView.BorderStyle getBorderTopStyle() {
+        return borderTopStyle;
+    }
+
+    public void setBorderTopStyle(BorderView.BorderStyle borderTopStyle) {
+        if (this.borderTopStyle != borderTopStyle) {
+            this.borderTopStyle = borderTopStyle;
+            mView.postInvalidate();
+        }
+    }
+
+    public BorderView.BorderStyle getBorderBottomStyle() {
+        return borderBottomStyle;
+    }
+
+    public void setBorderBottomStyle(BorderView.BorderStyle borderBottomStyle) {
+        if (this.borderBottomStyle != borderBottomStyle) {
+            this.borderBottomStyle = borderBottomStyle;
             mView.postInvalidate();
         }
     }
@@ -145,7 +184,10 @@ public class BorderViewDelegate {
         int c = canvas.save();
 
         if (borderTopDrawable != null) {
-            int dy = mView.getScrollY() + mView.getPaddingTop();
+            int dy = mView.getScrollY();
+            if (borderTopStyle == BorderView.BorderStyle.INSIDE) {
+                dy += mView.getPaddingTop();
+            }
             canvas.translate(0, dy);
             if (isShowingTopBorder()) {
                 borderTopDrawable.setBounds(0, 0, canvas.getWidth(), borderTopDrawable.getIntrinsicHeight());
@@ -155,7 +197,10 @@ public class BorderViewDelegate {
         }
 
         if (borderBottomDrawable != null) {
-            int dy = mView.getScrollY() + canvas.getHeight() - borderBottomDrawable.getIntrinsicHeight() - mView.getPaddingBottom();
+            int dy = mView.getScrollY() + canvas.getHeight() - borderBottomDrawable.getIntrinsicHeight();
+            if (borderTopStyle == BorderView.BorderStyle.INSIDE) {
+                dy -= mView.getPaddingBottom();
+            }
             canvas.translate(0, dy);
 
             if (isShowingBottomBorder()) {

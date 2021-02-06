@@ -42,13 +42,6 @@
         <item name="android:paddingEnd">16dp</item>
     </style>
 
-    <style name="Widget.Material.BorderView" parent="android:Widget">
-        <item name="borderTopDrawable">?android:dividerVertical</item>
-        <item name="borderBottomDrawable">?android:dividerVertical</item>
-        <item name="borderTopStyle">whenContentScrolled</item>
-        <item name="borderBottomStyle">whenContentScrolled</item>
-    </style>
-
     <style name="Widget.Material.ActionBar.Solid" parent="Widget.MaterialComponents.ActionBar.Solid">
         <item name="contentInsetStart">@dimen/rd_toolbar_content_padding_start</item>
         <item name="contentInsetStartWithNavigation">@dimen/rd_toolbar_content_padding_start_with_navigation</item>
