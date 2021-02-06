@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="list_item_padding">24dp</dimen>
-    <dimen name="switchbar_text_padding">64dp</dimen>
 
     <dimen name="rd_activity_horizontal_margin">56dp</dimen>
     <dimen name="rd_toolbar_content_padding_start">80dp</dimen>

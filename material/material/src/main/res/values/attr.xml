@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="SwitchBar">
-        <attr name="android:textColor" />
-        <attr name="switchOnText" format="string" />
-        <attr name="switchOffText" format="string" />
-    </declare-styleable>
-
     <declare-styleable name="Material">
         <!-- Alert color, such as error or dangerous action. -->
         <attr name="colorAlert" format="color" />
@@ -19,17 +13,9 @@
         <!-- Color for cards. -->
         <attr name="cardBackground" format="reference" />
 
-        <!-- Style for SwitchBar -->
-        <attr name="switchBarStyle" format="reference" />
-        <attr name="switchBarTheme" format="reference" />
-        <attr name="switchBarBackgroundNormal" format="color" />
-        <attr name="switchBarBackgroundDisabled" format="color" />
-
         <attr name="outlineButtonStyle" format="reference" />
         <attr name="outlineButtonBackground" format="reference" />
         <attr name="outlineButtonForeground" format="reference" />
-
-        <attr name="borderViewStyle" format="reference" />
 
         <attr name="appBarStyle" format="reference" />
 

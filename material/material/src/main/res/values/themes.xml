@@ -3,10 +3,6 @@
 
     <style name="ThemeOverlay" />
 
-    <style name="ThemeOverlay.Material.SwitchBar" parent="android:Widget">
-        <item name="colorControlActivated">?android:textColorPrimaryInverse</item>
-    </style>
-
     <style name="ThemeOverlay.Material.Dialog" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:windowAnimationStyle">@style/Animation.Material.Dialog</item>
         <item name="android:windowElevation">@dimen/rd_material_dialog_default_elevation</item>

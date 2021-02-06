@@ -14,9 +14,6 @@
     <color name="cardview_light_background">#ffffff</color>
     <color name="cardview_dark_background">@color/material_grey_800</color>
 
-    <color name="switchbar_background_light">#80868b</color>
-    <color name="switchbar_background_dark">#424242</color>
-
     <color name="navigation_bar_divider_light">#1f000000</color>
     <color name="navigation_bar_divider_dark">#1fffffff</color>
 </resources>

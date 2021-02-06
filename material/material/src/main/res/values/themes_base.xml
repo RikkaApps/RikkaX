@@ -24,10 +24,7 @@
         <item name="colorSafe">@color/material_green_600</item>
         <item name="colorWarning">@color/material_orange_700</item>
         <item name="colorInactive" tools:ignore="PrivateResource">@color/material_grey_600</item>
-        <item name="switchBarStyle">@style/Widget.Material.SwitchBar.Light</item>
-        <item name="switchBarTheme">@style/ThemeOverlay.Material.SwitchBar</item>
-        <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
-        <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
+
         <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline.Light</item>
         <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
@@ -35,6 +32,12 @@
         <item name="navigationBarDividerColor">@color/navigation_bar_divider_light</item>
 
         <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
+
+        <!-- SwitchBar -->
+        <item name="switchBarStyle">@style/Widget.Material.SwitchBar.Light</item>
+        <item name="switchBarTheme">@style/ThemeOverlay.Material.SwitchBar</item>
+        <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
+        <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
     </style>
 
     <style name="Base" parent="Theme.MaterialComponents">
@@ -60,10 +63,7 @@
         <item name="colorSafe">@color/material_green_A100</item>
         <item name="colorWarning">@color/material_orange_A100</item>
         <item name="colorInactive">@color/material_grey_500</item>
-        <item name="switchBarStyle">@style/Widget.Material.SwitchBar</item>
-        <item name="switchBarTheme">@style/ThemeOverlay.Material.SwitchBar</item>
-        <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
-        <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
+
         <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline</item>
         <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
@@ -71,6 +71,12 @@
         <item name="navigationBarDividerColor">@color/navigation_bar_divider_dark</item>
 
         <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
+
+        <!-- SwitchBar -->
+        <item name="switchBarStyle">@style/Widget.Material.SwitchBar</item>
+        <item name="switchBarTheme">@style/ThemeOverlay.Material.SwitchBar</item>
+        <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
+        <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
     </style>
 
     <style name="Base.Light.Dialog" parent="Theme.MaterialComponents.Light.Dialog">

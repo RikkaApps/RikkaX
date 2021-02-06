@@ -26,6 +26,6 @@
         android:clickable="false"
         android:duplicateParentState="true"
         android:focusable="false"
-        android:theme="?switchBarTheme"/>
+        android:theme="?switchBarTheme" />
 
 </merge>

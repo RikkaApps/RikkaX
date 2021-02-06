@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="switchBarStyle" format="reference" />
+    <attr name="switchBarTheme" format="reference" />
+    <attr name="switchBarBackgroundNormal" format="color" />
+    <attr name="switchBarBackgroundDisabled" format="color" />
+
+    <declare-styleable name="SwitchBar">
+        <attr name="android:textColor" />
+        <attr name="switchOnText" format="string" />
+        <attr name="switchOffText" format="string" />
+    </declare-styleable>
+
+</resources>

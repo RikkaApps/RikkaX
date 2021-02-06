@@ -1,4 +1,4 @@
-package rikka.material.widget;
+package rikka.widget.switchbar;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -16,12 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import rikka.material.R;
-
-/**
- * Created by Fung Gwo on 2018/2/20.
- */
-
 public class SwitchBar extends LinearLayout implements Checkable {
 
     private static final int[] CHECKED_STATE_SET = {
@@ -30,8 +24,8 @@ public class SwitchBar extends LinearLayout implements Checkable {
 
     private CharSequence mSwitchOnText, mSwitchOffText;
 
-    private TextView mStatusText;
-    private Switch mSwitch;
+    private final TextView mStatusText;
+    private final Switch mSwitch;
 
     private @Nullable OnCheckedChangeListener mOnCheckedChangeListener = null;
 
@@ -39,8 +33,8 @@ public class SwitchBar extends LinearLayout implements Checkable {
 
     private boolean isBroadcasting = false;
 
-    private static final String KEY_SUPER_STATES = "rikka.material.superStates";
-    private static final String KEY_IS_CHECKED = "rikka.material.isChecked";
+    private static final String KEY_SUPER_STATES = "rikka.widget.switchbar.superStates";
+    private static final String KEY_IS_CHECKED = "rikka.widget.switchbar.isChecked";
 
     public SwitchBar(@NonNull Context context) {
         this(context, null);
