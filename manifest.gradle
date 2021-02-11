@@ -25,8 +25,8 @@ ext {
     rikka_material_help_version = "1.1.1"
     rikka_preference_multiprocess_version = "1.0.0"
     rikka_recyclerview_utils_version = "1.2.0"
-    rikka_layout_inflater_version = "1.0.0"
-    rikka_insets_version = "1.0.0"
+    rikka_layout_inflater_version = "1.0.1"
+    rikka_insets_version = "1.0.1"
     rikka_widget_borderview_version = "1.0.0"
-    rikka_widget_switcherbar_version = "1.0.1"
+    rikka_widget_switcherbar_version = "1.0.2"
 }
