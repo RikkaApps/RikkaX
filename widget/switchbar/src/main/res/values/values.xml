@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ThemeOverlay.Material.SwitchBar" parent="android:Widget">
+    <style name="ThemeOverlay.SwitchBar" parent="android:Widget">
         <item name="android:colorControlActivated">?android:textColorPrimaryInverse</item>
     </style>
 

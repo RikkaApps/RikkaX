@@ -28,4 +28,5 @@ ext {
     rikka_layout_inflater_version = "1.0.0"
     rikka_insets_version = "1.0.0"
     rikka_widget_borderview_version = "1.0.0"
+    rikka_widget_switcherbar_version = "1.0.1"
 }

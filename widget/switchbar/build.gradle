@@ -6,7 +6,7 @@ android {
         minSdkVersion 21
         targetSdkVersion target_sdk
         versionCode 1
-        versionName rikka_widget_borderview_version
+        versionName rikka_widget_switcherbar_version
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildFeatures {
