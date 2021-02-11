@@ -1,7 +1,5 @@
 # SwitchBar
 
-`rikka.widget:switchbar:1.0.0`
-
 Add to your light theme:
 
 ```
