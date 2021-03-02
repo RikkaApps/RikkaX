@@ -1,5 +1,8 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+plugins {
+    id('com.android.library')
+    id('kotlin-android')
+    id('com.vanniktech.maven.publish')
+}
 
 android {
     compileSdkVersion target_sdk
@@ -47,20 +50,12 @@ dependencies {
     api(project(":insets"))
     implementation(project(":widget:switchbar"))
 
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
 
-project.ext {
-    mavProjectName = 'rikka.material:material'
-    mavLibraryDescription = 'material'
-}
-
-group = 'rikka.material'
-version = android.defaultConfig.versionName
-
-apply from: rootProject.file('publish.gradle')
-repositories {
-    mavenCentral()
+ext {
+    POM_NAME = "RikkaX Material"
+    POM_DESCRIPTION = "RikkaX Material"
 }

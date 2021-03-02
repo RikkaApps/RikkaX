@@ -7,32 +7,37 @@ plugins {
 android {
     compileSdkVersion target_sdk
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 14
         targetSdkVersion target_sdk
         versionCode 1
-        versionName rikka_layout_inflater_version
+        versionName rikka_recyclerview_utils_version
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
+    /*buildFeatures {
+        buildConfig = false
+    }*/
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.annotation:annotation:$androidx_annotation_version"
-    compileOnly "androidx.appcompat:appcompat:$androidx_appcompat_version"
+    implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
+    implementation 'me.zhanghai.android.fastscroll:library:1.1.5'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
 
 ext {
-    POM_NAME = "RikkaX LayoutInflater"
-    POM_DESCRIPTION = "RikkaX LayoutInflater"
+    POM_NAME = "RikkaX RecyclerView KTX"
+    POM_DESCRIPTION = "RikkaX RecyclerView KTX"
 }

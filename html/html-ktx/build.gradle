@@ -1,5 +1,8 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+plugins {
+    id('com.android.library')
+    id('kotlin-android')
+    id('com.vanniktech.maven.publish')
+}
 
 android {
     compileSdkVersion target_sdk
@@ -31,12 +34,7 @@ dependencies {
     api(project(':html:html'))
 }
 
-project.ext {
-    mavProjectName = 'rikka.html:html-ktx'
-    mavLibraryDescription = 'Copy of android.text.Html class (including kotlin extensions).'
+ext {
+    POM_NAME = "RikkaX Html KTX"
+    POM_DESCRIPTION = "Kotlin extensions for Html"
 }
-
-group = 'rikka.html'
-version = android.defaultConfig.versionName
-
-apply from: rootProject.file('publish.gradle')

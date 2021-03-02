@@ -1,4 +1,7 @@
-apply plugin: 'com.android.library'
+plugins {
+    id('com.android.library')
+    id('com.vanniktech.maven.publish')
+}
 
 android {
     compileSdkVersion target_sdk
@@ -30,12 +33,7 @@ dependencies {
     compileOnly "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
 }
 
-project.ext {
-    mavProjectName = 'rikka.widget:switchbar'
-    mavLibraryDescription = 'SwitchBar'
+ext {
+    POM_NAME = "RikkaX SwitchBar"
+    POM_DESCRIPTION = "RikkaX SwitchBar"
 }
-
-group = 'rikka.widget'
-version = android.defaultConfig.versionName
-
-apply from: rootProject.file('publish.gradle')

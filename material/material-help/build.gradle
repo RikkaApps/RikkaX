@@ -1,4 +1,7 @@
-apply plugin: 'com.android.library'
+plugins {
+    id('com.android.library')
+    id('com.vanniktech.maven.publish')
+}
 
 android {
     compileSdkVersion target_sdk
@@ -26,15 +29,11 @@ dependencies {
     implementation "moe.shizuku.preference:preference-android:$preferenceLibraryVersion"
     implementation "moe.shizuku.preference:preference-simplemenu-android:$preferenceLibraryVersion"
 
-    implementation(project(":recyclerview-utils"))
+    implementation(project(":recyclerview:recyclerview-adapter"))
+    implementation(project(":recyclerview:recyclerview-ktx"))
 }
 
-project.ext {
-    mavProjectName = 'rikka.material:material-help'
-    mavLibraryDescription = 'Simple Google style help UI lib.'
+ext {
+    POM_NAME = "RikkaX Helplib"
+    POM_DESCRIPTION = "RikkaX Helplib"
 }
-
-group = 'rikka.material'
-version = android.defaultConfig.versionName
-
-apply from: rootProject.file('publish.gradle')

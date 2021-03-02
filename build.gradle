@@ -5,15 +5,15 @@ buildscript {
     repositories {
         jcenter()
         google()
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_plugin_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$bintray_plugin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // vanniktech/gradle-maven-publish-plugin has hardcoded "oss.sonatype.org"
+        classpath 'com.github.RikkaW:gradle-maven-publish-plugin:87b40318c2'
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.20'
     }
 }
 
@@ -29,6 +29,47 @@ allprojects {
     }
 }
 
+subprojects {
+    afterEvaluate {
+        if (plugins.hasPlugin('com.vanniktech.maven.publish')) {
+            if (it.parent == rootProject) {
+                group = "${groupIdBase}.${it.name}"
+            } else {
+                group = "${groupIdBase}.${it.parent.name}"
+            }
+            version = android.defaultConfig.versionName
+            println("${it.displayName}: ${group}:${it.name}:${version}")
+
+            mavenPublish {
+                nexus {
+                    baseUrl = "https://s01.oss.sonatype.org"
+                    stagingProfile = "dev.rikka"
+                }
+            }
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    groupIdBase = "dev.rikka.rikkax"
+
+    POM_INCEPTION_YEAR = "2017"
+    POM_PACKAGING = "aar"
+
+    POM_URL = "https://github.com/RikkaApps/RikkaX"
+    POM_SCM_URL = "https://github.com/RikkaApps/RikkaX"
+    POM_SCM_CONNECTION = "scm:git@github.com:RikkaApps/RikkaX.git"
+    POM_SCM_DEV_CONNECTION = "scm:git@github.com:RikkaApps/RikkaX.git"
+
+    POM_LICENCE_NAME = "MIT License"
+    POM_LICENCE_URL = "https://github.com/RikkaApps/RikkaX/blob/master/LICENSE"
+    POM_LICENCE_DIST = "repo"
+
+    POM_DEVELOPER_ID = "rikka"
+    POM_DEVELOPER_NAME = "Rikka"
+    POM_DEVELOPER_URL = "https://github.com/RikkaW"
 }

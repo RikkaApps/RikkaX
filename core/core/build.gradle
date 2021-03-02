@@ -1,4 +1,7 @@
-apply plugin: 'com.android.library'
+plugins {
+    id('com.android.library')
+    id('com.vanniktech.maven.publish')
+}
 
 android {
     compileSdkVersion target_sdk
@@ -28,12 +31,7 @@ dependencies {
     implementation "androidx.fragment:fragment:$androidx_fragment_version"
 }
 
-project.ext {
-    mavProjectName = 'rikka.core:core'
-    mavLibraryDescription = 'Basic classes.'
+ext {
+    POM_NAME = "RikkaX Core"
+    POM_DESCRIPTION = "RikkaX Core"
 }
-
-group = 'rikka.core'
-version = android.defaultConfig.versionName
-
-apply from: rootProject.file('publish.gradle')

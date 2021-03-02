@@ -1,4 +1,7 @@
-apply plugin: 'com.android.library'
+plugins {
+    id('com.android.library')
+    id('com.vanniktech.maven.publish')
+}
 
 android {
     compileSdkVersion target_sdk
@@ -21,12 +24,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-project.ext {
-    mavProjectName = 'rikka.annotation:annotation'
-    mavLibraryDescription = 'Annotations'
+ext {
+    POM_NAME = "RikkaX Annotation"
+    POM_DESCRIPTION = "RikkaX Annotation"
 }
-
-group = 'rikka.annotation'
-version = android.defaultConfig.versionName
-
-apply from: rootProject.file('publish.gradle')

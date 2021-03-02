@@ -1,5 +1,7 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+plugins {
+    id('com.android.library')
+    id('com.vanniktech.maven.publish')
+}
 
 android {
     compileSdkVersion target_sdk
@@ -32,17 +34,12 @@ dependencies {
     implementation "org.ccil.cowan.tagsoup:tagsoup:1.2"
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
 
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
 
-project.ext {
-    mavProjectName = 'rikka.html:html'
-    mavLibraryDescription = 'Copy of android.text.Html class.'
+ext {
+    POM_NAME = "RikkaX Html"
+    POM_DESCRIPTION = "RikkaX Html"
 }
-
-group = 'rikka.html'
-version = android.defaultConfig.versionName
-
-apply from: rootProject.file('publish.gradle')
