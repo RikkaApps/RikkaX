@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Theme">
+        <!-- Default style for simple menu preferences. -->
+        <attr name="simpleMenuPreferenceStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ForegroundCheckTextView">
+        <attr name="android:foregroundGravity" />
+        <attr name="android:foreground" />
+        <attr name="foregroundInsidePadding" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SimpleMenuPreference">
+        <attr name="android:popupMenuStyle" />
+        <attr name="android:popupTheme" />
+        <attr name="popupBackgroundRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SimpleMenuPopup">
+
+        <attr name="listMarginHorizontal" format="dimension" />
+        <attr name="listMarginVertical" format="dimension" />
+        <attr name="listItemPadding" format="dimension" />
+        <attr name="listElevation" format="dimension" />
+
+        <attr name="dialogMarginHorizontal" format="dimension" />
+        <attr name="dialogMarginVertical" format="dimension" />
+        <attr name="dialogItemPadding" format="dimension" />
+        <attr name="dialogElevation" format="dimension" />
+        <attr name="dialogMaxWidth" format="dimension" />
+
+        <attr name="unit" format="dimension" />
+        <attr name="maxUnits" format="integer" />
+    </declare-styleable>
+
+</resources>

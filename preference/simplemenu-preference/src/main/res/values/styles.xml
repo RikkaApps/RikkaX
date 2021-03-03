@@ -1,0 +1,35 @@
+<resources>
+
+    <style name="Preference.SimpleMenuPreference">
+        <item name="android:layout">@layout/preference_simplemenu</item>
+        <item name="android:popupMenuStyle">@style/Widget.Preference.SimpleMenuPreference.PopupMenu</item>
+        <item name="android:popupTheme">@style/ThemeOverlay.Preference.SimpleMenuPreference.PopupMenu</item>
+    </style>
+
+    <style name="Widget.Preference.SimpleMenuPreference.PopupMenu" parent="android:Widget">
+        <item name="android:popupBackground">@drawable/simple_menu_background</item>
+
+        <item name="listMarginHorizontal">@dimen/simple_menu_margin</item>
+        <item name="listMarginVertical">8dp</item>
+        <item name="listItemPadding">16dp</item>
+        <item name="listElevation">8dp</item>
+
+        <item name="dialogMarginHorizontal">16dp</item>
+        <item name="dialogMarginVertical">24dp</item>
+        <item name="dialogItemPadding">24dp</item>
+        <item name="dialogElevation">24dp</item>
+        <item name="dialogMaxWidth">@dimen/simple_menu_dialog_max_width</item>
+
+        <item name="unit">@dimen/simple_menu_unit</item>
+        <item name="maxUnits">@integer/simple_menu_max_units</item>
+    </style>
+
+    <style name="ThemeOverlay.Preference.SimpleMenuPreference.PopupMenu" parent="android:ThemeOverlay">
+        <item name="popupBackgroundRadius">4dp</item>
+    </style>
+
+    <style name="Animation.Preference.SimpleMenuCenter" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@anim/shrink_fade_out_center</item>
+    </style>
+</resources>
