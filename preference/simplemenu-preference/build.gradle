@@ -9,7 +9,7 @@ android {
         minSdkVersion 16
         targetSdkVersion target_sdk
         versionCode 1
-        versionName '1.0.1'
+        versionName '1.0.2'
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildFeatures {
