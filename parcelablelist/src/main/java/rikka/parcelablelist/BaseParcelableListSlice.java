@@ -17,7 +17,7 @@ import java.util.List;
 public abstract class BaseParcelableListSlice<T> implements Parcelable {
 
     private static final String TAG = "ParcelableListSlice";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private static final int MAX_IPC_SIZE = 64 * 1024;
 
@@ -85,20 +85,22 @@ public abstract class BaseParcelableListSlice<T> implements Parcelable {
         Iterator<T> iterator = mList.iterator();
         writeSliceToParcel(iterator, dest, flags);
 
-        while (iterator.hasNext()) {
-            int writeFlags = flags;
-            IBinder binder = new Binder() {
-                @Override
-                protected boolean onTransact(int code, @NonNull Parcel data, @Nullable Parcel reply, int flags) {
-                    if (code != IBinder.FIRST_CALL_TRANSACTION || reply == null) {
-                        return false;
-                    }
-                    writeSliceToParcel(iterator, reply, writeFlags);
-                    return true;
-                }
-            };
-            dest.writeStrongBinder(binder);
+        if (!iterator.hasNext()) {
+            return;
         }
+
+        int writeFlags = flags;
+        IBinder binder = new Binder() {
+            @Override
+            protected boolean onTransact(int code, @NonNull Parcel data, @Nullable Parcel reply, int flags) {
+                if (code != IBinder.FIRST_CALL_TRANSACTION || reply == null) {
+                    return false;
+                }
+                writeSliceToParcel(iterator, reply, writeFlags);
+                return true;
+            }
+        };
+        dest.writeStrongBinder(binder);
     }
 
     private void writeSliceToParcel(Iterator<T> iterator, Parcel dest, int flags) {
@@ -111,11 +113,11 @@ public abstract class BaseParcelableListSlice<T> implements Parcelable {
         // and binder has total 1MB buffer size across the process, unless all 16 binder
         // threads are doing this at the same time, exceed a little bit could never be
         // a problem.
-        // Also, shrink is not allowed by Parcel and the system's ParceledListSlice class
-        // has the same implementation, we really don't need to consider this.
+        // Also, the system's ParceledListSlice class has the same implementation, we
+        // really don't need to consider this.
         while (iterator.hasNext() && dest.dataSize() < MAX_IPC_SIZE) {
             writeElement(iterator.next(), dest, flags);
-            size ++;
+            size++;
         }
         int position = dest.dataPosition();
         dest.setDataPosition(startPosition);
@@ -125,5 +127,5 @@ public abstract class BaseParcelableListSlice<T> implements Parcelable {
 
     public abstract T readElement(Parcel in);
 
-    protected abstract void writeElement(T parcelable, Parcel dest, int writeFlags);
+    public abstract void writeElement(T parcelable, Parcel dest, int writeFlags);
 }

@@ -27,7 +27,7 @@ public class StringListSlice extends BaseParcelableListSlice<String> {
     }
 
     @Override
-    protected void writeElement(String string, Parcel dest, int writeFlags) {
+    public void writeElement(String string, Parcel dest, int writeFlags) {
         dest.writeString(string);
     }
 

@@ -28,7 +28,7 @@ public class ParcelableListSlice<T extends Parcelable> extends BaseParcelableLis
     }
 
     @Override
-    protected void writeElement(T parcelable, Parcel dest, int writeFlags) {
+    public void writeElement(T parcelable, Parcel dest, int writeFlags) {
         dest.writeParcelable(parcelable, writeFlags);
     }
 
