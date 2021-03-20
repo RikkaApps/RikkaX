@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dark_theme_auto_battery">절전 모드를 사용중인 경우</string>
+    <string name="dark_theme_on">항상 켜짐</string>
+    <string name="dark_theme_off">항상 꺼짐</string>
+    <string name="dark_theme_auto_time">저녁 시간대</string>
+    <string name="dark_theme">어두운 테마</string>
+    <string name="follow_system">시스템 설정</string>
+</resources>

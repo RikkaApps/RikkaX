@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dark_theme_auto_battery">När \"batterisparläge\" är aktiverat</string>
+    <string name="dark_theme_auto_time">På natten</string>
+    <string name="dark_theme_on">Alltid på</string>
+    <string name="dark_theme_off">Alltid av</string>
+    <string name="dark_theme">Mörkt tema</string>
+    <string name="follow_system">Följ system</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dark_theme_auto_battery">Als \"Batterijbesparing\" is ingeschakeld</string>
+    <string name="dark_theme_auto_time">Bij nacht</string>
+    <string name="dark_theme_on">Altijd aan</string>
+    <string name="dark_theme_off">Altijd uit</string>
+    <string name="dark_theme">Donkere thema</string>
+    <string name="follow_system">Volg systeem</string>
+</resources>
