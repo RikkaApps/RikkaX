@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="dark_theme_auto_battery">Com a \"Economia de bateria\" ativa</string>
-    <string name="dark_theme_auto_time">À noite</string>
-    <string name="dark_theme_on">Sempre ligado</string>
-    <string name="dark_theme_off">Sempre desligado</string>
-    <string name="dark_theme">Tema escuro</string>
-    <string name="follow_system">Seguir o sistema</string>
-</resources>
