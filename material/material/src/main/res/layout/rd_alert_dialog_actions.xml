@@ -6,8 +6,6 @@
     android:layout_height="wrap_content"
     android:clipToPadding="false"
     android:fillViewport="true"
-    android:paddingBottom="4dp"
-    android:paddingTop="16dp"
     android:scrollIndicators="top|bottom">
 
     <androidx.appcompat.widget.ButtonBarLayout
@@ -18,9 +16,9 @@
         android:orientation="horizontal"
         android:paddingHorizontal="8dp"
         android:paddingVertical="2dp"
-        android:paddingStart="16dp"
+        android:paddingStart="8dp"
         android:paddingTop="2dp"
-        android:paddingEnd="16dp"
+        android:paddingEnd="8dp"
         android:paddingBottom="2dp">
 
         <Button
