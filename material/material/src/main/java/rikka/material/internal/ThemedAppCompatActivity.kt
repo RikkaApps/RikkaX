@@ -18,7 +18,7 @@ open class ThemedAppCompatActivity: AppCompatActivity() {
         LocaleDelegate()
     }
 
-    private val dayNightDelegate by lazy {
+    public val dayNightDelegate by lazy {
         DayNightDelegate(this)
     }
 
