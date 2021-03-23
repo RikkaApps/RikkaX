@@ -44,6 +44,10 @@ open class ThemedAppCompatActivity: AppCompatActivity() {
     open fun onApplyUserThemeResource(theme: Resources.Theme, isDecorView: Boolean) {
     }
 
+    open fun respectDefaultNightMode():Boolean{
+        return true
+    }
+
     private fun onApplyUserThemeResourceForDecorView() {
         // apply style to DecorContext to correct theme of PopupWindow, etc.
         if (window?.decorView?.context?.theme != null) {
@@ -81,7 +85,7 @@ open class ThemedAppCompatActivity: AppCompatActivity() {
 
         if (localeDelegate.isLocaleChanged
                 || dayNightDelegate.isDayNightChanged
-                || dayNightDelegate.calculateNightMode() != DayNightDelegate.getDefaultNightMode()
+                || respectDefaultNightMode() && dayNightDelegate.calculateNightMode() != DayNightDelegate.getDefaultNightMode()
                 || userThemeKey != computeUserThemeKey()) {
             recreate()
         }
