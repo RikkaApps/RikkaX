@@ -185,10 +185,16 @@ public class DayNightDelegate {
     }
 
     public void setLocalNightMode(final @NightMode int mode) {
+        setLocalNightMode(mode, true);
+    }
+
+    public void setLocalNightMode(final @NightMode int mode, boolean apply) {
         if (mLocalNightMode != mode) {
             mLocalNightMode = mode;
-            ensureAutoManagers();
-            applyDayNight();
+            if (apply) {
+                ensureAutoManagers();
+                applyDayNight();
+            }
         }
     }
 
