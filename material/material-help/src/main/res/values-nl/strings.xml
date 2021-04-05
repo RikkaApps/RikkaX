@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="helplib_title">Help &amp; ondersteuning</string>
+    <string name="helplib_action_about">Over</string>
+    <string name="helplib_action_issue">Een probleem melden</string>
+    <string name="helplib_action_telegram_group">Word lid van de telegramgroep</string>
+    <string name="helplib_action_mail">Stuur een email</string>
+    <string name="helplib_title_contact">Neem contact met ons op</string>
+    <string name="helplib_title_faq">Veel gestelde vragen</string>
+</resources>

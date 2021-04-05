@@ -8,16 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
-import moe.shizuku.preference.Preference;
-import moe.shizuku.preference.PreferenceFragment;
-import moe.shizuku.preference.PreferenceGroup;
 import rikka.recyclerview.RecyclerViewKt;
 
-public class HelpFragment extends PreferenceFragment {
+public class HelpFragment extends PreferenceFragmentCompat {
 
     public static final String KEY_HELP = "help";
     public static final String KEY_CONTACT = "contact";
@@ -36,12 +35,6 @@ public class HelpFragment extends PreferenceFragment {
         recyclerView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         RecyclerViewKt.fixEdgeEffect(recyclerView, true, true);
         return recyclerView;
-    }
-
-    @Nullable
-    @Override
-    public DividerDecoration onCreateItemDecoration() {
-        return new CategoryDivideDividerDecoration();
     }
 
     /**

@@ -5,11 +5,11 @@ import android.os.Build;
 
 public class InfoHelper {
 
-    private static String ANDROID = Build.VERSION.RELEASE;
-    private static String MODEL = Build.MODEL;
-    private static String MANUFACTURER = Build.MANUFACTURER;
+    private static final String ANDROID = Build.VERSION.RELEASE;
+    private static final String MODEL = Build.MODEL;
+    private static final String MANUFACTURER = Build.MANUFACTURER;
 
-    private Context mContext;
+    private final Context mContext;
 
     public InfoHelper(Context context) {
         mContext = context.getApplicationContext();

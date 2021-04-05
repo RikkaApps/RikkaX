@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="helplib_action_about">Om</string>
+    <string name="helplib_action_issue">Rapportera ett problem</string>
+    <string name="helplib_action_telegram_group">Gå med i telegram gruppen</string>
+    <string name="helplib_action_mail">Skicka ett mail</string>
+    <string name="helplib_title_contact">Kontakta oss</string>
+    <string name="helplib_title_faq">Ofta frågade frågor</string>
+    <string name="helplib_title">Hjälp &amp; support</string>
+</resources>
