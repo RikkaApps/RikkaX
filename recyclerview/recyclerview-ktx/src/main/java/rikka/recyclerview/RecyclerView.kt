@@ -5,6 +5,7 @@ package rikka.recyclerview
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Rect
+import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EdgeEffect
@@ -56,10 +57,13 @@ fun RecyclerView.fixEdgeEffect(overScrollIfContentScrolls: Boolean = true, alway
         }
     }
 
-    edgeEffectFactory = if (alwaysClipToPadding && !clipToPadding) {
-        AlwaysClipToPaddingEdgeEffectFactory()
-    } else {
-        RecyclerView.EdgeEffectFactory()
+    // Android 12 DP3 changes over edge effect to "scale", we don't need to "fix" it
+    if (!(Build.VERSION.SDK_INT >= 31 || (Build.VERSION.SDK_INT == 30 && Build.VERSION.PREVIEW_SDK_INT > 0))) {
+        edgeEffectFactory = if (alwaysClipToPadding && !clipToPadding) {
+            AlwaysClipToPaddingEdgeEffectFactory()
+        } else {
+            RecyclerView.EdgeEffectFactory()
+        }
     }
 }
 
