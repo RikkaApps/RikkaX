@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Base.V29.Light" parent="Base.V28.Light">
+        <!--
+        MIUI has some sort of "force dark mode".
+        However it seems that even if the app have correct dark them set, MIUI will still apply its "force dark mode",
+        making colors look crappy.
+        Fortunately it's reported that MIUI respect "android:forceDarkAllowed", so we can set it to false. -->
         <item name="android:forceDarkAllowed">false</item>
     </style>
 
@@ -8,9 +14,9 @@
         <item name="android:forceDarkAllowed">false</item>
     </style>
 
-    <style name="Theme.Material.Light" parent="Base.V29.Light"/>
-    <style name="Theme.Material" parent="Base.V29"/>
+    <style name="Theme.Material.Light" parent="Base.V29.Light" />
 
+    <style name="Theme.Material" parent="Base.V29" />
 
     <style name="Base.V29.Dialog.Light" parent="Base.Light.Dialog">
         <item name="android:forceDarkAllowed">false</item>
@@ -21,6 +27,7 @@
     </style>
 
     <style name="Theme.Material.Light.Dialog" parent="Base.V29.Dialog.Light" />
+
     <style name="Theme.Material.Dialog" parent="Base.V29.Dialog" />
 
 </resources>
