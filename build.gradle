@@ -11,8 +11,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradle_plugin_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        // vanniktech/gradle-maven-publish-plugin has hardcoded "oss.sonatype.org"
-        classpath 'com.github.RikkaW:gradle-maven-publish-plugin:87b40318c2'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.15.1'
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.20'
     }
 }
@@ -27,6 +26,11 @@ allprojects {
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet')
     }
+    plugins.withId("com.vanniktech.maven.publish") {
+        mavenPublish {
+            sonatypeHost = "S01"
+        }
+    }
 }
 
 subprojects {
@@ -39,13 +43,6 @@ subprojects {
             }
             version = android.defaultConfig.versionName
             println("${it.displayName}: ${group}:${it.name}:${version}")
-
-            mavenPublish {
-                nexus {
-                    baseUrl = "https://s01.oss.sonatype.org"
-                    stagingProfile = "dev.rikka"
-                }
-            }
         }
     }
 }
