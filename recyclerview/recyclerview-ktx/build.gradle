@@ -25,6 +25,13 @@ android {
         }
     }
 }
+repositories {
+    jcenter({
+        content {
+            includeGroup('me.zhanghai.android.fastscroll')
+        }
+    })
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
