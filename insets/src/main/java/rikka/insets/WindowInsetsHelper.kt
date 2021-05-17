@@ -69,7 +69,7 @@ open class WindowInsetsHelper private constructor(
     open fun setInitialPaddingRelative(start: Int, top: Int, end: Int, bottom: Int) {
         val isRTL = view.layoutDirection == View.LAYOUT_DIRECTION_RTL
         if (isRTL) {
-            setInitialPadding(start, top, end, bottom)
+            setInitialPadding(end, top, start, bottom)
         } else {
             setInitialPadding(start, top, end, bottom)
         }
