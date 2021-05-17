@@ -76,10 +76,10 @@ open class WindowInsetsHelper private constructor(
     }
 
     open fun setInitialMargin(left: Int, top: Int, right: Int, bottom: Int) {
-        initialPaddingLeft = left
-        initialPaddingTop = top
-        initialPaddingRight = right
-        initialPaddingBottom = bottom
+        initialMarginLeft = left
+        initialMarginTop = top
+        initialMarginRight = right
+        initialMarginBottom = bottom
 
         lastInsets?.let { applyWindowInsets(it) }
     }
