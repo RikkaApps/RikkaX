@@ -42,7 +42,7 @@ layoutInflater.factory2 = MyViewInflater(delegate)
 
 ### Use InsetsHelper
 
-First lets create a very simple layout, we can see that the square shows below the status bar.
+First lets create a very simple layout. We can see that the square shows below the status bar.
 
 ![A simple layout with a square on the top left corner; the square shows below the status bar](assets/01.png)
 
@@ -64,9 +64,9 @@ First lets create a very simple layout, we can see that the square shows below t
 </FrameLayout>
 ```
 
-Then add `app:edgeToEdge="true"` to the `FrameLayout`, we can see that the status bar now floating on the square.
+Then add `app:edgeToEdge="true"` to the `FrameLayout`, we can see that the status bar now floats on the square.
 
-![The status bar now floating on the square](assets/02.png)
+![The status bar floats on the square](assets/02.png)
 
 Note, to make the status bar and navigation bar transparent, you need to add these attributes to your theme.
 
@@ -77,9 +77,9 @@ Note, to make the status bar and navigation bar transparent, you need to add the
 <item name="android:enforceStatusBarContrast">false</item>
 ```
 
-Finally, add `app:fitsSystemWindowsInsets="top"` to the `FrameLayout`, we can see that the `FrameLayout` has a top padding which the size is the height of the status bar.
+Finally, add `app:fitsSystemWindowsInsets="top"` to the `FrameLayout`. We can see that the `FrameLayout` has a top padding whose the size is the height of the status bar.
 
-![The FrameLayout has a top padding which the size is the height of the status bar](assets/03.png)
+![The FrameLayout has a top padding whose the size is the height of the status bar](assets/03.png)
 
 **In the actual usage scenario, you need to add different attributes (`fitsSystemWindowsInsets` and `layout_fitsSystemWindowsInsets`) for different views according to your situation.**
 
@@ -96,7 +96,7 @@ Attribute                 | Type                                      | Descript
 
 ### Change padding and margin at runtime
 
-In actual use scenarios, there may be more complex requirements. For example, you need to change the padding of the views. You need to use our methods to change the padding and the margin, or the insets may be added multiple time.
+In actual usage scenario, there may be more complex requirements. For example, you need to change the padding of the views. You need to use our methods to change the padding and the margin, or the insets may be added multiple time.
 
 Also, **DO NOT** use DataBinding to change padding and margin since DataBinding runs "one frame later", so that it will overwrite values set by InsetsHelper.
 
@@ -126,7 +126,7 @@ To use these methods with Java, use `WindowInsetsHelperKt`.
 
 ### 1.1.0 (2021/05/17)
 
-* Add missing "s" to attribute `fitsSystemWindowsInsets` and `layout_fitsSystemWindowsInsets`
+* Add the missing "s" to the attribute `fitsSystemWindowsInsets` and `layout_fitsSystemWindowsInsets`
 
   This is a breaking change, but the user only needs to replace all "fitsSystemWindowsInsets" with "fitsSystemWindowsInsets".
 
