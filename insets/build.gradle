@@ -10,7 +10,7 @@ android {
         minSdkVersion 21
         targetSdkVersion target_sdk
         versionCode 1
-        versionName rikka_insets_version
+        versionName '1.1.0'
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildTypes {
