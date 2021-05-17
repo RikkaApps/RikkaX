@@ -2,7 +2,7 @@
 <resources>
     <declare-styleable name="WindowInsetsHelper">
         <attr name="edgeToEdge" format="boolean" />
-        <attr name="fitSystemWindowsInsets" format="flags">
+        <attr name="fitsSystemWindowsInsets" format="flags">
             <flag name="top" value="0x30" />
             <flag name="bottom" value="0x50" />
             <flag name="left" value="0x03" />
@@ -18,7 +18,7 @@
             <flag name="start" value="0x00800003" />
             <flag name="end" value="0x00800005" />
         </attr>
-        <attr name="layout_fitSystemWindowsInsets" format="flags">
+        <attr name="layout_fitsSystemWindowsInsets" format="flags">
             <flag name="top" value="0x30" />
             <flag name="bottom" value="0x50" />
             <flag name="left" value="0x03" />

@@ -39,7 +39,7 @@ private class ConsumeInsets : ApplyInsetsCallback<Insets> {
 open class WindowInsetsHelper private constructor(
         private val view: View,
         private val fitSystemWindows: Int,
-        private val layout_fitSystemWindowsInsets: Int,
+        private val layout_fitsSystemWindowsInsets: Int,
         private val consumeSystemWindows: Int) : OnApplyWindowInsetsListener {
 
     internal var initialPaddingLeft: Int = view.paddingLeft
@@ -124,7 +124,7 @@ open class WindowInsetsHelper private constructor(
             view.setPadding(padding.left, padding.top, padding.right, padding.bottom)
         }
 
-        if (layout_fitSystemWindowsInsets != 0) {
+        if (layout_fitsSystemWindowsInsets != 0) {
             if (!initialMargin) {
                 initialMarginLeft = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.leftMargin ?: 0
                 initialMarginTop = (view.layoutParams as? ViewGroup.MarginLayoutParams)?.topMargin ?: 0
@@ -135,19 +135,19 @@ open class WindowInsetsHelper private constructor(
                 initialMargin = true
             }
 
-            val margin = if ((layout_fitSystemWindowsInsets and RELATIVE_LAYOUT_DIRECTION) == RELATIVE_LAYOUT_DIRECTION)
+            val margin = if ((layout_fitsSystemWindowsInsets and RELATIVE_LAYOUT_DIRECTION) == RELATIVE_LAYOUT_DIRECTION)
                 Rect(initialMarginLeft, initialMarginTop, initialMarginRight, initialMarginBottom)
             else
                 Rect(initialMarginStart, initialMarginTop, initialMarginEnd, initialMarginBottom)
 
-            applyInsets(windowInsets.systemWindowInsets, layout_fitSystemWindowsInsets, ApplyInsets(margin))
+            applyInsets(windowInsets.systemWindowInsets, layout_fitsSystemWindowsInsets, ApplyInsets(margin))
 
             val lp = view.layoutParams
             if (lp is ViewGroup.MarginLayoutParams) {
                 lp.topMargin = margin.top
                 lp.bottomMargin = margin.bottom
 
-                if ((layout_fitSystemWindowsInsets and RELATIVE_LAYOUT_DIRECTION) == RELATIVE_LAYOUT_DIRECTION) {
+                if ((layout_fitsSystemWindowsInsets and RELATIVE_LAYOUT_DIRECTION) == RELATIVE_LAYOUT_DIRECTION) {
                     lp.marginStart = margin.left
                     lp.marginEnd = margin.right
                 } else {
@@ -182,16 +182,16 @@ open class WindowInsetsHelper private constructor(
         fun attach(view: View, attrs: AttributeSet) {
             val a = view.context.obtainStyledAttributes(attrs, R.styleable.WindowInsetsHelper, 0, 0)
             val edgeToEdge = a.getBoolean(R.styleable.WindowInsetsHelper_edgeToEdge, false)
-            val fitSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_fitSystemWindowsInsets, 0)
-            val layout_fitSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_layout_fitSystemWindowsInsets, 0)
+            val fitsSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_fitsSystemWindowsInsets, 0)
+            val layout_fitsSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_layout_fitsSystemWindowsInsets, 0)
             val consumeSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_consumeSystemWindowsInsets, 0)
             a.recycle()
 
-            attach(view, edgeToEdge, fitSystemWindowsInsets, layout_fitSystemWindowsInsets, consumeSystemWindowsInsets)
+            attach(view, edgeToEdge, fitsSystemWindowsInsets, layout_fitsSystemWindowsInsets, consumeSystemWindowsInsets)
         }
 
         @JvmStatic
-        fun attach(view: View, edgeToEdge: Boolean, fitSystemWindowsInsets: Int, layout_fitSystemWindowsInsets: Int, consumeSystemWindowsInsets: Int) {
+        fun attach(view: View, edgeToEdge: Boolean, fitsSystemWindowsInsets: Int, layout_fitsSystemWindowsInsets: Int, consumeSystemWindowsInsets: Int) {
             if (edgeToEdge) {
                 view.systemUiVisibility = (view.systemUiVisibility
                         or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -199,11 +199,11 @@ open class WindowInsetsHelper private constructor(
                         or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
             }
 
-            if (fitSystemWindowsInsets == 0 && layout_fitSystemWindowsInsets == 0 && consumeSystemWindowsInsets == 0) {
+            if (fitsSystemWindowsInsets == 0 && layout_fitsSystemWindowsInsets == 0 && consumeSystemWindowsInsets == 0) {
                 return
             }
 
-            val listener = WindowInsetsHelper(view, fitSystemWindowsInsets, layout_fitSystemWindowsInsets, consumeSystemWindowsInsets)
+            val listener = WindowInsetsHelper(view, fitsSystemWindowsInsets, layout_fitsSystemWindowsInsets, consumeSystemWindowsInsets)
             ViewCompat.setOnApplyWindowInsetsListener(view, listener)
             view.setTag(R.id.tag_rikka_material_WindowInsetsHelper, listener)
 

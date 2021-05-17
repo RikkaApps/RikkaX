@@ -54,7 +54,7 @@
         android:background="?android:colorBackground"
         android:elevation="8dp"
         android:orientation="vertical"
-        app:fitSystemWindowsInsets="bottom">
+        app:fitsSystemWindowsInsets="bottom">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/resolver_list"
