@@ -9,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion target_sdk
         versionCode 1
-        versionName rikka_recyclerview_utils_version
+        versionName '1.2.1'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
