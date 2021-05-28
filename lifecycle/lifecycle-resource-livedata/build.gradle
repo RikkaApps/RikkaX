@@ -40,6 +40,6 @@ dependencies {
 }
 
 ext {
-    POM_NAME = "RikkaX ViewModel Lazy"
-    POM_DESCRIPTION = "RikkaX ViewModel Lazy"
+    POM_NAME = "RikkaX ResourceLiveData"
+    POM_DESCRIPTION = "RikkaX ResourceLiveData"
 }
