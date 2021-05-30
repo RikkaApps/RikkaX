@@ -22,6 +22,10 @@ class SimpleMenuBoundsProperty extends Property<PropertyHolder, Rect> {
     @Override
     public void set(PropertyHolder holder, Rect value) {
         holder.setBounds(value);
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1) {
+            holder.getContentView().invalidate();
+        }
     }
 
     public SimpleMenuBoundsProperty(String name) {
