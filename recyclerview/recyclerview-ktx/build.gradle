@@ -10,7 +10,7 @@ android {
         minSdkVersion 14
         targetSdkVersion target_sdk
         versionCode 1
-        versionName '1.2.1'
+        versionName '1.2.2'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -25,19 +25,12 @@ android {
         }
     }
 }
-repositories {
-    jcenter({
-        content {
-            includeGroup('me.zhanghai.android.fastscroll')
-        }
-    })
-}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
-    implementation 'me.zhanghai.android.fastscroll:library:1.1.5'
+    implementation 'me.zhanghai.android.fastscroll:library:1.1.6'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
