@@ -5,19 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@SuppressWarnings("rawtypes")
 public abstract class BaseRecyclerViewAdapter<CP extends CreatorPool> extends RecyclerView.Adapter<BaseViewHolder> {
 
     private static final String TAG = "BaseRVAdapter";
     private static final boolean DEBUG = false;
 
     private List mItems;
-    private CP mCreatorPool;
+    private final CP mCreatorPool;
     private Object mListener;
 
     public Object getListener() {
@@ -127,5 +128,19 @@ public abstract class BaseRecyclerViewAdapter<CP extends CreatorPool> extends Re
         super.onViewRecycled(holder);
 
         holder.recycle();
+    }
+
+    @Override
+    public void onViewAttachedToWindow(@NonNull BaseViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+
+        holder.onViewAttachedToWindow();
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull BaseViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+
+        holder.onViewDetachedFromWindow();
     }
 }

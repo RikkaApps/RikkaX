@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
     public interface Creator<T> {
@@ -40,6 +41,7 @@ public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
         mData = data;
 
         int position = getAdapterPosition();
+        //noinspection unchecked
         getAdapter().getItems().set(position, data);
         getAdapter().notifyItemChanged(position, payload);
     }
@@ -87,6 +89,14 @@ public class BaseViewHolder<T> extends RecyclerView.ViewHolder {
     }
 
     public void onRecycle() {
+
+    }
+
+    public void onViewAttachedToWindow() {
+
+    }
+
+    public void onViewDetachedFromWindow() {
 
     }
 }
