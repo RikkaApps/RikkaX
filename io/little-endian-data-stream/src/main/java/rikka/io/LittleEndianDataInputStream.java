@@ -53,7 +53,7 @@ public class LittleEndianDataInputStream extends InputStream implements DataInpu
     @Override
     public int readUnsignedByte() throws IOException {
         int b = in.read();
-        if (b > 0) {
+        if (b < 0) {
             throw new EOFException();
         }
         return b;
