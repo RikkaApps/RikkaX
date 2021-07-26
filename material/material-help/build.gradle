@@ -15,7 +15,3 @@ dependencies {
     implementation(project(":recyclerview:recyclerview-ktx"))
 }
 
-ext {
-    POM_NAME = "RikkaX Helplib"
-    POM_DESCRIPTION = "RikkaX Helplib"
-}

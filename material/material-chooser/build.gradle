@@ -22,7 +22,3 @@ dependencies {
     implementation(project(":recyclerview:recyclerview-ktx"))
 }
 
-ext {
-    POM_NAME = "RikkaX Chooser"
-    POM_DESCRIPTION = "RikkaX Chooser"
-}

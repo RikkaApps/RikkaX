@@ -11,8 +11,3 @@ dependencies {
     implementation "androidx.core:core:$androidx_core_version"
     implementation "androidx.fragment:fragment:$androidx_fragment_version"
 }
-
-ext {
-    POM_NAME = "RikkaX Core"
-    POM_DESCRIPTION = "RikkaX Core"
-}

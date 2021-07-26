@@ -47,23 +47,3 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-ext {
-    groupIdBase = "dev.rikka.rikkax"
-
-    POM_INCEPTION_YEAR = "2017"
-    POM_PACKAGING = "aar"
-
-    POM_URL = "https://github.com/RikkaApps/RikkaX"
-    POM_SCM_URL = "https://github.com/RikkaApps/RikkaX"
-    POM_SCM_CONNECTION = "scm:git@github.com:RikkaApps/RikkaX.git"
-    POM_SCM_DEV_CONNECTION = "scm:git@github.com:RikkaApps/RikkaX.git"
-
-    POM_LICENCE_NAME = "MIT License"
-    POM_LICENCE_URL = "https://github.com/RikkaApps/RikkaX/blob/master/LICENSE"
-    POM_LICENCE_DIST = "repo"
-
-    POM_DEVELOPER_ID = "rikka"
-    POM_DEVELOPER_NAME = "Rikka"
-    POM_DEVELOPER_URL = "https://github.com/RikkaW"
-}

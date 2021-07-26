@@ -13,8 +13,3 @@ dependencies {
     implementation "org.ccil.cowan.tagsoup:tagsoup:1.2.1"
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
 }
-
-ext {
-    POM_NAME = "RikkaX Html"
-    POM_DESCRIPTION = "RikkaX Html"
-}

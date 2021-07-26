@@ -11,8 +11,3 @@ android {
 dependencies {
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
 }
-
-ext {
-    POM_NAME = "RikkaX ParcelableListSlice"
-    POM_DESCRIPTION = "RikkaX ParcelableListSlice"
-}

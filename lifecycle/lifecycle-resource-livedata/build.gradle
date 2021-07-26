@@ -18,7 +18,3 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
 }
 
-ext {
-    POM_NAME = "RikkaX ResourceLiveData"
-    POM_DESCRIPTION = "RikkaX ResourceLiveData"
-}

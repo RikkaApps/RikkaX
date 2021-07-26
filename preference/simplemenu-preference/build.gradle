@@ -15,7 +15,3 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
 }
 
-ext {
-    POM_NAME = "RikkaX SimpleMenu Preference"
-    POM_DESCRIPTION = "RikkaX SimpleMenu Preference"
-}

@@ -13,8 +13,3 @@ android {
 dependencies {
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
 }
-
-ext {
-    POM_NAME = "RikkaX BaseRecyclerViewAdapter"
-    POM_DESCRIPTION = "RikkaX BaseRecyclerViewAdapter"
-}

@@ -29,8 +29,3 @@ dependencies {
     api(project(":insets"))
     implementation(project(":widget:switchbar"))
 }
-
-ext {
-    POM_NAME = "RikkaX Material"
-    POM_DESCRIPTION = "RikkaX Material"
-}

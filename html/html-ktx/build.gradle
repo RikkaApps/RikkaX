@@ -14,8 +14,3 @@ android {
 dependencies {
     api(project(':html:html'))
 }
-
-ext {
-    POM_NAME = "RikkaX Html KTX"
-    POM_DESCRIPTION = "Kotlin extensions for Html"
-}

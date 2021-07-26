@@ -10,8 +10,3 @@ android {
 dependencies {
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
 }
-
-ext {
-    POM_NAME = "RikkaX Multi-process preference"
-    POM_DESCRIPTION = "RikkaX Multi-process preference"
-}

@@ -18,8 +18,3 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
 }
-
-ext {
-    POM_NAME = "RikkaX SharedViewModel"
-    POM_DESCRIPTION = "RikkaX SharedViewModel"
-}

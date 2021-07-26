@@ -12,8 +12,3 @@ dependencies {
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
     compileOnly "androidx.appcompat:appcompat:$androidx_appcompat_version"
 }
-
-ext {
-    POM_NAME = "RikkaX LayoutInflater"
-    POM_DESCRIPTION = "RikkaX LayoutInflater"
-}

@@ -6,8 +6,3 @@ android {
         versionName rikka_annotation_version
     }
 }
-
-ext {
-    POM_NAME = "RikkaX Annotation"
-    POM_DESCRIPTION = "RikkaX Annotation"
-}

@@ -13,8 +13,3 @@ android {
 dependencies {
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
 }
-
-ext {
-    POM_NAME = "RikkaX LittleEndianDataStream"
-    POM_DESCRIPTION = "RikkaX LittleEndianDataStream"
-}

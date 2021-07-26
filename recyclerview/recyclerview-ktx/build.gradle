@@ -17,7 +17,3 @@ dependencies {
     implementation 'me.zhanghai.android.fastscroll:library:1.1.7'
 }
 
-ext {
-    POM_NAME = "RikkaX RecyclerView KTX"
-    POM_DESCRIPTION = "RikkaX RecyclerView KTX"
-}

@@ -14,8 +14,3 @@ dependencies {
     implementation "androidx.core:core:$androidx_core_version"
     compileOnly "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
 }
-
-ext {
-    POM_NAME = "RikkaX SwitchBar"
-    POM_DESCRIPTION = "RikkaX SwitchBar"
-}
