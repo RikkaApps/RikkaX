@@ -16,7 +16,7 @@ dependencies {
     compileOnly "androidx.activity:activity-ktx:$androidx_activity_version"
     compileOnly "androidx.fragment:fragment-ktx:$androidx_fragment_version"
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
 }
 
 ext {
