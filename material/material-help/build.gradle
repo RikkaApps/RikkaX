@@ -23,7 +23,8 @@ android {
 }
 
 dependencies {
-    implementation "androidx.fragment:fragment:1.1.0"
+    //noinspection GradleDependency
+    implementation "androidx.fragment:fragment:$androidx_fragment_version"
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     implementation "androidx.preference:preference:$androidx_preference_version"
 

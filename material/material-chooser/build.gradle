@@ -43,9 +43,9 @@ dependencies {
     implementation(project(":recyclerview:recyclerview-adapter"))
     implementation(project(":recyclerview:recyclerview-ktx"))
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:runner:1.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test:runner:$androidx_runner_test_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_test_version"
 }
 
 ext {

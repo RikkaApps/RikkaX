@@ -30,11 +30,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
-    implementation 'me.zhanghai.android.fastscroll:library:1.1.6'
+    implementation 'me.zhanghai.android.fastscroll:library:1.1.7'
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_test_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_test_version"
 }
 
 ext {
