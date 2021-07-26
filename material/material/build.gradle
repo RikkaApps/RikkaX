@@ -1,29 +1,10 @@
-plugins {
-    id('com.android.library')
-    id('kotlin-android')
-    id('com.vanniktech.maven.publish')
-}
+apply from: "${rootDir.path}/gradle/base.gradle"
+
+apply plugin: "kotlin-android"
 
 android {
-    compileSdkVersion target_sdk
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion target_sdk
-        versionCode 1
         versionName rikka_material_version
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
     }
 }
 
@@ -32,8 +13,6 @@ configurations.all {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
     implementation "androidx.interpolator:interpolator:$androidx_interpolator_version"
     implementation "androidx.core:core-ktx:$androidx_core_version"
@@ -49,10 +28,6 @@ dependencies {
     api(project(":layoutinflater"))
     api(project(":insets"))
     implementation(project(":widget:switchbar"))
-
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test:runner:$androidx_runner_test_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_test_version"
 }
 
 ext {

@@ -1,41 +1,21 @@
-plugins {
-    id('com.android.library')
-    id('kotlin-android')
-    id('com.vanniktech.maven.publish')
-}
+apply from: "${rootDir.path}/gradle/base.gradle"
+
+apply plugin: "kotlin-android"
 
 android {
-    compileSdkVersion target_sdk
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion target_sdk
-        versionCode 1
         versionName '1.0.0'
-        consumerProguardFiles 'consumer-rules.pro'
     }
     buildFeatures {
         buildConfig = false
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     compileOnly "androidx.activity:activity-ktx:$androidx_activity_version"
     compileOnly "androidx.fragment:fragment-ktx:$androidx_fragment_version"
 
-    def lifecycle_version = "2.3.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 }
 

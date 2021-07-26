@@ -1,29 +1,11 @@
-plugins {
-    id('com.android.library')
-    id('com.vanniktech.maven.publish')
-}
+apply from: "${rootDir.path}/gradle/base.gradle"
 
 android {
-    compileSdkVersion target_sdk
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion target_sdk
-        versionCode 1
         versionName rikka_widget_switcherbar_version
-        consumerProguardFiles 'consumer-rules.pro'
     }
     buildFeatures {
         buildConfig = false
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
     }
 }
 

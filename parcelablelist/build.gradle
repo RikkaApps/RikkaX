@@ -1,27 +1,10 @@
-plugins {
-    id('com.android.library')
-    id('com.vanniktech.maven.publish')
-}
+apply from: "${rootDir.path}/gradle/base.gradle"
 
 android {
-    compileSdkVersion target_sdk
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion target_sdk
-        versionCode 1
         versionName '1.0.0'
-        consumerProguardFiles 'consumer-rules.pro'
         aidlPackageWhiteList 'rikka/parcelablelist/ParcelableListSlice.aidl', 'rikka/parcelablelist/StringListSlice.aidl'
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
     }
 }
 

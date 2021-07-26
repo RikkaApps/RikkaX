@@ -1,42 +1,17 @@
-plugins {
-    id('com.android.library')
-    id('com.vanniktech.maven.publish')
-}
+apply from: "${rootDir.path}/gradle/base.gradle"
 
 android {
-    compileSdkVersion target_sdk
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion target_sdk
-        versionCode 1
         versionName rikka_html_version
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
     }
     buildFeatures {
         buildConfig = false
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.ccil.cowan.tagsoup:tagsoup:1.2.1"
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
-
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test:runner:$androidx_runner_test_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_test_version"
 }
 
 ext {
