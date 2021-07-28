@@ -1,6 +1,4 @@
-apply from: "${rootDir.path}/gradle/base.gradle"
-
-apply plugin: "kotlin-android"
+apply from: "$rootDir/gradle/kotlin.gradle"
 
 android {
     defaultConfig {
@@ -17,4 +15,3 @@ dependencies {
     compileOnly "androidx.fragment:fragment-ktx:$androidx_fragment_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
 }
-

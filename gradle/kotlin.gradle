@@ -1,0 +1,7 @@
+apply from: "$rootDir/gradle/base.gradle"
+
+apply plugin: "kotlin-android"
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}

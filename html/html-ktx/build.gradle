@@ -1,6 +1,4 @@
-apply from: "${rootDir.path}/gradle/base.gradle"
-
-apply plugin: "kotlin-android"
+apply from: "$rootDir/gradle/kotlin.gradle"
 
 android {
     defaultConfig {
@@ -12,5 +10,5 @@ android {
 }
 
 dependencies {
-    api(project(':html:html'))
+    api project(':html:html')
 }

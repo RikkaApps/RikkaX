@@ -1,4 +1,4 @@
-apply from: "${rootDir.path}/gradle/base.gradle"
+apply from: "$rootDir/gradle/base.gradle"
 
 android {
     defaultConfig {
@@ -6,8 +6,4 @@ android {
         versionName '1.0.0'
         aidlPackageWhiteList 'rikka/parcelablelist/ParcelableListSlice.aidl', 'rikka/parcelablelist/StringListSlice.aidl'
     }
-}
-
-dependencies {
-    implementation "androidx.annotation:annotation:$androidx_annotation_version"
 }

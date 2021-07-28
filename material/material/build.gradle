@@ -1,6 +1,4 @@
-apply from: "${rootDir.path}/gradle/base.gradle"
-
-apply plugin: "kotlin-android"
+apply from: "$rootDir/gradle/kotlin.gradle"
 
 android {
     defaultConfig {
@@ -13,7 +11,6 @@ configurations.all {
 }
 
 dependencies {
-    implementation "androidx.annotation:annotation:$androidx_annotation_version"
     implementation "androidx.interpolator:interpolator:$androidx_interpolator_version"
     implementation "androidx.core:core-ktx:$androidx_core_version"
     api "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
@@ -23,9 +20,9 @@ dependencies {
     /*api "rikka.appcompat:appcompat:$rikka_appcompat_version"
     implementation "rikka.core:core:$rikka_core_version"*/
 
-    api(project(":appcompat"))
-    api(project(":core:core-ktx"))
-    api(project(":layoutinflater"))
-    api(project(":insets"))
-    implementation(project(":widget:switchbar"))
+    api project(":appcompat")
+    api project(":core:core-ktx")
+    api project(":layoutinflater")
+    api project(":insets")
+    implementation project(":widget:switchbar")
 }

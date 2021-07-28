@@ -1,6 +1,4 @@
-apply from: "${rootDir.path}/gradle/base.gradle"
-
-apply plugin: "kotlin-android"
+apply from: "$rootDir/gradle/kotlin.gradle"
 
 android {
     defaultConfig {
@@ -16,4 +14,3 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     implementation 'me.zhanghai.android.fastscroll:library:1.1.7'
 }
-

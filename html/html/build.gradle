@@ -1,4 +1,4 @@
-apply from: "${rootDir.path}/gradle/base.gradle"
+apply from: "$rootDir/gradle/base.gradle"
 
 android {
     defaultConfig {
@@ -11,5 +11,4 @@ android {
 
 dependencies {
     implementation "org.ccil.cowan.tagsoup:tagsoup:1.2.1"
-    implementation "androidx.annotation:annotation:$androidx_annotation_version"
 }

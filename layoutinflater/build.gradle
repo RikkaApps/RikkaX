@@ -1,6 +1,4 @@
-apply from: "${rootDir.path}/gradle/base.gradle"
-
-apply plugin: "kotlin-android"
+apply from: "$rootDir/gradle/kotlin.gradle"
 
 android {
     defaultConfig {
@@ -9,6 +7,5 @@ android {
 }
 
 dependencies {
-    implementation "androidx.annotation:annotation:$androidx_annotation_version"
     compileOnly "androidx.appcompat:appcompat:$androidx_appcompat_version"
 }

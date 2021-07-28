@@ -21,6 +21,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation "androidx.annotation:annotation:$androidx_annotation_version"
+
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test:runner:$androidx_runner_test_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_espresso_test_version"

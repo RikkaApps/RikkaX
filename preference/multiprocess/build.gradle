@@ -1,12 +1,8 @@
-apply from: "${rootDir.path}/gradle/base.gradle"
+apply from: "$rootDir/gradle/base.gradle"
 
 android {
     defaultConfig {
         versionName rikka_preference_multiprocess_version
         aidlPackageWhiteList 'rikka/preference/IMultiProcessPreferenceChangeListener.aidl'
     }
-}
-
-dependencies {
-    implementation "androidx.annotation:annotation:$androidx_annotation_version"
 }
