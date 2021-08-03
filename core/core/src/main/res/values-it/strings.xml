@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="follow_system">Uguale al sistema</string>
+    <string name="dark_theme">Tema scuro</string>
+    <string name="dark_theme_off">Sempre disattivato</string>
+    <string name="dark_theme_on">Sempre attivo</string>
+    <string name="dark_theme_auto_time">Di notte</string>
+    <string name="dark_theme_auto_battery">Quando il Risparmio energetico è attivato</string>
 </resources>
