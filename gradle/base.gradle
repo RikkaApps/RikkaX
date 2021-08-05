@@ -2,11 +2,10 @@ apply plugin: "com.android.library"
 apply plugin: "com.vanniktech.maven.publish"
 
 android {
-    compileSdkVersion target_sdk
+    compileSdk target_sdk
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion target_sdk
-        versionCode 1
+        minSdk 21
+        targetSdk target_sdk
         consumerProguardFiles 'consumer-rules.pro'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

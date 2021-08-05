@@ -2,7 +2,7 @@ apply from: "$rootDir/gradle/base.gradle"
 
 android {
     defaultConfig {
-        minSdkVersion 17
+        minSdk 17
         versionName rikka_widget_borderview_version
     }
     buildFeatures {

@@ -2,7 +2,7 @@ apply from: "$rootDir/gradle/base.gradle"
 
 android {
     defaultConfig {
-        minSdkVersion 14
+        minSdk 14
         versionName rikka_annotation_version
     }
 }

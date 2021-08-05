@@ -2,7 +2,7 @@ apply from: "$rootDir/gradle/base.gradle"
 
 android {
     defaultConfig {
-        minSdkVersion 23
+        minSdk 23
         versionName rikka_appcompat_version
         // This disables the builds tools automatic vector -> PNG generation
         generatedDensities = []

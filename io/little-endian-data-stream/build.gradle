@@ -2,7 +2,7 @@ apply from: "$rootDir/gradle/base.gradle"
 
 android {
     defaultConfig {
-        minSdkVersion 14
+        minSdk 14
         versionName '1.0.1'
     }
     buildFeatures {
