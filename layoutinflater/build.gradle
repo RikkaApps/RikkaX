@@ -1,11 +1,5 @@
 apply from: "$rootDir/gradle/kotlin.gradle"
 
-android {
-    defaultConfig {
-        versionName rikka_layout_inflater_version
-    }
-}
-
 dependencies {
     compileOnly "androidx.appcompat:appcompat:$androidx_appcompat_version"
 }

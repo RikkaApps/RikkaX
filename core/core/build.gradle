@@ -1,11 +1,5 @@
 apply from: "$rootDir/gradle/base.gradle"
 
-android {
-    defaultConfig {
-        versionName rikka_core_version
-    }
-}
-
 dependencies {
     compileOnly "androidx.appcompat:appcompat:$androidx_appcompat_version"
     implementation "androidx.core:core:$androidx_core_version"

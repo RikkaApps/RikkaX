@@ -2,23 +2,17 @@ apply plugin: "com.android.library"
 apply plugin: "com.vanniktech.maven.publish"
 
 android {
-    compileSdk target_sdk
+    compileSdk 31
     defaultConfig {
         minSdk 21
-        targetSdk target_sdk
-        consumerProguardFiles 'consumer-rules.pro'
+        targetSdk 31
+        consumerProguardFiles "consumer-rules.pro"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
-        }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
 

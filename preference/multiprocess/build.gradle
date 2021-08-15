@@ -2,7 +2,6 @@ apply from: "$rootDir/gradle/base.gradle"
 
 android {
     defaultConfig {
-        versionName rikka_preference_multiprocess_version
         aidlPackageWhiteList 'rikka/preference/IMultiProcessPreferenceChangeListener.aidl'
     }
 }

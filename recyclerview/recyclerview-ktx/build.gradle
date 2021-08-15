@@ -3,11 +3,7 @@ apply from: "$rootDir/gradle/kotlin.gradle"
 android {
     defaultConfig {
         minSdk 14
-        versionName '1.2.2'
     }
-    /*buildFeatures {
-        buildConfig = false
-    }*/
 }
 
 dependencies {

@@ -1,11 +1,5 @@
 apply from: "$rootDir/gradle/kotlin.gradle"
 
-android {
-    defaultConfig {
-        versionName '1.1.0'
-    }
-}
-
 dependencies {
     implementation "androidx.core:core-ktx:$androidx_core_version"
 }

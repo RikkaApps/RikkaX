@@ -1,11 +1,5 @@
 apply from: "$rootDir/gradle/kotlin.gradle"
 
-android {
-    defaultConfig {
-        versionName rikka_core_version
-    }
-}
-
 dependencies {
     api project(":core:core")
     compileOnly "androidx.appcompat:appcompat:$androidx_appcompat_version"

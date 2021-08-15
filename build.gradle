@@ -34,12 +34,12 @@ subprojects {
     afterEvaluate {
         if (plugins.hasPlugin('com.vanniktech.maven.publish')) {
             if (it.parent == rootProject) {
-                group = "${groupIdBase}.${it.name}"
+                group = "$GROUP_ID_BASE.${it.name}"
             } else {
-                group = "${groupIdBase}.${it.parent.name}"
+                group = "$GROUP_ID_BASE.${it.parent.name}"
             }
-            version = android.defaultConfig.versionName
-            println("${it.displayName}: ${group}:${it.name}:${version}")
+            version = VERSION_NAME
+            logger.info("${it.displayName}: ${group}:${it.name}:${version}")
         }
     }
 }

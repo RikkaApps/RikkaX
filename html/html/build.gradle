@@ -1,9 +1,6 @@
 apply from: "$rootDir/gradle/base.gradle"
 
 android {
-    defaultConfig {
-        versionName rikka_html_version
-    }
     buildFeatures {
         buildConfig = false
     }

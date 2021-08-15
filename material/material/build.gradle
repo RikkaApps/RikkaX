@@ -1,11 +1,5 @@
 apply from: "$rootDir/gradle/kotlin.gradle"
 
-android {
-    defaultConfig {
-        versionName rikka_material_version
-    }
-}
-
 configurations.all {
     exclude group: 'androidx.appcompat', module: 'appcompat'
 }

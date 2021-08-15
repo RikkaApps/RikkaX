@@ -1,9 +1,6 @@
 apply from: "$rootDir/gradle/base.gradle"
 
 android {
-    defaultConfig {
-        versionName rikka_widget_switcherbar_version
-    }
     buildFeatures {
         buildConfig = false
     }

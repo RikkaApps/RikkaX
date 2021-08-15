@@ -3,6 +3,5 @@ apply from: "$rootDir/gradle/base.gradle"
 android {
     defaultConfig {
         minSdk 14
-        versionName rikka_annotation_version
     }
 }
