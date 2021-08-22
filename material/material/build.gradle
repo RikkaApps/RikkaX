@@ -10,7 +10,7 @@ android {
         minSdkVersion 21
         targetSdkVersion target_sdk
         versionCode 1
-        versionName rikka_material_version
+        versionName '1.6.6'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
