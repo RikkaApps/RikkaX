@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="follow_system">Следить за системой</string>
+    <string name="follow_system">По умолчанию (как в системе)</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="dark_theme_off">Выключить</string>
+    <string name="dark_theme_on">Включить</string>
+    <string name="dark_theme_auto_time">По времени</string>
+    <string name="dark_theme_auto_battery">Если включен \"Режим энергосбережения\"</string>
 </resources>
