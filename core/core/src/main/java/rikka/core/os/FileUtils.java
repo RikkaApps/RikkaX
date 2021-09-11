@@ -84,8 +84,8 @@ public class FileUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
                 && in instanceof FileInputStream
                 && out instanceof FileOutputStream) {
-            return android.os.FileUtils.copy(((FileInputStream) in).getFD(), ((FileOutputStream) out).getFD(),
-                    signal, executor, listener != null ? (android.os.FileUtils.ProgressListener) listener::onProgress : null);
+            return PlatformFileUtils.copy(((FileInputStream) in).getFD(), ((FileOutputStream) out).getFD(),
+                    signal, executor, listener);
         } else {
             return copyInternalUserspace(in, out, signal, executor, listener);
         }
