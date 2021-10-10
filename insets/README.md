@@ -128,7 +128,7 @@ To use these methods with Java, use `WindowInsetsHelperKt`.
 
 * Add the missing "s" to the attribute `fitsSystemWindowsInsets` and `layout_fitsSystemWindowsInsets`
 
-  This is a breaking change, but the user only needs to replace all "fitsSystemWindowsInsets" with "fitsSystemWindowsInsets".
+  This is a breaking change, but the user only needs to replace all "fitSystemWindowsInsets" with "fitsSystemWindowsInsets".
 
   If you are also using `dev.rikka.rikkax.material:material-chooser`, since it depends on the library, you should upgrade to `1.4.0` or above.
 
