@@ -9,7 +9,7 @@ android {
         minSdkVersion 17
         targetSdkVersion target_sdk
         versionCode 1
-        versionName rikka_widget_borderview_version
+        versionName '1.1.0'
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildFeatures {
