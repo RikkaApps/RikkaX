@@ -38,12 +38,9 @@ public class BorderRecyclerView extends RecyclerView implements BorderView {
         int range = computeVerticalScrollRange() - computeVerticalScrollExtent();
         final boolean isShowingTopBorder, isShowingBottomBorder;
         final boolean isTop, isBottom;
-        if (range != 0) {
-            isTop = offset == 0;
-            isBottom = offset == range;
-        } else {
-            return;
-        }
+
+        isTop = offset == 0;
+        isBottom = offset == range;
         isShowingTopBorder = getBorderTopVisibility() == BorderVisibility.ALWAYS
                 || (getBorderTopVisibility() == BorderVisibility.TOP_OR_BOTTOM && isTop)
                 || (getBorderTopVisibility() == BorderVisibility.SCROLLED && !isTop);
