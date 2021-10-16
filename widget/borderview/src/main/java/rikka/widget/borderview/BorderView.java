@@ -8,7 +8,7 @@ public interface BorderView {
     enum BorderVisibility {
         NEVER, TOP_OR_BOTTOM, SCROLLED, ALWAYS
     }
-    
+
     enum BorderStyle {
         INSIDE, OUTSIDE
     }

@@ -16,7 +16,7 @@ public class BorderViewDelegate {
     private final View mView;
     private final BorderView mBorderView;
 
-    private boolean isShowingTopBorder, isShowingBottomBorder;
+    private Boolean isShowingTopBorder, isShowingBottomBorder;
 
     private BorderView.BorderVisibility borderTopVisibility, borderBottomVisibility;
     private BorderView.BorderStyle borderTopStyle, borderBottomStyle;
@@ -79,8 +79,37 @@ public class BorderViewDelegate {
         }
         a.recycle();
 
-        isShowingTopBorder = borderTopVisibility == BorderView.BorderVisibility.TOP_OR_BOTTOM || borderTopVisibility == BorderView.BorderVisibility.ALWAYS;
-        isShowingBottomBorder = borderBottomVisibility == BorderView.BorderVisibility.ALWAYS;
+        final View.OnLayoutChangeListener onLayoutChangeListener = new View.OnLayoutChangeListener() {
+
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (isShowingTopBorder == null || isShowingBottomBorder == null) {
+                    isShowingTopBorder = isShowingTopBorder();
+                    isShowingBottomBorder = isShowingBottomBorder();
+
+                    if (getBorderVisibilityChangedListener() != null) {
+                        getBorderVisibilityChangedListener().onBorderVisibilityChanged(
+                                isShowingTopBorder,
+                                borderTopVisibility == BorderView.BorderVisibility.TOP_OR_BOTTOM || borderTopVisibility == BorderView.BorderVisibility.ALWAYS,
+                                isShowingBottomBorder,
+                                borderBottomVisibility == BorderView.BorderVisibility.ALWAYS);
+                    }
+                }
+                v.removeOnLayoutChangeListener(this);
+            }
+        };
+
+        view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+                v.addOnLayoutChangeListener(onLayoutChangeListener);
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                v.removeOnLayoutChangeListener(onLayoutChangeListener);
+            }
+        });
     }
 
     public BorderView.OnBorderVisibilityChangedListener getBorderVisibilityChangedListener() {
@@ -158,11 +187,19 @@ public class BorderViewDelegate {
     }
 
     public boolean isShowingTopBorder() {
-        return isShowingTopBorder;
+        if (isShowingTopBorder != null) {
+            return isShowingTopBorder;
+        } else {
+            return borderTopVisibility == BorderView.BorderVisibility.TOP_OR_BOTTOM || borderTopVisibility == BorderView.BorderVisibility.ALWAYS;
+        }
     }
 
     public boolean isShowingBottomBorder() {
-        return isShowingBottomBorder;
+        if (isShowingBottomBorder != null) {
+            return isShowingBottomBorder;
+        } else {
+            return borderBottomVisibility == BorderView.BorderVisibility.ALWAYS;
+        }
     }
 
     public void onBorderVisibilityChanged(boolean top, boolean oldTop, boolean bottom, boolean oldBottom) {
