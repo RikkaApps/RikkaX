@@ -60,8 +60,10 @@ public class BorderRecyclerView extends RecyclerView implements BorderView {
     }
 
     @Override
-    public void onScrolled(int dx, int dy) {
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         updateBorderStatus();
+
+        super.onScrollChanged(l, t, oldl, oldt);
     }
 
     @Override
