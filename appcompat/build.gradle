@@ -23,12 +23,12 @@ android {
     sourceSets {
         main.res.srcDirs += 'src/main/res-public'
     }
-    aaptOptions {
-        additionalParameters "--no-version-vectors"
-        noCompress 'ttf'
-    }
     testOptions {
         animationsDisabled = true
+    }
+    androidResources {
+        noCompress 'ttf'
+        additionalParameters '--no-version-vectors'
     }
 }
 
