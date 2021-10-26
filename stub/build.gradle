@@ -1,0 +1,31 @@
+plugins {
+    id('com.android.library')
+}
+
+android {
+    compileSdkVersion 31
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 31
+    }
+    buildFeatures {
+        buildConfig false
+    }
+    buildTypes {
+        debug {
+            multiDexEnabled false
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation "androidx.annotation:annotation:1.2.0"
+}
