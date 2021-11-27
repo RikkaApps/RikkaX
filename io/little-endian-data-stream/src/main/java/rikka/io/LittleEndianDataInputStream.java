@@ -117,4 +117,10 @@ public class LittleEndianDataInputStream extends InputStream implements DataInpu
     public String readUTF() throws IOException {
         throw new UnsupportedOperationException("readUTF is not supported");
     }
+
+    @Override
+    public void close() throws IOException {
+        super.close();
+        in.close();
+    }
 }

@@ -87,4 +87,10 @@ public class LittleEndianDataOutputStream extends OutputStream implements DataOu
     public void writeUTF(String s) {
         throw new UnsupportedOperationException("writeUTF is not supported");
     }
+
+    @Override
+    public void close() throws IOException {
+        super.close();
+        out.close();
+    }
 }
