@@ -6,9 +6,11 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.os.Build
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EdgeEffect
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
@@ -19,11 +21,130 @@ import me.zhanghai.android.fastscroll.Predicate
 import rikka.recyclerview.ktx.R
 import kotlin.math.roundToInt
 
-fun RecyclerView.addVerticalPadding(paddingTop: Int = 8, paddingBottom: Int = 8) {
-    addItemDecoration(VerticalPaddingDecoration(context, paddingTop, paddingBottom))
+fun RecyclerView.addItemSpacing(
+    left: Float = 0f,
+    top: Float = 0f,
+    right: Float = 0f,
+    bottom: Float = 0f,
+    unit: Int = TypedValue.COMPLEX_UNIT_PX
+): ItemSpacing {
+    val displayMetrics = context.resources.displayMetrics
+    return ItemSpacing(
+        TypedValue.applyDimension(unit, left, displayMetrics).roundToInt(),
+        TypedValue.applyDimension(unit, top, displayMetrics).roundToInt(),
+        TypedValue.applyDimension(unit, right, displayMetrics).roundToInt(),
+        TypedValue.applyDimension(unit, bottom, displayMetrics).roundToInt(),
+    ).also { addItemDecoration(it) }
 }
 
-private class VerticalPaddingDecoration constructor(context: Context, paddingTop: Int = 8, paddingBottom: Int = 8) : ItemDecoration() {
+class ItemSpacing(
+    private val left: Int = 0,
+    private val top: Int = 0,
+    private val right: Int = 0,
+    private val bottom: Int = 0,
+) : RecyclerView.ItemDecoration() {
+
+    var allowLeft: Boolean = true
+    var allowTop: Boolean = true
+    var allowRight: Boolean = true
+    var allowBottom: Boolean = true
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        if (parent.adapter == null) {
+            return
+        }
+
+        if (allowLeft) {
+            outRect.left = left
+        }
+        if (allowTop) {
+            outRect.top = top
+        }
+        if (allowRight) {
+            outRect.right = right
+        }
+        if (allowBottom) {
+            outRect.bottom = bottom
+        }
+    }
+}
+
+fun RecyclerView.addEdgeSpacing(
+    left: Float = 0f,
+    top: Float = 0f,
+    right: Float = 0f,
+    bottom: Float = 0f,
+    unit: Int = TypedValue.COMPLEX_UNIT_PX
+): EdgeSpacing {
+    val displayMetrics = context.resources.displayMetrics
+    return EdgeSpacing(
+        TypedValue.applyDimension(unit, left, displayMetrics).roundToInt(),
+        TypedValue.applyDimension(unit, top, displayMetrics).roundToInt(),
+        TypedValue.applyDimension(unit, right, displayMetrics).roundToInt(),
+        TypedValue.applyDimension(unit, bottom, displayMetrics).roundToInt()
+    ).also { addItemDecoration(it) }
+}
+
+class EdgeSpacing constructor(
+    private val left: Int = 0,
+    private val top: Int = 0,
+    private val right: Int = 0,
+    private val bottom: Int = 0
+) : RecyclerView.ItemDecoration() {
+
+    var allowLeft: Boolean = true
+    var allowTop: Boolean = true
+    var allowRight: Boolean = true
+    var allowBottom: Boolean = true
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        val adapter = parent.adapter ?: return
+
+        val position = parent.getChildLayoutPosition(view)
+        val count = adapter.itemCount
+
+        if (allowTop && position == 0) {
+            outRect.top = top
+        }
+        if (allowBottom && position == count - 1) {
+            outRect.bottom = bottom
+        }
+
+        var showLeft = allowLeft
+        var showRight = allowRight
+
+        val lm = parent.layoutManager
+        val lp = view.layoutParams
+        if (lm is GridLayoutManager && lp is GridLayoutManager.LayoutParams) {
+            val spanCount = lm.spanCount
+            val spanIndex = lp.spanIndex
+
+            if (spanIndex != 0) showLeft = false
+            if (spanIndex != spanCount - 1) showRight = false
+        }
+
+        if (showLeft) {
+            outRect.left = left
+        }
+        if (showRight) {
+            outRect.right = right
+        }
+    }
+}
+
+@Deprecated(
+    "This extension has been replaced with `addEdgeSpacing`. Note this method uses dp and the new method has a `unit` parameter.",
+    ReplaceWith("addEdgeSpacing", "rikka.recyclerview")
+)
+fun RecyclerView.addVerticalPadding(paddingTopDp: Int = 8, paddingBottomDp: Int = 8) {
+    addItemDecoration(VerticalPaddingDecoration(context, paddingTopDp, paddingBottomDp))
+}
+
+private class VerticalPaddingDecoration constructor(
+    context: Context,
+    paddingTop: Int = 8,
+    paddingBottom: Int = 8
+) : ItemDecoration() {
 
     private var paddingTop: Int = (paddingTop * context.resources.displayMetrics.density).roundToInt()
     private var paddingBottom: Int = (paddingBottom * context.resources.displayMetrics.density).roundToInt()
@@ -50,7 +171,8 @@ fun RecyclerView.fixEdgeEffect(overScrollIfContentScrolls: Boolean = true, alway
         addOnLayoutChangeListener(listener)
         setTag(R.id.tag_rikka_recyclerView_OverScrollIfContentScrollsListener, listener)
     } else {
-        val listener = getTag(R.id.tag_rikka_recyclerView_OverScrollIfContentScrollsListener) as? OverScrollIfContentScrollsListener
+        val listener =
+            getTag(R.id.tag_rikka_recyclerView_OverScrollIfContentScrollsListener) as? OverScrollIfContentScrollsListener
         if (listener != null) {
             removeOnLayoutChangeListener(listener)
             setTag(R.id.tag_rikka_recyclerView_OverScrollIfContentScrollsListener, null)
@@ -69,7 +191,17 @@ fun RecyclerView.fixEdgeEffect(overScrollIfContentScrolls: Boolean = true, alway
 
 private class OverScrollIfContentScrollsListener : View.OnLayoutChangeListener {
     private var show = true
-    override fun onLayoutChange(v: View, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+    override fun onLayoutChange(
+        v: View,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+        oldLeft: Int,
+        oldTop: Int,
+        oldRight: Int,
+        oldBottom: Int
+    ) {
         if (shouldDrawOverScroll(v as RecyclerView) != show) {
             show = !show
             if (show) {
@@ -86,8 +218,10 @@ private class OverScrollIfContentScrollsListener : View.OnLayoutChangeListener {
         }
         if (recyclerView.layoutManager is LinearLayoutManager) {
             val itemCount = recyclerView.layoutManager!!.itemCount
-            val firstPosition: Int = (recyclerView.layoutManager as LinearLayoutManager?)!!.findFirstCompletelyVisibleItemPosition()
-            val lastPosition: Int = (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
+            val firstPosition: Int =
+                (recyclerView.layoutManager as LinearLayoutManager?)!!.findFirstCompletelyVisibleItemPosition()
+            val lastPosition: Int =
+                (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
             return firstPosition != 0 || lastPosition != itemCount - 1
         }
         return true
@@ -107,20 +241,28 @@ private class AlwaysClipToPaddingEdgeEffectFactory : RecyclerView.EdgeEffectFact
 
                 when (direction) {
                     DIRECTION_LEFT -> {
-                        setSize(view.measuredHeight - view.paddingTop - view.paddingBottom,
-                                view.measuredWidth - view.paddingLeft - view.paddingRight)
+                        setSize(
+                            view.measuredHeight - view.paddingTop - view.paddingBottom,
+                            view.measuredWidth - view.paddingLeft - view.paddingRight
+                        )
                     }
                     DIRECTION_TOP -> {
-                        setSize(view.measuredWidth - view.paddingLeft - view.paddingRight,
-                                view.measuredHeight - view.paddingTop - view.paddingBottom)
+                        setSize(
+                            view.measuredWidth - view.paddingLeft - view.paddingRight,
+                            view.measuredHeight - view.paddingTop - view.paddingBottom
+                        )
                     }
                     DIRECTION_RIGHT -> {
-                        setSize(view.measuredHeight - view.paddingTop - view.paddingBottom,
-                                view.measuredWidth - view.paddingLeft - view.paddingRight)
+                        setSize(
+                            view.measuredHeight - view.paddingTop - view.paddingBottom,
+                            view.measuredWidth - view.paddingLeft - view.paddingRight
+                        )
                     }
                     DIRECTION_BOTTOM -> {
-                        setSize(view.measuredWidth - view.paddingLeft - view.paddingRight,
-                                view.measuredHeight - view.paddingTop - view.paddingBottom)
+                        setSize(
+                            view.measuredWidth - view.paddingLeft - view.paddingRight,
+                            view.measuredHeight - view.paddingTop - view.paddingBottom
+                        )
                     }
                 }
             }
@@ -157,12 +299,15 @@ fun RecyclerView.addFastScroller(parent: View? = null) {
     builder.build()
 }
 
-private class VerticalLinearRecyclerViewHelper(private val view: RecyclerView, private val parent: View?) : FastScroller.ViewHelper {
+private class VerticalLinearRecyclerViewHelper(private val view: RecyclerView, private val parent: View?) :
+    FastScroller.ViewHelper {
 
     override fun addOnPreDrawListener(onPreDraw: Runnable) {
         view.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun onDraw(canvas: Canvas, parent: RecyclerView,
-                                state: RecyclerView.State) {
+            override fun onDraw(
+                canvas: Canvas, parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
                 onPreDraw.run()
             }
         })
@@ -181,13 +326,17 @@ private class VerticalLinearRecyclerViewHelper(private val view: RecyclerView, p
 
             var dragging: Boolean? = null
 
-            override fun onInterceptTouchEvent(recyclerView: RecyclerView,
-                                               event: MotionEvent): Boolean {
+            override fun onInterceptTouchEvent(
+                recyclerView: RecyclerView,
+                event: MotionEvent
+            ): Boolean {
                 return onTouchEventResult(onTouchEvent.test(event))
             }
 
-            override fun onTouchEvent(recyclerView: RecyclerView,
-                                      event: MotionEvent) {
+            override fun onTouchEvent(
+                recyclerView: RecyclerView,
+                event: MotionEvent
+            ) {
                 onTouchEventResult(onTouchEvent.test(event))
             }
 
@@ -249,4 +398,21 @@ private class VerticalLinearRecyclerViewHelper(private val view: RecyclerView, p
             } else layoutManager
         }
 
+}
+
+fun RecyclerView.addInvalidateItemDecorationsObserver() {
+
+    adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            invalidateItemDecorations()
+        }
+
+        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+            invalidateItemDecorations()
+        }
+
+        override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+            invalidateItemDecorations()
+        }
+    })
 }
