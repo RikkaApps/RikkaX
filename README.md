@@ -8,6 +8,10 @@ The libraries suitable as public libraries are as follows.
 
 -------------------
 
+## [AppCompat](./appcompat)
+
+Modified version of AndroidX AppCompat.
+
 ## [Compatibility](./compatibility)
 
 Helper class that helps you to check device information. For example, if the device runs MIUI.
