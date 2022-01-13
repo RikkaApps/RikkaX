@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion target_sdk
         versionCode 1
-        versionName '1.1.0'
+        versionName '1.2.0'
     }
     compileOptions {
         targetCompatibility 1.8
