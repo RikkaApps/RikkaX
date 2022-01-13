@@ -10,6 +10,7 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EdgeEffect
+import androidx.annotation.DimenRes
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,21 @@ import me.zhanghai.android.fastscroll.PopupTextProvider
 import me.zhanghai.android.fastscroll.Predicate
 import rikka.recyclerview.ktx.R
 import kotlin.math.roundToInt
+
+fun RecyclerView.addItemSpacing(
+    @DimenRes left: Int = 0,
+    @DimenRes top: Int = 0,
+    @DimenRes right: Int = 0,
+    @DimenRes bottom: Int = 0,
+): ItemSpacing {
+    val resource = context.resources
+    return ItemSpacing(
+        if (left != 0) resource.getDimensionPixelSize(left) else 0,
+        if (top != 0) resource.getDimensionPixelSize(top) else 0,
+        if (right != 0) resource.getDimensionPixelSize(right) else 0,
+        if (bottom != 0) resource.getDimensionPixelSize(bottom) else 0,
+    ).also { addItemDecoration(it) }
+}
 
 fun RecyclerView.addItemSpacing(
     left: Float = 0f,
@@ -67,6 +83,21 @@ class ItemSpacing(
             outRect.bottom = bottom
         }
     }
+}
+
+fun RecyclerView.addEdgeSpacing(
+    @DimenRes left: Int = 0,
+    @DimenRes top: Int = 0,
+    @DimenRes right: Int = 0,
+    @DimenRes bottom: Int = 0,
+): EdgeSpacing {
+    val resource = context.resources
+    return EdgeSpacing(
+        if (left != 0) resource.getDimensionPixelSize(left) else 0,
+        if (top != 0) resource.getDimensionPixelSize(top) else 0,
+        if (right != 0) resource.getDimensionPixelSize(right) else 0,
+        if (bottom != 0) resource.getDimensionPixelSize(bottom) else 0,
+    ).also { addItemDecoration(it) }
 }
 
 fun RecyclerView.addEdgeSpacing(
