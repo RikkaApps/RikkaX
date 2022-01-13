@@ -28,10 +28,20 @@ public class LayoutInflaterFactory implements LayoutInflater.Factory2 {
 
     private final List<OnViewCreatedListener> onViewCreatedListeners = new ArrayList<>();
 
+    /**
+     * Create a LayoutInflaterFactory instance.
+     * Use this constructor if you don't use AppCompat.
+     */
     public LayoutInflaterFactory() {
         this(null);
     }
 
+    /**
+     * Create a LayoutInflaterFactory instance.
+     * Use this constructor if you are using AppCompat.
+     *
+     * @param appCompatDelegate AppCompatDelegate from AppCompatActivity
+     */
     public LayoutInflaterFactory(AppCompatDelegate appCompatDelegate) {
         this.appCompatDelegate = appCompatDelegate;
     }
