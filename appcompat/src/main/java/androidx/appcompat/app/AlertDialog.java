@@ -925,7 +925,11 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
          *
          * This is currently hidden because it seems like people should just
          * be able to put padding around the view.
+         * @hide
+         * @deprecated This method has been deprecated.
          */
+        @RestrictTo(LIBRARY_GROUP_PREFIX)
+        @Deprecated
         public Builder setView(View view, int viewSpacingLeft, int viewSpacingTop,
                 int viewSpacingRight, int viewSpacingBottom) {
             P.mView = view;

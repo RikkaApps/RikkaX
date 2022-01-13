@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.text.method.KeyListener;
 import android.util.AttributeSet;
 import android.view.ActionMode;
 import android.view.inputmethod.EditorInfo;
@@ -37,6 +38,7 @@ import androidx.appcompat.R;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.view.TintableBackgroundView;
 import androidx.core.widget.TextViewCompat;
+import androidx.resourceinspection.annotation.AppCompatShadowedAttributes;
 
 /**
  * A {@link AutoCompleteTextView} which supports compatible features on older versions of the
@@ -53,8 +55,9 @@ import androidx.core.widget.TextViewCompat;
  * <a href="{@docRoot}topic/libraries/support-library/packages.html#v7-appcompat">appcompat</a>.
  * You should only need to manually use this class when writing custom views.</p>
  */
+@AppCompatShadowedAttributes
 public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implements
-        TintableBackgroundView {
+        TintableBackgroundView, EmojiCompatConfigurationView {
 
     private static final int[] TINT_ATTRS = {
             android.R.attr.popupBackground
@@ -62,6 +65,8 @@ public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implemen
 
     private final AppCompatBackgroundHelper mBackgroundTintHelper;
     private final AppCompatTextHelper mTextHelper;
+    @NonNull
+    private final AppCompatEmojiEditTextHelper mAppCompatEmojiEditTextHelper;
 
     public AppCompatAutoCompleteTextView(@NonNull Context context) {
         this(context, null);
@@ -90,6 +95,46 @@ public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implemen
         mTextHelper = new AppCompatTextHelper(this);
         mTextHelper.loadFromAttributes(attrs, defStyleAttr);
         mTextHelper.applyCompoundDrawablesTints();
+
+        mAppCompatEmojiEditTextHelper = new AppCompatEmojiEditTextHelper(this);
+        mAppCompatEmojiEditTextHelper.loadFromAttributes(attrs, defStyleAttr);
+        initEmojiKeyListener(mAppCompatEmojiEditTextHelper);
+    }
+
+    /**
+     * Call from the constructor to safely add KeyListener for emoji2.
+     *
+     * This will always call super methods to avoid leaking a partially constructed this to
+     * overrides of non-final methods.
+     *
+     * @param appCompatEmojiEditTextHelper emojicompat helper
+     */
+    void initEmojiKeyListener(AppCompatEmojiEditTextHelper appCompatEmojiEditTextHelper) {
+        // setKeyListener will cause a reset both focusable and the inputType to the most basic
+        // style for the key listener. Since we're calling this from the View constructor, this
+        // will cause both focusable and inputType to reset from the XML attributes.
+        // See: b/191061070 and b/188049943 for details
+        //
+        // We will only reset this during ctor invocation, and default to the platform behavior
+        // for later calls to setKeyListener, to emulate the exact behavior that a regular
+        // EditText would provide.
+        //
+        // Since we're calling non-final methods from a ctor (setKeyListener, setRawInputType,
+        // setFocusable) move this out of AppCompatEmojiEditTextHelper and into the respective
+        // views to ensure we only call the super methods during construction (b/208480173).
+        KeyListener currentKeyListener = getKeyListener();
+        if (appCompatEmojiEditTextHelper.isEmojiCapableKeyListener(currentKeyListener)) {
+            boolean wasFocusable = super.isFocusable();
+            int inputType = super.getInputType();
+            KeyListener wrappedKeyListener = appCompatEmojiEditTextHelper.getKeyListener(
+                    currentKeyListener);
+            // don't call parent setKeyListener if it's not wrapped
+            if (wrappedKeyListener == currentKeyListener) return;
+            super.setKeyListener(wrappedKeyListener);
+            // reset the input type and focusable attributes after calling setKeyListener
+            super.setRawInputType(inputType);
+            super.setFocusable(wasFocusable);
+        }
     }
 
     @Override
@@ -106,7 +151,7 @@ public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implemen
     }
 
     @Override
-    public void setBackgroundDrawable(Drawable background) {
+    public void setBackgroundDrawable(@Nullable Drawable background) {
         super.setBackgroundDrawable(background);
         if (mBackgroundTintHelper != null) {
             mBackgroundTintHelper.onSetBackgroundDrawable(background);
@@ -190,8 +235,9 @@ public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implemen
 
     @Override
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
-        return AppCompatHintHelper.onCreateInputConnection(super.onCreateInputConnection(outAttrs),
-                outAttrs, this);
+        InputConnection inputConnection = AppCompatHintHelper.onCreateInputConnection(
+                super.onCreateInputConnection(outAttrs), outAttrs, this);
+        return mAppCompatEmojiEditTextHelper.onCreateInputConnection(inputConnection, outAttrs);
     }
 
     /**
@@ -199,8 +245,37 @@ public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implemen
      * {@link TextViewCompat#setCustomSelectionActionModeCallback(TextView, ActionMode.Callback)}
      */
     @Override
-    public void setCustomSelectionActionModeCallback(ActionMode.Callback actionModeCallback) {
-        super.setCustomSelectionActionModeCallback(TextViewCompat
-                .wrapCustomSelectionActionModeCallback(this, actionModeCallback));
+    public void setCustomSelectionActionModeCallback(
+            @Nullable ActionMode.Callback actionModeCallback) {
+        super.setCustomSelectionActionModeCallback(
+                TextViewCompat.wrapCustomSelectionActionModeCallback(this, actionModeCallback));
+    }
+
+    @Override
+    @Nullable
+    public ActionMode.Callback getCustomSelectionActionModeCallback() {
+        return TextViewCompat.unwrapCustomSelectionActionModeCallback(
+                super.getCustomSelectionActionModeCallback());
+    }
+
+    /**
+     * Adds EmojiCompat KeyListener to correctly edit multi-codepoint emoji when they've been
+     * converted to spans.
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void setKeyListener(@Nullable KeyListener keyListener) {
+        super.setKeyListener(mAppCompatEmojiEditTextHelper.getKeyListener(keyListener));
+    }
+
+    @Override
+    public void setEmojiCompatEnabled(boolean enabled) {
+        mAppCompatEmojiEditTextHelper.setEnabled(enabled);
+    }
+
+    @Override
+    public boolean isEmojiCompatEnabled() {
+        return mAppCompatEmojiEditTextHelper.isEnabled();
     }
 }

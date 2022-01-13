@@ -79,6 +79,7 @@ import androidx.appcompat.view.CollapsibleActionView;
 import androidx.core.view.ViewCompat;
 import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.customview.view.AbsSavedState;
+import androidx.resourceinspection.annotation.Attribute;
 
 import java.lang.reflect.Method;
 import java.util.WeakHashMap;
@@ -87,11 +88,6 @@ import java.util.WeakHashMap;
  * A widget that provides a user interface for the user to enter a search query and submit a request
  * to a search provider. Shows a list of query suggestions or results, if available, and allows the
  * user to pick a suggestion or result to launch into.
- *
- * <p class="note"><strong>Note:</strong> This class is included in the <a
- * href="{@docRoot}tools/extras/support-library.html">support library</a> for compatibility
- * with API level 7 and higher. If you're developing your app for API level 11 and higher
- * <em>only</em>, you should instead use the framework {@link android.widget.SearchView} class.</p>
  *
  * <p>
  * When the SearchView is used in an {@link androidx.appcompat.app.ActionBar}
@@ -281,6 +277,8 @@ public class SearchView extends LinearLayoutCompat implements CollapsibleActionV
 
         final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context,
                 attrs, R.styleable.SearchView, defStyleAttr, 0);
+        ViewCompat.saveAttributeDataForStyleable(this, context, R.styleable.SearchView, attrs,
+                a.getWrappedTypeArray(), defStyleAttr, 0);
 
         final LayoutInflater inflater = LayoutInflater.from(context);
         final int layoutResId = a.getResourceId(
@@ -453,6 +451,7 @@ public class SearchView extends LinearLayoutCompat implements CollapsibleActionV
      *
      * {@link android.R.attr#imeOptions}
      */
+    @Attribute("android:imeOptions")
     public int getImeOptions() {
         return mSearchSrcTextView.getImeOptions();
     }
@@ -618,6 +617,7 @@ public class SearchView extends LinearLayoutCompat implements CollapsibleActionV
      * @return the displayed query hint text, or {@code null} if none set
      * {@link androidx.appcompat.R.attr#queryHint}
      */
+    @Attribute("androidx.appcompat:queryHint")
     @Nullable
     public CharSequence getQueryHint() {
         final CharSequence hint;
@@ -656,6 +656,7 @@ public class SearchView extends LinearLayoutCompat implements CollapsibleActionV
      *
      * {@link androidx.appcompat.R.attr#iconifiedByDefault}
      */
+    @Attribute("androidx.appcompat:iconifiedByDefault")
     public boolean isIconfiedByDefault() {
         return mIconifiedByDefault;
     }
@@ -778,6 +779,7 @@ public class SearchView extends LinearLayoutCompat implements CollapsibleActionV
      *
      * {@link android.R.attr#maxWidth}
      */
+    @Attribute("android:maxWidth")
     public int getMaxWidth() {
         return mMaxWidth;
     }
@@ -1592,7 +1594,7 @@ public class SearchView extends LinearLayoutCompat implements CollapsibleActionV
         Intent queryIntent = new Intent(Intent.ACTION_SEARCH);
         queryIntent.setComponent(searchActivity);
         PendingIntent pending = PendingIntent.getActivity(getContext(), 0, queryIntent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_MUTABLE);
 
         // Now set up the bundle that will be inserted into the pending intent
         // when it's time to do the search.  We always build it here (even if empty)
@@ -1687,7 +1689,7 @@ public class SearchView extends LinearLayoutCompat implements CollapsibleActionV
             return createIntent(action, dataUri, extraData, query, actionKey, actionMsg);
         } catch (RuntimeException e ) {
             int rowNum;
-            try {                       // be really paranoid now
+            try {
                 rowNum = c.getPosition();
             } catch (RuntimeException e2 ) {
                 rowNum = -1;

@@ -26,6 +26,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
+import android.text.InputFilter;
 import android.util.AttributeSet;
 import android.view.ActionMode;
 import android.view.inputmethod.EditorInfo;
@@ -47,6 +48,7 @@ import androidx.core.view.TintableBackgroundView;
 import androidx.core.widget.AutoSizeableTextView;
 import androidx.core.widget.TextViewCompat;
 import androidx.core.widget.TintableCompoundDrawablesView;
+import androidx.resourceinspection.annotation.AppCompatShadowedAttributes;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -77,12 +79,18 @@ import java.util.concurrent.Future;
  * <a href="{@docRoot}topic/libraries/support-library/packages.html#v7-appcompat">appcompat</a>.
  * You should only need to manually use this class when writing custom views.</p>
  */
+@AppCompatShadowedAttributes
 public class AppCompatTextView extends TextView implements TintableBackgroundView,
-        TintableCompoundDrawablesView, AutoSizeableTextView {
+        TintableCompoundDrawablesView, AutoSizeableTextView, EmojiCompatConfigurationView {
 
     private final AppCompatBackgroundHelper mBackgroundTintHelper;
     private final AppCompatTextHelper mTextHelper;
     private final AppCompatTextClassifierHelper mTextClassifierHelper;
+    @SuppressWarnings("NotNullFieldNotInitialized") // initialized in getter
+    @NonNull
+    private AppCompatEmojiTextHelper mEmojiTextViewHelper;
+
+    private boolean mIsSetTypefaceProcessing = false;
 
     @Nullable
     private Future<PrecomputedTextCompat> mPrecomputedTextFuture;
@@ -109,6 +117,21 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
         mTextHelper.applyCompoundDrawablesTints();
 
         mTextClassifierHelper = new AppCompatTextClassifierHelper(this);
+
+        AppCompatEmojiTextHelper emojiTextViewHelper = getEmojiTextViewHelper();
+        emojiTextViewHelper.loadFromAttributes(attrs, defStyleAttr);
+    }
+
+    /**
+     * This may be called from super constructors.
+     */
+    @NonNull
+    private AppCompatEmojiTextHelper getEmojiTextViewHelper() {
+        //noinspection ConstantConditions
+        if (mEmojiTextViewHelper == null) {
+            mEmojiTextViewHelper = new AppCompatEmojiTextHelper(this);
+        }
+        return mEmojiTextViewHelper;
     }
 
     @Override
@@ -120,7 +143,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
     }
 
     @Override
-    public void setBackgroundDrawable(Drawable background) {
+    public void setBackgroundDrawable(@Nullable Drawable background) {
         super.setBackgroundDrawable(background);
         if (mBackgroundTintHelper != null) {
             mBackgroundTintHelper.onSetBackgroundDrawable(background);
@@ -189,6 +212,27 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
         if (mTextHelper != null) {
             mTextHelper.onSetTextAppearance(context, resId);
         }
+    }
+
+    @Override
+    public void setFilters(@SuppressWarnings("ArrayReturn") @NonNull InputFilter[] filters) {
+        super.setFilters(getEmojiTextViewHelper().getFilters(filters));
+    }
+
+    @Override
+    public void setAllCaps(boolean allCaps) {
+        super.setAllCaps(allCaps);
+        getEmojiTextViewHelper().setAllCaps(allCaps);
+    }
+
+    @Override
+    public void setEmojiCompatEnabled(boolean enabled) {
+        getEmojiTextViewHelper().setEnabled(enabled);
+    }
+
+    @Override
+    public boolean isEmojiCompatEnabled() {
+        return getEmojiTextViewHelper().isEnabled();
     }
 
     @Override
@@ -396,8 +440,9 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     @Override
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
-        return AppCompatHintHelper.onCreateInputConnection(super.onCreateInputConnection(outAttrs),
-                outAttrs, this);
+        InputConnection ic = super.onCreateInputConnection(outAttrs);
+        mTextHelper.populateSurroundingTextIfNeeded(this, ic, outAttrs);
+        return AppCompatHintHelper.onCreateInputConnection(ic, outAttrs, this);
     }
 
     @Override
@@ -440,9 +485,17 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
      * {@link TextViewCompat#setCustomSelectionActionModeCallback(TextView, ActionMode.Callback)}
      */
     @Override
-    public void setCustomSelectionActionModeCallback(ActionMode.Callback actionModeCallback) {
-        super.setCustomSelectionActionModeCallback(TextViewCompat
-                .wrapCustomSelectionActionModeCallback(this, actionModeCallback));
+    public void setCustomSelectionActionModeCallback(
+            @Nullable ActionMode.Callback actionModeCallback) {
+        super.setCustomSelectionActionModeCallback(
+                TextViewCompat.wrapCustomSelectionActionModeCallback(this, actionModeCallback));
+    }
+
+    @Override
+    @Nullable
+    public ActionMode.Callback getCustomSelectionActionModeCallback() {
+        return TextViewCompat.unwrapCustomSelectionActionModeCallback(
+                super.getCustomSelectionActionModeCallback());
     }
 
     /**
@@ -703,11 +756,24 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     @Override
     public void setTypeface(@Nullable Typeface tf, int style) {
+        if (mIsSetTypefaceProcessing) {
+            // b/151782655
+            // Some device up to API19 recursively calls setTypeface. To avoid infinity recursive
+            // setTypeface call, exit if we know this is re-entrant call.
+            // TODO(nona): Remove this once Android X minSdkVersion moves to API21.
+            return;
+        }
         Typeface finalTypeface = null;
         if (tf != null && style > 0) {
             finalTypeface = TypefaceCompat.create(getContext(), tf, style);
         }
 
-        super.setTypeface(finalTypeface != null ? finalTypeface : tf, style);
+        mIsSetTypefaceProcessing = true;
+        try {
+            super.setTypeface(finalTypeface != null ? finalTypeface : tf, style);
+        } finally {
+            mIsSetTypefaceProcessing = false;
+        }
+
     }
 }

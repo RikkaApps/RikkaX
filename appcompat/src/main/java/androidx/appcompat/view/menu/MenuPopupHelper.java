@@ -16,6 +16,7 @@
 
 package androidx.appcompat.view.menu;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
 
 import android.content.Context;
@@ -151,6 +152,10 @@ public class MenuPopupHelper implements MenuHelper {
         }
     }
 
+    /**
+     * @hide
+     */
+    @RestrictTo(LIBRARY)
     @NonNull
     public MenuPopup getPopup() {
         if (mPopup == null) {
@@ -220,6 +225,7 @@ public class MenuPopupHelper implements MenuHelper {
      * @return an initialized popup
      */
     @NonNull
+    @SuppressWarnings("deprecation") /* getDefaultDisplay */
     private MenuPopup createPopup() {
         final WindowManager windowManager = (WindowManager) mContext.getSystemService(
                 Context.WINDOW_SERVICE);

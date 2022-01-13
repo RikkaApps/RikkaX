@@ -28,6 +28,7 @@ import android.graphics.Region;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.text.InputFilter;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -54,14 +55,23 @@ import androidx.appcompat.text.AllCapsTransformationMethod;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.TextViewCompat;
+import androidx.emoji2.text.EmojiCompat;
+import androidx.resourceinspection.annotation.Attribute;
+
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
 
 /**
- * SwitchCompat is a version of the Switch widget which on devices back to API v7. It does not
- * make any attempt to use the platform provided widget on those devices which it is available
- * normally.
+ * SwitchCompat is a complete backport of the core {@link android.widget.Switch} widget that
+ * brings the visuals and the functionality of that widget to older versions of the platform.
+ * Unlike other widgets in this package, SwitchCompat is <strong>not</strong> automatically used
+ * in layouts that use the <code>&lt;Switch&gt;</code> element. Instead, you need to explicitly
+ * use <code>&lt;androidx.appcompat.widget.SwitchCompat&gt;</code> and the matching attributes
+ * in your layouts.
+ *
  * <p>
- * A Switch is a two-state toggle switch widget that can select between two
- * options. The user may drag the "thumb" back and forth to choose the selected option,
+ * A Switch is a two-state toggle switch widget that can be used to select one of the two
+ * available options. The user may drag the "thumb" back and forth to choose the selected option,
  * or simply tap to toggle as if it were a checkbox. The {@link #setText(CharSequence) text}
  * property controls the text displayed in the label for the switch, whereas the
  * {@link #setTextOff(CharSequence) off} and {@link #setTextOn(CharSequence) on} text
@@ -70,6 +80,12 @@ import androidx.core.widget.TextViewCompat;
  * setTypeface() methods control the typeface and style of label text, whereas the
  * {@link #setSwitchTextAppearance(android.content.Context, int) switchTextAppearance} and
  * the related setSwitchTypeface() methods control that of the thumb.
+ *
+ * <p>
+ * The thumb can be tinted with {@link #setThumbTintList(ColorStateList)} and
+ * {@link #setThumbTintMode(PorterDuff.Mode)} APIs, as well as with the matching XML attributes.
+ * The track can be tinted with {@link #setTrackTintList(ColorStateList)} and
+ * {@link #setTrackTintMode(PorterDuff.Mode)} APIs, as well as with the matching XML attributes.
  *
  * <p>See the <a href="{@docRoot}guide/topics/ui/controls/togglebutton.html">Toggle Buttons</a>
  * guide.</p>
@@ -82,8 +98,12 @@ import androidx.core.widget.TextViewCompat;
  * {@link android.R.attr#thumb}
  * {@link androidx.appcompat.R.attr#thumbTextPadding}
  * {@link androidx.appcompat.R.attr#track}
+ * {@link androidx.appcompat.R.attr#thumbTint}
+ * {@link androidx.appcompat.R.attr#thumbTintMode}
+ * {@link androidx.appcompat.R.attr#trackTint}
+ * {@link androidx.appcompat.R.attr#trackTintMode}
  */
-public class SwitchCompat extends CompoundButton {
+public class SwitchCompat extends CompoundButton implements EmojiCompatConfigurationView {
     private static final int THUMB_ANIMATION_DURATION = 250;
 
     private static final int TOUCH_MODE_IDLE = 0;
@@ -129,7 +149,9 @@ public class SwitchCompat extends CompoundButton {
     private int mSwitchPadding;
     private boolean mSplitTrack;
     private CharSequence mTextOn;
+    private CharSequence mTextOnTransformed;
     private CharSequence mTextOff;
+    private CharSequence mTextOffTransformed;
     private boolean mShowText;
 
     private int mTouchMode;
@@ -175,9 +197,14 @@ public class SwitchCompat extends CompoundButton {
     private ColorStateList mTextColors;
     private Layout mOnLayout;
     private Layout mOffLayout;
+    @Nullable
     private TransformationMethod mSwitchTransformationMethod;
     ObjectAnimator mPositionAnimator;
     private final AppCompatTextHelper mTextHelper;
+    @NonNull
+    private AppCompatEmojiTextHelper mAppCompatEmojiTextHelper;
+    @Nullable
+    private EmojiCompatInitCallback mEmojiCompatInitCallback;
 
     @SuppressWarnings("hiding")
     private final Rect mTempRect = new Rect();
@@ -240,8 +267,8 @@ public class SwitchCompat extends CompoundButton {
         if (mTrackDrawable != null) {
             mTrackDrawable.setCallback(this);
         }
-        mTextOn = a.getText(R.styleable.SwitchCompat_android_textOn);
-        mTextOff = a.getText(R.styleable.SwitchCompat_android_textOff);
+        setTextOnInternal(a.getText(R.styleable.SwitchCompat_android_textOn));
+        setTextOffInternal(a.getText(R.styleable.SwitchCompat_android_textOff));
         mShowText = a.getBoolean(R.styleable.SwitchCompat_showText, true);
         mThumbTextPadding = a.getDimensionPixelSize(
                 R.styleable.SwitchCompat_thumbTextPadding, 0);
@@ -296,6 +323,9 @@ public class SwitchCompat extends CompoundButton {
         mTouchSlop = config.getScaledTouchSlop();
         mMinFlingVelocity = config.getScaledMinimumFlingVelocity();
 
+        AppCompatEmojiTextHelper emojiTextViewHelper = getEmojiTextViewHelper();
+        emojiTextViewHelper.loadFromAttributes(attrs, defStyleAttr);
+
         // Refresh display with current params
         refreshDrawableState();
         setChecked(isChecked());
@@ -342,6 +372,9 @@ public class SwitchCompat extends CompoundButton {
         } else {
             mSwitchTransformationMethod = null;
         }
+        // apply the new transform to current text
+        setTextOnInternal(mTextOn);
+        setTextOffInternal(mTextOff);
 
         appearance.recycle();
     }
@@ -428,6 +461,7 @@ public class SwitchCompat extends CompoundButton {
      *
      * {@link androidx.appcompat.R.attr#switchPadding}
      */
+    @Attribute("androidx.appcompat:switchPadding")
     public int getSwitchPadding() {
         return mSwitchPadding;
     }
@@ -453,6 +487,7 @@ public class SwitchCompat extends CompoundButton {
      *
      * {@link androidx.appcompat.R.attr#switchMinWidth}
      */
+    @Attribute("androidx.appcompat:switchMinWidth")
     public int getSwitchMinWidth() {
         return mSwitchMinWidth;
     }
@@ -476,6 +511,7 @@ public class SwitchCompat extends CompoundButton {
      *
      * {@link androidx.appcompat.R.attr#thumbTextPadding}
      */
+    @Attribute("androidx.appcompat:thumbTextPadding")
     public int getThumbTextPadding() {
         return mThumbTextPadding;
     }
@@ -516,6 +552,7 @@ public class SwitchCompat extends CompoundButton {
      *
      * {@link androidx.appcompat.R.attr#track}
      */
+    @Attribute("androidx.appcompat:track")
     public Drawable getTrackDrawable() {
         return mTrackDrawable;
     }
@@ -545,6 +582,7 @@ public class SwitchCompat extends CompoundButton {
      * {@link androidx.appcompat.R.attr#trackTint}
      * @see #setTrackTintList(ColorStateList)
      */
+    @Attribute("androidx.appcompat:trackTint")
     @Nullable
     public ColorStateList getTrackTintList() {
         return mTrackTintList;
@@ -573,6 +611,7 @@ public class SwitchCompat extends CompoundButton {
      * {@link androidx.appcompat.R.attr#trackTintMode}
      * @see #setTrackTintMode(PorterDuff.Mode)
      */
+    @Attribute("androidx.appcompat:trackTintMode")
     @Nullable
     public PorterDuff.Mode getTrackTintMode() {
         return mTrackTintMode;
@@ -637,6 +676,7 @@ public class SwitchCompat extends CompoundButton {
      *
      * {@link android.R.attr#thumb}
      */
+    @Attribute("android:thumb")
     public Drawable getThumbDrawable() {
         return mThumbDrawable;
     }
@@ -667,6 +707,7 @@ public class SwitchCompat extends CompoundButton {
      * {@link androidx.appcompat.R.attr#thumbTint}
      * @see #setThumbTintList(ColorStateList)
      */
+    @Attribute("androidx.appcompat:thumbTint")
     @Nullable
     public ColorStateList getThumbTintList() {
         return mThumbTintList;
@@ -696,6 +737,7 @@ public class SwitchCompat extends CompoundButton {
      * {@link androidx.appcompat.R.attr#thumbTintMode}
      * @see #setThumbTintMode(PorterDuff.Mode)
      */
+    @Attribute("androidx.appcompat:thumbTintMode")
     @Nullable
     public PorterDuff.Mode getThumbTintMode() {
         return mThumbTintMode;
@@ -740,6 +782,7 @@ public class SwitchCompat extends CompoundButton {
      *
      * {@link androidx.appcompat.R.attr#splitTrack}
      */
+    @Attribute("androidx.appcompat:splitTrack")
     public boolean getSplitTrack() {
         return mSplitTrack;
     }
@@ -749,9 +792,24 @@ public class SwitchCompat extends CompoundButton {
      *
      * {@link android.R.attr#textOn}
      */
+    @Attribute("android:textOn")
     public CharSequence getTextOn() {
         return mTextOn;
     }
+
+    /**
+     * Call this whenever setting mTextOn or mTextOnTransformed to ensure we maintain
+     * consistent state
+     */
+    private void setTextOnInternal(CharSequence textOn) {
+        mTextOn = textOn;
+        mTextOnTransformed = doTransformForOnOffText(textOn);
+        mOnLayout = null;
+        if (mShowText) {
+            setupEmojiCompatLoadCallback();
+        }
+    }
+
 
     /**
      * Sets the text displayed when the button is in the checked state.
@@ -759,8 +817,13 @@ public class SwitchCompat extends CompoundButton {
      * {@link android.R.attr#textOn}
      */
     public void setTextOn(CharSequence textOn) {
-        mTextOn = textOn;
+        setTextOnInternal(textOn);
         requestLayout();
+        if (isChecked()) {
+            // Default state is derived from on/off-text, so state has to be updated when
+            // on/off-text are updated.
+            setOnStateDescriptionOnRAndAbove();
+        }
     }
 
     /**
@@ -768,8 +831,22 @@ public class SwitchCompat extends CompoundButton {
      *
      * {@link android.R.attr#textOff}
      */
+    @Attribute("android:textOff")
     public CharSequence getTextOff() {
         return mTextOff;
+    }
+
+    /**
+     * Call this whenever setting mTextOff or mTextOffTransformed to ensure we maintain
+     * consistent state
+     */
+    private void setTextOffInternal(CharSequence textOff) {
+        mTextOff = textOff;
+        mTextOffTransformed = doTransformForOnOffText(textOff);
+        mOffLayout = null;
+        if (mShowText) {
+            setupEmojiCompatLoadCallback();
+        }
     }
 
     /**
@@ -778,8 +855,22 @@ public class SwitchCompat extends CompoundButton {
      * {@link android.R.attr#textOff}
      */
     public void setTextOff(CharSequence textOff) {
-        mTextOff = textOff;
+        setTextOffInternal(textOff);
         requestLayout();
+        if (!isChecked()) {
+            // Default state is derived from on/off-text, so state has to be updated when
+            // on/off-text are updated.
+            setOffStateDescriptionOnRAndAbove();
+        }
+    }
+
+    @Nullable
+    private CharSequence doTransformForOnOffText(@Nullable CharSequence onOffText) {
+        TransformationMethod transformationMethod =
+                getEmojiTextViewHelper().wrapTransformationMethod(mSwitchTransformationMethod);
+        return ((transformationMethod != null)
+                ? transformationMethod.getTransformation(onOffText, this)
+                : onOffText);
     }
 
     /**
@@ -792,6 +883,9 @@ public class SwitchCompat extends CompoundButton {
         if (mShowText != showText) {
             mShowText = showText;
             requestLayout();
+            if (showText) {
+                setupEmojiCompatLoadCallback();
+            }
         }
     }
 
@@ -799,6 +893,7 @@ public class SwitchCompat extends CompoundButton {
      * @return whether the on/off text should be displayed
      * {@link androidx.appcompat.R.attr#showText}
      */
+    @Attribute("androidx.appcompat:showText")
     public boolean getShowText() {
         return mShowText;
     }
@@ -807,11 +902,11 @@ public class SwitchCompat extends CompoundButton {
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (mShowText) {
             if (mOnLayout == null) {
-                mOnLayout = makeLayout(mTextOn);
+                mOnLayout = makeLayout(mTextOnTransformed);
             }
 
             if (mOffLayout == null) {
-                mOffLayout = makeLayout(mTextOff);
+                mOffLayout = makeLayout(mTextOffTransformed);
             }
         }
 
@@ -881,14 +976,10 @@ public class SwitchCompat extends CompoundButton {
         }
     }
 
-    private Layout makeLayout(CharSequence text) {
-        final CharSequence transformed = (mSwitchTransformationMethod != null)
-                ? mSwitchTransformationMethod.getTransformation(text, this)
-                : text;
-
-        return new StaticLayout(transformed, mTextPaint,
-                transformed != null ?
-                        (int) Math.ceil(Layout.getDesiredWidth(transformed, mTextPaint)) : 0,
+    private Layout makeLayout(CharSequence transformedText) {
+        return new StaticLayout(transformedText, mTextPaint,
+                transformedText != null
+                        ? (int) Math.ceil(Layout.getDesiredWidth(transformedText, mTextPaint)) : 0,
                 Layout.Alignment.ALIGN_NORMAL, 1.f, 0, true);
     }
 
@@ -1073,6 +1164,12 @@ public class SwitchCompat extends CompoundButton {
         // Calling the super method may result in setChecked() getting called
         // recursively with a different value, so load the REAL value...
         checked = isChecked();
+
+        if (checked) {
+            setOnStateDescriptionOnRAndAbove();
+        } else {
+            setOffStateDescriptionOnRAndAbove();
+        }
 
         if (getWindowToken() != null && ViewCompat.isLaidOut(this)) {
             animateThumbToCheckedState(checked);
@@ -1407,15 +1504,17 @@ public class SwitchCompat extends CompoundButton {
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
         info.setClassName(ACCESSIBILITY_EVENT_CLASS_NAME);
-        CharSequence switchText = isChecked() ? mTextOn : mTextOff;
-        if (!TextUtils.isEmpty(switchText)) {
-            CharSequence oldText = info.getText();
-            if (TextUtils.isEmpty(oldText)) {
-                info.setText(switchText);
-            } else {
-                StringBuilder newText = new StringBuilder();
-                newText.append(oldText).append(' ').append(switchText);
-                info.setText(newText);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            CharSequence switchText = isChecked() ? mTextOn : mTextOff;
+            if (!TextUtils.isEmpty(switchText)) {
+                CharSequence oldText = info.getText();
+                if (TextUtils.isEmpty(oldText)) {
+                    info.setText(switchText);
+                } else {
+                    StringBuilder newText = new StringBuilder();
+                    newText.append(oldText).append(' ').append(switchText);
+                    info.setText(newText);
+                }
             }
         }
     }
@@ -1425,9 +1524,17 @@ public class SwitchCompat extends CompoundButton {
      * {@link TextViewCompat#setCustomSelectionActionModeCallback(TextView, ActionMode.Callback)}
      */
     @Override
-    public void setCustomSelectionActionModeCallback(ActionMode.Callback actionModeCallback) {
-        super.setCustomSelectionActionModeCallback(TextViewCompat
-                .wrapCustomSelectionActionModeCallback(this, actionModeCallback));
+    public void setCustomSelectionActionModeCallback(
+            @Nullable ActionMode.Callback actionModeCallback) {
+        super.setCustomSelectionActionModeCallback(
+                TextViewCompat.wrapCustomSelectionActionModeCallback(this, actionModeCallback));
+    }
+
+    @Override
+    @Nullable
+    public ActionMode.Callback getCustomSelectionActionModeCallback() {
+        return TextViewCompat.unwrapCustomSelectionActionModeCallback(
+                super.getCustomSelectionActionModeCallback());
     }
 
     /**
@@ -1435,5 +1542,122 @@ public class SwitchCompat extends CompoundButton {
      */
     private static float constrain(float amount, float low, float high) {
         return amount < low ? low : (amount > high ? high : amount);
+    }
+
+    private void setOnStateDescriptionOnRAndAbove() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            ViewCompat.setStateDescription(
+                    this,
+                    mTextOn == null ? getResources().getString(R.string.abc_capital_on) : mTextOn
+            );
+        }
+    }
+
+    private void setOffStateDescriptionOnRAndAbove() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            ViewCompat.setStateDescription(
+                    this,
+                    mTextOff == null ? getResources().getString(R.string.abc_capital_off) : mTextOff
+            );
+        }
+    }
+
+    @Override
+    public void setAllCaps(boolean allCaps) {
+        super.setAllCaps(allCaps);
+        getEmojiTextViewHelper().setAllCaps(allCaps);
+    }
+
+    @Override
+    public void setFilters(@SuppressWarnings("ArrayReturn") @NonNull InputFilter[] filters) {
+        super.setFilters(getEmojiTextViewHelper().getFilters(filters));
+    }
+
+    /**
+     * This may be called from super constructors.
+     */
+    @NonNull
+    private AppCompatEmojiTextHelper getEmojiTextViewHelper() {
+        //noinspection ConstantConditions
+        if (mAppCompatEmojiTextHelper == null) {
+            mAppCompatEmojiTextHelper = new AppCompatEmojiTextHelper(this);
+        }
+        return mAppCompatEmojiTextHelper;
+    }
+
+    @Override
+    public void setEmojiCompatEnabled(boolean enabled) {
+        getEmojiTextViewHelper().setEnabled(enabled);
+        // the transformation method may have changed for on/off text so call again
+        setTextOnInternal(mTextOn);
+        setTextOffInternal(mTextOff);
+        requestLayout();
+    }
+
+    @Override
+    public boolean isEmojiCompatEnabled() {
+        return getEmojiTextViewHelper().isEnabled();
+    }
+
+
+    /**
+     * Call this before caching the text in mOnLayout or mOffLayout to ensure the layouts get
+     * updated when emojicompat loads
+     */
+    private void setupEmojiCompatLoadCallback() {
+        // Note: This is called again from onEmojiCompatInitializedForSwitchText, do not remove
+        // null check of mEmojiCompatInitCallback without refactoring.
+        if (mEmojiCompatInitCallback != null || !mAppCompatEmojiTextHelper.isEnabled()) {
+            return;
+        }
+        if (EmojiCompat.isConfigured()) {
+            EmojiCompat emojiCompat = EmojiCompat.get();
+            int loadState = emojiCompat.getLoadState();
+            if (loadState == EmojiCompat.LOAD_STATE_DEFAULT
+                    || loadState == EmojiCompat.LOAD_STATE_LOADING) {
+                // we can eventually load from default and loading
+                mEmojiCompatInitCallback = new EmojiCompatInitCallback(this);
+                emojiCompat.registerInitCallback(mEmojiCompatInitCallback);
+            }
+        }
+    }
+
+    /**
+     * Update cached transformed text in mTextOn and mTextOff
+     */
+    void onEmojiCompatInitializedForSwitchText() {
+        // this is required since we manage our own transformation method in this class during
+        // setTextOn and setTextOff
+
+        // if makeLayout, mOnLayout, or mOffLayout are removed, this can likely be removed
+        setTextOnInternal(mTextOn);
+        setTextOffInternal(mTextOff);
+        requestLayout();
+    }
+
+
+    static class EmojiCompatInitCallback extends EmojiCompat.InitCallback {
+        private final Reference<SwitchCompat> mOuterWeakRef;
+
+        EmojiCompatInitCallback(SwitchCompat view) {
+            mOuterWeakRef = new WeakReference<>(view);
+        }
+
+
+        @Override
+        public void onInitialized() {
+            SwitchCompat view = mOuterWeakRef.get();
+            if (view != null) {
+                view.onEmojiCompatInitializedForSwitchText();
+            }
+        }
+
+        @Override
+        public void onFailed(@Nullable Throwable throwable) {
+            SwitchCompat view = mOuterWeakRef.get();
+            if (view != null) {
+                view.onEmojiCompatInitializedForSwitchText();
+            }
+        }
     }
 }
