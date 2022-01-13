@@ -94,9 +94,19 @@
            parent="Base.Widget.AppCompat.ActionBar.TabBar">
     </style>
 
-    <style name="Base.Widget.AppCompat.ActionBar.TabView" parent="" />
+    <style name="Base.Widget.AppCompat.ActionBar.TabView" parent="">
+        <item name="android:background">@drawable/abc_tab_indicator_material</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">80dip</item>
+    </style>
 
-    <style name="Base.Widget.AppCompat.Light.ActionBar.TabView" parent="Base.Widget.AppCompat.ActionBar.TabView" />
+    <style name="Base.Widget.AppCompat.Light.ActionBar.TabView" parent="Base.Widget.AppCompat.ActionBar.TabView">
+        <item name="android:background">@drawable/abc_tab_indicator_material</item>
+    </style>
 
     <style name="Base.Widget.AppCompat.ActionBar.TabText" parent="">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
@@ -179,9 +189,21 @@
 
     <style name="Platform.Widget.AppCompat.Spinner" parent="android:Widget.Holo.Spinner" />
 
-    <style name="Base.Widget.AppCompat.Spinner" parent="Platform.Widget.AppCompat.Spinner" />
+    <style name="Base.Widget.AppCompat.Spinner" parent="Platform.Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/abc_spinner_mtrl_am_alpha</item>
+        <item name="android:popupBackground">@drawable/abc_popup_background_mtrl_mult</item>
+        <item name="android:dropDownSelector">?attr/listChoiceBackgroundIndicator</item>
+        <item name="android:dropDownVerticalOffset">0dip</item>
+        <item name="android:dropDownHorizontalOffset">0dip</item>
+        <item name="android:dropDownWidth">wrap_content</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">left|start|center_vertical</item>
+        <item name="overlapAnchor">true</item>
+    </style>
 
-    <style name="Base.Widget.AppCompat.Spinner.Underlined" />
+    <style name="Base.Widget.AppCompat.Spinner.Underlined">
+        <item name="android:background">@drawable/abc_spinner_textfield_background_material</item>
+    </style>
 
     <style name="Base.Widget.AppCompat.DropDownItem.Spinner" parent="">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Widget.DropDownItem</item>
@@ -217,7 +239,13 @@
         <item name="android:divider">?attr/dividerHorizontal</item>
     </style>
 
-    <style name="Base.Widget.AppCompat.ListPopupWindow" parent="android:Widget.Material.ListPopupWindow" />
+    <style name="Base.Widget.AppCompat.ListPopupWindow" parent="">
+        <item name="android:dropDownSelector">?attr/listChoiceBackgroundIndicator</item>
+        <item name="android:popupBackground">@drawable/abc_popup_background_mtrl_mult</item>
+        <item name="android:dropDownVerticalOffset">0dip</item>
+        <item name="android:dropDownHorizontalOffset">0dip</item>
+        <item name="android:dropDownWidth">wrap_content</item>
+    </style>
 
     <style name="Base.Widget.AppCompat.PopupMenu.Overflow">
         <item name="overlapAnchor">true</item>
@@ -261,11 +289,18 @@
 
     <style name="Base.Widget.AppCompat.AutoCompleteTextView" parent="Base.V7.Widget.AppCompat.AutoCompleteTextView" />
 
-    <style name="Base.V7.Widget.AppCompat.AutoCompleteTextView" parent="android:Widget.AutoCompleteTextView" />
+    <style name="Base.V7.Widget.AppCompat.AutoCompleteTextView" parent="android:Widget.AutoCompleteTextView">
+        <item name="android:dropDownSelector">?attr/listChoiceBackgroundIndicator</item>
+        <item name="android:popupBackground">@drawable/abc_popup_background_mtrl_mult</item>
+        <item name="android:background">?attr/editTextBackground</item>
+        <item name="android:textColor">?attr/editTextColor</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMediumInverse</item>
+        <item name="android:textCursorDrawable">@drawable/abc_text_cursor_material</item>
+    </style>
 
     <style name="Base.Widget.AppCompat.ActivityChooserView" parent="">
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/abc_ab_share_pack_mtrl</item>
+        <item name="android:background">@drawable/abc_ab_share_pack_mtrl_alpha</item>
         <item name="divider">?attr/dividerVertical</item>
         <item name="showDividers">middle</item>
         <item name="dividerPadding">6dip</item>
@@ -316,7 +351,7 @@
         <item name="searchHintIcon">@drawable/abc_ic_search_api_material</item>
         <item name="goIcon">@drawable/abc_ic_go_search_api_material</item>
         <item name="voiceIcon">@drawable/abc_ic_voice_search_api_material</item>
-        <item name="commitIcon">@drawable/abc_ic_commit_search_api_mtrl</item>
+        <item name="commitIcon">@drawable/abc_ic_commit_search_api_mtrl_alpha</item>
         <item name="suggestionRowLayout">@layout/abc_search_dropdown_item_icons_2line</item>
     </style>
 
@@ -366,8 +401,8 @@
     </style>
 
     <style name="Base.Widget.AppCompat.CompoundButton.Switch" parent="android:Widget.CompoundButton">
-        <item name="track">@null</item>
-        <item name="android:thumb">@null</item>
+        <item name="track">@drawable/abc_switch_track_mtrl_alpha</item>
+        <item name="android:thumb">@drawable/abc_switch_thumb_material</item>
         <item name="switchTextAppearance">@style/TextAppearance.AppCompat.Widget.Switch</item>
         <item name="android:background">?attr/controlBackground</item>
         <item name="showText">false</item>
@@ -378,13 +413,38 @@
 
     <style name="Base.TextAppearance.AppCompat.Widget.Switch" parent="TextAppearance.AppCompat.Button" />
 
-    <style name="Base.Widget.AppCompat.RatingBar" parent="android:Widget.RatingBar" />
+    <style name="Base.Widget.AppCompat.RatingBar" parent="android:Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/abc_ratingbar_material</item>
+        <item name="android:indeterminateDrawable">@drawable/abc_ratingbar_material</item>
+    </style>
 
-    <style name="Base.Widget.AppCompat.RatingBar.Indicator" parent="android:Widget.RatingBar" />
+    <style name="Base.Widget.AppCompat.RatingBar.Indicator" parent="android:Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/abc_ratingbar_indicator_material</item>
+        <item name="android:indeterminateDrawable">@drawable/abc_ratingbar_indicator_material</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:maxHeight">36dp</item>
+        <item name="android:isIndicator">true</item>
+        <item name="android:thumb">@null</item>
+    </style>
 
-    <style name="Base.Widget.AppCompat.RatingBar.Small" parent="android:Widget.RatingBar" />
+    <style name="Base.Widget.AppCompat.RatingBar.Small" parent="android:Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/abc_ratingbar_small_material</item>
+        <item name="android:indeterminateDrawable">@drawable/abc_ratingbar_small_material</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">16dp</item>
+        <item name="android:isIndicator">true</item>
+        <item name="android:thumb">@null</item>
+    </style>
 
-    <style name="Base.Widget.AppCompat.SeekBar" parent="android:Widget" />
+    <style name="Base.Widget.AppCompat.SeekBar" parent="android:Widget">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/abc_seekbar_track_material</item>
+        <item name="android:indeterminateDrawable">@drawable/abc_seekbar_track_material</item>
+        <item name="android:thumb">@drawable/abc_seekbar_thumb_material</item>
+        <item name="android:focusable">true</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style>
 
     <!-- A seek bar with tick marks at each progress value. -->
     <style name="Base.Widget.AppCompat.SeekBar.Discrete">
@@ -392,16 +452,32 @@
     </style>
 
     <!-- Bordered ink button -->
-    <style name="Base.Widget.AppCompat.Button" parent="android:Widget" />
+    <style name="Base.Widget.AppCompat.Button" parent="android:Widget">
+        <item name="android:background">@drawable/abc_btn_default_mtrl_shape</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:minWidth">88dip</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
 
     <!-- Small bordered ink button -->
-    <style name="Base.Widget.AppCompat.Button.Small" />
+    <style name="Base.Widget.AppCompat.Button.Small">
+        <item name="android:minHeight">48dip</item>
+        <item name="android:minWidth">48dip</item>
+    </style>
 
     <!-- Colored bordered ink button -->
-    <style name="Base.Widget.AppCompat.Button.Colored" />
+    <style name="Base.Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/abc_btn_colored_material</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Widget.Button.Colored</item>
+    </style>
 
     <!-- Borderless ink button -->
-    <style name="Base.Widget.AppCompat.Button.Borderless" />
+    <style name="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/abc_btn_borderless_material</item>
+    </style>
 
     <!-- Colored borderless ink button -->
     <style name="Base.Widget.AppCompat.Button.Borderless.Colored">
@@ -413,7 +489,9 @@
         <item name="android:minHeight">@dimen/abc_alert_dialog_button_bar_height</item>
     </style>
 
-    <style name="Base.Widget.AppCompat.ImageButton" parent="android:Widget.ImageButton" />
+    <style name="Base.Widget.AppCompat.ImageButton" parent="android:Widget.ImageButton">
+        <item name="android:background">@drawable/abc_btn_default_mtrl_shape</item>
+    </style>
 
     <style name="Base.Widget.AppCompat.TextView.SpinnerItem" parent="android:Widget.TextView.SpinnerItem">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem</item>

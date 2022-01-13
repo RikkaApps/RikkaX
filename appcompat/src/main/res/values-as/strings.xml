@@ -21,7 +21,7 @@
     <string name="abc_action_bar_up_description" msgid="8388173803310557296">"ওপৰলৈ যাওক"</string>
     <string name="abc_action_menu_overflow_description" msgid="3937310113216875497">"অধিক বিকল্প"</string>
     <string name="abc_toolbar_collapse_description" msgid="1656852541809559762">"সংকোচন কৰক"</string>
-    <string name="abc_searchview_description_search" msgid="3417662926640357176">"সন্ধান"</string>
+    <string name="abc_searchview_description_search" msgid="3417662926640357176">"সন্ধান কৰক"</string>
     <string name="abc_search_hint" msgid="7208076849092622260">"সন্ধান কৰক…"</string>
     <string name="abc_searchview_description_query" msgid="693312494995508443">"সন্ধান কৰা প্ৰশ্ন"</string>
     <string name="abc_searchview_description_clear" msgid="3741173234950517107">"সন্ধান কৰা প্ৰশ্ন মচক"</string>

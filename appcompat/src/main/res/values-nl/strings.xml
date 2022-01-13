@@ -16,7 +16,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="abc_action_mode_done" msgid="4692188335987374352">"Gereed"</string>
+    <string name="abc_action_mode_done" msgid="4692188335987374352">"Klaar"</string>
     <string name="abc_action_bar_home_description" msgid="5976598919945601918">"Navigeren naar startpositie"</string>
     <string name="abc_action_bar_up_description" msgid="8388173803310557296">"Omhoog navigeren"</string>
     <string name="abc_action_menu_overflow_description" msgid="3937310113216875497">"Meer opties"</string>
@@ -28,7 +28,7 @@
     <string name="abc_searchview_description_submit" msgid="1486535517437947103">"Zoekopdracht verzenden"</string>
     <string name="abc_searchview_description_voice" msgid="2293578557972875415">"Gesproken zoekopdracht"</string>
     <string name="abc_activitychooserview_choose_application" msgid="2165779757652331008">"Een app selecteren"</string>
-    <string name="abc_activity_chooser_view_see_all" msgid="1189761859438369441">"Alles weergeven"</string>
+    <string name="abc_activity_chooser_view_see_all" msgid="1189761859438369441">"Alles tonen"</string>
     <string name="abc_shareactionprovider_share_with_application" msgid="9055268688411532828">"Delen met <xliff:g id="APPLICATION_NAME">%s</xliff:g>"</string>
     <string name="abc_shareactionprovider_share_with" msgid="8875138169939072951">"Delen met"</string>
     <string name="abc_capital_on" msgid="884982626291842264">"AAN"</string>

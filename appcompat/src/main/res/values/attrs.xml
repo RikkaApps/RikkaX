@@ -110,6 +110,10 @@
              action bar. This will be inherited by any widget inflated
              into the action bar. -->
         <attr name="actionBarTheme" format="reference" />
+        <!-- Reference to a theme that should be used to inflate the
+             action bar in action mode. This will be inherited by any widget inflated
+             into the action bar. -->
+        <attr name="actionModeTheme" format="reference" />
         <!-- Reference to a theme that should be used to inflate widgets
              and layouts destined for the action bar. Most of the time
              this will be a reference to the current theme, but when
@@ -162,9 +166,11 @@
         <!-- Drawable to use for the Web Search action button in WebView selection action modes -->
         <attr name="actionModeWebSearchDrawable" format="reference"/>
 
+        <!-- Content description to use for the close action mode button -->
+        <attr name="actionModeCloseContentDescription" format="string"/>
+
         <!-- PopupWindow style to use for action modes when showing as a window overlay. -->
         <attr name="actionModePopupWindowStyle" format="reference"/>
-
 
         <!-- =================== -->
         <!-- Text styles -->
@@ -423,9 +429,9 @@
         <eat-comment />
 
         <!-- Animated Drawable to use for single choice indicators. -->
-        <attr name="listChoiceIndicatorMultipleAnimated" format="reference" />
-        <!-- Animated Drawable to use for multiple choice indicators. -->
         <attr name="listChoiceIndicatorSingleAnimated" format="reference" />
+        <!-- Animated Drawable to use for multiple choice indicators. -->
+        <attr name="listChoiceIndicatorMultipleAnimated" format="reference" />
 
     </declare-styleable>
 
@@ -716,7 +722,6 @@
         <attr name="android:onClick" />
 
         <!-- How this item should display in the Action Bar, if present. -->
-        <attr name="android:showAsAction" />
         <attr name="showAsAction">
             <!-- Never show this item in an action bar, show it in the overflow menu instead.
                  Mutually exclusive with "ifRoom" and "always". -->
@@ -742,24 +747,20 @@
         <!-- An optional layout to be used as an action view.
              See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. -->
-        <attr name="android:actionLayout" />
         <attr name="actionLayout" format="reference" />
 
         <!-- The name of an optional View class to instantiate and use as an
              action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. -->
-        <attr name="android:actionViewClass" />
         <attr name="actionViewClass" format="string" />
 
         <!-- The name of an optional ActionProvider class to instantiate an action view
              and perform operations such as default action for that menu item.
              See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
              for more info. -->
-        <attr name="android:actionProviderClass" />
         <attr name="actionProviderClass" format="string" />
 
         <!-- The content description associated with the item. -->
-        <attr name="android:contentDescription" />
         <attr name="contentDescription" format="string"/>
 
         <!-- The tooltip text associated with the item. -->
@@ -929,6 +930,8 @@
                  result to valid color values. Saturate(S + D) -->
             <enum name="add" value="16" />
         </attr>
+        <!-- Display the emoji if emojicompat has this character for emoji not on the system -->
+        <attr name="emojiCompatEnabled" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="LinearLayoutCompat">
@@ -1104,6 +1107,35 @@
 
         <!-- Blending mode used to apply the button tint. -->
         <attr name="buttonTintMode">
+            <!-- The tint is drawn on top of the drawable.
+                 [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] -->
+            <enum name="src_over" value="3" />
+            <!-- The tint is masked by the alpha channel of the drawable. The drawable’s
+                 color channels are thrown out. [Sa * Da, Sc * Da] -->
+            <enum name="src_in" value="5" />
+            <!-- The tint is drawn above the drawable, but with the drawable’s alpha
+                 channel masking the result. [Da, Sc * Da + (1 - Sa) * Dc] -->
+            <enum name="src_atop" value="9" />
+            <!-- Multiplies the color and alpha channels of the drawable with those of
+                 the tint. [Sa * Da, Sc * Dc] -->
+            <enum name="multiply" value="14" />
+            <!-- [Sa + Da - Sa * Da, Sc + Dc - Sc * Dc] -->
+            <enum name="screen" value="15" />
+            <!-- Combines the tint and icon color and alpha channels, clamping the
+                 result to valid color values. Saturate(S + D) -->
+            <enum name="add" value="16" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CheckedTextView">
+        <attr name="android:checkMark"/>
+        <!-- Compat attr to load backported drawable types -->
+        <attr name="checkMarkCompat" format="reference"/>
+        <!-- Tint to apply to the check mark drawable. -->
+        <attr name="checkMarkTint" format="color" />
+
+        <!-- Blending mode used to apply the check mark tint. -->
+        <attr name="checkMarkTintMode">
             <!-- The tint is drawn on top of the drawable.
                  [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] -->
             <enum name="src_over" value="3" />
@@ -1302,6 +1334,10 @@
         <attr name="android:drawableStart" />
         <attr name="android:drawableEnd" />
         <attr name="android:textAppearance" />
+    </declare-styleable>
+
+    <declare-styleable name="AppCompatEmojiHelper">
+
     </declare-styleable>
 
     <declare-styleable name="RecycleListView">
