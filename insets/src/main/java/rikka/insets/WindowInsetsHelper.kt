@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import rikka.layoutinflater.view.LayoutInflaterFactory
 
 private typealias ApplyInsetsCallback<T> = (insets: Insets, left: Boolean, top: Boolean, right: Boolean, bottom: Boolean) -> T
 
@@ -37,10 +38,11 @@ private class ConsumeInsets : ApplyInsetsCallback<Insets> {
 }
 
 open class WindowInsetsHelper private constructor(
-        private val view: View,
-        private val fitSystemWindows: Int,
-        private val layout_fitsSystemWindowsInsets: Int,
-        private val consumeSystemWindows: Int) : OnApplyWindowInsetsListener {
+    private val view: View,
+    private val fitSystemWindows: Int,
+    private val layout_fitsSystemWindowsInsets: Int,
+    private val consumeSystemWindows: Int
+) : OnApplyWindowInsetsListener {
 
     internal var initialPaddingLeft: Int = view.paddingLeft
     internal var initialPaddingTop: Int = view.paddingTop
@@ -135,10 +137,11 @@ open class WindowInsetsHelper private constructor(
                 initialMargin = true
             }
 
-            val margin = if ((layout_fitsSystemWindowsInsets and RELATIVE_LAYOUT_DIRECTION) == RELATIVE_LAYOUT_DIRECTION)
-                Rect(initialMarginLeft, initialMarginTop, initialMarginRight, initialMarginBottom)
-            else
-                Rect(initialMarginStart, initialMarginTop, initialMarginEnd, initialMarginBottom)
+            val margin =
+                if ((layout_fitsSystemWindowsInsets and RELATIVE_LAYOUT_DIRECTION) == RELATIVE_LAYOUT_DIRECTION)
+                    Rect(initialMarginLeft, initialMarginTop, initialMarginRight, initialMarginBottom)
+                else
+                    Rect(initialMarginStart, initialMarginTop, initialMarginEnd, initialMarginBottom)
 
             applyInsets(windowInsets.systemWindowInsets, layout_fitsSystemWindowsInsets, ApplyInsets(margin))
 
@@ -159,11 +162,15 @@ open class WindowInsetsHelper private constructor(
             }
         }
 
-        val systemWindowInsets = if (consumeSystemWindows != 0) applyInsets(windowInsets.systemWindowInsets, consumeSystemWindows, ConsumeInsets()) else windowInsets.systemWindowInsets
+        val systemWindowInsets = if (consumeSystemWindows != 0) applyInsets(
+            windowInsets.systemWindowInsets,
+            consumeSystemWindows,
+            ConsumeInsets()
+        ) else windowInsets.systemWindowInsets
 
         return WindowInsetsCompat.Builder(windowInsets)
-                .setSystemWindowInsets(systemWindowInsets)
-                .build()
+            .setSystemWindowInsets(systemWindowInsets)
+            .build()
     }
 
     override fun onApplyWindowInsets(view: View, insets: WindowInsetsCompat): WindowInsetsCompat {
@@ -183,15 +190,28 @@ open class WindowInsetsHelper private constructor(
             val a = view.context.obtainStyledAttributes(attrs, R.styleable.WindowInsetsHelper, 0, 0)
             val edgeToEdge = a.getBoolean(R.styleable.WindowInsetsHelper_edgeToEdge, false)
             val fitsSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_fitsSystemWindowsInsets, 0)
-            val layout_fitsSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_layout_fitsSystemWindowsInsets, 0)
+            val layout_fitsSystemWindowsInsets =
+                a.getInt(R.styleable.WindowInsetsHelper_layout_fitsSystemWindowsInsets, 0)
             val consumeSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_consumeSystemWindowsInsets, 0)
             a.recycle()
 
-            attach(view, edgeToEdge, fitsSystemWindowsInsets, layout_fitsSystemWindowsInsets, consumeSystemWindowsInsets)
+            attach(
+                view,
+                edgeToEdge,
+                fitsSystemWindowsInsets,
+                layout_fitsSystemWindowsInsets,
+                consumeSystemWindowsInsets
+            )
         }
 
         @JvmStatic
-        fun attach(view: View, edgeToEdge: Boolean, fitsSystemWindowsInsets: Int, layout_fitsSystemWindowsInsets: Int, consumeSystemWindowsInsets: Int) {
+        fun attach(
+            view: View,
+            edgeToEdge: Boolean,
+            fitsSystemWindowsInsets: Int,
+            layout_fitsSystemWindowsInsets: Int,
+            consumeSystemWindowsInsets: Int
+        ) {
             if (edgeToEdge) {
                 view.systemUiVisibility = (view.systemUiVisibility
                         or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -203,7 +223,12 @@ open class WindowInsetsHelper private constructor(
                 return
             }
 
-            val listener = WindowInsetsHelper(view, fitsSystemWindowsInsets, layout_fitsSystemWindowsInsets, consumeSystemWindowsInsets)
+            val listener = WindowInsetsHelper(
+                view,
+                fitsSystemWindowsInsets,
+                layout_fitsSystemWindowsInsets,
+                consumeSystemWindowsInsets
+            )
             ViewCompat.setOnApplyWindowInsetsListener(view, listener)
             view.setTag(R.id.tag_rikka_material_WindowInsetsHelper, listener)
 
@@ -217,6 +242,11 @@ open class WindowInsetsHelper private constructor(
                     override fun onViewDetachedFromWindow(v: View) = Unit
                 })
             }
+        }
+
+        @JvmStatic
+        val LISTENER = LayoutInflaterFactory.OnViewCreatedListener { view, _, _, _, attrs ->
+            attach(view, attrs)
         }
     }
 }
