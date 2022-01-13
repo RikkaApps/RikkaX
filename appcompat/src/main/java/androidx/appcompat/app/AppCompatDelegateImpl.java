@@ -358,6 +358,10 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         // 4. Don't use applyOverrideConfiguration() unless you're able to retain the base context's
         //    configuration overrides (as distinct from the entire configuration).
 
+        final int nightMode = calculateNightMode();
+        if (nightMode == MODE_NIGHT_UNSPECIFIED) {
+            return super.attachBaseContext2(baseContext);
+        }
         final int modeToApply = mapNightMode(baseContext, calculateNightMode());
 
         // If the base context is a ContextThemeWrapper (thus not an Application context)
@@ -571,11 +575,6 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
     @Override
     public void setSupportActionBar(Toolbar toolbar) {
-        if (!(mHost instanceof Activity)) {
-            // Only Activities support custom Action Bars
-            return;
-        }
-
         final ActionBar ab = getSupportActionBar();
         if (ab instanceof WindowDecorActionBar) {
             throw new IllegalStateException("This Activity already has an action bar supplied " +
@@ -941,7 +940,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
                             + " }");
         }
 
-        if (Build.VERSION.SDK_INT >= 21) {
+        /*if (Build.VERSION.SDK_INT >= 21) {
             // If we're running on L or above, we can rely on ViewCompat's
             // setOnApplyWindowInsetsListener
             ViewCompat.setOnApplyWindowInsetsListener(subDecor, new OnApplyWindowInsetsListener() {
@@ -972,7 +971,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
                             insets.top = updateStatusGuard(null, insets);
                         }
                     });
-        }
+        }*/
 
         if (mDecorContentParent == null) {
             mTitleView = (TextView) subDecor.findViewById(R.id.title);
@@ -2385,6 +2384,10 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         }
 
         @NightMode final int nightMode = calculateNightMode();
+        if (nightMode == MODE_NIGHT_UNSPECIFIED) {
+            return false;
+        }
+
         @ApplyableNightMode final int modeToApply = mapNightMode(mContext, nightMode);
         final boolean applied = updateForNightMode(modeToApply, allowRecreation);
 
