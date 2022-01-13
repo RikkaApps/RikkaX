@@ -12,11 +12,21 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.collection.SimpleArrayMap;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class LayoutInflaterFactory implements LayoutInflater.Factory2 {
 
     private final AppCompatDelegate appCompatDelegate;
+
+    public interface OnViewCreatedListener {
+
+        void onViewCreated(@NonNull View view, @Nullable View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs);
+    }
+
+    private final List<OnViewCreatedListener> onViewCreatedListeners = new ArrayList<>();
 
     public LayoutInflaterFactory() {
         this(null);
@@ -53,6 +63,20 @@ public class LayoutInflaterFactory implements LayoutInflater.Factory2 {
     }
 
     public void onViewCreated(@NonNull View view, @Nullable View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        for (OnViewCreatedListener listener : onViewCreatedListeners) {
+            listener.onViewCreated(view, parent, name, context, attrs);
+        }
+    }
+
+    public final LayoutInflaterFactory addOnViewCreatedListener(@NonNull OnViewCreatedListener listener) {
+        Objects.requireNonNull(listener);
+        onViewCreatedListeners.add(listener);
+        return this;
+    }
+
+    public final LayoutInflaterFactory addOnViewCreatedListeners(@NonNull OnViewCreatedListener... listeners) {
+        Collections.addAll(onViewCreatedListeners, listeners);
+        return this;
     }
 }
 
