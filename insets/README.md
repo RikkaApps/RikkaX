@@ -28,15 +28,8 @@ This library requires custom attributes for all views, including framework views
 An example implementation:
 
 ```kotlin
-open class MyViewInflater(delegate: AppCompatDelegate) : LayoutInflaterFactory(delegate) {
-
-    override fun onViewCreated(view: View, parent: View?, name: String, context: Context, attrs: AttributeSet) {
-        WindowInsetsHelper.attach(view, attrs)
-    }
-}
-
-// call in Activity#onCreate
-layoutInflater.factory2 = MyViewInflater(delegate)
+// Call in Activity#onCreate
+layoutInflater.factory2 = LayoutInflaterFactory(delegate).addOnViewCreatedListener(WindowInsetsHelper.LISTENER)
 ```
 </details>
 
