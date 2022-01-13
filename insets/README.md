@@ -8,7 +8,7 @@ Handle window insets with XML only. Say goodbye to writing `OnApplyWindowInsetsL
 
 ```groovy
 dependencies {
-    implementation "dev.rikka.rikkax.insets:insets:1.1.0"
+    implementation "dev.rikka.rikkax.insets:insets:1.1.1"
 }
 ```
 
