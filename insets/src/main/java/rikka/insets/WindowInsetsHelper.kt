@@ -3,8 +3,10 @@
 package rikka.insets
 
 import android.annotation.SuppressLint
+import android.content.res.TypedArray
 import android.graphics.Rect
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity.*
 import android.view.View
 import android.view.ViewGroup
@@ -187,12 +189,29 @@ open class WindowInsetsHelper private constructor(
 
         @JvmStatic
         fun attach(view: View, attrs: AttributeSet) {
+            fun TypedArray.getIntOrReference(index: Int, defValue: Int) =
+                if (getType(index) == TypedValue.TYPE_REFERENCE) {
+                    view.context.resources.getInteger(getResourceId(index, 0))
+                } else {
+                    getInt(index, defValue)
+                }
+
+            fun TypedArray.getBooleanOrReference(index: Int, defValue: Boolean) =
+                if (getType(index) == TypedValue.TYPE_REFERENCE) {
+                    view.context.resources.getBoolean(getResourceId(index, 0))
+                } else {
+                    getBoolean(index, defValue)
+                }
+
             val a = view.context.obtainStyledAttributes(attrs, R.styleable.WindowInsetsHelper, 0, 0)
-            val edgeToEdge = a.getBoolean(R.styleable.WindowInsetsHelper_edgeToEdge, false)
-            val fitsSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_fitsSystemWindowsInsets, 0)
+            val edgeToEdge =
+                a.getBooleanOrReference(R.styleable.WindowInsetsHelper_edgeToEdge, false)
+            val fitsSystemWindowsInsets =
+                a.getIntOrReference(R.styleable.WindowInsetsHelper_fitsSystemWindowsInsets, 0)
             val layout_fitsSystemWindowsInsets =
-                a.getInt(R.styleable.WindowInsetsHelper_layout_fitsSystemWindowsInsets, 0)
-            val consumeSystemWindowsInsets = a.getInt(R.styleable.WindowInsetsHelper_consumeSystemWindowsInsets, 0)
+                a.getIntOrReference(R.styleable.WindowInsetsHelper_layout_fitsSystemWindowsInsets, 0)
+            val consumeSystemWindowsInsets =
+                a.getIntOrReference(R.styleable.WindowInsetsHelper_consumeSystemWindowsInsets, 0)
             a.recycle()
 
             attach(
