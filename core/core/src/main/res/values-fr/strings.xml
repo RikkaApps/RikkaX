@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="follow_system">Identique au système</string>
+    <string name="dark_theme">Thème sombre</string>
+    <string name="dark_theme_off">Toujours actif</string>
+    <string name="dark_theme_on">Toujours inactif</string>
+    <string name="dark_theme_auto_time">Lorsqu\'il fait nuit</string>
+    <string name="dark_theme_auto_battery">Lorsque l\'économiseur de batterie est activé</string>
 </resources>
