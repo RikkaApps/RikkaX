@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import androidx.annotation.CallSuper
 import androidx.appcompat.widget.Toolbar
 import rikka.core.res.resolveColor
+import rikka.insets.WindowInsetsHelper
+import rikka.layoutinflater.view.LayoutInflaterFactory
 import rikka.material.R
 import rikka.material.internal.ThemedAppCompatActivity
 import rikka.material.widget.AppBarLayout
@@ -25,7 +27,9 @@ open class MaterialActivity : ThemedAppCompatActivity(), AppBarOwner, Translucen
     }
 
     open fun onInstallViewFactory(layoutInflater: LayoutInflater) {
-        layoutInflater.factory2 = MaterialViewInflater(delegate)
+        layoutInflater.factory2 = LayoutInflaterFactory(delegate).apply {
+            addOnViewCreatedListeners(WindowInsetsHelper.LISTENER)
+        }
     }
 
     override fun getAppBar(): AppBar? {

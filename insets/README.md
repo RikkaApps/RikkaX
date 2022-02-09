@@ -117,6 +117,10 @@ To use these methods with Java, use `WindowInsetsHelperKt`.
 
 ## Changelog
 
+### 1.2.0 (2022-01-30)
+
+* Add reference support for attributes
+
 ### 1.1.0 (2021/05/17)
 
 * Add the missing "s" to the attribute `fitsSystemWindowsInsets` and `layout_fitsSystemWindowsInsets`
