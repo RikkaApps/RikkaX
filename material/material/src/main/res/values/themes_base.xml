@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!--
+    Theme.Rikka.Material3 <- Base.Rikka.Material3 <- Theme.Material3 (Material Components)
+    -->
+
     <!-- Base themes -->
-    <style name="Base.Light" parent="Theme.MaterialComponents.Light">
-        <item name="android:statusBarColor">?android:colorBackground</item>
+    <style name="Base.Rikka.Material3.Light" parent="Theme.Material3.Light">
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
         <item name="android:listDivider">@drawable/list_divider</item>
         <item name="android:dividerVertical">?android:listDivider</item>
         <item name="android:dividerHorizontal">?android:listDivider</item>
-        <item name="android:colorBackground">@color/background_light</item>
         <item name="android:backgroundDimAmount">@dimen/rd_material_dialog_default_dim_amount</item>
 
-        <item name="colorPrimary">@color/primary_light</item>
-        <item name="colorPrimaryVariant">@color/primary_dark_light</item>
-        <item name="actionBarStyle">@style/Widget.Material.ActionBar.Solid</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
-        <item name="dialogTheme">@style/ThemeOverlay.Material.Dialog</item>
-        <item name="alertDialogTheme">@style/ThemeOverlay.Material.Dialog.Alert</item>
 
         <item name="cardBackground">@color/cardview_light_background</item>
         <item name="colorAlert">@color/material_red_A200</item>
@@ -28,7 +26,6 @@
         <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline.Light</item>
         <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
         <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
-        <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
         <item name="navigationBarDividerColor">@color/navigation_bar_divider_light</item>
 
         <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
@@ -40,7 +37,7 @@
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
     </style>
 
-    <style name="Base" parent="Theme.MaterialComponents">
+    <style name="Base.Rikka.Material3.Dark" parent="Theme.Material3.Dark">
         <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
@@ -55,8 +52,6 @@
         <item name="actionBarStyle">@style/Widget.Material.ActionBar.Surface</item>
         <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
-        <item name="dialogTheme">@style/ThemeOverlay.Material.Dialog</item>
-        <item name="alertDialogTheme">@style/ThemeOverlay.Material.Dialog.Alert</item>
 
         <item name="cardBackground">@color/cardview_dark_background</item>
         <item name="colorAlert">@color/material_red_A100</item>
@@ -79,93 +74,13 @@
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
     </style>
 
-    <style name="Base.Light.Dialog" parent="Theme.MaterialComponents.Light.Dialog">
-        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
-        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
-        <item name="android:listDivider">@drawable/list_divider</item>
-        <item name="android:dividerVertical">?android:listDivider</item>
-        <item name="android:dividerHorizontal">?android:listDivider</item>
-        <item name="android:backgroundDimAmount">@dimen/rd_material_dialog_default_dim_amount</item>
-
-        <item name="colorPrimary">@color/primary_light</item>
-        <item name="colorPrimaryVariant">@color/primary_dark_light</item>
-        <item name="actionBarStyle">@style/Widget.Material.ActionBar.Solid</item>
-        <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
-        <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
-        <item name="dialogTheme">@style/ThemeOverlay.Material.Dialog</item>
-        <item name="alertDialogTheme">@style/ThemeOverlay.Material.Dialog.Alert</item>
-
-        <item name="cardBackground">@color/cardview_light_background</item>
-        <item name="colorAlert">@color/material_red_A200</item>
-        <item name="colorSafe">@color/material_green_600</item>
-        <item name="colorWarning">@color/material_orange_700</item>
-        <item name="colorInactive" tools:ignore="PrivateResource">@color/material_grey_600</item>
-        <item name="switchBarStyle">@style/Widget.SwitchBar.Light</item>
-        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar</item>
-        <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
-        <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
-        <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline.Light</item>
-        <item name="outlineButtonBackground">@drawable/material_button_outline_background</item>
-        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
-        <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
-        <item name="navigationBarDividerColor">@color/navigation_bar_divider_light</item>
-
-        <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
-    </style>
-
-    <style name="Base.Dialog" parent="Theme.MaterialComponents.Dialog">
-        <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
-        <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
-        <item name="android:listDivider">@drawable/list_divider</item>
-        <item name="android:dividerVertical">?android:listDivider</item>
-        <item name="android:dividerHorizontal">?android:listDivider</item>
-        <item name="android:backgroundDimAmount">@dimen/rd_material_dialog_default_dim_amount</item>
-
-        <item name="colorPrimary">@color/primary_dark</item>
-        <item name="colorPrimaryVariant">@color/primary_dark_dark</item>
-        <item name="actionBarStyle">@style/Widget.Material.ActionBar.Surface</item>
-        <item name="dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
-        <item name="swipeRefreshLayoutProgressSpinnerBackgroundColor">?cardBackground</item>
-        <item name="dialogTheme">@style/ThemeOverlay.Material.Dialog</item>
-        <item name="alertDialogTheme">@style/ThemeOverlay.Material.Dialog.Alert</item>
-
-        <item name="cardBackground">@color/cardview_dark_background</item>
-        <item name="colorAlert">@color/material_red_A100</item>
-        <item name="colorSafe">@color/material_green_A100</item>
-        <item name="colorWarning">@color/material_orange_A100</item>
-        <item name="colorInactive">@color/material_grey_500</item>
-        <item name="switchBarStyle">@style/Widget.SwitchBar</item>
-        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar</item>
-        <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
-        <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
-        <item name="outlineButtonStyle">@style/Widget.Material.Button.Outline</item>
-        <item name="outlineButtonBackground">@drawable/material_button_outline_background_dark</item>
-        <item name="outlineButtonForeground">@drawable/material_button_outline_foreground</item>
-        <item name="materialButtonHorizontalMarginAmend">@dimen/rd_material_button_horizontal_margin_amend</item>
-        <item name="navigationBarDividerColor">@color/navigation_bar_divider_dark</item>
-
-        <item name="extendedFloatingActionButtonStyle">@style/Widget.Material.ExtendedFloatingActionButton.Icon</item>
-    </style>
-
     <!-- Theme for users -->
-    <style name="Theme.Material.Light" parent="Base.Light" />
+    <style name="Theme.Rikka.Material3.Light" parent="Base.Rikka.Material3.Light" />
 
-    <style name="Theme.Material.Light.Dialog" parent="Base.Light.Dialog" />
+    <style name="Theme.Rikka.Material3.Dark" parent="Base.Rikka.Material3.Dark" />
 
-    <style name="Theme.Material" parent="Base" />
+    <style name="Theme.Rikka.Material3.DynamicColors.Light" parent="Theme.Rikka.Material3.Light"/>
 
-    <style name="Theme.Material.Dialog" parent="Base.Dialog" />
-
-    <!-- Light theme variants -->
-    <style name="Theme.Material.Light.DarkActionBar" parent="Theme.Material.Light">
-        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="actionBarWidgetTheme">@null</item>
-        <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
-
-        <item name="colorPrimaryDark" tools:ignore="PrivateResource">@color/primary_dark_material_dark</item>
-        <item name="colorPrimary" tools:ignore="PrivateResource">@color/primary_material_dark</item>
-    </style>
-
-    <style name="Theme.Material.Light.LightStatusBar" parent="Theme.Material.Light" />
+    <style name="Theme.Rikka.Material3.DynamicColors.Dark" parent="Theme.Rikka.Material3.Dark" />
 
 </resources>

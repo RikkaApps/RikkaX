@@ -10,7 +10,7 @@ android {
         minSdkVersion 21
         targetSdkVersion target_sdk
         versionCode 1
-        versionName '1.7.0'
+        versionName '2.0.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -38,7 +38,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$androidx_core_version"
     api "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     api "androidx.swiperefreshlayout:swiperefreshlayout:$androidx_swiperefreshlayout_version"
-    api 'com.google.android.material:material:1.4.0'
+    api 'com.google.android.material:material:1.5.0'
 
     /*api "rikka.appcompat:appcompat:$rikka_appcompat_version"
     implementation "rikka.core:core:$rikka_core_version"*/

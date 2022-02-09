@@ -15,8 +15,8 @@
     <dimen name="rd_toolbar_content_padding_start_with_navigation">72dp</dimen>
     <dimen name="rd_toolbar_padding_end">0dp</dimen>
 
-    <dimen name="rd_default_dialog_corner_radius">4dp</dimen>
-    <dimen name="rd_default_button_corner_radius">4dp</dimen>
+    <dimen name="rd_default_dialog_corner_radius">24dp</dimen>
+    <dimen name="rd_default_button_corner_radius">8dp</dimen>
 
     <dimen name="rd_material_button_horizontal_margin_amend">-8dp</dimen>
 

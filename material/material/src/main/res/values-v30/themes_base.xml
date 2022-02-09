@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Base.V30.Light" parent="Base.V29.Light">
+    <style name="Base.V30.Rikka.Material3.Light" parent="Base.V29.Rikka.Material3.Light">
         <item name="android:enforceStatusBarContrast">false</item>
         <item name="android:enforceNavigationBarContrast">false</item>
     </style>
 
-    <style name="Base.V30" parent="Base.V29">
+    <style name="Base.V30.Rikka.Material3.Dark" parent="Base.V29.Rikka.Material3.Dark">
         <item name="android:enforceStatusBarContrast">false</item>
         <item name="android:enforceNavigationBarContrast">false</item>
     </style>
 
-    <style name="Theme.Material.Light" parent="Base.V30.Light"/>
-    <style name="Theme.Material" parent="Base.V30"/>
+    <style name="Theme.Rikka.Material3.Light" parent="Base.V30.Rikka.Material3.Light"/>
+    <style name="Theme.Rikka.Material3.Dark" parent="Base.V30.Rikka.Material3.Dark"/>
 </resources>
