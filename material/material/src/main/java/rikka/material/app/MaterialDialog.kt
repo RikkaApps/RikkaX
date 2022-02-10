@@ -8,14 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.Window
 import androidx.appcompat.app.AppCompatDialog
-import androidx.appcompat.widget.Toolbar
-import rikka.material.widget.AppBarLayout
 
-open class MaterialDialog : AppCompatDialog, AppBarOwner, TranslucentSystemBars {
+open class MaterialDialog : AppCompatDialog, TranslucentSystemBars {
 
     var parent: MaterialDialogParent? = null
-
-    private var appBar: AppBar? = null
 
     constructor(context: Context) : super(context)
     constructor(context: Context, themeResId: Int) : super(context, themeResId)
@@ -33,15 +29,6 @@ open class MaterialDialog : AppCompatDialog, AppBarOwner, TranslucentSystemBars 
                 onApplyTranslucentSystemBars()
             }
         }
-    }
-
-    override fun getAppBar(): AppBar? {
-        return appBar
-    }
-
-    override fun setAppBar(appBarLayout: AppBarLayout, toolbar: Toolbar) {
-        delegate.setSupportActionBar(toolbar)
-        appBar = AppBar(supportActionBar!!, appBarLayout)
     }
 
     override fun onMenuItemSelected(featureId: Int, item: MenuItem): Boolean {

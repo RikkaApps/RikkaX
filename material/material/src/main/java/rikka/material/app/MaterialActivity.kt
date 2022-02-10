@@ -5,17 +5,13 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.annotation.CallSuper
-import androidx.appcompat.widget.Toolbar
 import rikka.core.res.resolveColor
 import rikka.insets.WindowInsetsHelper
 import rikka.layoutinflater.view.LayoutInflaterFactory
 import rikka.material.R
 import rikka.material.internal.ThemedAppCompatActivity
-import rikka.material.widget.AppBarLayout
 
-open class MaterialActivity : ThemedAppCompatActivity(), AppBarOwner, TranslucentSystemBars {
-
-    private var appBar: AppBar? = null
+open class MaterialActivity : ThemedAppCompatActivity(), TranslucentSystemBars {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         onInstallViewFactory(LayoutInflater.from(this))
@@ -30,15 +26,6 @@ open class MaterialActivity : ThemedAppCompatActivity(), AppBarOwner, Translucen
         layoutInflater.factory2 = LayoutInflaterFactory(delegate).apply {
             addOnViewCreatedListeners(WindowInsetsHelper.LISTENER)
         }
-    }
-
-    override fun getAppBar(): AppBar? {
-        return appBar
-    }
-
-    override fun setAppBar(appBarLayout: AppBarLayout, toolbar: Toolbar) {
-        super.setSupportActionBar(toolbar)
-        appBar = AppBar(supportActionBar!!, appBarLayout)
     }
 
     override fun shouldApplyTranslucentSystemBars(): Boolean {
