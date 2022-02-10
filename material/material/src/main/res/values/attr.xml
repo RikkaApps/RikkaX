@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="MaterialColorTokens">
+        <attr name="palettePrimary0" format="color" />
+        <attr name="palettePrimary10" format="color" />
+        <attr name="palettePrimary20" format="color" />
+        <attr name="palettePrimary30" format="color" />
+        <attr name="palettePrimary40" format="color" />
+        <attr name="palettePrimary50" format="color" />
+        <attr name="palettePrimary60" format="color" />
+        <attr name="palettePrimary70" format="color" />
+        <attr name="palettePrimary80" format="color" />
+        <attr name="palettePrimary90" format="color" />
+        <attr name="palettePrimary95" format="color" />
+        <attr name="palettePrimary99" format="color" />
+        <attr name="palettePrimary100" format="color" />
+
+        <attr name="paletteSecondary0" format="color" />
+        <attr name="paletteSecondary10" format="color" />
+        <attr name="paletteSecondary20" format="color" />
+        <attr name="paletteSecondary30" format="color" />
+        <attr name="paletteSecondary40" format="color" />
+        <attr name="paletteSecondary50" format="color" />
+        <attr name="paletteSecondary60" format="color" />
+        <attr name="paletteSecondary70" format="color" />
+        <attr name="paletteSecondary80" format="color" />
+        <attr name="paletteSecondary90" format="color" />
+        <attr name="paletteSecondary95" format="color" />
+        <attr name="paletteSecondary99" format="color" />
+        <attr name="paletteSecondary100" format="color" />
+
+        <attr name="paletteTertiary0" format="color" />
+        <attr name="paletteTertiary10" format="color" />
+        <attr name="paletteTertiary20" format="color" />
+        <attr name="paletteTertiary30" format="color" />
+        <attr name="paletteTertiary40" format="color" />
+        <attr name="paletteTertiary50" format="color" />
+        <attr name="paletteTertiary60" format="color" />
+        <attr name="paletteTertiary70" format="color" />
+        <attr name="paletteTertiary80" format="color" />
+        <attr name="paletteTertiary90" format="color" />
+        <attr name="paletteTertiary95" format="color" />
+        <attr name="paletteTertiary99" format="color" />
+        <attr name="paletteTertiary100" format="color" />
+
+        <attr name="paletteError0" format="color" />
+        <attr name="paletteError10" format="color" />
+        <attr name="paletteError20" format="color" />
+        <attr name="paletteError30" format="color" />
+        <attr name="paletteError40" format="color" />
+        <attr name="paletteError50" format="color" />
+        <attr name="paletteError60" format="color" />
+        <attr name="paletteError70" format="color" />
+        <attr name="paletteError80" format="color" />
+        <attr name="paletteError90" format="color" />
+        <attr name="paletteError95" format="color" />
+        <attr name="paletteError99" format="color" />
+        <attr name="paletteError100" format="color" />
+
+        <attr name="paletteNeutral0" format="color" />
+        <attr name="paletteNeutral10" format="color" />
+        <attr name="paletteNeutral20" format="color" />
+        <attr name="paletteNeutral30" format="color" />
+        <attr name="paletteNeutral40" format="color" />
+        <attr name="paletteNeutral50" format="color" />
+        <attr name="paletteNeutral60" format="color" />
+        <attr name="paletteNeutral70" format="color" />
+        <attr name="paletteNeutral80" format="color" />
+        <attr name="paletteNeutral90" format="color" />
+        <attr name="paletteNeutral95" format="color" />
+        <attr name="paletteNeutral99" format="color" />
+        <attr name="paletteNeutral100" format="color" />
+
+        <attr name="paletteNeutralVariant0" format="color" />
+        <attr name="paletteNeutralVariant10" format="color" />
+        <attr name="paletteNeutralVariant20" format="color" />
+        <attr name="paletteNeutralVariant30" format="color" />
+        <attr name="paletteNeutralVariant40" format="color" />
+        <attr name="paletteNeutralVariant50" format="color" />
+        <attr name="paletteNeutralVariant60" format="color" />
+        <attr name="paletteNeutralVariant70" format="color" />
+        <attr name="paletteNeutralVariant80" format="color" />
+        <attr name="paletteNeutralVariant90" format="color" />
+        <attr name="paletteNeutralVariant95" format="color" />
+        <attr name="paletteNeutralVariant99" format="color" />
+        <attr name="paletteNeutralVariant100" format="color" />
+    </declare-styleable>
+
     <declare-styleable name="Material">
         <!-- Alert color, such as error or dangerous action. -->
         <attr name="colorAlert" format="color" />
