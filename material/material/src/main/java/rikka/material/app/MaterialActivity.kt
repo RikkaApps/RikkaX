@@ -23,8 +23,15 @@ open class MaterialActivity : ThemedAppCompatActivity(), TranslucentSystemBars {
     }
 
     open fun onInstallViewFactory(layoutInflater: LayoutInflater) {
-        layoutInflater.factory2 = LayoutInflaterFactory(delegate).apply {
-            addOnViewCreatedListeners(WindowInsetsHelper.LISTENER)
+        layoutInflater.factory2 = onCreateLayoutInflaterFactory()
+    }
+
+    open fun onCreateLayoutInflaterFactory(): LayoutInflaterFactory {
+        return LayoutInflaterFactory(delegate).apply {
+            addOnViewCreatedListeners(
+                WindowInsetsHelper.LISTENER,
+                ToolbarTitleAlignmentFix.LISTENER
+            )
         }
     }
 
