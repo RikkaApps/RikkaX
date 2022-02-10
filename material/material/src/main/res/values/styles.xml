@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Widget.Rikka.Material3.Light.Switch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="android:switchMinWidth">52dp</item>
+        <item name="android:minHeight">@dimen/m3_preferred_minimum_touch_target</item>
+        <item name="android:track">@drawable/m3_switch_track_light</item>
+        <item name="android:thumb">@drawable/m3_switch_thumb_light</item>
+        <item name="android:showText">false</item>
+        <item name="showText">false</item>
+    </style>
+
+    <style name="Widget.Rikka.Material3.Dark.Switch" parent="Widget.Rikka.Material3.Light.Switch">
+        <item name="android:track">@drawable/m3_switch_track_dark</item>
+        <item name="android:thumb">@drawable/m3_switch_thumb_dark</item>
+    </style>
+
     <style name="Widget.Material.Button.Outline" parent="android:Widget.Material.Button.Borderless">
         <item name="android:stateListAnimator">@animator/material_button_outline_state_list_animator</item>
         <item name="android:background">?outlineButtonBackground</item>

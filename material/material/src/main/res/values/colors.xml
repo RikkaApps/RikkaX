@@ -16,4 +16,16 @@
 
     <color name="navigation_bar_divider_light">#1f000000</color>
     <color name="navigation_bar_divider_dark">#1fffffff</color>
+
+    <color name="m3_state_on_color">?palettePrimary90</color>
+
+    <color name="m3_thumb_disabled_color_light">?paletteNeutralVariant90</color>
+    <color name="m3_thumb_off_color_light">?paletteNeutralVariant70</color>
+    <color name="m3_track_on_color_light">?palettePrimary40</color>
+    <color name="m3_track_off_color_light">?paletteNeutralVariant50</color>
+
+    <color name="m3_thumb_disabled_color_dark">?paletteNeutral30</color>
+    <color name="m3_thumb_off_color_dark">?paletteNeutral60</color>
+    <color name="m3_track_on_color_dark">?paletteSecondary50</color>
+    <color name="m3_track_off_color_dark">?paletteNeutral30</color>
 </resources>

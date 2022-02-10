@@ -30,4 +30,6 @@
 
     <dimen name="rd_material_dialog_line_spacing_extra">2sp</dimen>
 
+    <dimen name="m3_preferred_minimum_touch_target">48dp</dimen>
+
 </resources>
