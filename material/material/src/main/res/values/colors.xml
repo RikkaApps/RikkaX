@@ -20,12 +20,16 @@
     <color name="m3_state_on_color">?palettePrimary90</color>
 
     <color name="m3_thumb_disabled_color_light">?paletteNeutralVariant100</color>
+    <color name="m3_thumb_disabled_on_color_light">?palettePrimary100</color>
     <color name="m3_thumb_off_color_light">?paletteNeutralVariant90</color>
     <color name="m3_track_on_color_light">?palettePrimary40</color>
     <color name="m3_track_off_color_light">?paletteNeutralVariant70</color>
+    <color name="m3_track_disabled_on_color_light">?palettePrimary40</color>
 
     <color name="m3_thumb_disabled_color_dark">?paletteNeutral30</color>
+    <color name="m3_thumb_disabled_on_color_dark">?paletteSecondary80</color>
     <color name="m3_thumb_off_color_dark">?paletteNeutral60</color>
     <color name="m3_track_on_color_dark">?paletteSecondary50</color>
     <color name="m3_track_off_color_dark">?paletteNeutral30</color>
+    <color name="m3_track_disabled_on_color_dark">?paletteSecondary40</color>
 </resources>
