@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.Rikka.PreferenceTitle.Material3"
+        parent="@android:style/TextAppearance.Material.Subhead">
+        <!--<item name="android:fontFamily">@string/settingslib_config_headlineFontFamily</item>-->
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.Rikka.CategoryTitle.Material3"
+        parent="@android:style/TextAppearance.DeviceDefault.Medium">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Widget.Rikka.Preference.HorizontalProgressBar.Material3"
+        parent="android:style/Widget.Material.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/m3_progress_horizontal</item>
+        <item name="android:scaleY">0.5</item>
+    </style>
+</resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeOverlay.Rikka.Material3.Preference" parent="">
+        <item name="android:textAppearanceListItem">@style/TextAppearance.Rikka.PreferenceTitle.Material3</item>
+        <item name="android:listPreferredItemPaddingStart">24dp</item>
+        <item name="android:listPreferredItemPaddingLeft">24dp</item>
+        <item name="android:listPreferredItemPaddingEnd">16dp</item>
+        <item name="android:listPreferredItemPaddingRight">16dp</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Rikka.Material3</item>
+        <item name="android:progressBarStyleHorizontal">@style/Widget.Rikka.Preference.HorizontalProgressBar.Material3</item>
+        <item name="colorBackgroundFloating">?colorSurface</item>
+    </style>
+
+    <style name="PreferenceThemeOverlay.Rikka.Material3" parent="@style/PreferenceThemeOverlay">
+        <item name="preferenceCategoryTitleTextAppearance">@style/TextAppearance.Rikka.CategoryTitle.Material3</item>
+        <item name="preferenceCategoryTitleTextColor">?colorPrimary</item>
+        <item name="preferenceCategoryStyle">@style/Preference.Rikka.Category.Material3</item>
+        <item name="preferenceStyle">@style/Preference.Rikka.Material3</item>
+        <item name="checkBoxPreferenceStyle">@style/Preference.Rikka.CheckBoxPreference.Material3</item>
+        <item name="dialogPreferenceStyle">@style/Preference.Rikka.Material3</item>
+        <item name="editTextPreferenceStyle">@style/Preference.Rikka.EditTextPreference.Material3</item>
+        <item name="dropdownPreferenceStyle">@style/Preference.Rikka.DropdownPreference.Material3</item>
+        <item name="switchPreferenceStyle">@style/Preference.Rikka.SwitchPreference.Material3</item>
+        <item name="seekBarPreferenceStyle">@style/Preference.Rikka.SeekbarPreference.Material3</item>
+        <item name="simpleMenuPreferenceStyle">@style/Preference.Rikka.SimpleMenuPreference.Material3</item>
+    </style>
+
+    <style name="Preference.Rikka.Category.Material3" parent="@style/Preference.Category.Material">
+        <item name="iconSpaceReserved">@bool/config_preference_iconSpaceReserved</item>
+        <item name="allowDividerAbove">@bool/config_preference_allowDivider</item>
+        <item name="allowDividerBelow">@bool/config_preference_allowDivider</item>
+    </style>
+
+    <style name="Preference.Rikka.Material3" parent="@style/Preference.Material">
+        <item name="layout">@layout/m3_preference</item>
+        <item name="iconSpaceReserved">@bool/config_preference_iconSpaceReserved</item>
+    </style>
+
+    <style name="Preference.Rikka.CheckBoxPreference.Material3" parent="@style/Preference.CheckBoxPreference.Material">
+        <item name="layout">@layout/m3_preference</item>
+        <item name="iconSpaceReserved">@bool/config_preference_iconSpaceReserved</item>
+    </style>
+
+    <style name="Preference.Rikka.EditTextPreference.Material3" parent="@style/Preference.DialogPreference.EditTextPreference.Material">
+        <item name="layout">@layout/m3_preference</item>
+        <item name="iconSpaceReserved">@bool/config_preference_iconSpaceReserved</item>
+    </style>
+
+    <style name="Preference.Rikka.DropdownPreference.Material3" parent="@style/Preference.DropDown.Material">
+        <item name="layout">@layout/m3_dropdown_preference</item>
+        <item name="iconSpaceReserved">@bool/config_preference_iconSpaceReserved</item>
+    </style>
+
+    <style name="Preference.Rikka.SwitchPreference.Material3" parent="@style/Preference.SwitchPreference.Material">
+        <item name="layout">@layout/m3_preference</item>
+        <item name="iconSpaceReserved">@bool/config_preference_iconSpaceReserved</item>
+    </style>
+
+    <style name="Preference.Rikka.SeekbarPreference.Material3" parent="@style/Preference.SeekBarPreference.Material">
+        <item name="iconSpaceReserved">@bool/config_preference_iconSpaceReserved</item>
+    </style>
+
+    <style name="Preference.Rikka.SimpleMenuPreference.Material3" parent="@style/Preference.SimpleMenuPreference">
+        <item name="android:layout">@layout/m3_preference_simplemenu</item>
+        <item name="android:popupMenuStyle">@style/Widget.Preference.SimpleMenuPreference.PopupMenu.Material3</item>
+        <item name="android:popupTheme">@style/ThemeOverlay.Preference.SimpleMenuPreference.PopupMenu.Material3</item>
+        <item name="iconSpaceReserved">@bool/config_preference_iconSpaceReserved</item>
+    </style>
+
+    <style name="Widget.Preference.SimpleMenuPreference.PopupMenu.Material3" parent="@style/Widget.Preference.SimpleMenuPreference.PopupMenu">
+        <item name="android:popupBackground">@drawable/m3_simple_menu_background</item>
+    </style>
+
+    <style name="ThemeOverlay.Preference.SimpleMenuPreference.PopupMenu.Material3" parent="ThemeOverlay.Preference.SimpleMenuPreference.PopupMenu">
+        <item name="popupBackgroundRadius">8dp</item>
+    </style>
+
+</resources>
