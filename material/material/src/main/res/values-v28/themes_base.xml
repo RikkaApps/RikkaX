@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Base.V28.Rikka.Material3.Light" parent="Base.V27.Rikka.Material3.Light">
+    <style name="Base.V28.Material3.Light.Rikka" parent="Base.V27.Material3.Light.Rikka">
         <item name="android:dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
 
-    <style name="Base.V28.Rikka.Material3.Dark" parent="Base.V27.Rikka.Material3.Dark">
+    <style name="Base.V28.Material3.Dark.Rikka" parent="Base.V27.Material3.Dark.Rikka">
         <item name="android:dialogCornerRadius">@dimen/rd_default_dialog_corner_radius</item>
         <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
 
-    <style name="Theme.Rikka.Material3.Light" parent="Base.V28.Rikka.Material3.Light" />
-    <style name="Theme.Rikka.Material3.Dark" parent="Base.V28.Rikka.Material3.Dark" />
+    <style name="Theme.Material3.Light.Rikka" parent="Base.V28.Material3.Light.Rikka" />
+    <style name="Theme.Material3.Dark.Rikka" parent="Base.V28.Material3.Dark.Rikka" />
 
 </resources>

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.V27.Rikka.Material3.Light" parent="Base.V23.Rikka.Material3.Light">
+    <style name="Base.V27.Material3.Light.Rikka" parent="Base.V23.Material3.Light.Rikka">
         <item name="android:navigationBarColor">?android:colorBackground</item>
         <item name="android:windowLightNavigationBar">true</item>
     </style>
 
-    <style name="Base.V27.Rikka.Material3.Dark" parent="Base.V23.Rikka.Material3.Dark">
+    <style name="Base.V27.Material3.Dark.Rikka" parent="Base.V23.Material3.Dark.Rikka">
         <item name="android:navigationBarColor">?android:colorBackground</item>
         <item name="android:windowLightNavigationBar">false</item>
     </style>
+
+    <style name="Theme.Material3.Light.Rikka" parent="Base.V27.Material3.Light.Rikka" />
+    <style name="Theme.Material3.Dark.Rikka" parent="Base.V27.Material3.Dark.Rikka" />
 
 </resources>

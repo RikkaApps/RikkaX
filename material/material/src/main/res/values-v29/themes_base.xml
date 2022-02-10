@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.V29.Rikka.Material3.Light" parent="Base.V28.Rikka.Material3.Light">
+    <style name="Base.V29.Material3.Light.Rikka" parent="Base.V28.Material3.Light.Rikka">
         <!--
         MIUI has some sort of "force dark mode".
         However it seems that even if the app have correct dark them set, MIUI will still apply its "force dark mode",
@@ -10,11 +10,11 @@
         <item name="android:forceDarkAllowed">false</item>
     </style>
 
-    <style name="Base.V29.Rikka.Material3.Dark" parent="Base.V28.Rikka.Material3.Dark">
+    <style name="Base.V29.Material3.Dark.Rikka" parent="Base.V28.Material3.Dark.Rikka">
         <item name="android:forceDarkAllowed">false</item>
     </style>
 
-    <style name="Theme.Rikka.Material3.Light" parent="Base.V29.Rikka.Material3.Light" />
-    <style name="Theme.Rikka.Material3.Dark" parent="Base.V29.Rikka.Material3.Dark" />
+    <style name="Theme.Material3.Light.Rikka" parent="Base.V29.Material3.Light.Rikka" />
+    <style name="Theme.Material3.Dark.Rikka" parent="Base.V29.Material3.Dark.Rikka" />
 
 </resources>

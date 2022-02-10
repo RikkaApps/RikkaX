@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--
-    Theme.Rikka.Material3 <- Base.Rikka.Material3 <- Theme.Material3 (Material Components)
+    Theme.Material3.(Variant).Rikka <- Base.(API).Material3.(Variant).Rikka <- Theme.Material3.(Variant) (Material Components)
     -->
 
     <!-- Base themes -->
-    <style name="Base.Rikka.Material3.Light" parent="Theme.Material3.Light">
+    <style name="Base.Material3.Light.Rikka" parent="Theme.Material3.Light">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
@@ -133,7 +133,7 @@
         <item name="paletteNeutralVariant0">#ff000000</item>
     </style>
 
-    <style name="Base.Rikka.Material3.Dark" parent="Theme.Material3.Dark">
+    <style name="Base.Material3.Dark.Rikka" parent="Theme.Material3.Dark">
         <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="android:ambientShadowAlpha">@dimen/ambient_shadow_alpha</item>
         <item name="android:spotShadowAlpha">@dimen/spot_shadow_alpha</item>
@@ -267,12 +267,12 @@
     </style>
 
     <!-- Theme for users -->
-    <style name="Theme.Rikka.Material3.Light" parent="Base.Rikka.Material3.Light" />
+    <style name="Theme.Material3.Light.Rikka" parent="Base.Material3.Light.Rikka" />
 
-    <style name="Theme.Rikka.Material3.Dark" parent="Base.Rikka.Material3.Dark" />
+    <style name="Theme.Material3.Dark.Rikka" parent="Base.Material3.Dark.Rikka" />
 
-    <style name="Theme.Rikka.Material3.DynamicColors.Light" parent="Theme.Rikka.Material3.Light"/>
+    <style name="Theme.Material3.DynamicColors.Light.Rikka" parent="Theme.Material3.Light.Rikka"/>
 
-    <style name="Theme.Rikka.Material3.DynamicColors.Dark" parent="Theme.Rikka.Material3.Dark" />
+    <style name="Theme.Material3.DynamicColors.Dark.Rikka" parent="Theme.Material3.Dark.Rikka" />
 
 </resources>
