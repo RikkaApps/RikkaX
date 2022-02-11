@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ThemeOverlay.Rikka.Material3.DynamicColors.Light" parent="ThemeOverlay.Material3.DynamicColors.Light">
+    <style name="ThemeOverlay.Material3.DynamicColors.Light.Rikka" parent="ThemeOverlay.Material3.DynamicColors.Light">
         <!-- MaterialColorTokens -->
         <item name="palettePrimary100">@android:color/system_accent1_0</item>
         <item name="palettePrimary99">@android:color/system_accent1_10</item>
@@ -74,7 +74,7 @@
         <item name="paletteNeutralVariant0">@android:color/system_neutral2_1000</item>
     </style>
 
-    <style name="ThemeOverlay.Rikka.Material3.DynamicColors.Dark" parent="ThemeOverlay.Material3.DynamicColors.Dark">
+    <style name="ThemeOverlay.Material3.DynamicColors.Dark.Rikka" parent="ThemeOverlay.Material3.DynamicColors.Dark">
         <!-- MaterialColorTokens -->
         <item name="palettePrimary100">@android:color/system_accent1_0</item>
         <item name="palettePrimary99">@android:color/system_accent1_10</item>

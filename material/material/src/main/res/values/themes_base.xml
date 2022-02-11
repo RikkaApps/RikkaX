@@ -37,14 +37,14 @@
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
 
         <!-- Material 3 Switch -->
-        <item name="android:switchStyle">@style/Widget.Rikka.Material3.Light.Switch</item>
-        <item name="switchStyle">@style/Widget.Rikka.Material3.Light.Switch</item>
+        <item name="android:switchStyle">@style/Widget.Material3.Light.Switch.Rikka</item>
+        <item name="switchStyle">@style/Widget.Material3.Light.Switch.Rikka</item>
 
         <!-- Material Components PopupMenuBackground -->
         <item name="popupMenuBackground">@drawable/m3_popupmenu_background</item>
 
         <!-- Material Components dynamic color overlay -->
-        <item name="dynamicColorThemeOverlay">@style/ThemeOverlay.Rikka.Material3.DynamicColors.Light</item>
+        <item name="dynamicColorThemeOverlay">@style/ThemeOverlay.Material3.DynamicColors.Light.Rikka</item>
 
         <!-- MaterialColorTokens -->
         <!-- Generated from Material Components default color -->
@@ -170,14 +170,14 @@
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
 
         <!-- Material 3 Switch -->
-        <item name="android:switchStyle">@style/Widget.Rikka.Material3.Dark.Switch</item>
-        <item name="switchStyle">@style/Widget.Rikka.Material3.Dark.Switch</item>
+        <item name="android:switchStyle">@style/Widget.Material3.Dark.Switch.Rikka</item>
+        <item name="switchStyle">@style/Widget.Material3.Dark.Switch.Rikka</item>
 
         <!-- Material Components PopupMenuBackground -->
         <item name="popupMenuBackground">@drawable/m3_popupmenu_background</item>
 
         <!-- Material Components dynamic color overlay -->
-        <item name="dynamicColorThemeOverlay">@style/ThemeOverlay.Rikka.Material3.DynamicColors.Dark</item>
+        <item name="dynamicColorThemeOverlay">@style/ThemeOverlay.Material3.DynamicColors.Dark.Rikka</item>
 
         <!-- MaterialColorTokens -->
         <!-- Generated from Material Components default color -->
