@@ -25,6 +25,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -40,7 +41,7 @@ import java.util.List;
  * This component is used as the main switch of the page
  * to enable or disable the prefereces on the page.
  */
-public class MainSwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
+public class MainSwitchBar extends LinearLayout implements Checkable, CompoundButton.OnCheckedChangeListener {
 
     private final List<OnMainSwitchChangeListener> mSwitchChangeListeners = new ArrayList<>();
 
@@ -108,6 +109,7 @@ public class MainSwitchBar extends LinearLayout implements CompoundButton.OnChec
     /**
      * Update the switch status
      */
+    @Override
     public void setChecked(boolean checked) {
         if (mSwitch != null) {
             mSwitch.setChecked(checked);
@@ -118,8 +120,14 @@ public class MainSwitchBar extends LinearLayout implements CompoundButton.OnChec
     /**
      * Return the status of the Switch
      */
+    @Override
     public boolean isChecked() {
         return mSwitch.isChecked();
+    }
+
+    @Override
+    public void toggle() {
+        performClick();
     }
 
     /**
