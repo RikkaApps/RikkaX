@@ -31,6 +31,7 @@ dependencies {
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
     implementation "androidx.core:core:$androidx_core_version"
     implementation project(':material:material')
+    compileOnly "androidx.preference:preference:$androidx_preference_version"
 }
 
 ext {

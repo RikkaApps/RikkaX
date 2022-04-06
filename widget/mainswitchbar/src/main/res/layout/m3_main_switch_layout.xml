@@ -20,7 +20,7 @@
     android:layout_width="match_parent"
     android:importantForAccessibility="no">
 
-    <com.android.settingslib.widget.MainSwitchBar
+    <rikka.widget.mainswitchbar.MainSwitchBar
         android:id="@+id/m3_main_switch_bar"
         android:visibility="gone"
         android:layout_height="wrap_content"
