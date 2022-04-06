@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright (C) 2021 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/m3_switchbar_margin"
+        android:minHeight="@dimen/m3_min_switch_bar_height"
+        android:paddingStart="@dimen/m3_switchbar_padding_left"
+        android:paddingEnd="@dimen/m3_switchbar_padding_right">
+
+        <TextView
+            android:id="@+id/switch_text"
+            style="@style/TextAppearance.MainSwitchText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginVertical="@dimen/m3_switch_title_margin"
+            android:layout_marginEnd="@dimen/m3_switch_title_margin"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:textAppearance="?android:attr/textAppearanceListItem" />
+
+        <ImageView
+            android:id="@+id/restricted_icon"
+            android:layout_width="@dimen/m3_restricted_icon_size"
+            android:layout_height="@dimen/m3_restricted_icon_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/m3_restricted_icon_margin_end"
+            android:importantForAccessibility="no"
+            android:src="@android:drawable/ic_info"
+            android:tint="?android:attr/colorAccent"
+            android:visibility="gone" />
+
+        <Switch
+            android:id="@+id/switch_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:clickable="false"
+            android:focusable="false" />
+    </LinearLayout>
+
+</LinearLayout>
+
+

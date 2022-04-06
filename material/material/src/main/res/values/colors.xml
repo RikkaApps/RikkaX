@@ -18,6 +18,7 @@
     <color name="navigation_bar_divider_dark">#1fffffff</color>
 
     <color name="m3_state_on_color">?palettePrimary90</color>
+    <color name="m3_state_off_color">?paletteSecondary90</color>
 
     <color name="m3_thumb_disabled_color_light">?paletteNeutralVariant100</color>
     <color name="m3_thumb_disabled_on_color_light">?palettePrimary100</color>

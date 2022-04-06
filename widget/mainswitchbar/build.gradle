@@ -1,0 +1,39 @@
+plugins {
+    id('com.android.library')
+    id('com.vanniktech.maven.publish')
+}
+
+android {
+    compileSdkVersion target_sdk
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion target_sdk
+        versionCode 1
+        versionName '1.0.0'
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildFeatures {
+        buildConfig = false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation "androidx.annotation:annotation:$androidx_annotation_version"
+    implementation "androidx.core:core:$androidx_core_version"
+    implementation project(':material:material')
+}
+
+ext {
+    POM_NAME = "RikkaX SwitchBar"
+    POM_DESCRIPTION = "RikkaX SwitchBar"
+}
