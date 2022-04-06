@@ -41,7 +41,7 @@ public class SimpleMenuPreference extends ListPreference {
     }
 
     public SimpleMenuPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ? R.attr.dialogPreferenceStyle : R.attr.simpleMenuPreferenceStyle);
+        this(context, attrs, Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ? androidx.preference.R.attr.dialogPreferenceStyle : R.attr.simpleMenuPreferenceStyle);
     }
 
     public SimpleMenuPreference(Context context, AttributeSet attrs, int defStyle) {
