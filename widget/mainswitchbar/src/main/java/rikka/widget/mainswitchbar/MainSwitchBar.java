@@ -93,6 +93,7 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
         }
 
         setBackground(true);
+        mSwitch.setOnCheckedChangeListener(this);
     }
 
     @Override
