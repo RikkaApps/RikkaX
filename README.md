@@ -56,6 +56,12 @@ ViewModel that shares across activities.
 
 An easier-to-use version of ViewModelLazy than Androidx.
 
+## Material
+
+### [MaterialPreference](./material/material-preference)
+
+Android 12 Settings app-styled preference.
+
 ## [ParcelableList](./parcelablelist)
 
 Helper class to transfer a large list of Parcelable objects through Binder.
@@ -78,6 +84,10 @@ RecyclerView helper.
 ### [BorderView](./widget/borderview)
 
 BorderRecyclerView BorderNestedScrollView that shows border when content scrolls.
+
+### [MainSwitchBar](./widget/mainswitchbar)
+
+MainSwitchBar & MainSwitchPreference ported from AOSP [SettingLib/MainSwitchPreference](https://cs.android.com/android/platform/superproject/+/master:frameworks/base/packages/SettingsLib/MainSwitchPreference/).
 
 ### [SwitchBar](./widget/switchbar)
 
