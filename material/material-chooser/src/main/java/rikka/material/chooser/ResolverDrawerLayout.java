@@ -141,7 +141,7 @@ public class ResolverDrawerLayout extends ViewGroup {
         mShowAtTop = a.getBoolean(R.styleable.ResolverDrawerLayout_showAtTop, false);
         a.recycle();
 
-        mScrollIndicatorDrawable = context.getDrawable(R.drawable.scroll_indicator_material);
+        mScrollIndicatorDrawable = context.getDrawable(rikka.material.R.drawable.scroll_indicator_material);
 
         mScroller = new OverScroller(context, AnimationUtils.loadInterpolator(context,
                 android.R.interpolator.decelerate_quint));

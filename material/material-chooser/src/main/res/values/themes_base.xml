@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Base.Light.Resolver" parent="Theme.Material.Light">
+    <style name="Base.Light.Resolver" parent="Theme.Material3.Light.Rikka">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
@@ -17,7 +17,7 @@
         <item name="windowActionBar">false</item>
     </style>
 
-    <style name="Base.Resolver" parent="Theme.Material">
+    <style name="Base.Resolver" parent="Theme.Material3.Dark.Rikka">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
