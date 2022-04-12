@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.annotation.CallSuper
+import rikka.core.res.ResourcesCompatLayoutInflaterListener
 import rikka.core.res.resolveColor
 import rikka.insets.WindowInsetsHelper
 import rikka.layoutinflater.view.LayoutInflaterFactory
@@ -32,6 +33,12 @@ open class MaterialActivity : ThemedAppCompatActivity(), TranslucentSystemBars {
                 WindowInsetsHelper.LISTENER,
                 ToolbarTitleAlignmentFix.LISTENER
             )
+
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+                addOnViewCreatedListeners(
+                    ResourcesCompatLayoutInflaterListener.getInstance()
+                )
+            }
         }
     }
 
