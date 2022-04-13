@@ -47,6 +47,24 @@
         <!-- Material Components dynamic color overlay -->
         <item name="dynamicColorThemeOverlay">@style/ThemeOverlay.Material3.DynamicColors.Light.Rikka</item>
 
+        <!-- Android framework text colors. Different to Material Components,
+             they uses our palette attributes instead of hardcoded colors. -->
+        <item name="android:textColorPrimary">@color/m3_light_text_color_primary</item>
+        <item name="android:textColorPrimaryInverse">@color/m3_dark_text_color_primary</item>
+        <item name="android:textColorSecondary">@color/m3_light_text_color_secondary</item>
+        <item name="android:textColorSecondaryInverse">@color/m3_dark_text_color_secondary</item>
+        <item name="android:textColorTertiary">@color/m3_light_text_color_secondary</item>
+        <item name="android:textColorTertiaryInverse">@color/m3_dark_text_color_secondary</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/m3_light_text_color_primary_disable_only</item>
+        <item name="android:textColorPrimaryInverseDisableOnly">@color/m3_dark_text_color_primary_disable_only</item>
+        <item name="android:textColorHint">@color/m3_light_text_color_hint</item>
+        <item name="android:textColorHintInverse">@color/m3_dark_text_color_hint</item>
+        <item name="android:textColorHighlight">@color/m3_light_text_color_highlighted</item>
+        <item name="android:textColorHighlightInverse">@color/m3_dark_text_color_highlighted</item>
+        <item name="android:textColorLink">?colorPrimary</item>
+        <item name="android:textColorLinkInverse">?colorPrimaryInverse</item>
+        <item name="android:textColorAlertDialogListItem">@color/m3_light_text_color_primary</item>
+
         <!-- MaterialColorTokens -->
         <!-- Generated from Material Components default color -->
         <item name="palettePrimary100">#ffffffff</item>
@@ -180,6 +198,24 @@
         <!-- Material Components dynamic color overlay -->
         <item name="dynamicColorThemeOverlay">@style/ThemeOverlay.Material3.DynamicColors.Dark.Rikka</item>
 
+        <!-- Android framework text colors. Different to Material Components,
+             they uses our palette attributes instead of hardcoded colors. -->
+        <item name="android:textColorPrimary">@color/m3_dark_text_color_primary</item>
+        <item name="android:textColorPrimaryInverse">@color/m3_light_text_color_primary</item>
+        <item name="android:textColorSecondary">@color/m3_dark_text_color_secondary</item>
+        <item name="android:textColorSecondaryInverse">@color/m3_light_text_color_secondary</item>
+        <item name="android:textColorTertiary">@color/m3_dark_text_color_secondary</item>
+        <item name="android:textColorTertiaryInverse">@color/m3_light_text_color_secondary</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/m3_dark_text_color_primary_disable_only</item>
+        <item name="android:textColorPrimaryInverseDisableOnly">@color/m3_light_text_color_primary_disable_only</item>
+        <item name="android:textColorHint">@color/m3_dark_text_color_hint</item>
+        <item name="android:textColorHintInverse">@color/m3_light_text_color_hint</item>
+        <item name="android:textColorHighlight">@color/m3_dark_text_color_highlighted</item>
+        <item name="android:textColorHighlightInverse">@color/m3_light_text_color_highlighted</item>
+        <item name="android:textColorLink">?colorPrimary</item>
+        <item name="android:textColorLinkInverse">?colorPrimaryInverse</item>
+        <item name="android:textColorAlertDialogListItem">@color/m3_dark_text_color_primary</item>
+
         <!-- MaterialColorTokens -->
         <!-- Generated from Material Components default color -->
         <item name="palettePrimary100">#ffffffff</item>
@@ -272,7 +308,7 @@
 
     <style name="Theme.Material3.Dark.Rikka" parent="Base.Material3.Dark.Rikka" />
 
-    <style name="Theme.Material3.DynamicColors.Light.Rikka" parent="Theme.Material3.Light.Rikka"/>
+    <style name="Theme.Material3.DynamicColors.Light.Rikka" parent="Theme.Material3.Light.Rikka" />
 
     <style name="Theme.Material3.DynamicColors.Dark.Rikka" parent="Theme.Material3.Dark.Rikka" />
 
