@@ -41,17 +41,6 @@
             android:ellipsize="end"
             android:textAppearance="?android:attr/textAppearanceListItem" />
 
-        <ImageView
-            android:id="@+id/restricted_icon"
-            android:layout_width="@dimen/m3_restricted_icon_size"
-            android:layout_height="@dimen/m3_restricted_icon_size"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/m3_restricted_icon_margin_end"
-            android:importantForAccessibility="no"
-            android:src="@android:drawable/ic_info"
-            android:tint="?android:attr/colorAccent"
-            android:visibility="gone" />
-
         <Switch
             android:id="@+id/switch_widget"
             android:layout_width="wrap_content"

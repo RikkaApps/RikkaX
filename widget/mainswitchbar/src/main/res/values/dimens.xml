@@ -17,12 +17,6 @@
 
 <resources>
 
-    <!-- Restricted icon size in switch bar -->
-    <dimen name="m3_restricted_icon_size">@android:dimen/config_restrictedIconSize</dimen>
-
-    <!-- Restricted icon in switch bar -->
-    <dimen name="m3_restricted_icon_margin_end">16dp</dimen>
-
     <!-- Size of title margin -->
     <dimen name="m3_switch_title_margin">24dp</dimen>
 
