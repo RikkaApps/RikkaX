@@ -3,8 +3,4 @@
 
     <style name="ThemeOverlay" />
 
-    <style name="ThemeOverlay.Material3.DynamicColors.Light.Rikka" parent="ThemeOverlay.Material3.DynamicColors.Light"/>
-
-    <style name="ThemeOverlay.Material3.DynamicColors.Dark.Rikka" parent="ThemeOverlay.Material3.DynamicColors.Dark"/>
-
 </resources>

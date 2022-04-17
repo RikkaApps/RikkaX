@@ -37,6 +37,20 @@ materialThemeBuilder {
             darkThemeFormat = "Theme.Material3.Dark.Rikka"
             darkThemeParent = "Base.Material3.Dark.Rikka"
         }
+        dynamic_colors {
+            dynamicColors = true
+            lightThemeFormat = "Theme.Material3.DynamicColors.Light.Rikka"
+            lightThemeParent = "Base.Material3.Light.Rikka"
+            darkThemeFormat = "Theme.Material3.DynamicColors.Dark.Rikka"
+            darkThemeParent = "Base.Material3.Dark.Rikka"
+        }
+        dynamic_colors_overlay {
+            dynamicColors = true
+            lightThemeFormat = "ThemeOverlay.Material3.DynamicColors.Light.Rikka"
+            lightThemeParent = "ThemeOverlay.Material3.DynamicColors.Light"
+            darkThemeFormat = "ThemeOverlay.Material3.DynamicColors.Dark.Rikka"
+            darkThemeParent = "ThemeOverlay.Material3.DynamicColors.Dark"
+        }
     }
     generatePalette = true
     generatePaletteAttributes = true
