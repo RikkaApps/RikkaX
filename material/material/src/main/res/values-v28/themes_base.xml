@@ -10,7 +10,7 @@
         <item name="android:buttonCornerRadius">@dimen/rd_default_button_corner_radius</item>
     </style>
 
-    <style name="Theme.Material3.Light.Rikka" parent="Base.V28.Material3.Light.Rikka" />
-    <style name="Theme.Material3.Dark.Rikka" parent="Base.V28.Material3.Dark.Rikka" />
+    <style name="Base.Material3.Light.Rikka" parent="Base.V28.Material3.Light.Rikka" />
+    <style name="Base.Material3.Dark.Rikka" parent="Base.V28.Material3.Dark.Rikka" />
 
 </resources>

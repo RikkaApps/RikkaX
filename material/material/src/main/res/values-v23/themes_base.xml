@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Base.V23.Material3.Light.Rikka" parent="Base.Material3.Light.Rikka">
+    <style name="Base.V23.Material3.Light.Rikka" parent="Base.V21.Material3.Light.Rikka">
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="Base.V23.Material3.Dark.Rikka" parent="Base.Material3.Dark.Rikka">
+    <style name="Base.V23.Material3.Dark.Rikka" parent="Base.V21.Material3.Dark.Rikka">
     </style>
 
-    <style name="Theme.Material3.Light.Rikka" parent="Base.V23.Material3.Light.Rikka" />
-    <style name="Theme.Material3.Dark.Rikka" parent="Base.V23.Material3.Dark.Rikka" />
+    <style name="Base.Material3.Light.Rikka" parent="Base.V23.Material3.Light.Rikka" />
+    <style name="Base.Material3.Dark.Rikka" parent="Base.V23.Material3.Dark.Rikka" />
 
 </resources>

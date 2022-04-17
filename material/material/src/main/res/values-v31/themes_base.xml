@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="PrivateResource">
 
-    <style name="Theme.Material3.DynamicColors.Light.Rikka" parent="Theme.Material3.Light.Rikka">
+    <style name="Theme.Material3.DynamicColors.Light.Rikka" parent="Base.Material3.Light.Rikka">
         <item name="colorPrimary">@color/m3_sys_color_dynamic_light_primary</item>
         <item name="colorOnPrimary">@color/m3_sys_color_dynamic_light_on_primary</item>
         <item name="colorPrimaryInverse">@color/m3_sys_color_dynamic_light_inverse_primary</item>
@@ -116,7 +116,7 @@
         <item name="paletteNeutralVariant0">@android:color/system_neutral2_1000</item>
     </style>
 
-    <style name="Theme.Material3.DynamicColors.Dark.Rikka" parent="Theme.Material3.Dark.Rikka">
+    <style name="Theme.Material3.DynamicColors.Dark.Rikka" parent="Base.Material3.Dark.Rikka">
         <item name="colorPrimary">@color/m3_sys_color_dynamic_dark_primary</item>
         <item name="colorOnPrimary">@color/m3_sys_color_dynamic_dark_on_primary</item>
         <item name="colorPrimaryInverse">@color/m3_sys_color_dynamic_dark_inverse_primary</item>

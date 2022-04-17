@@ -14,7 +14,7 @@
         <item name="android:forceDarkAllowed">false</item>
     </style>
 
-    <style name="Theme.Material3.Light.Rikka" parent="Base.V29.Material3.Light.Rikka" />
-    <style name="Theme.Material3.Dark.Rikka" parent="Base.V29.Material3.Dark.Rikka" />
+    <style name="Base.Material3.Light.Rikka" parent="Base.V29.Material3.Light.Rikka" />
+    <style name="Base.Material3.Dark.Rikka" parent="Base.V29.Material3.Dark.Rikka" />
 
 </resources>

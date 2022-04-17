@@ -2,6 +2,7 @@ plugins {
     id('com.android.library')
     id('kotlin-android')
     id('com.vanniktech.maven.publish')
+    id('dev.rikka.tools.materialthemebuilder')
 }
 
 android {
@@ -25,6 +26,20 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+}
+
+materialThemeBuilder {
+    themes {
+        'default' {
+            primaryColor = "#6750A4"
+            lightThemeFormat = "Theme.Material3.Light.Rikka"
+            lightThemeParent = "Base.Material3.Light.Rikka"
+            darkThemeFormat = "Theme.Material3.Dark.Rikka"
+            darkThemeParent = "Base.Material3.Dark.Rikka"
+        }
+    }
+    generatePalette = true
+    generatePaletteAttributes = true
 }
 
 configurations.all {
