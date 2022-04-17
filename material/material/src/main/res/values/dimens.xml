@@ -32,4 +32,10 @@
 
     <dimen name="m3_preferred_minimum_touch_target">48dp</dimen>
 
+    <item format="float" name="m3_emphasis_disabled" type="dimen">0.38</item>
+    <item format="float" name="m3_emphasis_disabled_background" type="dimen">0.12</item>
+    <item format="float" name="m3_emphasis_high" type="dimen">0.87</item>
+    <item format="float" name="m3_emphasis_high_disabled" type="dimen">0.33</item>
+    <item format="float" name="m3_emphasis_medium" type="dimen">0.6</item>
+    <item format="float" name="m3_emphasis_medium_disabled" type="dimen">0.23</item>
 </resources>
