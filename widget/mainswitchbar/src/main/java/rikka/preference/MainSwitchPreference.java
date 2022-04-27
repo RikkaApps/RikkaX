@@ -19,6 +19,7 @@ package rikka.preference;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Switch;
 
 import androidx.preference.PreferenceViewHolder;
@@ -34,7 +35,7 @@ import rikka.widget.mainswitchbar.R;
 /**
  * MainSwitchPreference is a Preference with a customized Switch.
  * This component is used as the main switch of the page
- * to enable or disable the prefereces on the page.
+ * to enable or disable the preferences on the page.
  */
 public class MainSwitchPreference extends TwoStatePreference implements OnMainSwitchChangeListener {
 
@@ -118,7 +119,7 @@ public class MainSwitchPreference extends TwoStatePreference implements OnMainSw
         setChecked(checked);
         if (mMainSwitchBar != null) {
             mMainSwitchBar.setTitle(mTitle);
-            mMainSwitchBar.show();
+            mMainSwitchBar.setVisibility(View.VISIBLE);
         }
     }
 

@@ -16,7 +16,6 @@
 
 package rikka.widget.mainswitchbar;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -24,9 +23,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.Checkable;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -39,9 +38,9 @@ import java.util.List;
 /**
  * MainSwitchBar is a View with a customized Switch.
  * This component is used as the main switch of the page
- * to enable or disable the prefereces on the page.
+ * to enable or disable the preferences on the page.
  */
-public class MainSwitchBar extends LinearLayout implements Checkable, CompoundButton.OnCheckedChangeListener {
+public class MainSwitchBar extends LinearLayout implements Checkable {
 
     private final List<OnMainSwitchChangeListener> mSwitchChangeListeners = new ArrayList<>();
 
@@ -70,9 +69,6 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
 
         LayoutInflater.from(context).inflate(R.layout.m3_main_switch_bar, this);
 
-        setFocusable(true);
-        setClickable(true);
-
         mFrameView = findViewById(R.id.frame);
         mTextView = findViewById(R.id.switch_text);
         mSwitch = findViewById(R.id.switch_widget);
@@ -80,7 +76,6 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
         mBackgroundOff = getContext().getDrawable(R.drawable.m3_switch_bar_bg_off);
         mBackgroundDisabled = getContext().getDrawable(
                 R.drawable.m3_switch_bar_bg_disabled);
-        addOnSwitchChangeListener((switchView, isChecked) -> setChecked(isChecked));
 
         setChecked(mSwitch.isChecked());
 
@@ -93,21 +88,18 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
         }
 
         setBackground(true);
-        
-        if (getVisibility() == View.VISIBLE) {
-            mSwitch.setOnCheckedChangeListener(this);
-        }
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        propagateChecked(isChecked);
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean performClick() {
-        return mSwitch.performClick();
+        toggle();
+
+        final boolean handled = super.performClick();
+        if (!handled) {
+            playSoundEffect(SoundEffectConstants.CLICK);
+        }
+
+        return handled;
     }
 
     /**
@@ -119,6 +111,7 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
             mSwitch.setChecked(checked);
         }
         setBackground(checked);
+        propagateChecked(checked);
     }
 
     /**
@@ -131,14 +124,7 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
 
     @Override
     public void toggle() {
-        performClick();
-    }
-
-    /**
-     * Return the Switch
-     */
-    public final Switch getSwitch() {
-        return mSwitch;
+        setChecked(!isChecked());
     }
 
     /**
@@ -148,31 +134,6 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
         if (mTextView != null) {
             mTextView.setText(text);
         }
-    }
-
-    /**
-     * Show the MainSwitchBar
-     */
-    public void show() {
-        setVisibility(View.VISIBLE);
-        mSwitch.setOnCheckedChangeListener(this);
-    }
-
-    /**
-     * Hide the MainSwitchBar
-     */
-    public void hide() {
-        if (isShowing()) {
-            setVisibility(View.GONE);
-            mSwitch.setOnCheckedChangeListener(null);
-        }
-    }
-
-    /**
-     * Return the displaying status of MainSwitchBar
-     */
-    public boolean isShowing() {
-        return (getVisibility() == View.VISIBLE);
     }
 
     /**
@@ -207,8 +168,6 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
     }
 
     private void propagateChecked(boolean isChecked) {
-        setBackground(isChecked);
-
         final int count = mSwitchChangeListeners.size();
         for (int n = 0; n < count; n++) {
             mSwitchChangeListeners.get(n).onSwitchChanged(mSwitch, isChecked);
@@ -221,7 +180,7 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
 
     static class SavedState extends BaseSavedState {
         boolean mChecked;
-        boolean mVisible;
+        int mVisibility;
 
         SavedState(Parcelable superState) {
             super(superState);
@@ -233,14 +192,14 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
         private SavedState(Parcel in) {
             super(in);
             mChecked = (Boolean) in.readValue(getClass().getClassLoader());
-            mVisible = (Boolean) in.readValue(getClass().getClassLoader());
+            mVisibility = (Integer) in.readValue(getClass().getClassLoader());
         }
 
         @Override
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeValue(mChecked);
-            out.writeValue(mVisible);
+            out.writeValue(mVisibility);
         }
 
         @NonNull
@@ -249,7 +208,7 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
             return "MainSwitchBar.SavedState{"
                     + Integer.toHexString(System.identityHashCode(this))
                     + " checked=" + mChecked
-                    + " visible=" + mVisible + "}";
+                    + " visible=" + mVisibility + "}";
         }
 
         public static final Parcelable.Creator<SavedState> CREATOR =
@@ -272,7 +231,7 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
 
         SavedState ss = new SavedState(superState);
         ss.mChecked = mSwitch.isChecked();
-        ss.mVisible = isShowing();
+        ss.mVisibility = getVisibility();
         return ss;
     }
 
@@ -285,8 +244,7 @@ public class MainSwitchBar extends LinearLayout implements Checkable, CompoundBu
         mSwitch.setChecked(ss.mChecked);
         setChecked(ss.mChecked);
         setBackground(ss.mChecked);
-        setVisibility(ss.mVisible ? View.VISIBLE : View.GONE);
-        mSwitch.setOnCheckedChangeListener(ss.mVisible ? this : null);
+        setVisibility(ss.mVisibility);
 
         requestLayout();
     }
