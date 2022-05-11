@@ -1,4 +1,4 @@
 package rikka.parcelablelist;
 
-parcelable ParcelableListSlice;
+parcelable ParcelableListSlice<T>;
 
