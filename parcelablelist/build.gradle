@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    implementation "androidx.annotation:annotation:$androidx_annotation_version"
+    compileOnly "androidx.annotation:annotation:$androidx_annotation_version"
 }
 
 ext {
