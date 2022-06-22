@@ -60,7 +60,7 @@ An easier-to-use version of ViewModelLazy than Androidx.
 
 ### [MaterialPreference](./material/material-preference)
 
-Android 12 Settings app-styled preference.
+Material 3 styled preference.
 
 ## [ParcelableList](./parcelablelist)
 
