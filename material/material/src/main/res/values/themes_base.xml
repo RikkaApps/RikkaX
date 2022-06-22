@@ -50,9 +50,12 @@
         <item name="switchBarBackgroundNormal">@color/switchbar_background_light</item>
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_light</item>
 
-        <!-- Material 3 Switch -->
+        <!-- Android 12 System Settings Switch -->
         <item name="android:switchStyle">@style/Widget.Material3.Light.Switch.Rikka</item>
         <item name="switchStyle">@style/Widget.Material3.Light.Switch.Rikka</item>
+
+        <!-- Material Components MatrialSwitch -->
+        <item name="materialSwitchStyle">@style/Widget.Material3.CompoundButton.MaterialSwitch</item>
 
         <!-- Material Components PopupMenuBackground -->
         <item name="popupMenuBackground">@drawable/m3_popupmenu_background</item>
@@ -115,9 +118,12 @@
         <item name="switchBarBackgroundNormal">@color/switchbar_background_dark</item>
         <item name="switchBarBackgroundDisabled">@color/switchbar_background_dark</item>
 
-        <!-- Material 3 Switch -->
+        <!-- Android 12 System Settings Switch -->
         <item name="android:switchStyle">@style/Widget.Material3.Dark.Switch.Rikka</item>
         <item name="switchStyle">@style/Widget.Material3.Dark.Switch.Rikka</item>
+
+        <!-- Material Components MatrialSwitch -->
+        <item name="materialSwitchStyle">@style/Widget.Material3.CompoundButton.MaterialSwitch</item>
 
         <!-- Material Components PopupMenuBackground -->
         <item name="popupMenuBackground">@drawable/m3_popupmenu_background</item>
