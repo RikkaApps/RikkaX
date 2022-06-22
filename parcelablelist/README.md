@@ -17,3 +17,13 @@ dependencies {
     implementation "dev.rikka.rikkax.parcelablelist:parcelablelist:1.0.0"
 }
 ```
+
+## Changlog
+
+### 2.0.1
+
+- `androidx.annoation` should be `compileOnly`
+
+### 2.0.0
+
+- Let ParcelableListSlice be a generic type
