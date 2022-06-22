@@ -8,7 +8,7 @@ This library implements Material 3 Preference theme by extending AndroidX prefer
 
 ```groovy
 dependencies {
-    implementation "dev.rikka.rikkax.material:material-preference:2.0.0"
+    implementation "dev.rikka.rikkax.material:material-preference:<version>"
 }
 ```
 

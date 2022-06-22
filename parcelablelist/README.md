@@ -14,7 +14,7 @@ There is also a base class, `BaseParcelableListSlice`, for extension to transfer
 
 ```groovy
 dependencies {
-    implementation "dev.rikka.rikkax.parcelablelist:parcelablelist:1.0.0"
+    implementation "dev.rikka.rikkax.parcelablelist:parcelablelist:<version>"
 }
 ```
 
