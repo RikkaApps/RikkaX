@@ -18,7 +18,7 @@ dependencies {
 }
 ```
 
-## Changlog
+## Changelog
 
 ### 2.0.1
 
