@@ -8,7 +8,7 @@ Handle window insets with XML only. Say goodbye to writing `OnApplyWindowInsetsL
 
 ```groovy
 dependencies {
-    implementation "dev.rikka.rikkax.insets:insets:1.1.1"
+    implementation "dev.rikka.rikkax.insets:insets:<version>"
 }
 ```
 
@@ -116,6 +116,10 @@ fun View.setInitialMarginRelative(start: Int, top: Int, end: Int, bottom: Int)
 To use these methods with Java, use `WindowInsetsHelperKt`.
 
 ## Changelog
+
+### 1.3.0 (2022-06-23)
+
+* Allow modifying `WindowInsetsHelper#fitsSystemWindowsInsets`, `WindowInsetsHelper#layout_fitsSystemWindowsInset` and `WindowInsetsHelper#consumeSystemWindowsInsets` by code.
 
 ### 1.2.0 (2022-01-30)
 

@@ -41,9 +41,9 @@ private class ConsumeInsets : ApplyInsetsCallback<Insets> {
 
 open class WindowInsetsHelper private constructor(
     private val view: View,
-    private val fitSystemWindows: Int,
-    private val layout_fitsSystemWindowsInsets: Int,
-    private val consumeSystemWindows: Int
+    var fitSystemWindows: Int,
+    var layout_fitsSystemWindowsInsets: Int,
+    var consumeSystemWindows: Int
 ) : OnApplyWindowInsetsListener {
 
     internal var initialPaddingLeft: Int = view.paddingLeft
