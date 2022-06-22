@@ -4,7 +4,7 @@
     <style name="TextAppearance.Rikka.PreferenceTitle.Material3"
         parent="@style/TextAppearance.AppCompat.Subhead">
         <!--<item name="android:fontFamily">@string/settingslib_config_headlineFontFamily</item>-->
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.Rikka.CategoryTitle.Material3"

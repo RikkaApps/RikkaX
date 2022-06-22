@@ -24,9 +24,11 @@
         <item name="switchPreferenceStyle">@style/Preference.Rikka.SwitchPreference.Material3</item>
         <item name="seekBarPreferenceStyle">@style/Preference.Rikka.SeekbarPreference.Material3</item>
         <item name="simpleMenuPreferenceStyle">@style/Preference.Rikka.SimpleMenuPreference.Material3</item>
+        <item name="materialSwitchPreferenceStyle">@style/Preference.Rikka.MateriaSwitchPreference</item>
     </style>
 
     <style name="Preference.Rikka.Category.Material3" parent="@style/Preference.Category.Material">
+        <item name="android:layout">@layout/m3_preference_category</item>
         <item name="iconSpaceReserved">@bool/config_preference_iconSpaceReserved</item>
         <item name="allowDividerAbove">@bool/config_preference_allowDivider</item>
         <item name="allowDividerBelow">@bool/config_preference_allowDivider</item>
@@ -74,6 +76,10 @@
 
     <style name="ThemeOverlay.Preference.SimpleMenuPreference.PopupMenu.Material3" parent="ThemeOverlay.Preference.SimpleMenuPreference.PopupMenu">
         <item name="popupBackgroundRadius">8dp</item>
+    </style>
+
+    <style name="Preference.Rikka.MateriaSwitchPreference" parent="Preference.Rikka.SwitchPreference.Material3">
+        <item name="android:widgetLayout">@layout/m3_preference_widget_material_switch</item>
     </style>
 
 </resources>

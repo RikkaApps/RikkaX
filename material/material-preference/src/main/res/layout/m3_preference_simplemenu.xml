@@ -54,19 +54,20 @@
                 android:id="@android:id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="2sp"
                 android:ellipsize="marquee"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceListItem" />
 
             <TextView
                 android:id="@android:id/summary"
+                style="@style/PreferenceSummaryTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@android:id/title"
-                android:layout_alignLeft="@android:id/title"
                 android:layout_alignStart="@android:id/title"
+                android:layout_alignLeft="@android:id/title"
                 android:maxLines="10"
-                style="@style/PreferenceSummaryTextStyle"
                 android:textColor="?android:attr/textColorSecondary" />
 
         </RelativeLayout>
