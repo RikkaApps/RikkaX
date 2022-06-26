@@ -12,7 +12,7 @@ open class Resource<out T>(val status: Status, val data: T?, val error: Throwabl
             return Resource(Status.SUCCESS, data, noError)
         }
 
-        fun <T> error(error: Throwable, data: T?): Resource<T> {
+        fun <T> error(error: Throwable, data: T? = null): Resource<T> {
             return Resource(Status.ERROR, data, error)
         }
 
