@@ -27,6 +27,7 @@ open class ThemedAppCompatActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         localeDelegate.onCreate(this)
         dayNightDelegate.onCreate(savedInstanceState)
+        resetTitle()
         fixWindowFlags()
 
         userThemeKey = computeUserThemeKey()
@@ -101,6 +102,20 @@ open class ThemedAppCompatActivity: AppCompatActivity() {
         dayNightDelegate.attachBaseContext(newBase, configuration)
 
         super.attachBaseContext(newBase.createConfigurationContext(configuration))
+    }
+
+    private fun resetTitle() {
+        var label = try {
+            packageManager.getActivityInfo(componentName, PackageManager.GET_META_DATA).labelRes
+        } catch (ignored: PackageManager.NameNotFoundException) {
+            0
+        }
+        if (label == 0) {
+            label = applicationInfo.labelRes
+        }
+        if (label != 0) {
+            setTitle(label)
+        }
     }
 
     /**
