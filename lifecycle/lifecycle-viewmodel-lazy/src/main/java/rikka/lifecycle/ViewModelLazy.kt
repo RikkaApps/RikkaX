@@ -1,6 +1,5 @@
 package rikka.lifecycle
 
-import androidx.activity.ComponentActivity
 import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -9,32 +8,32 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 
 @MainThread
-inline fun <reified VM : ViewModel> ComponentActivity.viewModels(
-        noinline viewModelProducer: () -> VM
+inline fun <reified VM : ViewModel> ViewModelStoreOwner.viewModels(
+    noinline viewModelProducer: () -> VM
 ) = ViewModelLazy(
-        { viewModelStore },
-        viewModelProducer,
-        VM::class.java
+    { viewModelStore },
+    viewModelProducer,
+    VM::class.java
 )
 
 inline fun <reified VM : ViewModel> Fragment.activityViewModels(
-        noinline viewModelProducer: () -> VM
+    noinline viewModelProducer: () -> VM
 ) = viewModels(::requireActivity, viewModelProducer)
 
 @MainThread
 inline fun <reified VM : ViewModel> Fragment.viewModels(
-        noinline ownerProducer: () -> ViewModelStoreOwner = { this },
-        noinline viewModelProducer: () -> VM
+    noinline ownerProducer: () -> ViewModelStoreOwner = { this },
+    noinline viewModelProducer: () -> VM
 ) = ViewModelLazy(
-        { ownerProducer().viewModelStore },
-        viewModelProducer,
-        VM::class.java
+    { ownerProducer().viewModelStore },
+    viewModelProducer,
+    VM::class.java
 )
 
 class ViewModelLazy<VM : ViewModel>(
-        private val storeProducer: () -> ViewModelStore,
-        private val viewModelProducer: () -> VM,
-        private val clazz: Class<out ViewModel>
+    private val storeProducer: () -> ViewModelStore,
+    private val viewModelProducer: () -> VM,
+    private val clazz: Class<out ViewModel>
 ) : Lazy<VM> {
 
     private var cached: VM? = null
