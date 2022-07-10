@@ -1,62 +1,53 @@
 package rikka.core.util;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import rikka.core.R;
-
 public class IntentUtils {
 
-    public static boolean isValid(Context context, Intent intent) {
-        return intent.resolveActivity(context.getPackageManager()) != null;
-    }
-
     public static boolean startActivity(Context context, Intent intent, String notFoundMessage) {
-        if (isValid(context, intent)) {
-            if (!(context instanceof Activity)) {
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        try {
+            context.startActivity(intent);
+            return true;
+        } catch (ActivityNotFoundException ignored) {
+            if (notFoundMessage != null) {
+                Toast.makeText(context, notFoundMessage, Toast.LENGTH_LONG).show();
             }
-            try {
-                context.startActivity(intent);
-                return true;
-            } catch (Exception ignored) {
-            }
-        } else if (notFoundMessage != null) {
-            Toast.makeText(context, notFoundMessage, Toast.LENGTH_LONG).show();
+        } catch (Throwable ignored) {
         }
         return false;
     }
 
     public static boolean startActivityForResult(Activity activity, Intent intent, int requestCode, String notFoundMessage) {
-        if (isValid(activity, intent)) {
-            try {
-                activity.startActivityForResult(intent, requestCode);
-                return true;
-            } catch (Exception ignored) {
-            }
+        try {
+            activity.startActivityForResult(intent, requestCode);
             return true;
-        } else if (notFoundMessage != null) {
-            Toast.makeText(activity, notFoundMessage, Toast.LENGTH_LONG).show();
+        } catch (ActivityNotFoundException ignored) {
+            if (notFoundMessage != null) {
+                Toast.makeText(activity, notFoundMessage, Toast.LENGTH_LONG).show();
+            }
+        } catch (Throwable ignored) {
         }
-        return false;
+        return true;
     }
 
     public static boolean startActivityForResult(Fragment fragment, Intent intent, int requestCode, String notFoundMessage) {
-        if (fragment.getActivity() == null) {
-            return false;
-        }
-        if (isValid(fragment.getActivity(), intent)) {
-            try {
-                fragment.startActivityForResult(intent, requestCode);
-                return true;
-            } catch (Exception ignored) {
+        try {
+            fragment.startActivityForResult(intent, requestCode);
+            return true;
+        } catch (ActivityNotFoundException ignored) {
+            if (notFoundMessage != null) {
+                Toast.makeText(fragment.requireContext(), notFoundMessage, Toast.LENGTH_LONG).show();
             }
-        } else if (notFoundMessage != null) {
-            Toast.makeText(fragment.getActivity(), notFoundMessage, Toast.LENGTH_LONG).show();
+        } catch (Throwable ignored) {
         }
         return false;
     }
