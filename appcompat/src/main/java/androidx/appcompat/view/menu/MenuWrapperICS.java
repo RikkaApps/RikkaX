@@ -30,7 +30,7 @@ import androidx.annotation.RestrictTo;
 import androidx.core.internal.view.SupportMenu;
 
 /**
- * Wraps a support {@link SupportMenu} as a framework {@link android.view.Menu}
+ * Wraps a support {@link SupportMenu} as a framework {@link Menu}
  * @hide
  */
 @RestrictTo(LIBRARY_GROUP_PREFIX)
@@ -89,9 +89,9 @@ public class MenuWrapperICS extends BaseMenuWrapper implements Menu {
     @Override
     public int addIntentOptions(int groupId, int itemId, int order, ComponentName caller,
             Intent[] specifics, Intent intent, int flags, MenuItem[] outSpecificItems) {
-        android.view.MenuItem[] items = null;
+        MenuItem[] items = null;
         if (outSpecificItems != null) {
-            items = new android.view.MenuItem[outSpecificItems.length];
+            items = new MenuItem[outSpecificItems.length];
         }
 
         int result = mWrappedObject

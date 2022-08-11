@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 /**
  * A very naive implementation of a set of
- * {@link androidx.core.view.ViewPropertyAnimatorCompat}.
+ * {@link ViewPropertyAnimatorCompat}.
  *
  * @hide
  */

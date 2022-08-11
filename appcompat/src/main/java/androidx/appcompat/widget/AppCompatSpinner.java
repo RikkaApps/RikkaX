@@ -46,10 +46,13 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import androidx.annotation.DoNotInline;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.RestrictTo;
+import androidx.annotation.StyleableRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.R;
 import androidx.appcompat.app.AlertDialog;
@@ -66,7 +69,7 @@ import androidx.resourceinspection.annotation.AppCompatShadowedAttributes;
  * including:
  * <ul>
  *     <li>Allows dynamic tint of its background via the background tint methods in
- *     {@link androidx.core.view.ViewCompat}.</li>
+ *     {@link ViewCompat}.</li>
  *     <li>Allows setting of the background tint using {@link R.attr#buttonTint} and
  *     {@link R.attr#buttonTintMode}.</li>
  *     <li>Setting the popup theme using {@link R.attr#popupTheme}.</li>
@@ -78,6 +81,8 @@ import androidx.resourceinspection.annotation.AppCompatShadowedAttributes;
 @AppCompatShadowedAttributes
 public class AppCompatSpinner extends Spinner implements TintableBackgroundView {
 
+    @SuppressLint("ResourceType")
+    @StyleableRes
     private static final int[] ATTRS_ANDROID_SPINNERMODE = {android.R.attr.spinnerMode};
 
     private static final int MAX_ITEMS_MEASURED = 15;
@@ -247,7 +252,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
         switch (mode) {
             case MODE_DIALOG: {
-                mPopup = new AppCompatSpinner.DialogPopup();
+                mPopup = new DialogPopup();
                 mPopup.setPromptText(a.getString(R.styleable.Spinner_android_prompt));
                 break;
             }
@@ -492,7 +497,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     /**
      * This should be accessed via
-     * {@link androidx.core.view.ViewCompat#setBackgroundTintList(android.view.View,
+     * {@link ViewCompat#setBackgroundTintList(View,
      * ColorStateList)}
      *
      * @hide
@@ -507,7 +512,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     /**
      * This should be accessed via
-     * {@link androidx.core.view.ViewCompat#getBackgroundTintList(android.view.View)}
+     * {@link ViewCompat#getBackgroundTintList(View)}
      *
      * @hide
      */
@@ -521,7 +526,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     /**
      * This should be accessed via
-     * {@link androidx.core.view.ViewCompat#setBackgroundTintMode(android.view.View,
+     * {@link ViewCompat#setBackgroundTintMode(View,
      * PorterDuff.Mode)}
      *
      * @hide
@@ -536,7 +541,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     /**
      * This should be accessed via
-     * {@link androidx.core.view.ViewCompat#getBackgroundTintMode(android.view.View)}
+     * {@link ViewCompat#getBackgroundTintMode(View)}
      *
      * @hide
      */
@@ -607,7 +612,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     void showPopup() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            mPopup.show(getTextDirection(), getTextAlignment());
+            mPopup.show(Api17Impl.getTextDirection(this), Api17Impl.getTextAlignment(this));
         } else {
             mPopup.show(-1, -1);
         }
@@ -616,15 +621,15 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     @Override
     public Parcelable onSaveInstanceState() {
-        final AppCompatSpinner.SavedState ss =
-                new AppCompatSpinner.SavedState(super.onSaveInstanceState());
+        final SavedState ss =
+                new SavedState(super.onSaveInstanceState());
         ss.mShowDropdown = mPopup != null && mPopup.isShowing();
         return ss;
     }
 
     @Override
     public void onRestoreInstanceState(Parcelable state) {
-        AppCompatSpinner.SavedState ss = (AppCompatSpinner.SavedState) state;
+        SavedState ss = (SavedState) state;
 
         super.onRestoreInstanceState(ss.getSuperState());
 
@@ -640,7 +645,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
                         final ViewTreeObserver vto = getViewTreeObserver();
                         if (vto != null) {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                vto.removeOnGlobalLayoutListener(this);
+                                Api16Impl.removeOnGlobalLayoutListener(vto, this);
                             } else {
                                 vto.removeGlobalOnLayoutListener(this);
                             }
@@ -670,8 +675,8 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
             out.writeByte((byte) (mShowDropdown ? 1 : 0));
         }
 
-        public static final Parcelable.Creator<SavedState> CREATOR =
-                new Parcelable.Creator<SavedState>() {
+        public static final Creator<SavedState> CREATOR =
+                new Creator<SavedState>() {
                     @Override
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
@@ -714,9 +719,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
                          && adapter instanceof android.widget.ThemedSpinnerAdapter) {
                     final android.widget.ThemedSpinnerAdapter themedAdapter =
                             (android.widget.ThemedSpinnerAdapter) adapter;
-                    if (themedAdapter.getDropDownViewTheme() != dropDownTheme) {
-                        themedAdapter.setDropDownViewTheme(dropDownTheme);
-                    }
+                    Api23Impl.setDropDownViewTheme(themedAdapter, dropDownTheme);
                 } else if (adapter instanceof ThemedSpinnerAdapter) {
                     final ThemedSpinnerAdapter themedAdapter = (ThemedSpinnerAdapter) adapter;
                     if (themedAdapter.getDropDownViewTheme() == null) {
@@ -904,8 +907,8 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
                     getSelectedItemPosition(), this).create();
             final ListView listView = mPopup.getListView();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                listView.setTextDirection(textDirection);
-                listView.setTextAlignment(textAlignment);
+                Api17Impl.setTextDirection(listView, textDirection);
+                Api17Impl.setTextAlignment(listView, textAlignment);
             }
             mPopup.show();
         }
@@ -974,7 +977,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
             setModal(true);
             setPromptPosition(POSITION_PROMPT_ABOVE);
 
-            setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                     AppCompatSpinner.this.setSelection(position);
@@ -1053,8 +1056,8 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
             final ListView listView = getListView();
             listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                listView.setTextDirection(textDirection);
-                listView.setTextAlignment(textAlignment);
+                Api17Impl.setTextDirection(listView, textDirection);
+                Api17Impl.setTextAlignment(listView, textAlignment);
             }
             setSelection(AppCompatSpinner.this.getSelectedItemPosition());
 
@@ -1069,8 +1072,8 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
             // but it may have other side effects to investigate first. (Text editing handles, etc.)
             final ViewTreeObserver vto = getViewTreeObserver();
             if (vto != null) {
-                final ViewTreeObserver.OnGlobalLayoutListener layoutListener
-                        = new ViewTreeObserver.OnGlobalLayoutListener() {
+                final OnGlobalLayoutListener layoutListener
+                        = new OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
                         if (!isVisibleToUser(AppCompatSpinner.this)) {
@@ -1112,6 +1115,65 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
         @Override
         public int getHorizontalOriginalOffset() {
             return mOriginalHorizontalOffset;
+        }
+    }
+
+    @RequiresApi(23)
+    private static final class Api23Impl {
+        private Api23Impl() {
+            // This class is not instantiable.
+        }
+
+        @DoNotInline
+        static void setDropDownViewTheme(
+                @NonNull android.widget.ThemedSpinnerAdapter themedSpinnerAdapter,
+                @Nullable Resources.Theme theme
+        ) {
+            if (themedSpinnerAdapter.getDropDownViewTheme() != theme) {
+                themedSpinnerAdapter.setDropDownViewTheme(theme);
+            }
+        }
+    }
+
+    @RequiresApi(17)
+    private static final class Api17Impl {
+        private Api17Impl() {
+            // This class is not instantiable.
+        }
+
+        @DoNotInline
+        static int getTextAlignment(@NonNull View view) {
+            return view.getTextAlignment();
+        }
+
+        @DoNotInline
+        static void setTextAlignment(@NonNull View view, int textAlignment) {
+            view.setTextAlignment(textAlignment);
+        }
+
+        @DoNotInline
+        static int getTextDirection(@NonNull View view) {
+            return view.getTextDirection();
+        }
+
+        @DoNotInline
+        static void setTextDirection(@NonNull View view, int textDirection) {
+            view.setTextDirection(textDirection);
+        }
+    }
+
+    @RequiresApi(16)
+    private static final class Api16Impl {
+        private Api16Impl() {
+            // This class is not instantiable.
+        }
+
+        @DoNotInline
+        static void removeOnGlobalLayoutListener(
+                @NonNull ViewTreeObserver viewTreeObserver,
+                @Nullable OnGlobalLayoutListener victim
+        ) {
+            viewTreeObserver.removeOnGlobalLayoutListener(victim);
         }
     }
 }

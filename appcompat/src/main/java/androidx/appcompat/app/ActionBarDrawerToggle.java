@@ -26,8 +26,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.DoNotInline;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
 import androidx.appcompat.widget.Toolbar;
@@ -43,14 +45,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
  * to the following methods corresponding to your Activity callbacks:</p>
  *
  * <ul>
- * <li>{@link android.app.Activity#onConfigurationChanged(android.content.res.Configuration)
+ * <li>{@link Activity#onConfigurationChanged(Configuration)
  * onConfigurationChanged}
- * <li>{@link android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+ * <li>{@link Activity#onOptionsItemSelected(MenuItem)
  * onOptionsItemSelected}</li>
  * </ul>
  *
  * <p>Call {@link #syncState()} from your <code>Activity</code>'s
- * {@link android.app.Activity#onPostCreate(android.os.Bundle) onPostCreate} to synchronize the
+ * {@link Activity#onPostCreate(android.os.Bundle) onPostCreate} to synchronize the
  * indicator with the state of the linked DrawerLayout after <code>onRestoreInstanceState</code>
  * has occurred.</p>
  *
@@ -66,7 +68,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
 
     /**
-     * Allows an implementing Activity to return an {@link ActionBarDrawerToggle.Delegate} to use
+     * Allows an implementing Activity to return an {@link Delegate} to use
      * with ActionBarDrawerToggle.
      */
     public interface DelegateProvider {
@@ -247,7 +249,7 @@ public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
 
     /**
      * This method should always be called by your <code>Activity</code>'s
-     * {@link Activity#onConfigurationChanged(android.content.res.Configuration)
+     * {@link Activity#onConfigurationChanged(Configuration)
      * onConfigurationChanged}
      * method.
      *
@@ -263,7 +265,7 @@ public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
 
     /**
      * This method should be called by your <code>Activity</code>'s
-     * {@link Activity#onOptionsItemSelected(android.view.MenuItem) onOptionsItemSelected} method.
+     * {@link Activity#onOptionsItemSelected(MenuItem) onOptionsItemSelected} method.
      * If it returns true, your <code>onOptionsItemSelected</code> method should return true and
      * skip further processing.
      *
@@ -463,7 +465,7 @@ public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
      *
      * @return The click listener which receives Navigation click events from Toolbar when
      * drawer indicator is disabled.
-     * @see #setToolbarNavigationClickListener(android.view.View.OnClickListener)
+     * @see #setToolbarNavigationClickListener(View.OnClickListener)
      * @see #setDrawerIndicatorEnabled(boolean)
      * @see #isDrawerIndicatorEnabled()
      */
@@ -554,8 +556,8 @@ public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
             final ActionBar actionBar = mActivity.getActionBar();
             if (actionBar != null) {
                 if (Build.VERSION.SDK_INT >= 18) {
-                    actionBar.setHomeAsUpIndicator(themeImage);
-                    actionBar.setHomeActionContentDescription(contentDescRes);
+                    Api18Impl.setHomeAsUpIndicator(actionBar, themeImage);
+                    Api18Impl.setHomeActionContentDescription(actionBar, contentDescRes);
                 } else {
                     actionBar.setDisplayShowHomeEnabled(true);
                     mSetIndicatorInfo = ActionBarDrawerToggleHoneycomb.setActionBarUpIndicator(
@@ -570,12 +572,30 @@ public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
             if (Build.VERSION.SDK_INT >= 18) {
                 final ActionBar actionBar = mActivity.getActionBar();
                 if (actionBar != null) {
-                    actionBar.setHomeActionContentDescription(contentDescRes);
+                    Api18Impl.setHomeActionContentDescription(actionBar, contentDescRes);
                 }
             } else {
                 mSetIndicatorInfo = ActionBarDrawerToggleHoneycomb.setActionBarDescription(
-                    mSetIndicatorInfo, mActivity, contentDescRes);
+                        mSetIndicatorInfo, mActivity, contentDescRes);
             }
+        }
+
+        @RequiresApi(18)
+        static class Api18Impl {
+            private Api18Impl() {
+                // This class is not instantiable.
+            }
+
+            @DoNotInline
+            static void setHomeActionContentDescription(ActionBar actionBar, int resId) {
+                actionBar.setHomeActionContentDescription(resId);
+            }
+
+            @DoNotInline
+            static void setHomeAsUpIndicator(ActionBar actionBar, Drawable indicator) {
+                actionBar.setHomeAsUpIndicator(indicator);
+            }
+
         }
     }
 

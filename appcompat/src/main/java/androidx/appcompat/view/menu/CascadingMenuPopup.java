@@ -62,7 +62,7 @@ import java.util.List;
  * side.
  */
 final class CascadingMenuPopup extends MenuPopup implements MenuPresenter, OnKeyListener,
-        PopupWindow.OnDismissListener {
+        OnDismissListener {
     private static final int ITEM_LAYOUT = R.layout.abc_cascading_menu_item_layout;
 
     @Retention(RetentionPolicy.SOURCE)
@@ -208,7 +208,7 @@ final class CascadingMenuPopup extends MenuPopup implements MenuPresenter, OnKey
     private Callback mPresenterCallback;
     @SuppressWarnings("WeakerAccess") /* synthetic access */
     ViewTreeObserver mTreeObserver;
-    private PopupWindow.OnDismissListener mOnDismissListener;
+    private OnDismissListener mOnDismissListener;
 
     /** Whether popup menus should disable exit animations when closing. */
     boolean mShouldCloseImmediately;
@@ -216,7 +216,7 @@ final class CascadingMenuPopup extends MenuPopup implements MenuPresenter, OnKey
     /**
      * Initializes a new cascading-capable menu popup.
      *
-     * @param anchor A parent view to get the {@link android.view.View#getWindowToken()} token from.
+     * @param anchor A parent view to get the {@link View#getWindowToken()} token from.
      */
     @SuppressWarnings("deprecation")
     public CascadingMenuPopup(@NonNull Context context, @NonNull View anchor,

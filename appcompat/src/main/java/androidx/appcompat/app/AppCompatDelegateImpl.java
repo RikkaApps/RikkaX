@@ -250,7 +250,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
     /**
      * The configuration from the most recent call to either onConfigurationChanged or onCreate.
-     * May be null neither method has been called yet.
+     * May be null if neither method has been called yet.
      */
     private Configuration mEffectiveConfiguration;
 
@@ -370,7 +370,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         if (sCanApplyOverrideConfiguration
                 && baseContext instanceof android.view.ContextThemeWrapper) {
             final Configuration config = createOverrideConfigurationForDayNight(
-                    baseContext, modeToApply, null);
+                    baseContext, modeToApply, null, false);
             if (DEBUG) {
                 Log.d(TAG, String.format("Attempting to apply config to base context: %s",
                         config.toString()));
@@ -390,7 +390,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         // Again, but using the AppCompat version of ContextThemeWrapper.
         if (baseContext instanceof ContextThemeWrapper) {
             final Configuration config = createOverrideConfigurationForDayNight(
-                    baseContext, modeToApply, null);
+                    baseContext, modeToApply, null, false);
             if (DEBUG) {
                 Log.d(TAG, String.format("Attempting to apply config to base context: %s",
                         config.toString()));
@@ -447,7 +447,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         }
 
         final Configuration config = createOverrideConfigurationForDayNight(
-                baseContext, modeToApply, configOverlay);
+                baseContext, modeToApply, configOverlay, true);
         if (DEBUG) {
             Log.d(TAG, String.format("Applying night mode using ContextThemeWrapper and "
                     + "applyOverrideConfiguration(). Config: %s", config.toString()));
@@ -663,6 +663,10 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         // Re-apply Day/Night with the new configuration but disable recreations. Since this
         // configuration change has only just happened we can safely just update the resources now
         applyDayNight(false);
+
+        // We may have just changed the resource configuration. Make sure that everyone after us
+        // sees the same configuration by modifying the parameter's internal state.
+        newConfig.updateFrom(mContext.getResources().getConfiguration());
     }
 
     @Override
@@ -694,7 +698,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         ViewGroup contentParent = mSubDecor.findViewById(android.R.id.content);
         contentParent.removeAllViews();
         contentParent.addView(v);
-        mAppCompatWindowCallback.getWrapped().onContentChanged();
+        mAppCompatWindowCallback.bypassOnContentChanged(mWindow.getCallback());
     }
 
     @Override
@@ -703,7 +707,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         ViewGroup contentParent = mSubDecor.findViewById(android.R.id.content);
         contentParent.removeAllViews();
         LayoutInflater.from(mContext).inflate(resId, contentParent);
-        mAppCompatWindowCallback.getWrapped().onContentChanged();
+        mAppCompatWindowCallback.bypassOnContentChanged(mWindow.getCallback());
     }
 
     @Override
@@ -712,7 +716,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         ViewGroup contentParent = mSubDecor.findViewById(android.R.id.content);
         contentParent.removeAllViews();
         contentParent.addView(v, lp);
-        mAppCompatWindowCallback.getWrapped().onContentChanged();
+        mAppCompatWindowCallback.bypassOnContentChanged(mWindow.getCallback());
     }
 
     @Override
@@ -720,7 +724,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         ensureSubDecor();
         ViewGroup contentParent = mSubDecor.findViewById(android.R.id.content);
         contentParent.addView(v, lp);
-        mAppCompatWindowCallback.getWrapped().onContentChanged();
+        mAppCompatWindowCallback.bypassOnContentChanged(mWindow.getCallback());
     }
 
     @Override
@@ -1461,7 +1465,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
         if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
             // If this is a MENU event, let the Activity have a go.
-            if (mAppCompatWindowCallback.getWrapped().dispatchKeyEvent(event)) {
+            if (mAppCompatWindowCallback.bypassDispatchKeyEvent(mWindow.getCallback(), event)) {
                 return true;
             }
         }
@@ -2097,7 +2101,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
             // We need to be careful which callback we dispatch the call to. We can not dispatch
             // this to the Window's callback since that will call back into this method and cause a
             // crash. Instead we need to dispatch down to the original Activity/Dialog/etc.
-            mAppCompatWindowCallback.getWrapped().onPanelClosed(featureId, menu);
+            mAppCompatWindowCallback.bypassOnPanelClosed(mWindow.getCallback(), featureId, menu);
         }
     }
 
@@ -2383,10 +2387,6 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         }
 
         @NightMode final int nightMode = calculateNightMode();
-        if (nightMode == MODE_NIGHT_UNSPECIFIED) {
-            return false;
-        }
-
         @ApplyableNightMode final int modeToApply = mapNightMode(mContext, nightMode);
         final boolean applied = updateForNightMode(modeToApply, allowRecreation);
 
@@ -2467,7 +2467,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
     @NonNull
     private Configuration createOverrideConfigurationForDayNight(
             @NonNull Context context, @ApplyableNightMode final int mode,
-            @Nullable Configuration configOverlay) {
+            @Nullable Configuration configOverlay, boolean ignoreFollowSystem) {
         int newNightMode;
         switch (mode) {
             case MODE_NIGHT_YES:
@@ -2478,11 +2478,17 @@ class AppCompatDelegateImpl extends AppCompatDelegate
                 break;
             default:
             case MODE_NIGHT_FOLLOW_SYSTEM:
-                // If we're following the system, we just use the system default from the
-                // application context
-                final Configuration appConfig =
-                        context.getApplicationContext().getResources().getConfiguration();
-                newNightMode = appConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                if (ignoreFollowSystem) {
+                    // We're generating an overlay to be used on top of the system configuration,
+                    // so use whatever's already there.
+                    newNightMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
+                } else {
+                    // If we're following the system, we just use the system default from the
+                    // application context
+                    final Configuration appConfig =
+                            context.getApplicationContext().getResources().getConfiguration();
+                    newNightMode = appConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                }
                 break;
         }
 
@@ -2511,9 +2517,9 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         boolean handled = false;
 
         final Configuration overrideConfig =
-                createOverrideConfigurationForDayNight(mContext, mode, null);
+                createOverrideConfigurationForDayNight(mContext, mode, null, false);
 
-        final boolean activityHandlingUiMode = isActivityManifestHandlingUiMode();
+        final boolean activityHandlingUiMode = isActivityManifestHandlingUiMode(mContext);
         final Configuration currentConfiguration = mEffectiveConfiguration == null
                 ? mContext.getResources().getConfiguration() : mEffectiveConfiguration;
         final int currentNightMode = currentConfiguration.uiMode
@@ -2647,9 +2653,9 @@ class AppCompatDelegateImpl extends AppCompatDelegate
         return mAutoBatteryNightModeManager;
     }
 
-    private boolean isActivityManifestHandlingUiMode() {
+    private boolean isActivityManifestHandlingUiMode(Context baseContext) {
         if (!mActivityHandlesUiModeChecked && mHost instanceof Activity) {
-            final PackageManager pm = mContext.getPackageManager();
+            final PackageManager pm = baseContext.getPackageManager();
             if (pm == null) {
                 // If we don't have a PackageManager, return false. Don't set
                 // the checked flag though so we still check again later
@@ -2669,7 +2675,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
                             | PackageManager.MATCH_DIRECT_BOOT_UNAWARE;
                 }
                 final ActivityInfo info = pm.getActivityInfo(
-                        new ComponentName(mContext, mHost.getClass()), flags);
+                        new ComponentName(baseContext, mHost.getClass()), flags);
                 mActivityHandlesUiMode = info != null
                         && (info.configChanges & ActivityInfo.CONFIG_UI_MODE) != 0;
             } catch (PackageManager.NameNotFoundException e) {
@@ -3077,6 +3083,9 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
     class AppCompatWindowCallback extends WindowCallbackWrapper {
         private ActionBarMenuCallback mActionBarCallback;
+        private boolean mOnContentChangedBypassEnabled;
+        private boolean mDispatchKeyEventBypassEnabled;
+        private boolean mOnPanelClosedBypassEnabled;
 
         AppCompatWindowCallback(Window.Callback callback) {
             super(callback);
@@ -3088,6 +3097,10 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
         @Override
         public boolean dispatchKeyEvent(KeyEvent event) {
+            if (mDispatchKeyEventBypassEnabled) {
+                return getWrapped().dispatchKeyEvent(event);
+            }
+
             return AppCompatDelegateImpl.this.dispatchKeyEvent(event)
                     || super.dispatchKeyEvent(event);
         }
@@ -3121,6 +3134,11 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
         @Override
         public void onContentChanged() {
+            if (mOnContentChangedBypassEnabled) {
+                getWrapped().onContentChanged();
+                return;
+            }
+
             // We purposely do not propagate this call as this is called when we install
             // our sub-decor rather than the user's content
         }
@@ -3167,6 +3185,11 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
         @Override
         public void onPanelClosed(int featureId, Menu menu) {
+            if (mOnPanelClosedBypassEnabled) {
+                getWrapped().onPanelClosed(featureId, menu);
+                return;
+            }
+
             super.onPanelClosed(featureId, menu);
             AppCompatDelegateImpl.this.onPanelClosed(featureId);
         }
@@ -3197,7 +3220,7 @@ class AppCompatDelegateImpl extends AppCompatDelegate
                     new SupportActionModeWrapper.CallbackWrapper(mContext, callback);
 
             // Try and start a support action mode using the wrapped callback
-            final androidx.appcompat.view.ActionMode supportActionMode =
+            final ActionMode supportActionMode =
                     startSupportActionMode(callbackWrapper);
 
             if (supportActionMode != null) {
@@ -3234,6 +3257,58 @@ class AppCompatDelegateImpl extends AppCompatDelegate
             } else {
                 // If we don't have a menu, jump pass through the original instead
                 super.onProvideKeyboardShortcuts(data, menu, deviceId);
+            }
+        }
+
+        /**
+         * Performs a call to {@link Window.Callback#onContentChanged()}, ensuring that if the
+         * delegate's own {@link #onContentChanged()} is called then it delegates directly to the
+         * wrapped callback.
+         *
+         * @param c the callback
+         */
+        public void bypassOnContentChanged(Window.Callback c) {
+            try {
+                mOnContentChangedBypassEnabled = true;
+                c.onContentChanged();
+            } finally {
+                mOnContentChangedBypassEnabled = false;
+            }
+        }
+
+        /**
+         * Performs a call to {@link Window.Callback#dispatchKeyEvent(KeyEvent)}, ensuring that if
+         * the delegate's own {@link #dispatchKeyEvent(KeyEvent)} is called then it delegates
+         * directly to the wrapped callback.
+         *
+         * @param c the callback
+         * @param e the key event to dispatch
+         * @return whether the key event was handled
+         */
+        public boolean bypassDispatchKeyEvent(Window.Callback c, KeyEvent e) {
+            try {
+                mDispatchKeyEventBypassEnabled = true;
+                return c.dispatchKeyEvent(e);
+            } finally {
+                mDispatchKeyEventBypassEnabled = false;
+            }
+        }
+
+        /**
+         * Performs a call to {@link Window.Callback#onPanelClosed(int, Menu)}, ensuring that if the
+         * delegate's own {@link #onPanelClosed(int, Menu)} is called then it delegates directly to
+         * the wrapped callback.
+         *
+         * @param c the callback
+         * @param featureId the feature ID for the panel
+         * @param menu the menu represented by the panel
+         */
+        public void bypassOnPanelClosed(Window.Callback c, int featureId, Menu menu) {
+            try {
+                mOnPanelClosedBypassEnabled = true;
+                c.onPanelClosed(featureId, menu);
+            } finally {
+                mOnPanelClosedBypassEnabled = false;
             }
         }
     }

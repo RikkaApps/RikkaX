@@ -165,17 +165,17 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
 
     /**
      * Set a {@link android.widget.Toolbar Toolbar} to act as the
-     * {@link androidx.appcompat.app.ActionBar} for this Activity window.
+     * {@link ActionBar} for this Activity window.
      *
      * <p>When set to a non-null value the {@link #getActionBar()} method will return
-     * an {@link androidx.appcompat.app.ActionBar} object that can be used to control the given
+     * an {@link ActionBar} object that can be used to control the given
      * toolbar as if it were a traditional window decor action bar. The toolbar's menu will be
      * populated with the Activity's options menu and the navigation button will be wired through
      * the standard {@link android.R.id#home home} menu select action.</p>
      *
      * <p>In order to use a Toolbar within the Activity's window content the application
      * must not request the window feature
-     * {@link android.view.Window#FEATURE_ACTION_BAR FEATURE_SUPPORT_ACTION_BAR}.</p>
+     * {@link Window#FEATURE_ACTION_BAR FEATURE_SUPPORT_ACTION_BAR}.</p>
      *
      * @param toolbar Toolbar to set as the Activity's action bar, or {@code null} to clear it
      */
@@ -225,14 +225,16 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        if (mResources != null) {
-            // The real (and thus managed) resources object was already updated
-            // by ResourcesManager, so pull the current metrics from there.
-            final DisplayMetrics newMetrics = super.getResources().getDisplayMetrics();
-            mResources.updateConfiguration(newConfig, newMetrics);
-        }
-
+        // The delegate may modify the real resources object or the config param to implement its
+        // desired configuration overrides. Let it do it's thing and then use the resulting state.
         getDelegate().onConfigurationChanged(newConfig);
+
+        // Manually propagate configuration changes to our unmanaged resources object.
+        if (mResources != null) {
+            final Configuration currConfig = super.getResources().getConfiguration();
+            final DisplayMetrics currMetrics = super.getResources().getDisplayMetrics();
+            mResources.updateConfiguration(currConfig, currMetrics);
+        }
     }
 
     @Override
@@ -289,15 +291,15 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
      * Enable extended support library window features.
      * <p>
      * This is a convenience for calling
-     * {@link android.view.Window#requestFeature getWindow().requestFeature()}.
+     * {@link Window#requestFeature getWindow().requestFeature()}.
      * </p>
      *
      * @param featureId The desired feature as defined in
-     * {@link android.view.Window} or {@link androidx.core.view.WindowCompat}.
+     * {@link Window} or {@link androidx.core.view.WindowCompat}.
      * @return Returns true if the requested feature is supported and now enabled.
      *
      * @see android.app.Activity#requestWindowFeature
-     * @see android.view.Window#requestFeature
+     * @see Window#requestFeature
      */
     public boolean supportRequestWindowFeature(int featureId) {
         return getDelegate().requestWindowFeature(featureId);
@@ -398,17 +400,17 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
      * a different task.
      *
      * <p>The default implementation of this method adds the parent chain of this activity
-     * as specified in the manifest to the supplied {@link androidx.core.app.TaskStackBuilder}. Applications
+     * as specified in the manifest to the supplied {@link TaskStackBuilder}. Applications
      * may choose to override this method to construct the desired task stack in a different
      * way.</p>
      *
      * <p>This method will be invoked by the default implementation of {@link #onNavigateUp()}
-     * if {@link #shouldUpRecreateTask(android.content.Intent)} returns true when supplied with the intent
+     * if {@link #shouldUpRecreateTask(Intent)} returns true when supplied with the intent
      * returned by {@link #getParentActivityIntent()}.</p>
      *
      * <p>Applications that wish to supply extra Intent parameters to the parent stack defined
      * by the manifest should override
-     * {@link #onPrepareSupportNavigateUpTaskStack(androidx.core.app.TaskStackBuilder)}.</p>
+     * {@link #onPrepareSupportNavigateUpTaskStack(TaskStackBuilder)}.</p>
      *
      * @param builder An empty TaskStackBuilder - the application should add intents representing
      *                the desired task stack
@@ -424,8 +426,8 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
      * Prepare the synthetic task stack that will be generated during Up navigation
      * from a different task.
      *
-     * <p>This method receives the {@link androidx.core.app.TaskStackBuilder} with the constructed series of
-     * Intents as generated by {@link #onCreateSupportNavigateUpTaskStack(androidx.core.app.TaskStackBuilder)}.
+     * <p>This method receives the {@link TaskStackBuilder} with the constructed series of
+     * Intents as generated by {@link #onCreateSupportNavigateUpTaskStack(TaskStackBuilder)}.
      * If any extra data should be added to these intents before launching the new task,
      * the application should override this method and add that data here.</p>
      *
@@ -443,7 +445,7 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
      * default Up navigation will be handled automatically. See
      * {@link #getSupportParentActivityIntent()} for how to specify the parent. If any activity
      * along the parent chain requires extra Intent arguments, the Activity subclass
-     * should override the method {@link #onPrepareSupportNavigateUpTaskStack(androidx.core.app.TaskStackBuilder)}
+     * should override the method {@link #onPrepareSupportNavigateUpTaskStack(TaskStackBuilder)}
      * to supply those arguments.</p>
      *
      * <p>See <a href="{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html">Tasks and
@@ -451,9 +453,9 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
      * <a href="{@docRoot}design/patterns/navigation.html">Navigation</a> from the design guide
      * for more information about navigating within your app.</p>
      *
-     * <p>See the {@link androidx.core.app.TaskStackBuilder} class and the Activity methods
-     * {@link #getSupportParentActivityIntent()}, {@link #supportShouldUpRecreateTask(android.content.Intent)}, and
-     * {@link #supportNavigateUpTo(android.content.Intent)} for help implementing custom Up navigation.</p>
+     * <p>See the {@link TaskStackBuilder} class and the Activity methods
+     * {@link #getSupportParentActivityIntent()}, {@link #supportShouldUpRecreateTask(Intent)}, and
+     * {@link #supportNavigateUpTo(Intent)} for help implementing custom Up navigation.</p>
      *
      * @return true if Up navigation completed successfully and this Activity was finished,
      *         false otherwise.
@@ -486,8 +488,8 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
     }
 
     /**
-     * Obtain an {@link android.content.Intent} that will launch an explicit target activity
-     * specified by sourceActivity's {@link androidx.core.app.NavUtils#PARENT_ACTIVITY} &lt;meta-data&gt;
+     * Obtain an {@link Intent} that will launch an explicit target activity
+     * specified by sourceActivity's {@link NavUtils#PARENT_ACTIVITY} &lt;meta-data&gt;
      * element in the application's manifest. If the device is running
      * Jellybean or newer, the android:parentActivityName attribute will be preferred
      * if it is present.
@@ -505,9 +507,9 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
      * by using targetIntent.
      *
      * <p>If this method returns false the app can trivially call
-     * {@link #supportNavigateUpTo(android.content.Intent)} using the same parameters to correctly perform
+     * {@link #supportNavigateUpTo(Intent)} using the same parameters to correctly perform
      * up navigation. If this method returns false, the app should synthesize a new task stack
-     * by using {@link androidx.core.app.TaskStackBuilder} or another similar mechanism to perform up navigation.</p>
+     * by using {@link TaskStackBuilder} or another similar mechanism to perform up navigation.</p>
      *
      * @param targetIntent An intent representing the target destination for up navigation
      * @return true if navigating up should recreate a new task stack, false if the same task
@@ -519,13 +521,13 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
 
     /**
      * Navigate from sourceActivity to the activity specified by upIntent, finishing sourceActivity
-     * in the process. upIntent will have the flag {@link android.content.Intent#FLAG_ACTIVITY_CLEAR_TOP} set
+     * in the process. upIntent will have the flag {@link Intent#FLAG_ACTIVITY_CLEAR_TOP} set
      * by this method, along with any others required for proper up navigation as outlined
      * in the Android Design Guide.
      *
      * <p>This method should be used when performing up navigation from within the same task
      * as the destination. If up navigation should cross tasks in some cases, see
-     * {@link #supportShouldUpRecreateTask(android.content.Intent)}.</p>
+     * {@link #supportShouldUpRecreateTask(Intent)}.</p>
      *
      * @param upIntent An intent representing the target destination for up navigation
      */

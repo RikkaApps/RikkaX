@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Implementation of the {@link androidx.core.internal.view.SupportMenu} interface for creating a
+ * Implementation of the {@link SupportMenu} interface for creating a
  * standard menu UI.
  *
  * @hide
@@ -340,6 +340,7 @@ public class MenuBuilder implements SupportMenu {
         outState.putSparseParcelableArray(PRESENTER_KEY, presenterStates);
     }
 
+    @SuppressWarnings("deprecation")
     private void dispatchRestoreInstanceState(Bundle state) {
         SparseArray<Parcelable> presenterStates = state.getSparseParcelableArray(PRESENTER_KEY);
 
@@ -396,6 +397,7 @@ public class MenuBuilder implements SupportMenu {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void restoreActionViewStates(Bundle states) {
         if (states == null) {
             return;

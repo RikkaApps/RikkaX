@@ -103,7 +103,7 @@ public final class AppCompatDrawableManager {
                 /**
                  * Drawables which should be tinted with the value of
                  * {@code android.R.attr.colorBackground}, using the
-                 * {@link android.graphics.PorterDuff.Mode#MULTIPLY} mode and a color filter.
+                 * {@link PorterDuff.Mode#MULTIPLY} mode and a color filter.
                  */
                 private final int[] COLORFILTER_COLOR_BACKGROUND_MULTIPLY = {
                         R.drawable.abc_popup_background_mtrl_mult,

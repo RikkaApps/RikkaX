@@ -80,7 +80,7 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 public class ActivityChooserView extends ViewGroup implements
         ActivityChooserModel.ActivityChooserModelClient {
     /**
-     * An adapter for displaying the activities in an {@link android.widget.AdapterView}.
+     * An adapter for displaying the activities in an {@link AdapterView}.
      */
     final ActivityChooserViewAdapter mAdapter;
 
@@ -580,7 +580,7 @@ public class ActivityChooserView extends ViewGroup implements
      * Interface implementation to avoid publishing them in the APIs.
      */
     private class Callbacks implements AdapterView.OnItemClickListener,
-            View.OnClickListener, View.OnLongClickListener, PopupWindow.OnDismissListener {
+            OnClickListener, OnLongClickListener, PopupWindow.OnDismissListener {
 
         Callbacks() {
         }

@@ -53,31 +53,31 @@ import java.util.Iterator;
 
 /**
  * This class represents a delegate which you can use to extend AppCompat's support to any
- * {@link android.app.Activity}.
+ * {@link Activity}.
  *
  * <p>When using an {@link AppCompatDelegate}, you should call the following methods instead of the
- * {@link android.app.Activity} method of the same name:</p>
+ * {@link Activity} method of the same name:</p>
  * <ul>
- *     <li>{@link #addContentView(android.view.View, android.view.ViewGroup.LayoutParams)}</li>
+ *     <li>{@link #addContentView(View, ViewGroup.LayoutParams)}</li>
  *     <li>{@link #setContentView(int)}</li>
- *     <li>{@link #setContentView(android.view.View)}</li>
- *     <li>{@link #setContentView(android.view.View, android.view.ViewGroup.LayoutParams)}</li>
+ *     <li>{@link #setContentView(View)}</li>
+ *     <li>{@link #setContentView(View, ViewGroup.LayoutParams)}</li>
  *     <li>{@link #requestWindowFeature(int)}</li>
  *     <li>{@link #hasWindowFeature(int)}</li>
  *     <li>{@link #invalidateOptionsMenu()}</li>
- *     <li>{@link #startSupportActionMode(androidx.appcompat.view.ActionMode.Callback)}</li>
- *     <li>{@link #setSupportActionBar(androidx.appcompat.widget.Toolbar)}</li>
+ *     <li>{@link #startSupportActionMode(ActionMode.Callback)}</li>
+ *     <li>{@link #setSupportActionBar(Toolbar)}</li>
  *     <li>{@link #getSupportActionBar()}</li>
  *     <li>{@link #getMenuInflater()}</li>
  *     <li>{@link #findViewById(int)}</li>
  * </ul>
  *
- * <p>The following methods should be called from the {@link android.app.Activity} method of the
+ * <p>The following methods should be called from the {@link Activity} method of the
  * same name:</p>
  * <ul>
- *     <li>{@link #onCreate(android.os.Bundle)}</li>
- *     <li>{@link #onPostCreate(android.os.Bundle)}</li>
- *     <li>{@link #onConfigurationChanged(android.content.res.Configuration)}</li>
+ *     <li>{@link #onCreate(Bundle)}</li>
+ *     <li>{@link #onPostCreate(Bundle)}</li>
+ *     <li>{@link #onConfigurationChanged(Configuration)}</li>
  *     <li>{@link #onStart()}</li>
  *     <li>{@link #onStop()}</li>
  *     <li>{@link #onPostResume()}</li>
@@ -220,7 +220,7 @@ public abstract class AppCompatDelegate {
     public static final int FEATURE_ACTION_MODE_OVERLAY = WindowCompat.FEATURE_ACTION_MODE_OVERLAY;
 
     /**
-     * Create an {@link androidx.appcompat.app.AppCompatDelegate} to use with {@code activity}.
+     * Create an {@link AppCompatDelegate} to use with {@code activity}.
      *
      * @param callback An optional callback for AppCompat specific events
      */
@@ -231,7 +231,7 @@ public abstract class AppCompatDelegate {
     }
 
     /**
-     * Create an {@link androidx.appcompat.app.AppCompatDelegate} to use with {@code dialog}.
+     * Create an {@link AppCompatDelegate} to use with {@code dialog}.
      *
      * @param callback An optional callback for AppCompat specific events
      */
@@ -242,7 +242,7 @@ public abstract class AppCompatDelegate {
     }
 
     /**
-     * Create an {@link androidx.appcompat.app.AppCompatDelegate} to use with a {@code context}
+     * Create an {@link AppCompatDelegate} to use with a {@code context}
      * and a {@code window}.
      *
      * @param callback An optional callback for AppCompat specific events
@@ -254,7 +254,7 @@ public abstract class AppCompatDelegate {
     }
 
     /**
-     * Create an {@link androidx.appcompat.app.AppCompatDelegate} to use with a {@code context}
+     * Create an {@link AppCompatDelegate} to use with a {@code context}
      * and hosted by an {@code Activity}.
      *
      * @param callback An optional callback for AppCompat specific events
@@ -315,7 +315,7 @@ public abstract class AppCompatDelegate {
     public abstract void onCreate(Bundle savedInstanceState);
 
     /**
-     * Should be called from {@link Activity#onPostCreate(android.os.Bundle)}
+     * Should be called from {@link Activity#onPostCreate(Bundle)}
      */
     public abstract void onPostCreate(Bundle savedInstanceState);
 
@@ -358,7 +358,7 @@ public abstract class AppCompatDelegate {
     public abstract <T extends View> T findViewById(@IdRes int id);
 
     /**
-     * Should be called instead of {@link Activity#setContentView(android.view.View)}}
+     * Should be called instead of {@link Activity#setContentView(View)}}
      */
     public abstract void setContentView(View v);
 
@@ -369,13 +369,13 @@ public abstract class AppCompatDelegate {
 
     /**
      * Should be called instead of
-     * {@link Activity#setContentView(android.view.View, android.view.ViewGroup.LayoutParams)}}
+     * {@link Activity#setContentView(View, ViewGroup.LayoutParams)}}
      */
     public abstract void setContentView(View v, ViewGroup.LayoutParams lp);
 
     /**
      * Should be called instead of
-     * {@link Activity#addContentView(android.view.View, android.view.ViewGroup.LayoutParams)}}
+     * {@link Activity#addContentView(View, ViewGroup.LayoutParams)}}
      */
     public abstract void addContentView(View v, ViewGroup.LayoutParams lp);
 
@@ -421,10 +421,10 @@ public abstract class AppCompatDelegate {
 
     /**
      * Enable extended window features.  This should be called instead of
-     * {@link android.app.Activity#requestWindowFeature(int)} or
-     * {@link android.view.Window#requestFeature getWindow().requestFeature()}.
+     * {@link Activity#requestWindowFeature(int)} or
+     * {@link Window#requestFeature getWindow().requestFeature()}.
      *
-     * @param featureId The desired feature as defined in {@link android.view.Window}.
+     * @param featureId The desired feature as defined in {@link Window}.
      * @return Returns true if the requested feature is supported and now
      *         enabled.
      */
@@ -433,7 +433,7 @@ public abstract class AppCompatDelegate {
     /**
      * Query for the availability of a certain feature.
      *
-     * <p>This should be called instead of {@link android.view.Window#hasFeature(int)}.</p>
+     * <p>This should be called instead of {@link Window#hasFeature(int)}.</p>
      *
      * @param featureId The feature ID to check
      * @return true if the feature is enabled, false otherwise.
@@ -464,7 +464,7 @@ public abstract class AppCompatDelegate {
      * </pre>
      * If you are using your own {@link android.view.LayoutInflater.Factory Factory} or
      * {@link android.view.LayoutInflater.Factory2 Factory2} then you can omit this call, and instead call
-     * {@link #createView(android.view.View, String, android.content.Context, android.util.AttributeSet)}
+     * {@link #createView(View, String, Context, AttributeSet)}
      * from your factory to return any compatible widgets.
      */
     public abstract void installViewFactory();

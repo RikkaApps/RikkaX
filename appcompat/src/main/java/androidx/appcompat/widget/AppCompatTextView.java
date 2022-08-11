@@ -62,7 +62,7 @@ import java.util.concurrent.Future;
  * <li>Allows setting of the background tint using
  * {@link androidx.appcompat.R.attr#backgroundTint} and
  * {@link androidx.appcompat.R.attr#backgroundTintMode}.</li>
- * <li>Supports auto-sizing via {@link androidx.core.widget.TextViewCompat} by allowing to instruct
+ * <li>Supports auto-sizing via {@link TextViewCompat} by allowing to instruct
  * a {@link TextView} to let the size of the text expand or contract automatically to fill its
  * layout based on the TextView's characteristics and boundaries. The style attributes associated
  * with auto-sizing are
@@ -275,7 +275,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#setAutoSizeTextTypeWithDefaults(
+     * {@link TextViewCompat#setAutoSizeTextTypeWithDefaults(
      *TextView, int)}
      *
      * @hide
@@ -295,7 +295,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#setAutoSizeTextTypeUniformWithConfiguration(
+     * {@link TextViewCompat#setAutoSizeTextTypeUniformWithConfiguration(
      *TextView, int, int, int, int)}
      *
      * @hide
@@ -320,7 +320,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#setAutoSizeTextTypeUniformWithPresetSizes(
+     * {@link TextViewCompat#setAutoSizeTextTypeUniformWithPresetSizes(
      *TextView, int[], int)}
      *
      * @hide
@@ -340,7 +340,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#getAutoSizeTextType(TextView)}
+     * {@link TextViewCompat#getAutoSizeTextType(TextView)}
      *
      * @hide
      */
@@ -364,7 +364,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#getAutoSizeStepGranularity(TextView)}
+     * {@link TextViewCompat#getAutoSizeStepGranularity(TextView)}
      *
      * @hide
      */
@@ -383,7 +383,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#getAutoSizeMinTextSize(TextView)}
+     * {@link TextViewCompat#getAutoSizeMinTextSize(TextView)}
      *
      * @hide
      */
@@ -402,7 +402,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#getAutoSizeMaxTextSize(TextView)}
+     * {@link TextViewCompat#getAutoSizeMaxTextSize(TextView)}
      *
      * @hide
      */
@@ -421,7 +421,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#getAutoSizeTextAvailableSizes(TextView)}
+     * {@link TextViewCompat#getAutoSizeTextAvailableSizes(TextView)}
      *
      * @hide
      */
@@ -558,7 +558,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
     @Override
     @RequiresApi(api = 26)
     public void setTextClassifier(@Nullable TextClassifier textClassifier) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P || mTextClassifierHelper == null) {
+        if (Build.VERSION.SDK_INT >= VERSION_CODES.P || mTextClassifierHelper == null) {
             super.setTextClassifier(textClassifier);
             return;
         }
@@ -576,7 +576,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
     public TextClassifier getTextClassifier() {
         // The null check is necessary because getTextClassifier is called when we are invoking
         // the super class's constructor.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P || mTextClassifierHelper == null) {
+        if (Build.VERSION.SDK_INT >= VERSION_CODES.P || mTextClassifierHelper == null) {
             return super.getTextClassifier();
         }
         return mTextClassifierHelper.getTextClassifier();
@@ -616,7 +616,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @RequiresApi(VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void setCompoundDrawablesRelative(@Nullable Drawable start, @Nullable Drawable top,
             @Nullable Drawable end, @Nullable Drawable bottom) {
@@ -648,7 +648,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @RequiresApi(VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void setCompoundDrawablesRelativeWithIntrinsicBounds(@Nullable Drawable start,
             @Nullable Drawable top, @Nullable Drawable end, @Nullable Drawable bottom) {
@@ -658,7 +658,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @RequiresApi(VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void setCompoundDrawablesRelativeWithIntrinsicBounds(
             int start, int top, int end, int bottom) {
@@ -675,7 +675,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#getCompoundDrawableTintList(TextView)}
+     * {@link TextViewCompat#getCompoundDrawableTintList(TextView)}
      *
      * @return the tint applied to the compound drawables
      * @attr ref androidx.appcompat.R.styleable#AppCompatTextView_drawableTint
@@ -692,7 +692,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via {@link
-     * androidx.core.widget.TextViewCompat#setCompoundDrawableTintList(TextView, ColorStateList)}
+     * TextViewCompat#setCompoundDrawableTintList(TextView, ColorStateList)}
      *
      * Applies a tint to the compound drawables. Does not modify the current tint mode, which is
      * {@link PorterDuff.Mode#SRC_IN} by default.
@@ -716,7 +716,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.TextViewCompat#getCompoundDrawableTintMode(TextView)}
+     * {@link TextViewCompat#getCompoundDrawableTintMode(TextView)}
      *
      * Returns the blending mode used to apply the tint to the compound drawables, if specified.
      *
@@ -735,7 +735,7 @@ public class AppCompatTextView extends TextView implements TintableBackgroundVie
 
     /**
      * This should be accessed via {@link
-     * androidx.core.widget.TextViewCompat#setCompoundDrawableTintMode(TextView, PorterDuff.Mode)}
+     * TextViewCompat#setCompoundDrawableTintMode(TextView, PorterDuff.Mode)}
      *
      * Specifies the blending mode used to apply the tint specified by
      * {@link #setSupportCompoundDrawablesTintList(ColorStateList)} to the compound drawables. The

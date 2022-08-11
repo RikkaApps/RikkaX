@@ -92,7 +92,7 @@ final class StandardMenuPopup extends MenuPopup implements OnDismissListener, On
         }
     };
 
-    private PopupWindow.OnDismissListener mOnDismissListener;
+    private OnDismissListener mOnDismissListener;
 
     private View mAnchorView;
     View mShownAnchorView;

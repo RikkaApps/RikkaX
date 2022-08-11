@@ -45,10 +45,14 @@ import android.view.ViewConfiguration;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.annotation.DoNotInline;
+import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.R;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.text.AllCapsTransformationMethod;
@@ -62,46 +66,40 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
 /**
- * SwitchCompat is a complete backport of the core {@link android.widget.Switch} widget that
- * brings the visuals and the functionality of that widget to older versions of the platform.
- * Unlike other widgets in this package, SwitchCompat is <strong>not</strong> automatically used
- * in layouts that use the <code>&lt;Switch&gt;</code> element. Instead, you need to explicitly
- * use <code>&lt;androidx.appcompat.widget.SwitchCompat&gt;</code> and the matching attributes
- * in your layouts.
+ * SwitchCompat is a complete backport of the core {@link Switch} widget that
+ * brings the visuals and functionality of the toggle widget to older versions
+ * of the Android platform. Unlike other widgets in this package, SwitchCompat
+ * is not automatically used in layouts that include the
+ * <code>&lt;Switch&gt;</code> element. Instead, you need to explicitly use
+ * <code>&lt;androidx.appcompat.widget.SwitchCompat&gt;</code> and the matching
+ * attributes in your layouts.
  *
- * <p>
- * A Switch is a two-state toggle switch widget that can be used to select one of the two
- * available options. The user may drag the "thumb" back and forth to choose the selected option,
- * or simply tap to toggle as if it were a checkbox. The {@link #setText(CharSequence) text}
- * property controls the text displayed in the label for the switch, whereas the
- * {@link #setTextOff(CharSequence) off} and {@link #setTextOn(CharSequence) on} text
- * controls the text on the thumb. Similarly, the
- * {@link #setTextAppearance(android.content.Context, int) textAppearance} and the related
- * setTypeface() methods control the typeface and style of label text, whereas the
- * {@link #setSwitchTextAppearance(android.content.Context, int) switchTextAppearance} and
- * the related setSwitchTypeface() methods control that of the thumb.
+ * <p>The thumb can be tinted with {@link #setThumbTintList(ColorStateList)} and
+ * {@link #setThumbTintMode(PorterDuff.Mode)} APIs as well as with the matching
+ * XML attributes. The track can be tinted with
+ * {@link #setTrackTintList(ColorStateList)} and
+ * {@link #setTrackTintMode(PorterDuff.Mode)} APIs as well as with the matching
+ * XML attributes.</p>
  *
- * <p>
- * The thumb can be tinted with {@link #setThumbTintList(ColorStateList)} and
- * {@link #setThumbTintMode(PorterDuff.Mode)} APIs, as well as with the matching XML attributes.
- * The track can be tinted with {@link #setTrackTintList(ColorStateList)} and
- * {@link #setTrackTintMode(PorterDuff.Mode)} APIs, as well as with the matching XML attributes.
+ * <p>Supported attributes include:</p>
+ * <ul>
+ *    <li>{@link android.R.attr#textOn}</li>
+ *    <li>{@link android.R.attr#textOff}</li>
+ *    <li>{@link android.R.attr#switchMinWidth}</li>
+ *    <li>{@link android.R.attr#switchPadding}</li>
+ *    <li>{@link android.R.attr#switchTextAppearance}</li>
+ *    <li>{@link android.R.attr#thumb}</li>
+ *    <li>{@link android.R.attr#thumbTextPadding}</li>
+ *    <li>{@link android.R.attr#track}</li>
+ *    <li>{@link android.R.attr#thumbTint}</li>
+ *    <li>{@link android.R.attr#thumbTintMode}</li>
+ *    <li>{@link android.R.attr#trackTint}</li>
+ *    <li>{@link android.R.attr#trackTintMode}</li>
+ * </ul>
  *
- * <p>See the <a href="{@docRoot}guide/topics/ui/controls/togglebutton.html">Toggle Buttons</a>
- * guide.</p>
- *
- * {@link android.R.attr#textOn}
- * {@link android.R.attr#textOff}
- * {@link androidx.appcompat.R.attr#switchMinWidth}
- * {@link androidx.appcompat.R.attr#switchPadding}
- * {@link androidx.appcompat.R.attr#switchTextAppearance}
- * {@link android.R.attr#thumb}
- * {@link androidx.appcompat.R.attr#thumbTextPadding}
- * {@link androidx.appcompat.R.attr#track}
- * {@link androidx.appcompat.R.attr#thumbTint}
- * {@link androidx.appcompat.R.attr#thumbTintMode}
- * {@link androidx.appcompat.R.attr#trackTint}
- * {@link androidx.appcompat.R.attr#trackTintMode}
+ * <p>For more information, see the
+ * <a href="{@docRoot}guide/topics/ui/controls/togglebutton.html">
+ * Toggle Buttons</a> guide.</p>
  */
 public class SwitchCompat extends CompoundButton implements EmojiCompatConfigurationView {
     private static final int THUMB_ANIMATION_DURATION = 250;
@@ -192,6 +190,8 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
 
     /** Bottom bound for drawing the switch track and thumb. */
     private int mSwitchBottom;
+
+    private boolean mEnforceSwitchWidth = true;
 
     private final TextPaint mTextPaint;
     private ColorStateList mTextColors;
@@ -335,7 +335,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      * Sets the switch text color, size, style, hint color, and highlight color
      * from the specified TextAppearance resource.
      *
-     * {@link androidx.appcompat.R.attr#switchTextAppearance}
+     * @see android.R.attr#switchTextAppearance
      */
     public void setSwitchTextAppearance(Context context, int resid) {
         final TintTypedArray appearance = TintTypedArray.obtainStyledAttributes(context, resid,
@@ -447,7 +447,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param pixels Amount of padding in pixels
      *
-     * {@link androidx.appcompat.R.attr#switchPadding}
+     * @see android.R.attr#switchPadding
      */
     public void setSwitchPadding(int pixels) {
         mSwitchPadding = pixels;
@@ -459,7 +459,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @return Amount of padding in pixels
      *
-     * {@link androidx.appcompat.R.attr#switchPadding}
+     * @see android.R.attr#switchPadding
      */
     @Attribute("androidx.appcompat:switchPadding")
     public int getSwitchPadding() {
@@ -472,7 +472,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param pixels Minimum width of the switch in pixels
      *
-     * {@link androidx.appcompat.R.attr#switchMinWidth}
+     * @see android.R.attr#switchMinWidth
      */
     public void setSwitchMinWidth(int pixels) {
         mSwitchMinWidth = pixels;
@@ -485,7 +485,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @return Minimum width of the switch in pixels
      *
-     * {@link androidx.appcompat.R.attr#switchMinWidth}
+     * @see android.R.attr#switchMinWidth
      */
     @Attribute("androidx.appcompat:switchMinWidth")
     public int getSwitchMinWidth() {
@@ -497,7 +497,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param pixels Horizontal padding for switch thumb text in pixels
      *
-     * {@link androidx.appcompat.R.attr#thumbTextPadding}
+     * @see android.R.attr#thumbTextPadding
      */
     public void setThumbTextPadding(int pixels) {
         mThumbTextPadding = pixels;
@@ -509,7 +509,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @return Horizontal padding for switch thumb text in pixels
      *
-     * {@link androidx.appcompat.R.attr#thumbTextPadding}
+     * @see android.R.attr#thumbTextPadding
      */
     @Attribute("androidx.appcompat:thumbTextPadding")
     public int getThumbTextPadding() {
@@ -521,7 +521,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param track Track drawable
      *
-     * {@link androidx.appcompat.R.attr#track}
+     * @see android.R.attr#track
      */
     public void setTrackDrawable(Drawable track) {
         if (mTrackDrawable != null) {
@@ -539,7 +539,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param resId Resource ID of a track drawable
      *
-     * {@link androidx.appcompat.R.attr#track}
+     * @see android.R.attr#track
      */
     public void setTrackResource(int resId) {
         setTrackDrawable(AppCompatResources.getDrawable(getContext(), resId));
@@ -550,7 +550,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @return Track drawable
      *
-     * {@link androidx.appcompat.R.attr#track}
+     * @see android.R.attr#track
      */
     @Attribute("androidx.appcompat:track")
     public Drawable getTrackDrawable() {
@@ -567,8 +567,8 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param tint the tint to apply, may be {@code null} to clear tint
      *
-     * {@link androidx.appcompat.R.attr#trackTint}
      * @see #getTrackTintList()
+     * @see android.R.attr#trackTint
      */
     public void setTrackTintList(@Nullable ColorStateList tint) {
         mTrackTintList = tint;
@@ -579,8 +579,9 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
 
     /**
      * @return the tint applied to the track drawable
-     * {@link androidx.appcompat.R.attr#trackTint}
+     *
      * @see #setTrackTintList(ColorStateList)
+     * @see android.R.attr#trackTint
      */
     @Attribute("androidx.appcompat:trackTint")
     @Nullable
@@ -590,13 +591,14 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
 
     /**
      * Specifies the blending mode used to apply the tint specified by
-     * {@link #setTrackTintList(ColorStateList)}} to the track drawable.
+     * {@link #setTrackTintList(ColorStateList)} to the track drawable.
      * The default mode is {@link PorterDuff.Mode#SRC_IN}.
      *
      * @param tintMode the blending mode used to apply the tint, may be
      *                 {@code null} to clear tint
-     * {@link androidx.appcompat.R.attr#trackTintMode}
+     *
      * @see #getTrackTintMode()
+     * @see android.R.attr#trackTintMode
      */
     public void setTrackTintMode(@Nullable PorterDuff.Mode tintMode) {
         mTrackTintMode = tintMode;
@@ -608,8 +610,9 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
     /**
      * @return the blending mode used to apply the tint to the track
      *         drawable
-     * {@link androidx.appcompat.R.attr#trackTintMode}
+     *
      * @see #setTrackTintMode(PorterDuff.Mode)
+     * @see android.R.attr#trackTintMode
      */
     @Attribute("androidx.appcompat:trackTintMode")
     @Nullable
@@ -643,7 +646,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param thumb Thumb drawable
      *
-     * {@link android.R.attr#thumb}
+     * @see android.R.attr#thumb
      */
     public void setThumbDrawable(Drawable thumb) {
         if (mThumbDrawable != null) {
@@ -662,7 +665,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param resId Resource ID of a thumb drawable
      *
-     * {@link android.R.attr#thumb}
+     * @see android.R.attr#thumb
      */
     public void setThumbResource(int resId) {
         setThumbDrawable(AppCompatResources.getDrawable(getContext(), resId));
@@ -674,7 +677,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @return Thumb drawable
      *
-     * {@link android.R.attr#thumb}
+     * @see android.R.attr#thumb
      */
     @Attribute("android:thumb")
     public Drawable getThumbDrawable() {
@@ -691,8 +694,8 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param tint the tint to apply, may be {@code null} to clear tint
      *
-     * {@link androidx.appcompat.R.attr#thumbTint}
      * @see #getThumbTintList()
+     * @see android.R.attr#thumbTint
      * @see Drawable#setTintList(ColorStateList)
      */
     public void setThumbTintList(@Nullable ColorStateList tint) {
@@ -704,8 +707,9 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
 
     /**
      * @return the tint applied to the thumb drawable
-     * {@link androidx.appcompat.R.attr#thumbTint}
+     *
      * @see #setThumbTintList(ColorStateList)
+     * @see android.R.attr#thumbTint
      */
     @Attribute("androidx.appcompat:thumbTint")
     @Nullable
@@ -720,8 +724,9 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param tintMode the blending mode used to apply the tint, may be
      *                 {@code null} to clear tint
-     * {@link androidx.appcompat.R.attr#thumbTintMode}
+     *
      * @see #getThumbTintMode()
+     * @see android.R.attr#thumbTintMode
      * @see Drawable#setTintMode(PorterDuff.Mode)
      */
     public void setThumbTintMode(@Nullable PorterDuff.Mode tintMode) {
@@ -734,8 +739,9 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
     /**
      * @return the blending mode used to apply the tint to the thumb
      *         drawable
-     * {@link androidx.appcompat.R.attr#thumbTintMode}
+     *
      * @see #setThumbTintMode(PorterDuff.Mode)
+     * @see android.R.attr#thumbTintMode
      */
     @Attribute("androidx.appcompat:thumbTintMode")
     @Nullable
@@ -770,7 +776,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      *
      * @param splitTrack Whether the track should be split by the thumb
      *
-     * {@link androidx.appcompat.R.attr#splitTrack}
+     * @see android.R.attr#splitTrack
      */
     public void setSplitTrack(boolean splitTrack) {
         mSplitTrack = splitTrack;
@@ -780,7 +786,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
     /**
      * Returns whether the track should be split by the thumb.
      *
-     * {@link androidx.appcompat.R.attr#splitTrack}
+     * @see android.R.attr#splitTrack
      */
     @Attribute("androidx.appcompat:splitTrack")
     public boolean getSplitTrack() {
@@ -790,7 +796,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
     /**
      * Returns the text displayed when the button is in the checked state.
      *
-     * {@link android.R.attr#textOn}
+     * @see android.R.attr#textOn
      */
     @Attribute("android:textOn")
     public CharSequence getTextOn() {
@@ -814,7 +820,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
     /**
      * Sets the text displayed when the button is in the checked state.
      *
-     * {@link android.R.attr#textOn}
+     * @see android.R.attr#textOn
      */
     public void setTextOn(CharSequence textOn) {
         setTextOnInternal(textOn);
@@ -829,7 +835,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
     /**
      * Returns the text displayed when the button is not in the checked state.
      *
-     * {@link android.R.attr#textOff}
+     * @see android.R.attr#textOff
      */
     @Attribute("android:textOff")
     public CharSequence getTextOff() {
@@ -852,7 +858,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
     /**
      * Sets the text displayed when the button is not in the checked state.
      *
-     * {@link android.R.attr#textOff}
+     * @see android.R.attr#textOff
      */
     public void setTextOff(CharSequence textOff) {
         setTextOffInternal(textOff);
@@ -877,7 +883,8 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
      * Sets whether the on/off text should be displayed.
      *
      * @param showText {@code true} to display on/off text
-     * {@link androidx.appcompat.R.attr#showText}
+     *
+     * @see android.R.attr#showText
      */
     public void setShowText(boolean showText) {
         if (mShowText != showText) {
@@ -890,8 +897,12 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
     }
 
     /**
-     * @return whether the on/off text should be displayed
-     * {@link androidx.appcompat.R.attr#showText}
+     * Indicates whether the on/off text should be displayed.
+     *
+     * @return {@code true} if the on/off text should be displayed, otherwise
+     *     {@code false}
+     *
+     * @see android.R.attr#showText
      */
     @Attribute("androidx.appcompat:showText")
     public boolean getShowText() {
@@ -952,8 +963,10 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
             paddingRight = Math.max(paddingRight, inset.right);
         }
 
-        final int switchWidth = Math.max(mSwitchMinWidth,
-                2 * mThumbWidth + paddingLeft + paddingRight);
+        final int switchWidth =
+                mEnforceSwitchWidth
+                        ? Math.max(mSwitchMinWidth, 2 * mThumbWidth + paddingLeft + paddingRight)
+                        : mSwitchMinWidth;
         final int switchHeight = Math.max(trackHeight, thumbHeight);
         mSwitchWidth = switchWidth;
         mSwitchHeight = switchHeight;
@@ -1127,7 +1140,7 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
         mPositionAnimator = ObjectAnimator.ofFloat(this, THUMB_POS, targetPosition);
         mPositionAnimator.setDuration(THUMB_ANIMATION_DURATION);
         if (Build.VERSION.SDK_INT >= 18) {
-            mPositionAnimator.setAutoCancel(true);
+            Api18Impl.setAutoCancel(mPositionAnimator, true);
         }
         mPositionAnimator.start();
     }
@@ -1140,6 +1153,14 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
 
     private boolean getTargetCheckedState() {
         return mThumbPosition > 0.5f;
+    }
+
+    /**
+     * @return the current thumb position as a decimal value between 0 (off) and 1 (on).
+     */
+    @FloatRange(from = 0.0, to = 1.0)
+    protected final float getThumbPosition() {
+        return mThumbPosition;
     }
 
     /**
@@ -1538,6 +1559,17 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
     }
 
     /**
+     * Sets {@code true} to enforce the switch width being at least twice of the thumb width.
+     * Otherwise the switch width will be the value set by {@link #setSwitchMinWidth(int)}.
+     *
+     * The default value is {@code true}.
+     */
+    protected final void setEnforceSwitchWidth(boolean enforceSwitchWidth) {
+        mEnforceSwitchWidth = enforceSwitchWidth;
+        invalidate();
+    }
+
+    /**
      * Taken from android.util.MathUtils
      */
     private static float constrain(float amount, float low, float high) {
@@ -1658,6 +1690,18 @@ public class SwitchCompat extends CompoundButton implements EmojiCompatConfigura
             if (view != null) {
                 view.onEmojiCompatInitializedForSwitchText();
             }
+        }
+    }
+
+    @RequiresApi(18)
+    static class Api18Impl {
+        private Api18Impl() {
+            // This class is not instantiable.
+        }
+
+        @DoNotInline
+        static void setAutoCancel(ObjectAnimator objectAnimator, boolean cancel) {
+            objectAnimator.setAutoCancel(cancel);
         }
     }
 }

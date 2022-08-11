@@ -37,7 +37,7 @@ import java.lang.ref.WeakReference;
 
 /**
  * Backport of {@link android.view.ViewStub} so that we can set the
- * {@link android.view.LayoutInflater} on devices before Jelly Bean.
+ * {@link LayoutInflater} on devices before Jelly Bean.
  *
  * @hide
  */

@@ -890,7 +890,7 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
             super(source);
         }
 
-        public LayoutParams(ViewGroup.MarginLayoutParams source) {
+        public LayoutParams(MarginLayoutParams source) {
             super(source);
         }
     }

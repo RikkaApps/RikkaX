@@ -122,34 +122,34 @@ import java.util.List;
  * toolbars than on their application icon. The use of application icon plus title as a standard
  * layout is discouraged on API 21 devices and newer.</p>
  *
- * {@link androidx.appcompat.R.attr#buttonGravity}
- * {@link androidx.appcompat.R.attr#collapseContentDescription}
- * {@link androidx.appcompat.R.attr#collapseIcon}
- * {@link androidx.appcompat.R.attr#contentInsetEnd}
- * {@link androidx.appcompat.R.attr#contentInsetLeft}
- * {@link androidx.appcompat.R.attr#contentInsetRight}
- * {@link androidx.appcompat.R.attr#contentInsetStart}
- * {@link androidx.appcompat.R.attr#contentInsetStartWithNavigation}
- * {@link androidx.appcompat.R.attr#contentInsetEndWithActions}
+ * {@link R.attr#buttonGravity}
+ * {@link R.attr#collapseContentDescription}
+ * {@link R.attr#collapseIcon}
+ * {@link R.attr#contentInsetEnd}
+ * {@link R.attr#contentInsetLeft}
+ * {@link R.attr#contentInsetRight}
+ * {@link R.attr#contentInsetStart}
+ * {@link R.attr#contentInsetStartWithNavigation}
+ * {@link R.attr#contentInsetEndWithActions}
  * {@link android.R.attr#gravity}
- * {@link androidx.appcompat.R.attr#logo}
- * {@link androidx.appcompat.R.attr#logoDescription}
- * {@link androidx.appcompat.R.attr#maxButtonHeight}
- * {@link androidx.appcompat.R.attr#navigationContentDescription}
- * {@link androidx.appcompat.R.attr#navigationIcon}
- * {@link androidx.appcompat.R.attr#popupTheme}
- * {@link androidx.appcompat.R.attr#subtitle}
- * {@link androidx.appcompat.R.attr#subtitleTextAppearance}
- * {@link androidx.appcompat.R.attr#subtitleTextColor}
- * {@link androidx.appcompat.R.attr#title}
- * {@link androidx.appcompat.R.attr#titleMargin}
- * {@link androidx.appcompat.R.attr#titleMarginBottom}
- * {@link androidx.appcompat.R.attr#titleMarginEnd}
- * {@link androidx.appcompat.R.attr#titleMarginStart}
- * {@link androidx.appcompat.R.attr#titleMarginTop}
- * {@link androidx.appcompat.R.attr#titleTextAppearance}
- * {@link androidx.appcompat.R.attr#titleTextColor}
- * {@link androidx.appcompat.R.attr#menu}
+ * {@link R.attr#logo}
+ * {@link R.attr#logoDescription}
+ * {@link R.attr#maxButtonHeight}
+ * {@link R.attr#navigationContentDescription}
+ * {@link R.attr#navigationIcon}
+ * {@link R.attr#popupTheme}
+ * {@link R.attr#subtitle}
+ * {@link R.attr#subtitleTextAppearance}
+ * {@link R.attr#subtitleTextColor}
+ * {@link R.attr#title}
+ * {@link R.attr#titleMargin}
+ * {@link R.attr#titleMarginBottom}
+ * {@link R.attr#titleMarginEnd}
+ * {@link R.attr#titleMarginStart}
+ * {@link R.attr#titleMarginTop}
+ * {@link R.attr#titleTextAppearance}
+ * {@link R.attr#titleTextColor}
+ * {@link R.attr#menu}
  */
 public class Toolbar extends ViewGroup implements MenuHost {
     private static final String TAG = "Toolbar";
@@ -406,7 +406,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getTitleMarginTop()
      * @see #getTitleMarginEnd()
      * @see #getTitleMarginBottom()
-     * {@link androidx.appcompat.R.attr#titleMargin}
+     * {@link R.attr#titleMargin}
      */
     public void setTitleMargin(int start, int top, int end, int bottom) {
         mTitleMarginStart = start;
@@ -420,7 +420,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
     /**
      * @return the starting title margin in pixels
      * @see #setTitleMarginStart(int)
-     * {@link androidx.appcompat.R.attr#titleMarginStart}
+     * {@link R.attr#titleMarginStart}
      */
     @Attribute("androidx.appcompat:titleMarginStart")
     public int getTitleMarginStart() {
@@ -432,7 +432,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param margin the starting title margin in pixels
      * @see #getTitleMarginStart()
-     * {@link androidx.appcompat.R.attr#titleMarginStart}
+     * {@link R.attr#titleMarginStart}
      */
     public void setTitleMarginStart(int margin) {
         mTitleMarginStart = margin;
@@ -443,7 +443,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
     /**
      * @return the top title margin in pixels
      * @see #setTitleMarginTop(int)
-     * {@link androidx.appcompat.R.attr#titleMarginTop}
+     * {@link R.attr#titleMarginTop}
      */
     @Attribute("androidx.appcompat:titleMarginTop")
     public int getTitleMarginTop() {
@@ -455,7 +455,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param margin the top title margin in pixels
      * @see #getTitleMarginTop()
-     * {@link androidx.appcompat.R.attr#titleMarginTop}
+     * {@link R.attr#titleMarginTop}
      */
     public void setTitleMarginTop(int margin) {
         mTitleMarginTop = margin;
@@ -466,7 +466,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
     /**
      * @return the ending title margin in pixels
      * @see #setTitleMarginEnd(int)
-     * {@link androidx.appcompat.R.attr#titleMarginEnd}
+     * {@link R.attr#titleMarginEnd}
      */
     @Attribute("androidx.appcompat:titleMarginEnd")
     public int getTitleMarginEnd() {
@@ -478,7 +478,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param margin the ending title margin in pixels
      * @see #getTitleMarginEnd()
-     * {@link androidx.appcompat.R.attr#titleMarginEnd}
+     * {@link R.attr#titleMarginEnd}
      */
     public void setTitleMarginEnd(int margin) {
         mTitleMarginEnd = margin;
@@ -489,7 +489,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
     /**
      * @return the bottom title margin in pixels
      * @see #setTitleMarginBottom(int)
-     * {@link androidx.appcompat.R.attr#titleMarginBottom}
+     * {@link R.attr#titleMarginBottom}
      */
     @Attribute("androidx.appcompat:titleMarginBottom")
     public int getTitleMarginBottom() {
@@ -501,7 +501,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param margin the bottom title margin in pixels
      * @see #getTitleMarginBottom()
-     * {@link androidx.appcompat.R.attr#titleMarginBottom}
+     * {@link R.attr#titleMarginBottom}
      */
     public void setTitleMarginBottom(int margin) {
         mTitleMarginBottom = margin;
@@ -667,7 +667,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The current logo drawable
      * @see #setLogo(int)
-     * @see #setLogo(android.graphics.drawable.Drawable)
+     * @see #setLogo(Drawable)
      */
     @Attribute("androidx.appcompat:logo")
     public Drawable getLogo() {
@@ -723,7 +723,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * Check whether this Toolbar is currently hosting an expanded action view.
      *
      * <p>An action view may be expanded either directly from the
-     * {@link android.view.MenuItem MenuItem} it belongs to or by user action. If the Toolbar
+     * {@link MenuItem MenuItem} it belongs to or by user action. If the Toolbar
      * has an expanded action view it can be collapsed using the {@link #collapseActionView()}
      * method.</p>
      *
@@ -739,7 +739,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * expanded action view this method has no effect.
      *
      * <p>An action view may be expanded either directly from the
-     * {@link android.view.MenuItem MenuItem} it belongs to or by user action.</p>
+     * {@link MenuItem MenuItem} it belongs to or by user action.</p>
      *
      * @see #hasExpandedActionView()
      */
@@ -934,7 +934,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The navigation button's content description
      *
-     * {@link androidx.appcompat.R.attr#navigationContentDescription}
+     * {@link R.attr#navigationContentDescription}
      */
     @Attribute("androidx.appcompat:navigationContentDescription")
     @Nullable
@@ -950,7 +950,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param resId Resource ID of a content description string to set, or 0 to
      *              clear the description
      *
-     * {@link androidx.appcompat.R.attr#navigationContentDescription}
+     * {@link R.attr#navigationContentDescription}
      */
     public void setNavigationContentDescription(@StringRes int resId) {
         setNavigationContentDescription(resId != 0 ? getContext().getText(resId) : null);
@@ -964,7 +964,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param description Content description to set, or <code>null</code> to
      *                    clear the content description
      *
-     * {@link androidx.appcompat.R.attr#navigationContentDescription}
+     * {@link R.attr#navigationContentDescription}
      */
     public void setNavigationContentDescription(@Nullable CharSequence description) {
         if (!TextUtils.isEmpty(description)) {
@@ -988,7 +988,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param resId Resource ID of a drawable to set
      *
-     * {@link androidx.appcompat.R.attr#navigationIcon}
+     * {@link R.attr#navigationIcon}
      */
     public void setNavigationIcon(@DrawableRes int resId) {
         setNavigationIcon(AppCompatResources.getDrawable(getContext(), resId));
@@ -1006,7 +1006,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param icon Drawable to set, may be null to clear the icon
      *
-     * {@link androidx.appcompat.R.attr#navigationIcon}
+     * {@link R.attr#navigationIcon}
      */
     public void setNavigationIcon(@Nullable Drawable icon) {
         if (icon != null) {
@@ -1028,7 +1028,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The navigation icon drawable
      *
-     * {@link androidx.appcompat.R.attr#navigationIcon}
+     * {@link R.attr#navigationIcon}
      */
     @Attribute("androidx.appcompat:navigationIcon")
     @Nullable
@@ -1043,7 +1043,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * at the start of the toolbar. An icon must be set for the navigation button to appear.</p>
      *
      * @param listener Listener to set
-     * @see #setNavigationIcon(android.graphics.drawable.Drawable)
+     * @see #setNavigationIcon(Drawable)
      */
     public void setNavigationOnClickListener(OnClickListener listener) {
         ensureNavButtonView();
@@ -1057,7 +1057,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The collapse button's content description
      *
-     * {@link androidx.appcompat.R.attr#collapseContentDescription}
+     * {@link R.attr#collapseContentDescription}
      */
     @Attribute("androidx.appcompat:collapseContentDescription")
     @Nullable
@@ -1073,7 +1073,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param resId Resource ID of a content description string to set, or 0 to
      *              clear the description
      *
-     * {@link androidx.appcompat.R.attr#collapseContentDescription}
+     * {@link R.attr#collapseContentDescription}
      */
     public void setCollapseContentDescription(@StringRes int resId) {
         setCollapseContentDescription(resId != 0 ? getContext().getText(resId) : null);
@@ -1087,7 +1087,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param description Content description to set, or <code>null</code> to
      *                    clear the content description
      *
-     * {@link androidx.appcompat.R.attr#collapseContentDescription}
+     * {@link R.attr#collapseContentDescription}
      */
     public void setCollapseContentDescription(@Nullable CharSequence description) {
         if (!TextUtils.isEmpty(description)) {
@@ -1103,7 +1103,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The collapse icon drawable
      *
-     * {@link androidx.appcompat.R.attr#collapseIcon}
+     * {@link R.attr#collapseIcon}
      */
     @Attribute("androidx.appcompat:collapseIcon")
     @Nullable
@@ -1119,7 +1119,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param resId Resource ID of a drawable to set
      *
-     * {@link androidx.appcompat.R.attr#collapseIcon}
+     * {@link R.attr#collapseIcon}
      */
     public void setCollapseIcon(@DrawableRes int resId) {
         setCollapseIcon(AppCompatResources.getDrawable(getContext(), resId));
@@ -1133,7 +1133,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param icon Drawable to set, may be null to use the default icon
      *
-     * {@link androidx.appcompat.R.attr#collapseIcon}
+     * {@link R.attr#collapseIcon}
      */
     public void setCollapseIcon(@Nullable Drawable icon) {
         if (icon != null) {
@@ -1151,7 +1151,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * an XML menu resource, use {@link #inflateMenu(int)}.</p>
      *
      * @return The toolbar's Menu
-     * {@link androidx.appcompat.R.attr#menu}
+     * {@link R.attr#menu}
      */
     @Attribute("androidx.appcompat:menu")
     public Menu getMenu() {
@@ -1217,7 +1217,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * be modified or removed.</p>
      *
      * @param resId ID of a menu resource to inflate
-     * {@link androidx.appcompat.R.attr#menu}
+     * {@link R.attr#menu}
      */
     public void inflateMenu(@MenuRes int resId) {
         getMenuInflater().inflate(resId, getMenu());
@@ -1250,8 +1250,8 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetEnd}
-     * {@link androidx.appcompat.R.attr#contentInsetStart}
+     * {@link R.attr#contentInsetEnd}
+     * {@link R.attr#contentInsetStart}
      */
     public void setContentInsetsRelative(int contentInsetStart, int contentInsetEnd) {
         ensureContentInsets();
@@ -1272,7 +1272,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetStart}
+     * {@link R.attr#contentInsetStart}
      */
     @Attribute("androidx.appcompat:contentInsetStart")
     public int getContentInsetStart() {
@@ -1293,7 +1293,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetStart()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetEnd}
+     * {@link R.attr#contentInsetEnd}
      */
     @Attribute("androidx.appcompat:contentInsetEnd")
     public int getContentInsetEnd() {
@@ -1315,8 +1315,8 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetLeft}
-     * {@link androidx.appcompat.R.attr#contentInsetRight}
+     * {@link R.attr#contentInsetLeft}
+     * {@link R.attr#contentInsetRight}
      */
     public void setContentInsetsAbsolute(int contentInsetLeft, int contentInsetRight) {
         ensureContentInsets();
@@ -1337,7 +1337,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetStart()
      * @see #getContentInsetEnd()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetLeft}
+     * {@link R.attr#contentInsetLeft}
      */
     @Attribute("androidx.appcompat:contentInsetLeft")
     public int getContentInsetLeft() {
@@ -1358,7 +1358,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetStart()
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
-     * {@link androidx.appcompat.R.attr#contentInsetRight}
+     * {@link R.attr#contentInsetRight}
      */
     @Attribute("androidx.appcompat:contentInsetRight")
     public int getContentInsetRight() {
@@ -1375,7 +1375,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @return the start content inset used when a navigation icon has been set in pixels
      *
      * @see #setContentInsetStartWithNavigation(int)
-     * {@link androidx.appcompat.R.attr#contentInsetStartWithNavigation}
+     * {@link R.attr#contentInsetStartWithNavigation}
      */
     @Attribute("androidx.appcompat:contentInsetStartWithNavigation")
     public int getContentInsetStartWithNavigation() {
@@ -1395,7 +1395,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *                                 in pixels
      *
      * @see #getContentInsetStartWithNavigation()
-     * {@link androidx.appcompat.R.attr#contentInsetStartWithNavigation}
+     * {@link R.attr#contentInsetStartWithNavigation}
      */
     public void setContentInsetStartWithNavigation(int insetStartWithNavigation) {
         if (insetStartWithNavigation < 0) {
@@ -1419,7 +1419,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @return the end content inset used when a menu has been set in pixels
      *
      * @see #setContentInsetEndWithActions(int)
-     * {@link androidx.appcompat.R.attr#contentInsetEndWithActions}
+     * {@link R.attr#contentInsetEndWithActions}
      */
     @Attribute("androidx.appcompat:contentInsetEndWithActions")
     public int getContentInsetEndWithActions() {
@@ -1438,7 +1438,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param insetEndWithActions the inset to use when a menu has been set in pixels
      *
      * @see #getContentInsetEndWithActions()
-     * {@link androidx.appcompat.R.attr#contentInsetEndWithActions}
+     * {@link R.attr#contentInsetEndWithActions}
      */
     public void setContentInsetEndWithActions(int insetEndWithActions) {
         if (insetEndWithActions < 0) {
@@ -2376,12 +2376,15 @@ public class Toolbar extends ViewGroup implements MenuHost {
     }
 
     private void onCreateMenu() {
+        Menu menu = getMenu();
         ArrayList<MenuItem> oldMenuItemList = getCurrentMenuItems();
-        mMenuHostHelper.onCreateMenu(getMenu(), getMenuInflater());
+        mMenuHostHelper.onCreateMenu(menu, getMenuInflater());
 
         ArrayList<MenuItem> newMenuItemList = getCurrentMenuItems();
         newMenuItemList.removeAll(oldMenuItemList);
         mProvidedMenuItems = newMenuItemList;
+
+        mMenuHostHelper.onPrepareMenu(menu);
     }
 
     @Override

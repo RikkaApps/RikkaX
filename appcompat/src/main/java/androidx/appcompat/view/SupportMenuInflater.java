@@ -449,11 +449,7 @@ public class SupportMenuInflater extends MenuInflater {
                 itemActionProvider = null;
             }
 
-            if (a.hasValue(R.styleable.MenuItem_android_contentDescription)) {
-                itemContentDescription = a.getText(R.styleable.MenuItem_android_contentDescription);
-            } else {
-                itemContentDescription = a.getText(R.styleable.MenuItem_contentDescription);
-            }
+            itemContentDescription = a.getText(R.styleable.MenuItem_contentDescription);
             itemTooltipText = a.getText(R.styleable.MenuItem_tooltipText);
             if (a.hasValue(R.styleable.MenuItem_iconTintMode)) {
                 itemIconTintMode = DrawableUtils.parseTintMode(a.getInt(

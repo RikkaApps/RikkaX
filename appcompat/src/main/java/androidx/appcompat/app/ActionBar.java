@@ -925,7 +925,7 @@ public abstract class ActionBar {
      *
      * @param description New description for the Home action when enabled
      * @see #setHomeAsUpIndicator(int)
-     * @see #setHomeAsUpIndicator(android.graphics.drawable.Drawable)
+     * @see #setHomeAsUpIndicator(Drawable)
      */
     public void setHomeActionContentDescription(@Nullable CharSequence description) {}
 
@@ -945,7 +945,7 @@ public abstract class ActionBar {
      * @param resId Resource ID of a string to use as the new description
      *              for the Home action when enabled
      * @see #setHomeAsUpIndicator(int)
-     * @see #setHomeAsUpIndicator(android.graphics.drawable.Drawable)
+     * @see #setHomeAsUpIndicator(Drawable)
      */
     public void setHomeActionContentDescription(@StringRes int resId) {}
 
@@ -1369,7 +1369,7 @@ public abstract class ActionBar {
         /**
          * Gravity for the view associated with these LayoutParams.
          *
-         * @see android.view.Gravity
+         * @see Gravity
          */
         public int gravity = Gravity.NO_GRAVITY;
 

@@ -42,24 +42,24 @@ import androidx.appcompat.view.ContextThemeWrapper;
  */
 public interface ThemedSpinnerAdapter extends SpinnerAdapter {
     /**
-     * Sets the {@link Resources.Theme} against which drop-down views are
+     * Sets the {@link Theme} against which drop-down views are
      * inflated.
      *
      * @param theme the context against which to inflate drop-down views, or
      *              {@code null} to use the default theme
      * @see SpinnerAdapter#getDropDownView(int, View, ViewGroup)
      */
-    void setDropDownViewTheme(@Nullable Resources.Theme theme);
+    void setDropDownViewTheme(@Nullable Theme theme);
 
     /**
      * Returns the value previously set by a call to
      * {@link #setDropDownViewTheme(Theme)}.
      *
-     * @return the {@link Resources.Theme} against which drop-down views are
+     * @return the {@link Theme} against which drop-down views are
      *         inflated, or {@code null} if one has not been explicitly set
      */
     @Nullable
-    Resources.Theme getDropDownViewTheme();
+    Theme getDropDownViewTheme();
 
     /**
      * A helper class which allows easy integration of {@link ThemedSpinnerAdapter} into existing
@@ -120,7 +120,7 @@ public interface ThemedSpinnerAdapter extends SpinnerAdapter {
          * @param theme the theme passed in to
          *              {@link ThemedSpinnerAdapter#setDropDownViewTheme(Theme)}
          */
-        public void setDropDownViewTheme(@Nullable Resources.Theme theme) {
+        public void setDropDownViewTheme(@Nullable Theme theme) {
             if (theme == null) {
                 mDropDownInflater = null;
             } else if (theme == mContext.getTheme()) {
@@ -136,7 +136,7 @@ public interface ThemedSpinnerAdapter extends SpinnerAdapter {
          * returning the value returned from this method.
          */
         @Nullable
-        public Resources.Theme getDropDownViewTheme() {
+        public Theme getDropDownViewTheme() {
             return mDropDownInflater == null ? null : mDropDownInflater.getContext().getTheme();
         }
 

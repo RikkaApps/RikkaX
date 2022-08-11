@@ -20,6 +20,7 @@ import android.view.textclassifier.TextClassificationManager;
 import android.view.textclassifier.TextClassifier;
 import android.widget.TextView;
 
+import androidx.annotation.DoNotInline;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -54,19 +55,32 @@ final class AppCompatTextClassifierHelper {
     /**
      * Returns the {@link TextClassifier} used by this TextView.
      * If no TextClassifier has been set, this TextView uses the default set by the
-     * {@link android.view.textclassifier.TextClassificationManager}.
+     * {@link TextClassificationManager}.
      */
     @RequiresApi(api = 26)
     @NonNull
     public TextClassifier getTextClassifier() {
         if (mTextClassifier == null) {
+            return Api26Impl.getTextClassifier(mTextView);
+        }
+        return mTextClassifier;
+    }
+
+    @RequiresApi(26)
+    private static final class Api26Impl {
+        private Api26Impl() {
+            // This class is not instantiable.
+        }
+
+        @DoNotInline
+        @NonNull
+        static TextClassifier getTextClassifier(@NonNull TextView textView) {
             final TextClassificationManager tcm =
-                    mTextView.getContext().getSystemService(TextClassificationManager.class);
+                    textView.getContext().getSystemService(TextClassificationManager.class);
             if (tcm != null) {
                 return tcm.getTextClassifier();
             }
             return TextClassifier.NO_OP;
         }
-        return mTextClassifier;
     }
 }
