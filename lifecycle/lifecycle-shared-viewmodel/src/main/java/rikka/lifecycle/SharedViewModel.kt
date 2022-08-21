@@ -5,11 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.annotation.MainThread
 import androidx.collection.ArrayMap
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
-import java.lang.reflect.Method
+import androidx.lifecycle.*
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.set
@@ -76,7 +72,7 @@ private class SharedViewModelLazy<VM : ViewModel>(
                             referenceCounts.remove(vm)
                             if (!isChangingConfigurations) {
                                 cache.values.remove(vm)
-                                vm.clear()
+                                rikkax_lifecycle_ViewModel.clear(vm)
                             }
                         }
 
@@ -93,15 +89,4 @@ private class SharedViewModelLazy<VM : ViewModel>(
         }
 
     override fun isInitialized() = cached != null
-}
-
-private val clearMethod: Method? = try {
-    ViewModel::class.java.getDeclaredMethod("clear").apply { isAccessible = true }
-} catch (e: Throwable) {
-    e.printStackTrace()
-    null
-}
-
-private fun ViewModel.clear() {
-    clearMethod!!.invoke(this)
 }
