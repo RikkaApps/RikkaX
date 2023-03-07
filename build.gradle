@@ -35,7 +35,7 @@ subprojects {
         }
 
         if (project.parent == rootProject) {
-            group = "${groupIdBase}"
+            group = "${groupIdBase}.${project.name}"
         } else {
             group = "${groupIdBase}.${project.parent.name}"
         }
