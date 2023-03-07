@@ -2,6 +2,7 @@ include ':stub'
 
 include ':annotation'
 include ':appcompat'
+include ':buildcompat'
 include ':core:core', ':core:core-ktx'
 include ':compatibility'
 include ':material:material'
