@@ -8,6 +8,18 @@ import androidx.annotation.ChecksSdkIntAtLeast;
 public class BuildCompat {
 
     /**
+     * Checks if the device is running on a specific API version or newer.
+     * <p>
+     *
+     * @param api API version
+     * @return {@code true} if the specific version of APIs are available for use, {@code false} otherwise
+     */
+    @ChecksSdkIntAtLeast(parameter = 0)
+    public static boolean isAtLeast(int api) {
+        return Build.VERSION.SDK_INT >= api;
+    }
+
+    /**
      * Checks if the device is running on a release version of Android 5.0 (L, API 21) or newer.
      * <p>
      *
