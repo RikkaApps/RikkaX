@@ -7,26 +7,25 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
-
         classpath 'dev.rikka.tools.materialthemebuilder:gradle-plugin:1.3.3'
     }
 }
 
+plugins {
+    id 'com.android.application' version '7.4.2' apply false
+    id 'com.android.library' version '7.4.2' apply false
+    id 'org.jetbrains.kotlin.jvm' version '1.8.0' apply false
+}
+
 allprojects {
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        google()
-        maven { url 'https://jitpack.io' }
-    }
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet')
         options.addStringOption('encoding', 'UTF-8')
         options.addStringOption('charSet', 'UTF-8')
     }
 }
+
+rootProject.group = 'dev.rikka.rikkax'
 
 subprojects {
     afterEvaluate { project ->
@@ -35,9 +34,9 @@ subprojects {
         }
 
         if (project.parent == rootProject) {
-            group = "${groupIdBase}.${project.name}"
+            group = "${rootProject.group}.${project.name}"
         } else {
-            group = "${groupIdBase}.${project.parent.name}"
+            group = "${rootProject.group}.${project.parent.name}"
         }
         version = android.defaultConfig.versionName
         println("${project.displayName}: ${group}:${project.name}:${version}")
@@ -54,22 +53,22 @@ subprojects {
                     pom {
                         name = POM_NAME
                         description = POM_DESCRIPTION
-                        url = POM_URL
+                        url = 'https://github.com/RikkaApps/RikkaX'
                         licenses {
                             license {
-                                name = POM_LICENCE_NAME
-                                url = POM_LICENCE_URL
+                                name = 'MIT License'
+                                url = 'https://github.com/RikkaApps/RikkaX/blob/master/LICENSE'
                             }
                         }
                         developers {
                             developer {
-                                name = POM_DEVELOPER_NAME
-                                url = POM_DEVELOPER_URL
+                                name = 'Rikka'
+                                url = 'https://github.com/RikkaW'
                             }
                         }
                         scm {
-                            connection = POM_SCM_CONNECTION
-                            url = POM_SCM_URL
+                            connection = 'scm:git@github.com:RikkaApps/RikkaX.git'
+                            url = 'https://github.com/RikkaApps/RikkaX'
                         }
                     }
                 }
@@ -99,40 +98,12 @@ subprojects {
         }
 
         signing {
-            def signingKey = findProperty("signingKey")
-            def signingPassword = findProperty("signingPassword")
-            def secretKeyRingFile = findProperty("signing.secretKeyRingFile")
-
-            if (secretKeyRingFile != null && file(secretKeyRingFile).exists()) {
-                sign publishing.publications
-            } else if (signingKey != null) {
-                useInMemoryPgpKeys(signingKey, signingPassword)
-                sign publishing.publications
-            }
+            useGpgCmd()
+            sign publishing.publications
         }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    groupIdBase = "dev.rikka.rikkax"
-
-    POM_INCEPTION_YEAR = "2017"
-    POM_PACKAGING = "aar"
-
-    POM_URL = "https://github.com/RikkaApps/RikkaX"
-    POM_SCM_URL = "https://github.com/RikkaApps/RikkaX"
-    POM_SCM_CONNECTION = "scm:git@github.com:RikkaApps/RikkaX.git"
-    POM_SCM_DEV_CONNECTION = "scm:git@github.com:RikkaApps/RikkaX.git"
-
-    POM_LICENCE_NAME = "MIT License"
-    POM_LICENCE_URL = "https://github.com/RikkaApps/RikkaX/blob/master/LICENSE"
-    POM_LICENCE_DIST = "repo"
-
-    POM_DEVELOPER_ID = "rikka"
-    POM_DEVELOPER_NAME = "Rikka"
-    POM_DEVELOPER_URL = "https://github.com/RikkaW"
 }
