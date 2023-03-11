@@ -620,11 +620,6 @@ class AppCompatDelegateImpl extends AppCompatDelegate
 
     @Override
     public void setSupportActionBar(Toolbar toolbar) {
-        if (!(mHost instanceof Activity)) {
-            // Only Activities support custom Action Bars
-            return;
-        }
-
         final ActionBar ab = getSupportActionBar();
         if (ab instanceof WindowDecorActionBar) {
             throw new IllegalStateException("This Activity already has an action bar supplied " +
@@ -1013,39 +1008,6 @@ class AppCompatDelegateImpl extends AppCompatDelegate
                             + ", windowActionModeOverlay: " + mOverlayActionMode
                             + ", windowNoTitle: " + mWindowNoTitle
                             + " }");
-        }
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            // If we're running on L or above, we can rely on ViewCompat's
-            // setOnApplyWindowInsetsListener
-            ViewCompat.setOnApplyWindowInsetsListener(subDecor, new OnApplyWindowInsetsListener() {
-                        @Override
-                        public WindowInsetsCompat onApplyWindowInsets(View v,
-                                WindowInsetsCompat insets) {
-                            final int top = insets.getSystemWindowInsetTop();
-                            final int newTop = updateStatusGuard(insets, null);
-
-                            if (top != newTop) {
-                                insets = insets.replaceSystemWindowInsets(
-                                        insets.getSystemWindowInsetLeft(),
-                                        newTop,
-                                        insets.getSystemWindowInsetRight(),
-                                        insets.getSystemWindowInsetBottom());
-                            }
-
-                            // Now apply the insets on our view
-                            return ViewCompat.onApplyWindowInsets(v, insets);
-                        }
-                    });
-        } else if (subDecor instanceof FitWindowsViewGroup) {
-            // Else, we need to use our own FitWindowsViewGroup handling
-            ((FitWindowsViewGroup) subDecor).setOnFitSystemWindowsListener(
-                    new FitWindowsViewGroup.OnFitSystemWindowsListener() {
-                        @Override
-                        public void onFitSystemWindows(Rect insets) {
-                            insets.top = updateStatusGuard(null, insets);
-                        }
-                    });
         }
 
         if (mDecorContentParent == null) {

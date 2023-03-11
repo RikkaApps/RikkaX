@@ -654,12 +654,14 @@ class AlertController {
 
         if (hasCustomView) {
             final FrameLayout custom = (FrameLayout) mWindow.findViewById(R.id.custom);
-            custom.addView(customView, new LayoutParams(MATCH_PARENT, MATCH_PARENT));
-
+            final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
             if (mViewSpacingSpecified) {
-                custom.setPadding(
-                        mViewSpacingLeft, mViewSpacingTop, mViewSpacingRight, mViewSpacingBottom);
+                lp.leftMargin = mViewSpacingLeft;
+                lp.topMargin = mViewSpacingTop;
+                lp.rightMargin = mViewSpacingRight;
+                lp.bottomMargin = mViewSpacingBottom;
             }
+            custom.addView(customView, lp);
 
             if (mListView != null) {
                 ((LinearLayoutCompat.LayoutParams) customPanel.getLayoutParams()).weight = 0;
