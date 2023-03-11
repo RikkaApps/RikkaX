@@ -490,7 +490,7 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements OnClickListene
      * (e.g., "2130837524"), in which case we will try to retrieve a drawable from
      * the provider's resources. If the value is not an integer, it is
      * treated as a Uri and opened with
-     * {@link ContentResolver#openOutputStream(Uri, String)}.
+     * {@link ContentResolver#openOutputStream(android.net.Uri, String)}.
      *
      * All resources and URIs are read using the suggestion provider's context.
      *

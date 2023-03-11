@@ -49,7 +49,7 @@ import androidx.resourceinspection.annotation.AppCompatShadowedAttributes;
  * including:
  * <ul>
  *     <li>Allows dynamic tint of its background via the background tint methods in
- *     {@link ViewCompat}.</li>
+ *     {@link androidx.core.view.ViewCompat}.</li>
  *     <li>Allows setting of the background tint using {@link R.attr#backgroundTint} and
  *     {@link R.attr#backgroundTintMode}.</li>
  *     <li>Allows dynamic tint of its check mark via the check mark tint methods in
@@ -184,7 +184,7 @@ public class AppCompatCheckedTextView extends CheckedTextView implements Tintabl
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#getBackgroundTintList(View)}
+     * {@link androidx.core.view.ViewCompat#getBackgroundTintList(android.view.View)}
      *
      * @hide
      */
@@ -212,7 +212,7 @@ public class AppCompatCheckedTextView extends CheckedTextView implements Tintabl
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#getBackgroundTintMode(View)}
+     * {@link androidx.core.view.ViewCompat#getBackgroundTintMode(android.view.View)}
      *
      * @hide
      */
@@ -337,7 +337,7 @@ public class AppCompatCheckedTextView extends CheckedTextView implements Tintabl
 
     /**
      * This should be accessed via
-     * {@link TextViewCompat#getCompoundDrawableTintList(TextView)}
+     * {@link androidx.core.widget.TextViewCompat#getCompoundDrawableTintList(TextView)}
      *
      * @return the tint applied to the compound drawables
      * @attr ref androidx.appcompat.R.styleable#AppCompatTextView_drawableTint
@@ -354,7 +354,7 @@ public class AppCompatCheckedTextView extends CheckedTextView implements Tintabl
 
     /**
      * This should be accessed via {@link
-     * TextViewCompat#setCompoundDrawableTintList(TextView, ColorStateList)}
+     * androidx.core.widget.TextViewCompat#setCompoundDrawableTintList(TextView, ColorStateList)}
      *
      * Applies a tint to the compound drawables. Does not modify the current tint mode, which is
      * {@link PorterDuff.Mode#SRC_IN} by default.
@@ -378,7 +378,7 @@ public class AppCompatCheckedTextView extends CheckedTextView implements Tintabl
 
     /**
      * This should be accessed via
-     * {@link TextViewCompat#getCompoundDrawableTintMode(TextView)}
+     * {@link androidx.core.widget.TextViewCompat#getCompoundDrawableTintMode(TextView)}
      *
      * Returns the blending mode used to apply the tint to the compound drawables, if specified.
      *
@@ -397,7 +397,7 @@ public class AppCompatCheckedTextView extends CheckedTextView implements Tintabl
 
     /**
      * This should be accessed via {@link
-     * TextViewCompat#setCompoundDrawableTintMode(TextView, PorterDuff.Mode)}
+     * androidx.core.widget.TextViewCompat#setCompoundDrawableTintMode(TextView, PorterDuff.Mode)}
      *
      * Specifies the blending mode used to apply the tint specified by
      * {@link #setSupportCompoundDrawablesTintList(ColorStateList)} to the compound drawables. The

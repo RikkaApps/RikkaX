@@ -86,7 +86,7 @@ public final class MenuItemImpl implements SupportMenuItem {
     private SubMenuBuilder mSubMenu;
 
     private Runnable mItemCallback;
-    private OnMenuItemClickListener mClickListener;
+    private SupportMenuItem.OnMenuItemClickListener mClickListener;
 
     private CharSequence mContentDescription;
     private CharSequence mTooltipText;
@@ -109,7 +109,7 @@ public final class MenuItemImpl implements SupportMenuItem {
 
     private View mActionView;
     private ActionProvider mActionProvider;
-    private OnActionExpandListener mOnActionExpandListener;
+    private MenuItem.OnActionExpandListener mOnActionExpandListener;
     private boolean mIsActionViewExpanded = false;
 
     /** Used for the icon resource ID if this item does not have an icon */
@@ -674,7 +674,7 @@ public final class MenuItemImpl implements SupportMenuItem {
     }
 
     @Override
-    public MenuItem setOnMenuItemClickListener(OnMenuItemClickListener clickListener) {
+    public MenuItem setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener clickListener) {
         mClickListener = clickListener;
         return this;
     }
@@ -882,7 +882,7 @@ public final class MenuItemImpl implements SupportMenuItem {
     }
 
     @Override
-    public MenuItem setOnActionExpandListener(OnActionExpandListener listener) {
+    public MenuItem setOnActionExpandListener(MenuItem.OnActionExpandListener listener) {
         mOnActionExpandListener = listener;
         return this;
     }

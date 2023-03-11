@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 /**
  * Wraps a support {@link androidx.appcompat.view.ActionMode} as a framework
- * {@link ActionMode}.
+ * {@link android.view.ActionMode}.
  *
  * @hide
  */

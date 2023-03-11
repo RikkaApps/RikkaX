@@ -40,7 +40,7 @@ import androidx.core.view.ActionProvider;
 import java.lang.reflect.Method;
 
 /**
- * Wraps a support {@link SupportMenuItem} as a framework {@link MenuItem}
+ * Wraps a support {@link SupportMenuItem} as a framework {@link android.view.MenuItem}
  * @hide
  */
 @RestrictTo(LIBRARY_GROUP_PREFIX)
@@ -332,7 +332,7 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
     }
 
     @Override
-    public MenuItem setOnActionExpandListener(OnActionExpandListener listener) {
+    public MenuItem setOnActionExpandListener(MenuItem.OnActionExpandListener listener) {
         mWrappedObject.setOnActionExpandListener(listener != null
                 ? new OnActionExpandListenerWrapper(listener) : null);
         return this;
@@ -395,7 +395,7 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
     }
 
     private class OnMenuItemClickListenerWrapper implements
-            OnMenuItemClickListener {
+            android.view.MenuItem.OnMenuItemClickListener {
         private final OnMenuItemClickListener mObject;
 
         OnMenuItemClickListenerWrapper(OnMenuItemClickListener object) {
@@ -403,30 +403,30 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
         }
 
         @Override
-        public boolean onMenuItemClick(MenuItem item) {
+        public boolean onMenuItemClick(android.view.MenuItem item) {
             return mObject.onMenuItemClick(getMenuItemWrapper(item));
         }
     }
 
-    private class OnActionExpandListenerWrapper implements OnActionExpandListener {
-        private final OnActionExpandListener mObject;
+    private class OnActionExpandListenerWrapper implements MenuItem.OnActionExpandListener {
+        private final MenuItem.OnActionExpandListener mObject;
 
-        OnActionExpandListenerWrapper(OnActionExpandListener object) {
+        OnActionExpandListenerWrapper(MenuItem.OnActionExpandListener object) {
             mObject = object;
         }
 
         @Override
-        public boolean onMenuItemActionExpand(MenuItem item) {
+        public boolean onMenuItemActionExpand(android.view.MenuItem item) {
             return mObject.onMenuItemActionExpand(getMenuItemWrapper(item));
         }
 
         @Override
-        public boolean onMenuItemActionCollapse(MenuItem item) {
+        public boolean onMenuItemActionCollapse(android.view.MenuItem item) {
             return mObject.onMenuItemActionCollapse(getMenuItemWrapper(item));
         }
     }
 
-    private class ActionProviderWrapper extends ActionProvider {
+    private class ActionProviderWrapper extends androidx.core.view.ActionProvider {
         final android.view.ActionProvider mInner;
 
         ActionProviderWrapper(Context context, android.view.ActionProvider inner) {
@@ -450,7 +450,7 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
         }
 
         @Override
-        public void onPrepareSubMenu(SubMenu subMenu) {
+        public void onPrepareSubMenu(android.view.SubMenu subMenu) {
             mInner.onPrepareSubMenu(getSubMenuWrapper(subMenu));
         }
     }
@@ -458,7 +458,7 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
     @RequiresApi(16)
     private class ActionProviderWrapperJB extends ActionProviderWrapper
             implements android.view.ActionProvider.VisibilityListener {
-        private VisibilityListener mListener;
+        private ActionProvider.VisibilityListener mListener;
 
         ActionProviderWrapperJB(Context context, android.view.ActionProvider inner) {
             super(context, inner);
@@ -485,7 +485,7 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
         }
 
         @Override
-        public void setVisibilityListener(VisibilityListener listener) {
+        public void setVisibilityListener(ActionProvider.VisibilityListener listener) {
             mListener = listener;
             mInner.setVisibilityListener(listener != null ? this : null);
         }
@@ -500,7 +500,7 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
 
 
     /**
-     * Wrap a support {@link CollapsibleActionView} into a framework
+     * Wrap a support {@link androidx.appcompat.view.CollapsibleActionView} into a framework
      * {@link android.view.CollapsibleActionView}.
      */
     static class CollapsibleActionViewWrapper extends FrameLayout

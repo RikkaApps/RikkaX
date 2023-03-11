@@ -59,6 +59,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.view.menu.ShowableListMenu;
+import androidx.core.util.ObjectsCompat;
 import androidx.core.view.TintableBackgroundView;
 import androidx.core.view.ViewCompat;
 import androidx.resourceinspection.annotation.AppCompatShadowedAttributes;
@@ -69,7 +70,7 @@ import androidx.resourceinspection.annotation.AppCompatShadowedAttributes;
  * including:
  * <ul>
  *     <li>Allows dynamic tint of its background via the background tint methods in
- *     {@link ViewCompat}.</li>
+ *     {@link androidx.core.view.ViewCompat}.</li>
  *     <li>Allows setting of the background tint using {@link R.attr#buttonTint} and
  *     {@link R.attr#buttonTintMode}.</li>
  *     <li>Setting the popup theme using {@link R.attr#popupTheme}.</li>
@@ -252,7 +253,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
         switch (mode) {
             case MODE_DIALOG: {
-                mPopup = new DialogPopup();
+                mPopup = new AppCompatSpinner.DialogPopup();
                 mPopup.setPromptText(a.getString(R.styleable.Spinner_android_prompt));
                 break;
             }
@@ -497,7 +498,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#setBackgroundTintList(View,
+     * {@link androidx.core.view.ViewCompat#setBackgroundTintList(android.view.View,
      * ColorStateList)}
      *
      * @hide
@@ -512,7 +513,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#getBackgroundTintList(View)}
+     * {@link androidx.core.view.ViewCompat#getBackgroundTintList(android.view.View)}
      *
      * @hide
      */
@@ -526,7 +527,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#setBackgroundTintMode(View,
+     * {@link androidx.core.view.ViewCompat#setBackgroundTintMode(android.view.View,
      * PorterDuff.Mode)}
      *
      * @hide
@@ -541,7 +542,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#getBackgroundTintMode(View)}
+     * {@link androidx.core.view.ViewCompat#getBackgroundTintMode(android.view.View)}
      *
      * @hide
      */
@@ -621,15 +622,15 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
 
     @Override
     public Parcelable onSaveInstanceState() {
-        final SavedState ss =
-                new SavedState(super.onSaveInstanceState());
+        final AppCompatSpinner.SavedState ss =
+                new AppCompatSpinner.SavedState(super.onSaveInstanceState());
         ss.mShowDropdown = mPopup != null && mPopup.isShowing();
         return ss;
     }
 
     @Override
     public void onRestoreInstanceState(Parcelable state) {
-        SavedState ss = (SavedState) state;
+        AppCompatSpinner.SavedState ss = (AppCompatSpinner.SavedState) state;
 
         super.onRestoreInstanceState(ss.getSuperState());
 
@@ -675,8 +676,8 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
             out.writeByte((byte) (mShowDropdown ? 1 : 0));
         }
 
-        public static final Creator<SavedState> CREATOR =
-                new Creator<SavedState>() {
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<SavedState>() {
                     @Override
                     public SavedState createFromParcel(Parcel in) {
                         return new SavedState(in);
@@ -977,7 +978,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
             setModal(true);
             setPromptPosition(POSITION_PROMPT_ABOVE);
 
-            setOnItemClickListener(new OnItemClickListener() {
+            setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                     AppCompatSpinner.this.setSelection(position);
@@ -1072,8 +1073,8 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
             // but it may have other side effects to investigate first. (Text editing handles, etc.)
             final ViewTreeObserver vto = getViewTreeObserver();
             if (vto != null) {
-                final OnGlobalLayoutListener layoutListener
-                        = new OnGlobalLayoutListener() {
+                final ViewTreeObserver.OnGlobalLayoutListener layoutListener
+                        = new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
                         if (!isVisibleToUser(AppCompatSpinner.this)) {
@@ -1129,7 +1130,7 @@ public class AppCompatSpinner extends Spinner implements TintableBackgroundView 
                 @NonNull android.widget.ThemedSpinnerAdapter themedSpinnerAdapter,
                 @Nullable Resources.Theme theme
         ) {
-            if (themedSpinnerAdapter.getDropDownViewTheme() != theme) {
+            if (!ObjectsCompat.equals(themedSpinnerAdapter.getDropDownViewTheme(), theme)) {
                 themedSpinnerAdapter.setDropDownViewTheme(theme);
             }
         }

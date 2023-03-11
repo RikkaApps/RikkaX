@@ -305,8 +305,8 @@ public class AlertDialogLayout extends LinearLayoutCompat {
                 final int childWidth = child.getMeasuredWidth();
                 final int childHeight = child.getMeasuredHeight();
 
-                final LayoutParams lp =
-                        (LayoutParams) child.getLayoutParams();
+                final LinearLayoutCompat.LayoutParams lp =
+                        (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
 
                 int layoutGravity = lp.gravity;
                 if (layoutGravity < 0) {

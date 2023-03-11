@@ -56,7 +56,7 @@ import java.util.List;
 
 /**
  * Utility class which encapsulates the logic for the TextView auto-size text feature added to
- * the Android Framework in {@link Build.VERSION_CODES#O}.
+ * the Android Framework in {@link android.os.Build.VERSION_CODES#O}.
  *
  * <p>A TextView can be instructed to let the size of the text expand or contract automatically to
  * fill its layout based on the TextView's characteristics and boundaries.

@@ -42,13 +42,17 @@ import android.view.ViewParent;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.window.OnBackInvokedCallback;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DoNotInline;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.MainThread;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.RestrictTo;
 import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
@@ -122,39 +126,39 @@ import java.util.List;
  * toolbars than on their application icon. The use of application icon plus title as a standard
  * layout is discouraged on API 21 devices and newer.</p>
  *
- * {@link R.attr#buttonGravity}
- * {@link R.attr#collapseContentDescription}
- * {@link R.attr#collapseIcon}
- * {@link R.attr#contentInsetEnd}
- * {@link R.attr#contentInsetLeft}
- * {@link R.attr#contentInsetRight}
- * {@link R.attr#contentInsetStart}
- * {@link R.attr#contentInsetStartWithNavigation}
- * {@link R.attr#contentInsetEndWithActions}
+ * {@link androidx.appcompat.R.attr#buttonGravity}
+ * {@link androidx.appcompat.R.attr#collapseContentDescription}
+ * {@link androidx.appcompat.R.attr#collapseIcon}
+ * {@link androidx.appcompat.R.attr#contentInsetEnd}
+ * {@link androidx.appcompat.R.attr#contentInsetLeft}
+ * {@link androidx.appcompat.R.attr#contentInsetRight}
+ * {@link androidx.appcompat.R.attr#contentInsetStart}
+ * {@link androidx.appcompat.R.attr#contentInsetStartWithNavigation}
+ * {@link androidx.appcompat.R.attr#contentInsetEndWithActions}
  * {@link android.R.attr#gravity}
- * {@link R.attr#logo}
- * {@link R.attr#logoDescription}
- * {@link R.attr#maxButtonHeight}
- * {@link R.attr#navigationContentDescription}
- * {@link R.attr#navigationIcon}
- * {@link R.attr#popupTheme}
- * {@link R.attr#subtitle}
- * {@link R.attr#subtitleTextAppearance}
- * {@link R.attr#subtitleTextColor}
- * {@link R.attr#title}
- * {@link R.attr#titleMargin}
- * {@link R.attr#titleMarginBottom}
- * {@link R.attr#titleMarginEnd}
- * {@link R.attr#titleMarginStart}
- * {@link R.attr#titleMarginTop}
- * {@link R.attr#titleTextAppearance}
- * {@link R.attr#titleTextColor}
- * {@link R.attr#menu}
+ * {@link androidx.appcompat.R.attr#logo}
+ * {@link androidx.appcompat.R.attr#logoDescription}
+ * {@link androidx.appcompat.R.attr#maxButtonHeight}
+ * {@link androidx.appcompat.R.attr#navigationContentDescription}
+ * {@link androidx.appcompat.R.attr#navigationIcon}
+ * {@link androidx.appcompat.R.attr#popupTheme}
+ * {@link androidx.appcompat.R.attr#subtitle}
+ * {@link androidx.appcompat.R.attr#subtitleTextAppearance}
+ * {@link androidx.appcompat.R.attr#subtitleTextColor}
+ * {@link androidx.appcompat.R.attr#title}
+ * {@link androidx.appcompat.R.attr#titleMargin}
+ * {@link androidx.appcompat.R.attr#titleMarginBottom}
+ * {@link androidx.appcompat.R.attr#titleMarginEnd}
+ * {@link androidx.appcompat.R.attr#titleMarginStart}
+ * {@link androidx.appcompat.R.attr#titleMarginTop}
+ * {@link androidx.appcompat.R.attr#titleTextAppearance}
+ * {@link androidx.appcompat.R.attr#titleTextColor}
+ * {@link androidx.appcompat.R.attr#menu}
  */
 public class Toolbar extends ViewGroup implements MenuHost {
     private static final String TAG = "Toolbar";
 
-    private ActionMenuView mMenuView;
+    ActionMenuView mMenuView;
     private TextView mTitleTextView;
     private TextView mSubtitleTextView;
     private ImageButton mNavButtonView;
@@ -228,9 +232,21 @@ public class Toolbar extends ViewGroup implements MenuHost {
     private ActionMenuPresenter mOuterActionMenuPresenter;
     private ExpandedActionViewMenuPresenter mExpandedMenuPresenter;
     private MenuPresenter.Callback mActionMenuPresenterCallback;
-    private MenuBuilder.Callback mMenuBuilderCallback;
+    MenuBuilder.Callback mMenuBuilderCallback;
 
     private boolean mCollapsible;
+
+    // The callback handling back events. If this is non-null, the
+    // callback has been registered at least once.
+    private OnBackInvokedCallback mBackInvokedCallback;
+
+    // The dispatcher on which the callback was registered. If this
+    // value is null, the callback is not registered anywhere.
+    private OnBackInvokedDispatcher mBackInvokedDispatcher;
+
+    // Whether this Toolbar should register a back invocation handler
+    // when its action view is expanded.
+    private boolean mBackInvokedCallbackEnabled;
 
     private final Runnable mShowOverflowMenuRunnable = new Runnable() {
         @Override public void run() {
@@ -367,6 +383,39 @@ public class Toolbar extends ViewGroup implements MenuHost {
     }
 
     /**
+     * Sets whether the toolbar will attempt to register its own {@link OnBackInvokedCallback} in
+     * supported configurations to handle collapsing expanded action items when a back invocation
+     * occurs.
+     * <p>
+     * This feature is only supported on SDK 33 and above for applications that have enabled back
+     * invocation callback handling.
+     *
+     * @param enabled {@code true} to attempt to register a back invocation callback in supported
+     *                configurations or {@code false} to not automatically handle back invocations
+     *
+     * @see #isBackInvokedCallbackEnabled()
+     */
+    public void setBackInvokedCallbackEnabled(boolean enabled) {
+        if (mBackInvokedCallbackEnabled != enabled) {
+            mBackInvokedCallbackEnabled = enabled;
+
+            // mShouldHandleBackInvoked changed
+            updateBackInvokedCallbackState();
+        }
+    }
+
+    /**
+     * Returns whether the toolbar will attempt to register its own {@link OnBackInvokedCallback}
+     * in supported configurations to handle collapsing expanded action items when a back
+     * invocation occurs.
+     *
+     * @see #setBackInvokedCallbackEnabled(boolean)
+     */
+    public boolean isBackInvokedCallbackEnabled() {
+        return mBackInvokedCallbackEnabled;
+    }
+
+    /**
      * Specifies the theme to use when inflating popup menus. By default, uses
      * the same theme as the toolbar itself.
      *
@@ -406,7 +455,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getTitleMarginTop()
      * @see #getTitleMarginEnd()
      * @see #getTitleMarginBottom()
-     * {@link R.attr#titleMargin}
+     * {@link androidx.appcompat.R.attr#titleMargin}
      */
     public void setTitleMargin(int start, int top, int end, int bottom) {
         mTitleMarginStart = start;
@@ -420,7 +469,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
     /**
      * @return the starting title margin in pixels
      * @see #setTitleMarginStart(int)
-     * {@link R.attr#titleMarginStart}
+     * {@link androidx.appcompat.R.attr#titleMarginStart}
      */
     @Attribute("androidx.appcompat:titleMarginStart")
     public int getTitleMarginStart() {
@@ -432,7 +481,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param margin the starting title margin in pixels
      * @see #getTitleMarginStart()
-     * {@link R.attr#titleMarginStart}
+     * {@link androidx.appcompat.R.attr#titleMarginStart}
      */
     public void setTitleMarginStart(int margin) {
         mTitleMarginStart = margin;
@@ -443,7 +492,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
     /**
      * @return the top title margin in pixels
      * @see #setTitleMarginTop(int)
-     * {@link R.attr#titleMarginTop}
+     * {@link androidx.appcompat.R.attr#titleMarginTop}
      */
     @Attribute("androidx.appcompat:titleMarginTop")
     public int getTitleMarginTop() {
@@ -455,7 +504,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param margin the top title margin in pixels
      * @see #getTitleMarginTop()
-     * {@link R.attr#titleMarginTop}
+     * {@link androidx.appcompat.R.attr#titleMarginTop}
      */
     public void setTitleMarginTop(int margin) {
         mTitleMarginTop = margin;
@@ -466,7 +515,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
     /**
      * @return the ending title margin in pixels
      * @see #setTitleMarginEnd(int)
-     * {@link R.attr#titleMarginEnd}
+     * {@link androidx.appcompat.R.attr#titleMarginEnd}
      */
     @Attribute("androidx.appcompat:titleMarginEnd")
     public int getTitleMarginEnd() {
@@ -478,7 +527,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param margin the ending title margin in pixels
      * @see #getTitleMarginEnd()
-     * {@link R.attr#titleMarginEnd}
+     * {@link androidx.appcompat.R.attr#titleMarginEnd}
      */
     public void setTitleMarginEnd(int margin) {
         mTitleMarginEnd = margin;
@@ -489,7 +538,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
     /**
      * @return the bottom title margin in pixels
      * @see #setTitleMarginBottom(int)
-     * {@link R.attr#titleMarginBottom}
+     * {@link androidx.appcompat.R.attr#titleMarginBottom}
      */
     @Attribute("androidx.appcompat:titleMarginBottom")
     public int getTitleMarginBottom() {
@@ -501,7 +550,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param margin the bottom title margin in pixels
      * @see #getTitleMarginBottom()
-     * {@link R.attr#titleMarginBottom}
+     * {@link androidx.appcompat.R.attr#titleMarginBottom}
      */
     public void setTitleMarginBottom(int margin) {
         mTitleMarginBottom = margin;
@@ -606,6 +655,9 @@ public class Toolbar extends ViewGroup implements MenuHost {
         mMenuView.setPopupTheme(mPopupTheme);
         mMenuView.setPresenter(outerPresenter);
         mOuterActionMenuPresenter = outerPresenter;
+
+        // mExpandedMenuPresenter has changed.
+        updateBackInvokedCallbackState();
     }
 
     /**
@@ -667,7 +719,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The current logo drawable
      * @see #setLogo(int)
-     * @see #setLogo(Drawable)
+     * @see #setLogo(android.graphics.drawable.Drawable)
      */
     @Attribute("androidx.appcompat:logo")
     public Drawable getLogo() {
@@ -723,7 +775,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * Check whether this Toolbar is currently hosting an expanded action view.
      *
      * <p>An action view may be expanded either directly from the
-     * {@link MenuItem MenuItem} it belongs to or by user action. If the Toolbar
+     * {@link android.view.MenuItem MenuItem} it belongs to or by user action. If the Toolbar
      * has an expanded action view it can be collapsed using the {@link #collapseActionView()}
      * method.</p>
      *
@@ -739,7 +791,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * expanded action view this method has no effect.
      *
      * <p>An action view may be expanded either directly from the
-     * {@link MenuItem MenuItem} it belongs to or by user action.</p>
+     * {@link android.view.MenuItem MenuItem} it belongs to or by user action.</p>
      *
      * @see #hasExpandedActionView()
      */
@@ -934,7 +986,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The navigation button's content description
      *
-     * {@link R.attr#navigationContentDescription}
+     * {@link androidx.appcompat.R.attr#navigationContentDescription}
      */
     @Attribute("androidx.appcompat:navigationContentDescription")
     @Nullable
@@ -950,7 +1002,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param resId Resource ID of a content description string to set, or 0 to
      *              clear the description
      *
-     * {@link R.attr#navigationContentDescription}
+     * {@link androidx.appcompat.R.attr#navigationContentDescription}
      */
     public void setNavigationContentDescription(@StringRes int resId) {
         setNavigationContentDescription(resId != 0 ? getContext().getText(resId) : null);
@@ -964,7 +1016,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param description Content description to set, or <code>null</code> to
      *                    clear the content description
      *
-     * {@link R.attr#navigationContentDescription}
+     * {@link androidx.appcompat.R.attr#navigationContentDescription}
      */
     public void setNavigationContentDescription(@Nullable CharSequence description) {
         if (!TextUtils.isEmpty(description)) {
@@ -988,7 +1040,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param resId Resource ID of a drawable to set
      *
-     * {@link R.attr#navigationIcon}
+     * {@link androidx.appcompat.R.attr#navigationIcon}
      */
     public void setNavigationIcon(@DrawableRes int resId) {
         setNavigationIcon(AppCompatResources.getDrawable(getContext(), resId));
@@ -1006,7 +1058,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param icon Drawable to set, may be null to clear the icon
      *
-     * {@link R.attr#navigationIcon}
+     * {@link androidx.appcompat.R.attr#navigationIcon}
      */
     public void setNavigationIcon(@Nullable Drawable icon) {
         if (icon != null) {
@@ -1028,7 +1080,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The navigation icon drawable
      *
-     * {@link R.attr#navigationIcon}
+     * {@link androidx.appcompat.R.attr#navigationIcon}
      */
     @Attribute("androidx.appcompat:navigationIcon")
     @Nullable
@@ -1043,7 +1095,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * at the start of the toolbar. An icon must be set for the navigation button to appear.</p>
      *
      * @param listener Listener to set
-     * @see #setNavigationIcon(Drawable)
+     * @see #setNavigationIcon(android.graphics.drawable.Drawable)
      */
     public void setNavigationOnClickListener(OnClickListener listener) {
         ensureNavButtonView();
@@ -1057,7 +1109,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The collapse button's content description
      *
-     * {@link R.attr#collapseContentDescription}
+     * {@link androidx.appcompat.R.attr#collapseContentDescription}
      */
     @Attribute("androidx.appcompat:collapseContentDescription")
     @Nullable
@@ -1073,7 +1125,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param resId Resource ID of a content description string to set, or 0 to
      *              clear the description
      *
-     * {@link R.attr#collapseContentDescription}
+     * {@link androidx.appcompat.R.attr#collapseContentDescription}
      */
     public void setCollapseContentDescription(@StringRes int resId) {
         setCollapseContentDescription(resId != 0 ? getContext().getText(resId) : null);
@@ -1087,7 +1139,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param description Content description to set, or <code>null</code> to
      *                    clear the content description
      *
-     * {@link R.attr#collapseContentDescription}
+     * {@link androidx.appcompat.R.attr#collapseContentDescription}
      */
     public void setCollapseContentDescription(@Nullable CharSequence description) {
         if (!TextUtils.isEmpty(description)) {
@@ -1103,7 +1155,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @return The collapse icon drawable
      *
-     * {@link R.attr#collapseIcon}
+     * {@link androidx.appcompat.R.attr#collapseIcon}
      */
     @Attribute("androidx.appcompat:collapseIcon")
     @Nullable
@@ -1119,7 +1171,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param resId Resource ID of a drawable to set
      *
-     * {@link R.attr#collapseIcon}
+     * {@link androidx.appcompat.R.attr#collapseIcon}
      */
     public void setCollapseIcon(@DrawableRes int resId) {
         setCollapseIcon(AppCompatResources.getDrawable(getContext(), resId));
@@ -1133,7 +1185,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *
      * @param icon Drawable to set, may be null to use the default icon
      *
-     * {@link R.attr#collapseIcon}
+     * {@link androidx.appcompat.R.attr#collapseIcon}
      */
     public void setCollapseIcon(@Nullable Drawable icon) {
         if (icon != null) {
@@ -1151,7 +1203,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * an XML menu resource, use {@link #inflateMenu(int)}.</p>
      *
      * @return The toolbar's Menu
-     * {@link R.attr#menu}
+     * {@link androidx.appcompat.R.attr#menu}
      */
     @Attribute("androidx.appcompat:menu")
     public Menu getMenu() {
@@ -1190,6 +1242,9 @@ public class Toolbar extends ViewGroup implements MenuHost {
             }
             mMenuView.setExpandedActionViewsExclusive(true);
             menu.addMenuPresenter(mExpandedMenuPresenter, mPopupContext);
+
+            // mExpandedMenuPresenter has changed.
+            updateBackInvokedCallbackState();
         }
     }
 
@@ -1198,7 +1253,34 @@ public class Toolbar extends ViewGroup implements MenuHost {
             mMenuView = new ActionMenuView(getContext());
             mMenuView.setPopupTheme(mPopupTheme);
             mMenuView.setOnMenuItemClickListener(mMenuViewItemClickListener);
-            mMenuView.setMenuCallbacks(mActionMenuPresenterCallback, mMenuBuilderCallback);
+            mMenuView.setMenuCallbacks(mActionMenuPresenterCallback,
+                    // Have Toolbar insert a Callback to ensure onPrepareMenu is called properly
+                    new MenuBuilder.Callback() {
+                    // The mMenuView item does not call into the mMenuBuilderCallback when
+                    // menuItems are selected, so this should not get called, but we implement it
+                    // anyway
+                    @Override
+                    public boolean onMenuItemSelected(@NonNull MenuBuilder menu,
+                            @NonNull MenuItem item) {
+                        // Check if there is a mMenuBuilderCallback and if so, forward the call.
+                        return mMenuBuilderCallback != null
+                                && mMenuBuilderCallback.onMenuItemSelected(menu, item);
+                    }
+
+                    @Override
+                    public void onMenuModeChange(@NonNull MenuBuilder menu) {
+                        // If the menu is not showing, we are about to show it, so we need to
+                        // make the prepare call.
+                        if (!mMenuView.isOverflowMenuShowing()) {
+                            mMenuHostHelper.onPrepareMenu(menu);
+                        }
+                        // If there is a mMenuBuilderCallback, forward the onMenuModeChanged call.
+                        if (mMenuBuilderCallback != null) {
+                            mMenuBuilderCallback.onMenuModeChange(menu);
+                        }
+                    }
+                }
+            );
             final LayoutParams lp = generateDefaultLayoutParams();
             lp.gravity = GravityCompat.END | (mButtonGravity & Gravity.VERTICAL_GRAVITY_MASK);
             mMenuView.setLayoutParams(lp);
@@ -1217,7 +1299,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * be modified or removed.</p>
      *
      * @param resId ID of a menu resource to inflate
-     * {@link R.attr#menu}
+     * {@link androidx.appcompat.R.attr#menu}
      */
     public void inflateMenu(@MenuRes int resId) {
         getMenuInflater().inflate(resId, getMenu());
@@ -1250,8 +1332,8 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link R.attr#contentInsetEnd}
-     * {@link R.attr#contentInsetStart}
+     * {@link androidx.appcompat.R.attr#contentInsetEnd}
+     * {@link androidx.appcompat.R.attr#contentInsetStart}
      */
     public void setContentInsetsRelative(int contentInsetStart, int contentInsetEnd) {
         ensureContentInsets();
@@ -1272,7 +1354,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link R.attr#contentInsetStart}
+     * {@link androidx.appcompat.R.attr#contentInsetStart}
      */
     @Attribute("androidx.appcompat:contentInsetStart")
     public int getContentInsetStart() {
@@ -1293,7 +1375,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetStart()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link R.attr#contentInsetEnd}
+     * {@link androidx.appcompat.R.attr#contentInsetEnd}
      */
     @Attribute("androidx.appcompat:contentInsetEnd")
     public int getContentInsetEnd() {
@@ -1315,8 +1397,8 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link R.attr#contentInsetLeft}
-     * {@link R.attr#contentInsetRight}
+     * {@link androidx.appcompat.R.attr#contentInsetLeft}
+     * {@link androidx.appcompat.R.attr#contentInsetRight}
      */
     public void setContentInsetsAbsolute(int contentInsetLeft, int contentInsetRight) {
         ensureContentInsets();
@@ -1337,7 +1419,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetStart()
      * @see #getContentInsetEnd()
      * @see #getContentInsetRight()
-     * {@link R.attr#contentInsetLeft}
+     * {@link androidx.appcompat.R.attr#contentInsetLeft}
      */
     @Attribute("androidx.appcompat:contentInsetLeft")
     public int getContentInsetLeft() {
@@ -1358,7 +1440,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @see #getContentInsetStart()
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
-     * {@link R.attr#contentInsetRight}
+     * {@link androidx.appcompat.R.attr#contentInsetRight}
      */
     @Attribute("androidx.appcompat:contentInsetRight")
     public int getContentInsetRight() {
@@ -1375,7 +1457,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @return the start content inset used when a navigation icon has been set in pixels
      *
      * @see #setContentInsetStartWithNavigation(int)
-     * {@link R.attr#contentInsetStartWithNavigation}
+     * {@link androidx.appcompat.R.attr#contentInsetStartWithNavigation}
      */
     @Attribute("androidx.appcompat:contentInsetStartWithNavigation")
     public int getContentInsetStartWithNavigation() {
@@ -1395,7 +1477,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      *                                 in pixels
      *
      * @see #getContentInsetStartWithNavigation()
-     * {@link R.attr#contentInsetStartWithNavigation}
+     * {@link androidx.appcompat.R.attr#contentInsetStartWithNavigation}
      */
     public void setContentInsetStartWithNavigation(int insetStartWithNavigation) {
         if (insetStartWithNavigation < 0) {
@@ -1419,7 +1501,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @return the end content inset used when a menu has been set in pixels
      *
      * @see #setContentInsetEndWithActions(int)
-     * {@link R.attr#contentInsetEndWithActions}
+     * {@link androidx.appcompat.R.attr#contentInsetEndWithActions}
      */
     @Attribute("androidx.appcompat:contentInsetEndWithActions")
     public int getContentInsetEndWithActions() {
@@ -1438,7 +1520,7 @@ public class Toolbar extends ViewGroup implements MenuHost {
      * @param insetEndWithActions the inset to use when a menu has been set in pixels
      *
      * @see #getContentInsetEndWithActions()
-     * {@link R.attr#contentInsetEndWithActions}
+     * {@link androidx.appcompat.R.attr#contentInsetEndWithActions}
      */
     public void setContentInsetEndWithActions(int insetEndWithActions) {
         if (insetEndWithActions < 0) {
@@ -1619,6 +1701,13 @@ public class Toolbar extends ViewGroup implements MenuHost {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         removeCallbacks(mShowOverflowMenuRunnable);
+        updateBackInvokedCallbackState();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        updateBackInvokedCallbackState();
     }
 
     @Override
@@ -2383,8 +2472,6 @@ public class Toolbar extends ViewGroup implements MenuHost {
         ArrayList<MenuItem> newMenuItemList = getCurrentMenuItems();
         newMenuItemList.removeAll(oldMenuItemList);
         mProvidedMenuItems = newMenuItemList;
-
-        mMenuHostHelper.onPrepareMenu(menu);
     }
 
     @Override
@@ -2427,6 +2514,36 @@ public class Toolbar extends ViewGroup implements MenuHost {
             getMenu().removeItem(menuItem.getItemId());
         }
         onCreateMenu();
+    }
+
+    /**
+     * Call this method whenever a property changes that affects whether the view will handle a
+     * back press, which is the combination of {@link #hasExpandedActionView()} and properties that
+     * affect whether this view would normally receive key press events.
+     */
+    void updateBackInvokedCallbackState() {
+        if (Build.VERSION.SDK_INT >= 33) {
+            OnBackInvokedDispatcher currentDispatcher =
+                    Api33Impl.findOnBackInvokedDispatcher(this);
+            boolean shouldBeRegistered = hasExpandedActionView()
+                    && currentDispatcher != null
+                    && ViewCompat.isAttachedToWindow(this)
+                    && mBackInvokedCallbackEnabled;
+
+            if (shouldBeRegistered && mBackInvokedDispatcher == null) {
+                if (mBackInvokedCallback == null) {
+                    mBackInvokedCallback = Api33Impl.newOnBackInvokedCallback(
+                            this::collapseActionView);
+                }
+                Api33Impl.tryRegisterOnBackInvokedCallback(
+                        currentDispatcher, mBackInvokedCallback);
+                mBackInvokedDispatcher = currentDispatcher;
+            } else if (!shouldBeRegistered && mBackInvokedDispatcher != null) {
+                Api33Impl.tryUnregisterOnBackInvokedCallback(
+                        mBackInvokedDispatcher, mBackInvokedCallback);
+                mBackInvokedDispatcher = null;
+            }
+        }
     }
 
     /**
@@ -2645,6 +2762,9 @@ public class Toolbar extends ViewGroup implements MenuHost {
                 ((CollapsibleActionView) mExpandedActionView).onActionViewExpanded();
             }
 
+            // mCurrentExpandedItem has changed.
+            updateBackInvokedCallbackState();
+
             return true;
         }
 
@@ -2665,6 +2785,9 @@ public class Toolbar extends ViewGroup implements MenuHost {
             requestLayout();
             item.setActionViewExpanded(false);
 
+            // mCurrentExpandedItem has changed.
+            updateBackInvokedCallbackState();
+
             return true;
         }
 
@@ -2683,4 +2806,37 @@ public class Toolbar extends ViewGroup implements MenuHost {
         }
     }
 
+    @RequiresApi(33)
+    static class Api33Impl {
+        private Api33Impl() {
+            // This class is not instantiable.
+        }
+
+        @DoNotInline
+        static void tryRegisterOnBackInvokedCallback(@NonNull Object dispatcherObj,
+                @NonNull Object callback) {
+            OnBackInvokedDispatcher dispatcher = (OnBackInvokedDispatcher) dispatcherObj;
+            dispatcher.registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_OVERLAY,
+                    (OnBackInvokedCallback) callback);
+        }
+
+        @DoNotInline
+        static void tryUnregisterOnBackInvokedCallback(@NonNull Object dispatcherObj,
+                @NonNull Object callbackObj) {
+            OnBackInvokedDispatcher dispatcher = (OnBackInvokedDispatcher) dispatcherObj;
+            dispatcher.unregisterOnBackInvokedCallback((OnBackInvokedCallback) callbackObj);
+        }
+
+        @Nullable
+        @DoNotInline
+        static OnBackInvokedDispatcher findOnBackInvokedDispatcher(@NonNull View view) {
+            return view.findOnBackInvokedDispatcher();
+        }
+
+        @NonNull
+        @DoNotInline
+        static OnBackInvokedCallback newOnBackInvokedCallback(@NonNull Runnable action) {
+            return action::run;
+        }
+    }
 }

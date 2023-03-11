@@ -166,7 +166,7 @@ public abstract class ActionMode {
 
     /**
      * Invalidate the action mode and refresh menu content. The mode's
-     * {@link Callback} will have its
+     * {@link ActionMode.Callback} will have its
      * {@link Callback#onPrepareActionMode(ActionMode, Menu)} method called.
      * If it returns true the menu will be scanned for updated content and any relevant changes
      * will be reflected to the user.
@@ -174,7 +174,7 @@ public abstract class ActionMode {
     public abstract void invalidate();
 
     /**
-     * Finish and close this action mode. The action mode's {@link Callback} will
+     * Finish and close this action mode. The action mode's {@link ActionMode.Callback} will
      * have its {@link Callback#onDestroyActionMode(ActionMode)} method called.
      */
     public abstract void finish();

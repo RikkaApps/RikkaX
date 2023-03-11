@@ -220,7 +220,7 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
      *                    {@link DialogInterface#BUTTON_NEGATIVE}, or
      *                    {@link DialogInterface#BUTTON_NEUTRAL}
      * @param text        The text to display in positive button.
-     * @param listener    The {@link OnClickListener} to use.
+     * @param listener    The {@link DialogInterface.OnClickListener} to use.
      */
     public void setButton(int whichButton, CharSequence text, OnClickListener listener) {
         mAlert.setButton(whichButton, text, listener, null, null);
@@ -236,7 +236,7 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
      *                    {@link DialogInterface#BUTTON_NEGATIVE}, or
      *                    {@link DialogInterface#BUTTON_NEUTRAL}
      * @param text        The text to display in positive button.
-     * @param listener    The {@link OnClickListener} to use.
+     * @param listener    The {@link DialogInterface.OnClickListener} to use.
      * @param icon        The {@link Drawable} to be set as an icon for the button.
      */
     public void setButton(int whichButton, CharSequence text, Drawable icon,
@@ -465,7 +465,7 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
         /**
          * Set a listener to be invoked when the positive button of the dialog is pressed.
          * @param textId The resource id of the text to display in the positive button
-         * @param listener The {@link OnClickListener} to use.
+         * @param listener The {@link DialogInterface.OnClickListener} to use.
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
@@ -478,7 +478,7 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
         /**
          * Set a listener to be invoked when the positive button of the dialog is pressed.
          * @param text The text to display in the positive button
-         * @param listener The {@link OnClickListener} to use.
+         * @param listener The {@link DialogInterface.OnClickListener} to use.
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
@@ -501,7 +501,7 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
         /**
          * Set a listener to be invoked when the negative button of the dialog is pressed.
          * @param textId The resource id of the text to display in the negative button
-         * @param listener The {@link OnClickListener} to use.
+         * @param listener The {@link DialogInterface.OnClickListener} to use.
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
@@ -514,7 +514,7 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
         /**
          * Set a listener to be invoked when the negative button of the dialog is pressed.
          * @param text The text to display in the negative button
-         * @param listener The {@link OnClickListener} to use.
+         * @param listener The {@link DialogInterface.OnClickListener} to use.
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
@@ -537,7 +537,7 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
         /**
          * Set a listener to be invoked when the neutral button of the dialog is pressed.
          * @param textId The resource id of the text to display in the neutral button
-         * @param listener The {@link OnClickListener} to use.
+         * @param listener The {@link DialogInterface.OnClickListener} to use.
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
@@ -550,7 +550,7 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
         /**
          * Set a listener to be invoked when the neutral button of the dialog is pressed.
          * @param text The text to display in the neutral button
-         * @param listener The {@link OnClickListener} to use.
+         * @param listener The {@link DialogInterface.OnClickListener} to use.
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
@@ -587,12 +587,12 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
          * being canceled or one of the supplied choices being selected.
          * If you are interested in listening for all cases where the dialog is dismissed
          * and not just when it is canceled, see
-         * {@link #setOnDismissListener(OnDismissListener)
+         * {@link #setOnDismissListener(android.content.DialogInterface.OnDismissListener)
          * setOnDismissListener}.</p>
          *
          * @return This Builder object to allow for chaining of calls to set methods
          * @see #setCancelable(boolean)
-         * @see #setOnDismissListener(OnDismissListener)
+         * @see #setOnDismissListener(android.content.DialogInterface.OnDismissListener)
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
@@ -862,7 +862,7 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
          *
          * @param listener the listener to be invoked
          * @return this Builder object to allow for chaining of calls to set methods
-         * @see AdapterView#setOnItemSelectedListener(AdapterView.OnItemSelectedListener)
+         * @see AdapterView#setOnItemSelectedListener(android.widget.AdapterView.OnItemSelectedListener)
          */
         public Builder setOnItemSelectedListener(final AdapterView.OnItemSelectedListener listener) {
             P.mOnItemSelectedListener = listener;
@@ -925,7 +925,11 @@ public class AlertDialog extends AppCompatDialog implements DialogInterface {
          *
          * This is currently hidden because it seems like people should just
          * be able to put padding around the view.
+         * @hide
+         * @deprecated This method has been deprecated.
          */
+        @RestrictTo(LIBRARY_GROUP_PREFIX)
+        @Deprecated
         public Builder setView(View view, int viewSpacingLeft, int viewSpacingTop,
                 int viewSpacingRight, int viewSpacingBottom) {
             P.mView = view;

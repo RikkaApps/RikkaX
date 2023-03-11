@@ -55,7 +55,7 @@ final class AppCompatTextClassifierHelper {
     /**
      * Returns the {@link TextClassifier} used by this TextView.
      * If no TextClassifier has been set, this TextView uses the default set by the
-     * {@link TextClassificationManager}.
+     * {@link android.view.textclassifier.TextClassificationManager}.
      */
     @RequiresApi(api = 26)
     @NonNull

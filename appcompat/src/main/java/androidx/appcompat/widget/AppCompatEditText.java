@@ -41,6 +41,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.RestrictTo;
+import androidx.annotation.UiThread;
 import androidx.appcompat.R;
 import androidx.core.view.ContentInfoCompat;
 import androidx.core.view.OnReceiveContentListener;
@@ -59,7 +60,7 @@ import androidx.resourceinspection.annotation.AppCompatShadowedAttributes;
  * including:
  * <ul>
  *     <li>Allows dynamic tint of its background via the background tint methods in
- *     {@link ViewCompat}.</li>
+ *     {@link androidx.core.view.ViewCompat}.</li>
  *     <li>Allows setting of the background tint using {@link R.attr#backgroundTint} and
  *     {@link R.attr#backgroundTintMode}.</li>
  *     <li>Allows setting a custom {@link OnReceiveContentListener listener} to handle
@@ -83,6 +84,8 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
     private final TextViewOnReceiveContentListener mDefaultOnReceiveContentListener;
     @NonNull
     private final AppCompatEmojiEditTextHelper mAppCompatEmojiEditTextHelper;
+    @Nullable
+    private SuperCaller mSuperCaller;
 
     public AppCompatEditText(@NonNull Context context) {
         this(context, null);
@@ -185,7 +188,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#setBackgroundTintList(android.view.View, ColorStateList)}
+     * {@link androidx.core.view.ViewCompat#setBackgroundTintList(android.view.View, ColorStateList)}
      *
      * @hide
      */
@@ -199,7 +202,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#getBackgroundTintList(android.view.View)}
+     * {@link androidx.core.view.ViewCompat#getBackgroundTintList(android.view.View)}
      *
      * @hide
      */
@@ -213,7 +216,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#setBackgroundTintMode(android.view.View, PorterDuff.Mode)}
+     * {@link androidx.core.view.ViewCompat#setBackgroundTintMode(android.view.View, PorterDuff.Mode)}
      *
      * @hide
      */
@@ -227,7 +230,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#getBackgroundTintMode(android.view.View)}
+     * {@link androidx.core.view.ViewCompat#getBackgroundTintMode(android.view.View)}
      *
      * @hide
      */
@@ -302,6 +305,16 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
                 super.getCustomSelectionActionModeCallback());
     }
 
+    @UiThread
+    @NonNull
+    @RequiresApi(26)
+    private SuperCaller getSuperCaller() {
+        if (mSuperCaller == null) {
+            mSuperCaller = new SuperCaller();
+        }
+        return mSuperCaller;
+    }
+
     /**
      * Sets the {@link TextClassifier} for this TextView.
      */
@@ -309,7 +322,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
     @RequiresApi(api = 26)
     public void setTextClassifier(@Nullable TextClassifier textClassifier) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P || mTextClassifierHelper == null) {
-            super.setTextClassifier(textClassifier);
+            getSuperCaller().setTextClassifier(textClassifier);
             return;
         }
         mTextClassifierHelper.setTextClassifier(textClassifier);
@@ -327,7 +340,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
         // The null check is necessary because getTextClassifier is called when we are invoking
         // the super class's constructor.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P || mTextClassifierHelper == null) {
-            return super.getTextClassifier();
+            return getSuperCaller().getTextClassifier();
         }
         return mTextClassifierHelper.getTextClassifier();
     }
@@ -418,7 +431,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link TextViewCompat#getCompoundDrawableTintList(TextView)}
+     * {@link androidx.core.widget.TextViewCompat#getCompoundDrawableTintList(TextView)}
      *
      * @return the tint applied to the compound drawables
      * @attr ref androidx.appcompat.R.styleable#AppCompatTextView_drawableTint
@@ -435,7 +448,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
 
     /**
      * This should be accessed via {@link
-     * TextViewCompat#setCompoundDrawableTintList(TextView, ColorStateList)}
+     * androidx.core.widget.TextViewCompat#setCompoundDrawableTintList(TextView, ColorStateList)}
      *
      * Applies a tint to the compound drawables. Does not modify the current tint mode, which is
      * {@link PorterDuff.Mode#SRC_IN} by default.
@@ -459,7 +472,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
 
     /**
      * This should be accessed via
-     * {@link TextViewCompat#getCompoundDrawableTintMode(TextView)}
+     * {@link androidx.core.widget.TextViewCompat#getCompoundDrawableTintMode(TextView)}
      *
      * Returns the blending mode used to apply the tint to the compound drawables, if specified.
      *
@@ -478,7 +491,7 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
 
     /**
      * This should be accessed via {@link
-     * TextViewCompat#setCompoundDrawableTintMode(TextView, PorterDuff.Mode)}
+     * androidx.core.widget.TextViewCompat#setCompoundDrawableTintMode(TextView, PorterDuff.Mode)}
      *
      * Specifies the blending mode used to apply the tint specified by
      * {@link #setSupportCompoundDrawablesTintList(ColorStateList)} to the compound drawables. The
@@ -495,5 +508,18 @@ public class AppCompatEditText extends EditText implements TintableBackgroundVie
     public void setSupportCompoundDrawablesTintMode(@Nullable PorterDuff.Mode tintMode) {
         mTextHelper.setCompoundDrawableTintMode(tintMode);
         mTextHelper.applyCompoundDrawablesTints();
+    }
+
+    @RequiresApi(api = 26)
+    class SuperCaller {
+
+        @Nullable
+        public TextClassifier getTextClassifier() {
+            return AppCompatEditText.super.getTextClassifier();
+        }
+
+        public void setTextClassifier(TextClassifier textClassifier) {
+            AppCompatEditText.super.setTextClassifier(textClassifier);
+        }
     }
 }

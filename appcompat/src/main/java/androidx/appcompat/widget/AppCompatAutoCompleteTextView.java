@@ -307,7 +307,7 @@ public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implemen
 
     /**
      * This should be accessed via
-     * {@link TextViewCompat#getCompoundDrawableTintList(TextView)}
+     * {@link androidx.core.widget.TextViewCompat#getCompoundDrawableTintList(TextView)}
      *
      * @return the tint applied to the compound drawables
      * @attr ref androidx.appcompat.R.styleable#AppCompatTextView_drawableTint
@@ -324,7 +324,7 @@ public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implemen
 
     /**
      * This should be accessed via {@link
-     * TextViewCompat#setCompoundDrawableTintList(TextView, ColorStateList)}
+     * androidx.core.widget.TextViewCompat#setCompoundDrawableTintList(TextView, ColorStateList)}
      *
      * Applies a tint to the compound drawables. Does not modify the current tint mode, which is
      * {@link PorterDuff.Mode#SRC_IN} by default.
@@ -348,7 +348,7 @@ public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implemen
 
     /**
      * This should be accessed via
-     * {@link TextViewCompat#getCompoundDrawableTintMode(TextView)}
+     * {@link androidx.core.widget.TextViewCompat#getCompoundDrawableTintMode(TextView)}
      *
      * Returns the blending mode used to apply the tint to the compound drawables, if specified.
      *
@@ -367,7 +367,7 @@ public class AppCompatAutoCompleteTextView extends AutoCompleteTextView implemen
 
     /**
      * This should be accessed via {@link
-     * TextViewCompat#setCompoundDrawableTintMode(TextView, PorterDuff.Mode)}
+     * androidx.core.widget.TextViewCompat#setCompoundDrawableTintMode(TextView, PorterDuff.Mode)}
      *
      * Specifies the blending mode used to apply the tint specified by
      * {@link #setSupportCompoundDrawablesTintList(ColorStateList)} to the compound drawables. The

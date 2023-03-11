@@ -67,8 +67,8 @@ import androidx.core.view.ActionProvider;
  *
  * <ol>
  * <li>Get a reference to the ShareActionProvider by calling {@link
- * MenuItem#getActionProvider getActionProvider()} and
- * passing the share action's {@link MenuItem}. For
+ * android.view.MenuItem#getActionProvider getActionProvider()} and
+ * passing the share action's {@link android.view.MenuItem}. For
  * example:
  *
  * <pre>
@@ -76,7 +76,7 @@ import androidx.core.view.ActionProvider;
  * ShareActionProvider myShareActionProvider =
  *     (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);</pre></li>
  *
- * <li>Create an intent with the {@link Intent#ACTION_SEND}
+ * <li>Create an intent with the {@link android.content.Intent#ACTION_SEND}
  * action, and attach the content shared by the activity. For example, the
  * following intent shares an image:
  *

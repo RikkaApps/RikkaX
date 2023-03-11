@@ -16,13 +16,14 @@
 
 package androidx.appcompat.widget;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+
 import android.content.Context;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowInsets;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,8 +34,6 @@ import androidx.appcompat.R;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.view.ViewCompat;
-
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
 
 /**
  * @hide
@@ -54,9 +53,6 @@ public class ActionBarContextView extends AbsActionBarView {
     private int mSubtitleStyleRes;
     private boolean mTitleOptional;
     private int mCloseItemLayout;
-
-    private int mInitialContentHeight, mInsetsTop;
-    private int mInitialPaddingTop, mInitialMarginLeft = Integer.MIN_VALUE, mInitialMarginRight = Integer.MIN_VALUE;
 
     public ActionBarContextView(@NonNull Context context) {
         this(context, null);
@@ -86,52 +82,6 @@ public class ActionBarContextView extends AbsActionBarView {
                 R.layout.abc_action_mode_close_item_material);
 
         a.recycle();
-
-        mInitialContentHeight = mContentHeight;
-        mInitialPaddingTop = getPaddingTop();
-
-        if (Build.VERSION.SDK_INT < 30) {
-            addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
-                @Override
-                public void onViewAttachedToWindow(View v) {
-                    if (getRootWindowInsets() != null) {
-                        onWindowInsetChanged(getRootWindowInsets());
-                    }
-                }
-
-                @Override
-                public void onViewDetachedFromWindow(View v) {
-
-                }
-            });
-        }
-
-        setSystemUiVisibility(getSystemUiVisibility()
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        setOnApplyWindowInsetsListener(new OnApplyWindowInsetsListener() {
-            @Override
-            public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
-                return onWindowInsetChanged(insets);
-            }
-        });
-    }
-
-    WindowInsets onWindowInsetChanged(final WindowInsets insets) {
-        mInsetsTop = insets.getSystemWindowInsetTop();
-        mContentHeight = mInitialContentHeight + mInsetsTop;
-        setPadding(getPaddingLeft(), mInitialPaddingTop + mInsetsTop, getPaddingRight(), getPaddingBottom());
-
-        MarginLayoutParams lp = (MarginLayoutParams) getLayoutParams();
-        if (mInitialMarginLeft == Integer.MIN_VALUE) {
-            mInitialMarginLeft = lp.leftMargin;
-            mInitialMarginRight = lp.rightMargin;
-        }
-        lp.leftMargin = mInitialMarginLeft + insets.getSystemWindowInsetLeft();
-        lp.rightMargin = mInitialMarginRight + insets.getSystemWindowInsetRight();
-        setLayoutParams(lp);
-        return insets;
     }
 
     @Override
@@ -145,8 +95,7 @@ public class ActionBarContextView extends AbsActionBarView {
 
     @Override
     public void setContentHeight(int height) {
-        mInitialContentHeight = height;
-        mContentHeight = mInitialContentHeight + mInsetsTop;
+        mContentHeight = height;
     }
 
     public void setCustomView(View view) {
@@ -284,14 +233,14 @@ public class ActionBarContextView extends AbsActionBarView {
     }
 
     @Override
-    protected LayoutParams generateDefaultLayoutParams() {
+    protected ViewGroup.LayoutParams generateDefaultLayoutParams() {
         // Used by custom views if they don't supply layout params. Everything else
         // added to an ActionBarContextView should have them already.
         return new MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
 
     @Override
-    public LayoutParams generateLayoutParams(AttributeSet attrs) {
+    public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new MarginLayoutParams(getContext(), attrs);
     }
 
@@ -346,7 +295,7 @@ public class ActionBarContextView extends AbsActionBarView {
         }
 
         if (mCustomView != null) {
-            LayoutParams lp = mCustomView.getLayoutParams();
+            ViewGroup.LayoutParams lp = mCustomView.getLayoutParams();
             final int customWidthMode = lp.width != LayoutParams.WRAP_CONTENT ?
                     MeasureSpec.EXACTLY : MeasureSpec.AT_MOST;
             final int customWidth = lp.width >= 0 ?

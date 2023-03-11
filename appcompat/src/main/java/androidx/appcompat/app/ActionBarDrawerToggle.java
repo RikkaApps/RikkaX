@@ -45,14 +45,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
  * to the following methods corresponding to your Activity callbacks:</p>
  *
  * <ul>
- * <li>{@link Activity#onConfigurationChanged(Configuration)
+ * <li>{@link android.app.Activity#onConfigurationChanged(android.content.res.Configuration)
  * onConfigurationChanged}
- * <li>{@link Activity#onOptionsItemSelected(MenuItem)
+ * <li>{@link android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
  * onOptionsItemSelected}</li>
  * </ul>
  *
  * <p>Call {@link #syncState()} from your <code>Activity</code>'s
- * {@link Activity#onPostCreate(android.os.Bundle) onPostCreate} to synchronize the
+ * {@link android.app.Activity#onPostCreate(android.os.Bundle) onPostCreate} to synchronize the
  * indicator with the state of the linked DrawerLayout after <code>onRestoreInstanceState</code>
  * has occurred.</p>
  *
@@ -68,7 +68,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
 
     /**
-     * Allows an implementing Activity to return an {@link Delegate} to use
+     * Allows an implementing Activity to return an {@link ActionBarDrawerToggle.Delegate} to use
      * with ActionBarDrawerToggle.
      */
     public interface DelegateProvider {
@@ -249,7 +249,7 @@ public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
 
     /**
      * This method should always be called by your <code>Activity</code>'s
-     * {@link Activity#onConfigurationChanged(Configuration)
+     * {@link Activity#onConfigurationChanged(android.content.res.Configuration)
      * onConfigurationChanged}
      * method.
      *
@@ -265,7 +265,7 @@ public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
 
     /**
      * This method should be called by your <code>Activity</code>'s
-     * {@link Activity#onOptionsItemSelected(MenuItem) onOptionsItemSelected} method.
+     * {@link Activity#onOptionsItemSelected(android.view.MenuItem) onOptionsItemSelected} method.
      * If it returns true, your <code>onOptionsItemSelected</code> method should return true and
      * skip further processing.
      *
@@ -465,7 +465,7 @@ public class ActionBarDrawerToggle implements DrawerLayout.DrawerListener {
      *
      * @return The click listener which receives Navigation click events from Toolbar when
      * drawer indicator is disabled.
-     * @see #setToolbarNavigationClickListener(View.OnClickListener)
+     * @see #setToolbarNavigationClickListener(android.view.View.OnClickListener)
      * @see #setDrawerIndicatorEnabled(boolean)
      * @see #isDrawerIndicatorEnabled()
      */

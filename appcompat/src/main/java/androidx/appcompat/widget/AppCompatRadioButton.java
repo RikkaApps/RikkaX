@@ -189,7 +189,7 @@ public class AppCompatRadioButton extends RadioButton implements TintableCompoun
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#getBackgroundTintList(View)}
+     * {@link androidx.core.view.ViewCompat#getBackgroundTintList(android.view.View)}
      *
      * @hide
      */
@@ -217,7 +217,7 @@ public class AppCompatRadioButton extends RadioButton implements TintableCompoun
 
     /**
      * This should be accessed via
-     * {@link ViewCompat#getBackgroundTintMode(View)}
+     * {@link androidx.core.view.ViewCompat#getBackgroundTintMode(android.view.View)}
      *
      * @hide
      */

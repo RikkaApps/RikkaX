@@ -49,14 +49,14 @@ import java.lang.annotation.RetentionPolicy;
  * You can also specify gravity, which specifies the alignment of all the child elements by
  * calling {@link #setGravity(int) setGravity()} or specify that specific children
  * grow to fill up any remaining space in the layout by setting the <em>weight</em> member of
- * {@link LayoutParams LinearLayoutCompat.LayoutParams}.
+ * {@link LinearLayoutCompat.LayoutParams LinearLayoutCompat.LayoutParams}.
  * The default orientation is horizontal.
  *
  * <p>See the <a href="{@docRoot}guide/topics/ui/layout/linear.html">Linear Layout</a>
  * guide.</p>
  *
  * <p>
- * Also see {@link LayoutParams} for layout attributes </p>
+ * Also see {@link LinearLayoutCompat.LayoutParams} for layout attributes </p>
  */
 public class LinearLayoutCompat extends ViewGroup {
     /** @hide */
@@ -489,7 +489,7 @@ public class LinearLayoutCompat extends ViewGroup {
             }
         }
 
-        LayoutParams lp = (LayoutParams) child.getLayoutParams();
+        LinearLayoutCompat.LayoutParams lp = (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
         return childTop + lp.topMargin + childBaseline;
     }
 
@@ -655,7 +655,7 @@ public class LinearLayoutCompat extends ViewGroup {
                 mTotalLength += mDividerHeight;
             }
 
-            LayoutParams lp = (LayoutParams) child.getLayoutParams();
+            LinearLayoutCompat.LayoutParams lp = (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
 
             totalWeight += lp.weight;
 
@@ -771,7 +771,7 @@ public class LinearLayoutCompat extends ViewGroup {
                     continue;
                 }
 
-                final LayoutParams lp = (LayoutParams)
+                final LinearLayoutCompat.LayoutParams lp = (LinearLayoutCompat.LayoutParams)
                         child.getLayoutParams();
                 // Account for negative margins
                 final int totalLength = mTotalLength;
@@ -808,7 +808,7 @@ public class LinearLayoutCompat extends ViewGroup {
                     continue;
                 }
 
-                LayoutParams lp = (LayoutParams) child.getLayoutParams();
+                LinearLayoutCompat.LayoutParams lp = (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
 
                 float childExtra = lp.weight;
                 if (childExtra > 0) {
@@ -882,8 +882,8 @@ public class LinearLayoutCompat extends ViewGroup {
                         continue;
                     }
 
-                    final LayoutParams lp =
-                            (LayoutParams) child.getLayoutParams();
+                    final LinearLayoutCompat.LayoutParams lp =
+                            (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
 
                     float childExtra = lp.weight;
                     if (childExtra > 0) {
@@ -921,7 +921,7 @@ public class LinearLayoutCompat extends ViewGroup {
         for (int i = 0; i< count; ++i) {
             final View child = getVirtualChildAt(i);
             if (child.getVisibility() != GONE) {
-                LayoutParams lp = ((LayoutParams)child.getLayoutParams());
+                LinearLayoutCompat.LayoutParams lp = ((LinearLayoutCompat.LayoutParams)child.getLayoutParams());
 
                 if (lp.width == LayoutParams.MATCH_PARENT) {
                     // Temporarily force children to reuse their old measured height
@@ -1001,7 +1001,7 @@ public class LinearLayoutCompat extends ViewGroup {
                 mTotalLength += mDividerWidth;
             }
 
-            final LayoutParams lp = (LayoutParams)
+            final LinearLayoutCompat.LayoutParams lp = (LinearLayoutCompat.LayoutParams)
                     child.getLayoutParams();
 
             totalWeight += lp.weight;
@@ -1150,7 +1150,7 @@ public class LinearLayoutCompat extends ViewGroup {
                     continue;
                 }
 
-                final LayoutParams lp = (LayoutParams)
+                final LinearLayoutCompat.LayoutParams lp = (LinearLayoutCompat.LayoutParams)
                         child.getLayoutParams();
                 if (isExactly) {
                     mTotalLength += largestChildWidth + lp.leftMargin + lp.rightMargin +
@@ -1195,8 +1195,8 @@ public class LinearLayoutCompat extends ViewGroup {
                     continue;
                 }
 
-                final LayoutParams lp =
-                        (LayoutParams) child.getLayoutParams();
+                final LinearLayoutCompat.LayoutParams lp =
+                        (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
 
                 float childExtra = lp.weight;
                 if (childExtra > 0) {
@@ -1302,8 +1302,8 @@ public class LinearLayoutCompat extends ViewGroup {
                         continue;
                     }
 
-                    final LayoutParams lp =
-                            (LayoutParams) child.getLayoutParams();
+                    final LinearLayoutCompat.LayoutParams lp =
+                            (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
 
                     float childExtra = lp.weight;
                     if (childExtra > 0) {
@@ -1343,7 +1343,7 @@ public class LinearLayoutCompat extends ViewGroup {
         for (int i = 0; i < count; ++i) {
             final View child = getVirtualChildAt(i);
             if (child.getVisibility() != GONE) {
-                LayoutParams lp = (LayoutParams) child.getLayoutParams();
+                LinearLayoutCompat.LayoutParams lp = (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
 
                 if (lp.height == LayoutParams.MATCH_PARENT) {
                     // Temporarily force children to reuse their old measured width
@@ -1489,8 +1489,8 @@ public class LinearLayoutCompat extends ViewGroup {
                 final int childWidth = child.getMeasuredWidth();
                 final int childHeight = child.getMeasuredHeight();
 
-                final LayoutParams lp =
-                        (LayoutParams) child.getLayoutParams();
+                final LinearLayoutCompat.LayoutParams lp =
+                        (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
 
                 int gravity = lp.gravity;
                 if (gravity < 0) {
@@ -1602,8 +1602,8 @@ public class LinearLayoutCompat extends ViewGroup {
                 final int childHeight = child.getMeasuredHeight();
                 int childBaseline = -1;
 
-                final LayoutParams lp =
-                        (LayoutParams) child.getLayoutParams();
+                final LinearLayoutCompat.LayoutParams lp =
+                        (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
 
                 if (baselineAligned && lp.height != LayoutParams.MATCH_PARENT) {
                     childBaseline = child.getBaseline();
@@ -1701,7 +1701,7 @@ public class LinearLayoutCompat extends ViewGroup {
      * views are placed if there is extra vertical space. If this layout has a
      * HORIZONTAL orientation, this controls the alignment of the children.
      *
-     * @param gravity See {@link Gravity}
+     * @param gravity See {@link android.view.Gravity}
      */
     public void setGravity(@GravityInt int gravity) {
         if (mGravity != gravity) {
@@ -1719,7 +1719,7 @@ public class LinearLayoutCompat extends ViewGroup {
     }
 
     /**
-     * Returns the current gravity. See {@link Gravity}
+     * Returns the current gravity. See {@link android.view.Gravity}
      *
      * @return the current gravity.
      * @see #setGravity
@@ -1748,13 +1748,13 @@ public class LinearLayoutCompat extends ViewGroup {
 
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
-        return new LayoutParams(getContext(), attrs);
+        return new LinearLayoutCompat.LayoutParams(getContext(), attrs);
     }
 
     /**
      * Returns a set of layout parameters with a width of
-     * {@link ViewGroup.LayoutParams#MATCH_PARENT}
-     * and a height of {@link ViewGroup.LayoutParams#WRAP_CONTENT}
+     * {@link android.view.ViewGroup.LayoutParams#MATCH_PARENT}
+     * and a height of {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
      * when the layout's orientation is {@link #VERTICAL}. When the orientation is
      * {@link #HORIZONTAL}, the width is set to {@link LayoutParams#WRAP_CONTENT}
      * and the height to {@link LayoutParams#WRAP_CONTENT}.
@@ -1778,7 +1778,7 @@ public class LinearLayoutCompat extends ViewGroup {
     // Override to allow type-checking of LayoutParams.
     @Override
     protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
-        return p instanceof LayoutParams;
+        return p instanceof LinearLayoutCompat.LayoutParams;
     }
 
     @Override
@@ -1836,7 +1836,7 @@ public class LinearLayoutCompat extends ViewGroup {
         /**
          * {@inheritDoc}
          */
-        public LayoutParams(MarginLayoutParams source) {
+        public LayoutParams(ViewGroup.MarginLayoutParams source) {
             super(source);
         }
     }

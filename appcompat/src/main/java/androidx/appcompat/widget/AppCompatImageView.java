@@ -209,7 +209,7 @@ public class AppCompatImageView extends ImageView implements TintableBackgroundV
 
     /**
      * This should be accessed via
-     * {@link ImageViewCompat#setImageTintList(ImageView, ColorStateList)}
+     * {@link androidx.core.widget.ImageViewCompat#setImageTintList(ImageView, ColorStateList)}
      *
      * @hide
      */
@@ -223,7 +223,7 @@ public class AppCompatImageView extends ImageView implements TintableBackgroundV
 
     /**
      * This should be accessed via
-     * {@link ImageViewCompat#getImageTintList(ImageView)}
+     * {@link androidx.core.widget.ImageViewCompat#getImageTintList(ImageView)}
      *
      * @hide
      */
@@ -237,7 +237,7 @@ public class AppCompatImageView extends ImageView implements TintableBackgroundV
 
     /**
      * This should be accessed via
-     * {@link ImageViewCompat#setImageTintMode(ImageView, PorterDuff.Mode)}
+     * {@link androidx.core.widget.ImageViewCompat#setImageTintMode(ImageView, PorterDuff.Mode)}
      *
      * @hide
      */
@@ -251,7 +251,7 @@ public class AppCompatImageView extends ImageView implements TintableBackgroundV
 
     /**
      * This should be accessed via
-     * {@link ImageViewCompat#getImageTintMode(ImageView)}
+     * {@link androidx.core.widget.ImageViewCompat#getImageTintMode(ImageView)}
      *
      * @hide
      */

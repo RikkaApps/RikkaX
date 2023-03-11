@@ -59,7 +59,7 @@ public class ActionMenuItem implements SupportMenuItem {
 
     private Context mContext;
 
-    private OnMenuItemClickListener mClickListener;
+    private SupportMenuItem.OnMenuItemClickListener mClickListener;
 
     private CharSequence mContentDescription;
     private CharSequence mTooltipText;
@@ -385,7 +385,7 @@ public class ActionMenuItem implements SupportMenuItem {
     }
 
     @Override
-    public MenuItem setOnActionExpandListener(OnActionExpandListener listener) {
+    public MenuItem setOnActionExpandListener(MenuItem.OnActionExpandListener listener) {
         throw new UnsupportedOperationException();
     }
 

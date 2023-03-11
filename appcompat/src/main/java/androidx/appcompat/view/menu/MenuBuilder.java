@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Implementation of the {@link SupportMenu} interface for creating a
+ * Implementation of the {@link androidx.core.internal.view.SupportMenu} interface for creating a
  * standard menu UI.
  *
  * @hide
