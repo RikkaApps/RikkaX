@@ -26,6 +26,13 @@ public class LayoutInflaterFactory implements LayoutInflater.Factory2 {
         void onViewCreated(@NonNull View view, @Nullable View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs);
     }
 
+    public interface OnCreateViewListener {
+
+        @Nullable
+        View onCreateView(@Nullable View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs);
+    }
+
+    private final List<OnCreateViewListener> onCreateViewListeners = new ArrayList<>();
     private final List<OnViewCreatedListener> onViewCreatedListeners = new ArrayList<>();
 
     /**
@@ -62,6 +69,15 @@ public class LayoutInflaterFactory implements LayoutInflater.Factory2 {
         }
 
         if (view == null) {
+            for (OnCreateViewListener listener : onCreateViewListeners) {
+                view = listener.onCreateView(parent, name, context, attrs);
+                if (view != null) {
+                    break;
+                }
+            }
+        }
+
+        if (view == null) {
             view = LayoutInflaterFactoryDefaultImpl.INSTANCE.createViewFromTag(context, name, attrs);
         }
 
@@ -86,6 +102,17 @@ public class LayoutInflaterFactory implements LayoutInflater.Factory2 {
 
     public final LayoutInflaterFactory addOnViewCreatedListeners(@NonNull OnViewCreatedListener... listeners) {
         Collections.addAll(onViewCreatedListeners, listeners);
+        return this;
+    }
+
+    public final LayoutInflaterFactory addOnCreateViewListener(@NonNull OnCreateViewListener listener) {
+        Objects.requireNonNull(listener);
+        onCreateViewListeners.add(listener);
+        return this;
+    }
+
+    public final LayoutInflaterFactory addOnCreateViewListener(@NonNull OnCreateViewListener... listeners) {
+        Collections.addAll(onCreateViewListeners, listeners);
         return this;
     }
 }
