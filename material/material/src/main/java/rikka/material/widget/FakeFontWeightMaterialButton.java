@@ -18,7 +18,7 @@ public class FakeFontWeightMaterialButton extends MaterialButton {
     }
 
     public FakeFontWeightMaterialButton(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, com.google.android.material.R.attr.materialButtonStyle);
     }
 
     public FakeFontWeightMaterialButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

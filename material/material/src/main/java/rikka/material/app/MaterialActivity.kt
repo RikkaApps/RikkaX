@@ -11,6 +11,7 @@ import rikka.insets.WindowInsetsHelper
 import rikka.layoutinflater.view.LayoutInflaterFactory
 import rikka.material.R
 import rikka.material.internal.ThemedAppCompatActivity
+import rikka.material.widget.FakeFontWeightOnCreateViewListener
 
 open class MaterialActivity : ThemedAppCompatActivity(), TranslucentSystemBars {
 
@@ -33,6 +34,8 @@ open class MaterialActivity : ThemedAppCompatActivity(), TranslucentSystemBars {
                 WindowInsetsHelper.LISTENER,
                 ToolbarTitleAlignmentFix.LISTENER
             )
+
+            addOnCreateViewListener(FakeFontWeightOnCreateViewListener.getInstance())
 
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
                 addOnViewCreatedListeners(

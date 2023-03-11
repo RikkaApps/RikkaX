@@ -18,7 +18,7 @@ public class FakeFontWeightMaterialTextView extends MaterialTextView {
     }
 
     public FakeFontWeightMaterialTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, android.R.attr.textViewStyle);
     }
 
     public FakeFontWeightMaterialTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

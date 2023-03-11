@@ -17,7 +17,7 @@ public class FakeFontWeightImpl {
 
     private void updatePaint(Paint paint, boolean isMedium) {
         if (isMedium) {
-            paint.setStrokeWidth(0.7f);
+            paint.setStrokeWidth(0.5f);
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
         } else {
             paint.setStrokeWidth(0f);

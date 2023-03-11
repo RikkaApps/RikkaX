@@ -17,7 +17,7 @@ public class FakeFontWeightAppCompatCheckedTextView extends AppCompatCheckedText
     }
 
     public FakeFontWeightAppCompatCheckedTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, androidx.appcompat.R.attr.checkedTextViewStyle);
     }
 
     public FakeFontWeightAppCompatCheckedTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
