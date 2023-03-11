@@ -80,6 +80,9 @@
         <item name="android:textColorLink">?colorPrimary</item>
         <item name="android:textColorLinkInverse">?colorPrimaryInverse</item>
         <item name="android:textColorAlertDialogListItem">@color/m3_light_text_color_primary</item>
+
+        <!-- AppCompat LayoutInflater -->
+        <item name="viewInflaterClass">rikka.material.widget.MaterialViewInflater</item>
     </style>
 
     <style name="Base.V21.Material3.Dark.Rikka" parent="Theme.Material3.Dark">
@@ -148,6 +151,9 @@
         <item name="android:textColorLink">?colorPrimary</item>
         <item name="android:textColorLinkInverse">?colorPrimaryInverse</item>
         <item name="android:textColorAlertDialogListItem">@color/m3_dark_text_color_primary</item>
+
+        <!-- AppCompat LayoutInflater -->
+        <item name="viewInflaterClass">rikka.material.widget.MaterialViewInflater</item>
     </style>
 
     <style name="Base.Material3.Light.Rikka" parent="Base.V21.Material3.Light.Rikka" />
