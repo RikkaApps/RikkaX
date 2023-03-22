@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import rikka.material.R
-import rikka.material.app.DayNightDelegate
 import rikka.material.app.LocaleDelegate
 
 open class ThemedAppCompatActivity: AppCompatActivity() {
@@ -18,15 +17,10 @@ open class ThemedAppCompatActivity: AppCompatActivity() {
         LocaleDelegate()
     }
 
-    public val dayNightDelegate by lazy {
-        DayNightDelegate(this)
-    }
-
     private var userThemeKey: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         localeDelegate.onCreate(this)
-        dayNightDelegate.onCreate(savedInstanceState)
         resetTitle()
         fixWindowFlags()
 
@@ -42,10 +36,6 @@ open class ThemedAppCompatActivity: AppCompatActivity() {
     }
 
     open fun onApplyUserThemeResource(theme: Resources.Theme, isDecorView: Boolean) {
-    }
-
-    open fun respectDefaultNightMode():Boolean{
-        return true
     }
 
     private fun onApplyUserThemeResourceForDecorView() {
@@ -77,15 +67,12 @@ open class ThemedAppCompatActivity: AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        dayNightDelegate.onSaveInstanceState(outState)
     }
 
     override fun onResume() {
         super.onResume()
 
         if (localeDelegate.isLocaleChanged
-                || dayNightDelegate.isDayNightChanged
-                || respectDefaultNightMode() && dayNightDelegate.calculateNightMode() != DayNightDelegate.getDefaultNightMode()
                 || userThemeKey != computeUserThemeKey()) {
             recreate()
         }
@@ -93,13 +80,11 @@ open class ThemedAppCompatActivity: AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        dayNightDelegate.onDestroy()
     }
 
     override fun attachBaseContext(newBase: Context) {
         val configuration = newBase.resources.configuration
         localeDelegate.updateConfiguration(configuration)
-        dayNightDelegate.attachBaseContext(newBase, configuration)
 
         super.attachBaseContext(newBase.createConfigurationContext(configuration))
     }

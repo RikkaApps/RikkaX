@@ -12,7 +12,7 @@ android {
         minSdkVersion 21
         targetSdkVersion target_sdk
         versionCode 1
-        versionName '2.6.0'
+        versionName '2.7.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
