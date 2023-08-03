@@ -398,7 +398,7 @@ private class VerticalLinearRecyclerViewHelper(private val view: RecyclerView, p
         view.scrollBy(0, scrollingBy)
     }
 
-    override fun getPopupText(): String? {
+    override fun getPopupText(): CharSequence? {
         val adapter = view.adapter
         if (adapter !is PopupTextProvider) {
             return null
