@@ -12,7 +12,7 @@ The libraries suitable as public libraries are as follows.
 
 Modified version of AndroidX AppCompat.
 
-## [BuildCompat](./buiuldcompat)
+## [BuildCompat](./buildcompat)
 
 Helper class that helps you to check Android version, but also naming in a different way (`isAtLeast13` ✓).
 
