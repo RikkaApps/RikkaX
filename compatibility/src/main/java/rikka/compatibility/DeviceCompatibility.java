@@ -23,7 +23,8 @@ public class DeviceCompatibility {
                     || Pattern.compile("Flyme", Pattern.CASE_INSENSITIVE).matcher(Build.DISPLAY).find());
 
     private static final Lazy<Boolean> IS_EMUI = new UnsafeLazy<>(() ->
-            !TextUtils.isEmpty(SystemProperties.get("ro.build.version.emui")));
+            !TextUtils.isEmpty(SystemProperties.get("ro.build.version.emui"))
+                    || TextUtils.equals(SystemProperties.get("ro.build.hw_emui_lite.enable"), Boolean.toString(true)));
 
     private static final Lazy<Boolean> IS_MIUI = new UnsafeLazy<>(() ->
             !TextUtils.isEmpty(SystemProperties.get("ro.miui.ui.version.name")));
@@ -50,7 +51,8 @@ public class DeviceCompatibility {
     }
 
     /**
-     * Check if the device is running EMUI. Huawei devices are running EMUI.
+     * Check if the device is running EMUI. Huawei and Honor devices are running EMUI.
+     * (Although they have been renamed now.)
      *
      * @return If the device is running EMUI
      */
