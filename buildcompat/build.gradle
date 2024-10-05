@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion target_sdk
+    namespace "rikka.buildcompat"
+    compileSdk target_sdk
+
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion target_sdk
+        minSdk 14
+        targetSdk target_sdk
         versionCode 1
         versionName '34.0.1'
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
         buildConfig false
@@ -24,17 +24,13 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility 17
+        sourceCompatibility 17
     }
 }
 
 dependencies {
     implementation "androidx.annotation:annotation:$androidx_annotation_version"
-
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
 ext {

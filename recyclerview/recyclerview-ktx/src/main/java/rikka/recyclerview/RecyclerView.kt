@@ -58,14 +58,19 @@ class ItemSpacing(
     private val top: Int = 0,
     private val right: Int = 0,
     private val bottom: Int = 0,
-) : RecyclerView.ItemDecoration() {
+) : ItemDecoration() {
 
     var allowLeft: Boolean = true
     var allowTop: Boolean = true
     var allowRight: Boolean = true
     var allowBottom: Boolean = true
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
         if (parent.adapter == null) {
             return
         }
@@ -116,19 +121,24 @@ fun RecyclerView.addEdgeSpacing(
     ).also { addItemDecoration(it) }
 }
 
-class EdgeSpacing constructor(
+class EdgeSpacing(
     private val left: Int = 0,
     private val top: Int = 0,
     private val right: Int = 0,
     private val bottom: Int = 0
-) : RecyclerView.ItemDecoration() {
+) : ItemDecoration() {
 
     var allowLeft: Boolean = true
     var allowTop: Boolean = true
     var allowRight: Boolean = true
     var allowBottom: Boolean = true
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
         val adapter = parent.adapter ?: return
 
         val position = parent.getChildLayoutPosition(view)
@@ -171,7 +181,7 @@ fun RecyclerView.addVerticalPadding(paddingTopDp: Int = 8, paddingBottomDp: Int 
     addItemDecoration(VerticalPaddingDecoration(context, paddingTopDp, paddingBottomDp))
 }
 
-private class VerticalPaddingDecoration constructor(
+private class VerticalPaddingDecoration(
     context: Context,
     paddingTop: Int = 8,
     paddingBottom: Int = 8
@@ -182,7 +192,12 @@ private class VerticalPaddingDecoration constructor(
     private var allowTop: Boolean = true
     private var allowBottom: Boolean = true
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
         if (parent.adapter == null) {
             return
         }
@@ -196,7 +211,10 @@ private class VerticalPaddingDecoration constructor(
     }
 }
 
-fun RecyclerView.fixEdgeEffect(overScrollIfContentScrolls: Boolean = true, alwaysClipToPadding: Boolean = true) {
+fun RecyclerView.fixEdgeEffect(
+    overScrollIfContentScrolls: Boolean = true,
+    alwaysClipToPadding: Boolean = true
+) {
     if (overScrollIfContentScrolls) {
         val listener = OverScrollIfContentScrollsListener()
         addOnLayoutChangeListener(listener)
@@ -236,9 +254,9 @@ private class OverScrollIfContentScrollsListener : View.OnLayoutChangeListener {
         if (shouldDrawOverScroll(v as RecyclerView) != show) {
             show = !show
             if (show) {
-                v.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS)
+                v.overScrollMode = View.OVER_SCROLL_IF_CONTENT_SCROLLS
             } else {
-                v.setOverScrollMode(View.OVER_SCROLL_NEVER)
+                v.overScrollMode = View.OVER_SCROLL_NEVER
             }
         }
     }
@@ -330,11 +348,13 @@ fun RecyclerView.addFastScroller(parent: View? = null) {
     builder.build()
 }
 
-private class VerticalLinearRecyclerViewHelper(private val view: RecyclerView, private val parent: View?) :
-    FastScroller.ViewHelper {
+private class VerticalLinearRecyclerViewHelper(
+    private val view: RecyclerView,
+    private val parent: View?
+) : FastScroller.ViewHelper {
 
     override fun addOnPreDrawListener(onPreDraw: Runnable) {
-        view.addItemDecoration(object : RecyclerView.ItemDecoration() {
+        view.addItemDecoration(object : ItemDecoration() {
             override fun onDraw(
                 canvas: Canvas, parent: RecyclerView,
                 state: RecyclerView.State
@@ -407,7 +427,7 @@ private class VerticalLinearRecyclerViewHelper(private val view: RecyclerView, p
         val position = getItemAdapterPositionForPopup()
         return if (position == RecyclerView.NO_POSITION) {
             null
-        } else popupTextProvider.getPopupText(position)
+        } else popupTextProvider.getPopupText(view, position)
     }
 
     private fun getItemCount(): Int {
@@ -418,7 +438,8 @@ private class VerticalLinearRecyclerViewHelper(private val view: RecyclerView, p
         if (view.childCount == 0) {
             return RecyclerView.NO_POSITION
         }
-        return verticalLinearLayoutManager?.findFirstCompletelyVisibleItemPosition() ?: return RecyclerView.NO_POSITION
+        return verticalLinearLayoutManager?.findFirstCompletelyVisibleItemPosition()
+            ?: return RecyclerView.NO_POSITION
     }
 
     private val verticalLinearLayoutManager: LinearLayoutManager?
