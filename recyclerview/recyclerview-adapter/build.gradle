@@ -5,10 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion target_sdk
+    namespace "rikka.recyclerview.adapter"
+    compileSdk target_sdk
+
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion target_sdk
+        minSdk 14
+        targetSdk target_sdk
         versionCode 1
         versionName '1.3.0'
 

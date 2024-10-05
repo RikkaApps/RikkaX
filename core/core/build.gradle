@@ -5,12 +5,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion target_sdk
+    namespace "rikka.core"
+    compileSdk target_sdk
+
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion target_sdk
+        minSdk 21
+        targetSdk target_sdk
         versionCode 1
         versionName rikka_core_version
+
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildTypes {
@@ -20,8 +23,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility 17
+        sourceCompatibility 17
     }
 }
 

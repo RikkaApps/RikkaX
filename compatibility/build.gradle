@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion target_sdk
+    namespace "rikka.compatibility"
+    compileSdk target_sdk
+
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion target_sdk
+        minSdk 14
+        targetSdk target_sdk
         versionCode 1
         versionName '2.0.0'
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
         buildConfig false
@@ -24,8 +24,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility 17
+        sourceCompatibility 17
     }
 }
 

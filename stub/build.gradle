@@ -3,10 +3,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    namespace "stub"
+    compileSdk 31
+
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 31
+        minSdk 14
+        targetSdk 31
     }
     buildFeatures {
         buildConfig false
@@ -21,11 +23,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
-    implementation "androidx.annotation:annotation:1.2.0"
+    implementation "androidx.annotation:annotation:$androidx_annotation_version"
 }

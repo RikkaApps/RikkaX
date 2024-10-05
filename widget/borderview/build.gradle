@@ -5,10 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion target_sdk
+    namespace "rikka.widget.borderview"
+    compileSdk target_sdk
+
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion target_sdk
+        minSdk 17
+        targetSdk target_sdk
         versionCode 1
         versionName '1.1.0'
         consumerProguardFiles 'consumer-rules.pro'
@@ -23,8 +25,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility 17
+        sourceCompatibility 17
     }
 }
 

@@ -6,14 +6,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion target_sdk
+    namespace "rikka.recyclerview.ktx"
+    compileSdk target_sdk
+
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion target_sdk
+        minSdk 14
+        targetSdk target_sdk
         versionCode 1
         versionName '1.3.2'
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
     /*buildFeatures {
@@ -30,7 +31,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
-    implementation 'me.zhanghai.android.fastscroll:library:1.2.0'
+    implementation "me.zhanghai.android.fastscroll:library:$zhanghai_fastscroll_version"
 }
 
 ext {

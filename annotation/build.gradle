@@ -5,12 +5,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion target_sdk
+    namespace "rikka.annotation"
+    compileSdk target_sdk
+
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion target_sdk
+        minSdk 14
+        targetSdk target_sdk
         versionCode 1
         versionName rikka_annotation_version
+
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildTypes {

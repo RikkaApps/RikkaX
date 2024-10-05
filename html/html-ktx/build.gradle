@@ -6,14 +6,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion target_sdk
+    namespace "rikka.html.ktx"
+    compileSdk target_sdk
+
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion target_sdk
+        minSdk 21
+        targetSdk target_sdk
         versionCode 1
         versionName rikka_html_version
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
     buildFeatures {
@@ -26,8 +27,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility 17
+        sourceCompatibility 17
     }
 }
 
