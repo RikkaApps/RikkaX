@@ -48,7 +48,7 @@ public class HelpFragment extends PreferenceFragmentCompat {
      * Add a preference to specified preference group.
      */
     public void addPreference(String categoryKey, CharSequence title, CharSequence summary, Drawable icon, Intent intent, Preference.OnPreferenceClickListener listener) {
-        Preference preference = new Preference(requireContext(), null, R.attr.preferenceStyle, R.style.Preference_Help);
+        Preference preference = new Preference(requireContext(), null, androidx.preference.R.attr.preferenceStyle, R.style.Preference_Help);
         preference.setTitle(title);
         preference.setSummary(summary);
         preference.setIcon(icon);

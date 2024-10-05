@@ -15,7 +15,7 @@ android {
         versionName rikka_preference_multiprocess_version
 
         consumerProguardFiles 'consumer-rules.pro'
-        aidlPackageWhiteList 'rikka/preference/IMultiProcessPreferenceChangeListener.aidl'
+        aidlPackagedList 'rikka/preference/IMultiProcessPreferenceChangeListener.aidl'
     }
     buildTypes {
         release {
@@ -26,6 +26,9 @@ android {
     compileOptions {
         targetCompatibility 17
         sourceCompatibility 17
+    }
+    buildFeatures {
+        aidl = true
     }
 }
 

@@ -56,7 +56,7 @@ open class MaterialActivity : ThemedAppCompatActivity(), TranslucentSystemBars {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             window?.decorView?.post {
-                if (window.decorView.rootWindowInsets?.systemWindowInsetBottom ?: 0 >= Resources.getSystem().displayMetrics.density * 40) {
+                if ((window.decorView.rootWindowInsets?.systemWindowInsetBottom ?: 0) >= Resources.getSystem().displayMetrics.density * 40) {
                     window.navigationBarDividerColor = theme.resolveColor(R.attr.navigationBarDividerColor)
                 }
             }
