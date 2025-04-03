@@ -14,7 +14,7 @@ public class MaterialSwitchPreference extends SwitchPreferenceCompat {
     }
 
     public MaterialSwitchPreference(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, R.style.Preference_Rikka_MateriaSwitchPreference);
+        this(context, attrs, defStyleAttr, R.style.Preference_Rikka_MaterialSwitchPreference);
     }
 
     public MaterialSwitchPreference(@NonNull Context context, @Nullable AttributeSet attrs) {

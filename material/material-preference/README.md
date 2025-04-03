@@ -29,6 +29,12 @@ context.getTheme().applyStyle(rikka.material.preference.R.style.ThemeOverlay_Rik
 
 ## Changelog
 
+### 2025/04/04 (update to future versions)
+
+- Add `rikka.material.preference.MaterialComboBoxPreference`
+
+![](./MaterialComboBoxPreference_EffectDisplay.gif) ![](./MaterialComboBoxPreference_CodeExample.png)
+
 ### 2.0.0
 
 - (Breaking change) Use [Material 3 style](https://m3.material.io/components/switch/guidelines) rather than system settings style

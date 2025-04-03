@@ -4,4 +4,12 @@
     </declare-styleable>
 
     <attr name="materialSwitchPreferenceStyle" format="reference"/>
+
+    <declare-styleable name="MaterialComboBoxPreference">
+        <attr name="keys" format="reference"/>
+
+        <attr name="vals" format="reference"/>
+    </declare-styleable>
+
+    <attr name="materialComboBoxPreferenceStyle" format="reference"/>
 </resources>
