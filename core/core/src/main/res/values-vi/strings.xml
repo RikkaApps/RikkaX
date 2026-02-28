@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="follow_system">Theo hệ thống</string>
+
+    <string name="dark_theme">Chủ đề tối</string>
+
+    <string name="dark_theme_follow_system" translatable="false">@string/follow_system</string>
+    <string name="dark_theme_off">Luôn tắt</string>
+    <string name="dark_theme_on">Luôn bật</string>
+    <string name="dark_theme_auto_time">Ở đêm</string>
+    <string name="dark_theme_auto_battery">Khi \"Trình tiết kiệm pin\" được bật</string>
+
+</resources>
